@@ -1,0 +1,126 @@
+{
+  description = " kokona's NixOS configuration";
+
+  inputs = {
+    stable.url   = "github:NixOS/nixpkgs/release-24.05";
+    # unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    package.url  = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.follows = "stable";
+    home-manager = {
+      # ブランチの指定なしだとmaster(unstable用)になる
+      # url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # systems.url = "github:nix-systems/default";
+    # flake-utils = {
+    #   url  = "github:numtide/flake-utils";
+    #   inputs.systems.follows = "systems";
+    # };
+    # devshell = {
+    #   url = "github:numtide/devshell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-utils.follows = "flake-utils";
+    # };
+    # nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    # キー設定を変更するツール
+    # xremap = {
+    #   url = "github:xremap/nix-flake";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+  };
+
+  outputs = { self, nixpkgs, package, home-manager, rust-overlay, ... }@inputs: let
+    supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+    # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+    system = "x86_64-linux";
+    specialArgs = { inherit inputs; };  # `inputs = inputs;`と等しい
+  in
+  {
+    nixosConfigurations = { # システム全体の設定
+      myNixOS = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules = [ ./hosts/kokona.nix ];
+      };
+      # wsl = inputs.nixpkgs.lib.nixosSystem {
+      #   inherit system specialArgs;
+      #   modules = [ ./hosts/wsl.nix ];
+      #   modules = [
+      #     nixos-wsl.nixosModules.default
+      #     {
+      #       system.stateVersion = "24.05";
+      #       wsl.enable = true;
+      #     }
+      #   ];
+      # };
+    };
+    homeConfigurations = {  # ユーザー環境用設定
+      kokona = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true; # プロプライエタリなパッケージを許可
+          # overlays = [];  # 上書きで導入する場合
+        };
+        extraSpecialArgs = { inherit inputs; };
+        modules = [ ./home/home.nix ];
+      };
+    };
+    # nix develop を使えるようにする
+    devShells = forAllSystems (system: let
+      pkgs = import package {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [ (import rust-overlay) ]; # 一時シェルで上書きで導入する場合
+      };
+    in with pkgs;{
+      default = mkShell {
+        buildInputs = [
+          git
+          # gcc gnuplot
+          # jq unzip
+          # pcl meshlab
+          # libreoffice lapce
+          # protontricks
+          # winetricks
+        ];
+        # shellHook = '''';
+      };
+      django = mkshell {
+        buildInputs = [
+          python311
+          python311Packages.django
+          python311Packages.asgiref
+          python311Packages.sqlparse
+        ];
+        shellHook = "
+          alias runserver='python3 manage.py runserver'
+        ";
+      };
+      nkf = mkShell {
+        buildInputs = [ nkf ];
+        shellHook = ''
+          alias nkfsj='nkf -w --overwrite'
+        '';
+      };
+      rust = mkShell {
+        buildInputs = [
+          openssl pkg-config # zed
+          # rust-bin.stable.latest.default
+          (rust-bin.stable.latest.default.override {  extensions = [ "rust-src" ];  })            
+        ];
+        # shellHook = '''';
+      };
+      vera = mkShell {
+        buildInputs = [ veracrypt ];
+        shellHook = ''
+          WXSUPPRESS_SIZER_FLAGS_CHECK=1
+        '';
+      };
+    });
+  };
+}

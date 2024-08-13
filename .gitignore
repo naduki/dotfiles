@@ -1,0 +1,15 @@
+# 最初にすべての階層のファイルを無視
+# 階層は必要なだけ追加
+### all ignore ###
+/*
+/.**
+
+# .gitignoreは上から解釈されていくので
+# 管理対象のファイルをホワイトリストのように追記
+### not ignore ###
+!/.gitignore
+!/README.md
+!/home/
+!/hosts/
+!/flake.nix
+!/flake.lock
