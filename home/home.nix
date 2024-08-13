@@ -21,7 +21,7 @@
       '';
     };
     sessionVariables = {  # ユーザ環境変数
-      FLAKE = "${homeDirectory}/.config/.dotfile";
+      FLAKE = "${homeDirectory}/.config/.dotfiles";
       # WINE_HOME = "${homeDirectory}/.wine";
       # WINE32_HOME = "${homeDirectory}/.local/share/wineprefixes/wine32";
     };
