@@ -47,6 +47,7 @@
         inherit system specialArgs;
         modules = [ ./hosts/kokona.nix ];
       };
+      # NixOS-WSLのFlake設定 未実装
       # wsl = inputs.nixpkgs.lib.nixosSystem {
       #   inherit system specialArgs;
       #   modules = [ ./hosts/wsl.nix ];

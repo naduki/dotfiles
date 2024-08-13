@@ -7,7 +7,7 @@
 - Terminal: Wezterm
 - Browser : Brave
 
-## Resource
+## Reference
 [NixOSで最強のLinuxデスクトップを作ろう](https://zenn.dev/asa1984/articles/nixos-is-the-best)  
 [vimjoyer/nvim-nix-video](https://github.com/vimjoyer/nvim-nix-video/tree/main)  
 [redyf/nixdots: Dotfiles for NixOS](https://github.com/redyf/nixdots)  
