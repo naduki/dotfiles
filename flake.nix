@@ -2,20 +2,23 @@
   description = " kokona's NixOS configuration";
 
   inputs = {
+    # nixpkgs
     stable.url   = "github:NixOS/nixpkgs/release-24.05";
     # unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     package.url  = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.follows = "stable";
+    # home-manager
     home-manager = {
-      # ブランチの指定なしだとmaster(unstable用)になる
-      # url = "github:nix-community/home-manager";
+      # url = "github:nix-community/home-manager";  # unstable
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # rust
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # flake-utils
     # systems.url = "github:nix-systems/default";
     # flake-utils = {
     #   url  = "github:numtide/flake-utils";
@@ -26,6 +29,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.flake-utils.follows = "flake-utils";
     # };
+    # NixOS-WSL
     # nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     # キー設定を変更するツール
     # xremap = {
@@ -38,7 +42,7 @@
     supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
     # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-    system = "x86_64-linux";
+    system = "x86_64-linux";  # supportedSystemsを使いたい
     specialArgs = { inherit inputs; };  # `inputs = inputs;`と等しい
   in
   {
@@ -65,7 +69,7 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true; # プロプライエタリなパッケージを許可
-          # overlays = [];  # 上書きで導入する場合
+          # overlays = [];  # home-manager内で上書きで導入する場合
         };
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./home/home.nix ];
@@ -91,6 +95,7 @@
         ];
         # shellHook = '''';
       };
+      # $ nix develop .#<name> で使う
       django = mkshell {
         buildInputs = [
           python311
