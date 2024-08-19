@@ -85,13 +85,12 @@
     in with pkgs;{
       default = mkShell {
         buildInputs = [
-          git
+          git # poppler_utils
           # gcc gnuplot
           # jq unzip
           # pcl meshlab
           # libreoffice lapce
-          # protontricks
-          # winetricks
+          # protontricks # winetricks
         ];
         # shellHook = '''';
       };

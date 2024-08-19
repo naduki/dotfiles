@@ -130,6 +130,7 @@
             # libsForQt5.xp-pen-deco-01-v2-driver
             # cinnamon.nemo-python
             # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
+            # wineWowPackages.wayland
         ];
         # CinnamonがデフォルトでインストールするソフトからHexChatを除外する(NixOS 24.11からCinnamonで削除)
         cinnamon.excludePackages = with pkgs; [ hexchat ];
@@ -137,7 +138,7 @@
 
     # プログラム個別設定
     programs.geary.enable = false;      # Geary(メールアプリ)を消す(NixOS 24.11からCinnamonで削除)
-    programs.steam.enable = true;       # Steamを使えるようにする
+    programs.steam.enable = true;       # Steamを有効化
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
@@ -149,13 +150,17 @@
 
     # Nix Setting
     nix = {
+        # nixversion -> nix , latest , git , lix
+        package = pkgs.nixVersions.latest;
         settings = {
             auto-optimise-store = true; # Nix storeの最適化
-            experimental-features = [ "nix-command" "flakes" ]; # Flakeの有効化
-            warn-dirty = false; # Git のdirty警告を出さないようにする
-            keep-derivations = true;
-            keep-outputs = true;
+            experimental-features = [ "nix-command" "flakes" ]; # 実験機能 (Flakeを有効化)
+            warn-dirty = false; # Git の dirty を抑止
         };
+        extraOptions = ''
+            keep-outputs = true
+            keep-derivations = true
+        '';
     };
 
     # List services that you want to enable:
