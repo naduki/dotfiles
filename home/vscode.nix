@@ -17,7 +17,8 @@
         "editor.cursorSmoothCaretAnimation" = "on";
         "editor.fontFamily" = "'moralerspace Radon HWNF','Klee One','Material Design Icons',monospace";
         "editor.fontSize" = 17;
-        "editor.formatOnSave" = false;
+        "editor.formatOnSave" = false;  # ? prettier
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
         "editor.minimap.enabled" = false;
         "editor.renderLineHighlight" = "all";
         "editor.renderControlCharacters" = true;
@@ -76,7 +77,7 @@
           mkhl.direnv
           usernamehw.errorlens
           donjayamanne.githistory
-          esbenp.prettier-vscode
+          # esbenp.prettier-vscode
           christian-kohler.path-intellisense
         ]
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -85,8 +86,8 @@
             # 日本語化 1年前は流石に古すぎ
             name = "vscode-language-pack-ja";
             publisher = "ms-ceintl";
-            version = "1.92.2024072409";
-            sha256 = "1qbgyc0nzbbpb8p4n2f1bkymj96rq58ji2f7013fmyblpp9s3273";
+            version = "1.92.2024081409";
+            sha256 = "142qilsz5j5adwfkxbicm6jnblgvp9bc33hh8jpzzfnld33n8mfr";
           }
           {
             # ShellCheck: 最新版があると勝手にアップグレードする
@@ -116,6 +117,13 @@
             name = "icons-carbon";
             version = "0.2.6";
             sha256 = "05rv2piclq0sa2mxa7xfbfvfh9k3k8b2ikyi5bd02zlvwwp8gis7";
+          }
+          {
+            # Prettier: 最新版を勝ってに入れてる？
+            name = "prettier-vscode";
+            publisher = "esbenp";
+            version = "11.0.0";
+            sha256 = "1fcz8f4jgnf24kblf8m8nwgzd5pxs2gmrv235cpdgmqz38kf9n54";
           }
           # {
           #   # Draw.io
@@ -147,4 +155,5 @@
           # }
         ];
   };
+  # $HOME/.vscode-oss/argv.jsonに # "locale": "ja" があるようにしたい
 }

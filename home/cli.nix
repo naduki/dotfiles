@@ -17,7 +17,7 @@
         os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
         nix-clean = "nix-collect-garbage --delete-older-than 2d";
         nix-update = "nix flake update ";
-        # nix-edit  = "codium $FLAKE";
+        # nix-edit  = "codium --locale=ja $FLAKE";
         # hm-listgen = "home-manager generations";
         # hm-rmgen = "home-manager remove-generations ";
 
