@@ -16,8 +16,8 @@
       # Custom Order Maid 3D2 のスクショの保存先を変える
       myActivationAction = lib.hm.dag.entryAfter ["writeBoundary"] ''
         run \
-          ln -sf /tmp ${homeDirectory}/.cache/BraveSoftware; \
-          ln -sf ${homeDirectory}/Pictures /home/game/KISS/COM3D2/ScreenShot 
+          ln -fns /tmp ${homeDirectory}/.cache/BraveSoftware; \
+          ln -fns ${homeDirectory}/Pictures /home/game/KISS/COM3D2/ScreenShot
       '';
     };
     sessionVariables = {  # ユーザ環境変数
