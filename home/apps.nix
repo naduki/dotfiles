@@ -8,7 +8,7 @@
     # krita
     # prismlauncher # minecraft alternative launcher
     # unityhub
-    shellcheck-minimal    # for vscodium shellcheck extension
+    # shellcheck-minimal    # for vscodium shellcheck extension
     simplescreenrecorder
     # virt-manager
   ];
