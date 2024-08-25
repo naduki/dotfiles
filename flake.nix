@@ -24,17 +24,31 @@
     #   url  = "github:numtide/flake-utils";
     #   inputs.systems.follows = "systems";
     # };
+    # devshell
     # devshell = {
     #   url = "github:numtide/devshell";
     #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.flake-utils.follows = "flake-utils";
     # };
     # NixOS-WSL
-    # nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    # キー設定を変更するツール
+    # nixos-wsl = {
+    #   url = "github:nix-community/NixOS-WSL/main";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-utils.follows = "flake-utils";
+    #   # flake-compat
+    # };
+    # VScode Server
+    # vscode-server = {
+    #   url = "github:nix-community/nixos-vscode-server";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-utils.follows = "flake-utils";
+    # };
+    # キー設定を変更するツール xremap
     # xremap = {
     #   url = "github:xremap/nix-flake";
     #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.devshell.follows = "devshell";
+    #   inputs.home-manager.follows = "home-manager";
+    #   # hyprland flake-parts crane treefmt-nix
     # };
   };
 
@@ -52,15 +66,12 @@
         modules = [ ./hosts/kokona.nix ];
       };
       # NixOS-WSLのFlake設定 未実装
-      # wsl = inputs.nixpkgs.lib.nixosSystem {
+      # wsl = nixpkgs.lib.nixosSystem {
       #   inherit system specialArgs;
-      #   modules = [ ./hosts/wsl.nix ];
       #   modules = [
       #     nixos-wsl.nixosModules.default
-      #     {
-      #       system.stateVersion = "24.05";
-      #       wsl.enable = true;
-      #     }
+      #     vscode-server.nixosModules.default
+      #     ./hosts/wsl.nix
       #   ];
       # };
     };
