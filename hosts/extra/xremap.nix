@@ -1,7 +1,6 @@
 { inputs, ... }:
 {
-  imports = [inputs.xremap.nixosModules.default];
-
+  imports = [ inputs.xremap.nixosModules.default ];
   # xremap setting
   services.xremap = {
     userName = "kokona";
@@ -12,7 +11,7 @@
           name = "Example";
           exact_match = true;
           remap = {
-            CapsLock = "Esc"; # IME切り替え
+            CapsLock = "Esc";
           };
         }
       ];

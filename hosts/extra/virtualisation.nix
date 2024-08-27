@@ -19,6 +19,17 @@
         docker = {
             enable = true;
             storageDriver = "btrfs";
+            # rootless = {
+            #     enable = true;
+            #     setSocketVariable = true;
+            #     # gpuを使えるようにしたい
+            #     daemon.settings = {
+            #         features = ''
+            #             "cdi": true
+            #         '';
+            #         cdi-spec-dirs =  [ "/var/run/cdi" ];
+            #     };
+            # };
         };
     };
 

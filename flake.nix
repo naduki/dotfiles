@@ -18,6 +18,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # hardware setting
+    # inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # flake-utils
     # systems.url = "github:nix-systems/default";
     # flake-utils = {
@@ -65,15 +67,11 @@
         inherit system specialArgs;
         modules = [ ./hosts/kokona.nix ];
       };
-      # NixOS-WSLのFlake設定 未実装
-      # wsl = nixpkgs.lib.nixosSystem {
-      #   inherit system specialArgs;
-      #   modules = [
-      #     nixos-wsl.nixosModules.default
-      #     vscode-server.nixosModules.default
-      #     ./hosts/wsl.nix
-      #   ];
-      # };
+      # NixOS-WSLのFlake設定
+      wsl = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules = [ ./hosts/wsl.nix ];
+      };
     };
     homeConfigurations = {  # ユーザー環境用設定
       kokona = home-manager.lib.homeManagerConfiguration {
@@ -113,9 +111,9 @@
           python311Packages.asgiref
           python311Packages.sqlparse
         ];
-        shellHook = "
+        shellHook = ''
           alias runserver='python3 manage.py runserver'
-        ";
+        '';
       };
       nkf = mkShell {
         buildInputs = [ nkf ];

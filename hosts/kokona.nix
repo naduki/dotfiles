@@ -5,6 +5,7 @@
     ... 
 }:{
     # 分割した設定ファイルのインポート
+    # inputs.nixos-hardware.nixosModules.common-cpu-amd
     imports = [ ./extra ];
 
     boot = {
