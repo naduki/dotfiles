@@ -34,8 +34,11 @@
     };
 
     # Docker GPU
-    hardware.nvidia-container-toolkit.enable = (config.virtualisation.docker.enable);
-    #hardware.nvidia-container-toolkit.mounts = [ nvidia.com/gpu=0 ]
+    hardware.nvidia-container-toolkit = {
+        enable = (config.virtualisation.docker.enable);
+        # mounts = [ nvidia.com/gpu=0 ];
+    };
+
     environment.systemPackages = with pkgs; if config.virtualisation.libvirtd.enable then
         [
             win-spice               # KVM qemu の WindowsでUSBが使えるようになる？

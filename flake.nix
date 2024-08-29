@@ -19,17 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # hardware setting
-    # inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    # nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # flake-utils
     # systems.url = "github:nix-systems/default";
     # flake-utils = {
     #   url  = "github:numtide/flake-utils";
     #   inputs.systems.follows = "systems";
-    # };
-    # devshell
-    # devshell = {
-    #   url = "github:numtide/devshell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
     # };
     # NixOS-WSL
     # nixos-wsl = {
@@ -48,9 +43,8 @@
     # xremap = {
     #   url = "github:xremap/nix-flake";
     #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.devshell.follows = "devshell";
     #   inputs.home-manager.follows = "home-manager";
-    #   # hyprland flake-parts crane treefmt-nix
+    #   # devshell hyprland flake-parts crane treefmt-nix
     # };
   };
 
