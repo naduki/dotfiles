@@ -3,13 +3,13 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-        noto-fonts-cjk-serif
+      noto-fonts-cjk-serif
 
-        noto-fonts-emoji
-        material-design-icons
+      noto-fonts-emoji
+      material-design-icons
 
-        # Moralerspace
-        "${pkgs.fetchzip {
+      # Moralerspace
+      "${pkgs.fetchzip {
             url = "https://github.com/yuru7/moralerspace/releases/download/v1.0.2/MoralerspaceHWNF_v1.0.2.zip";
             sha256 = "sha256-9jbOELf/kBMVZMPPEAZ/1ubqxNZ+6oHFoOKrG9srQkE=";
         }}"

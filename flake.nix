@@ -3,9 +3,9 @@
 
   inputs = {
     # nixpkgs
-    stable.url   = "github:NixOS/nixpkgs/release-24.05";
+    stable.url = "github:NixOS/nixpkgs/release-24.05";
     # unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    package.url  = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.follows = "stable";
     # home-manager
     home-manager = {
@@ -48,87 +48,93 @@
     # };
   };
 
-  outputs = { self, nixpkgs, package, home-manager, rust-overlay, ... }@inputs: let
-    supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
-    # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-    system = "x86_64-linux";  # supportedSystemsを使いたい
-    specialArgs = { inherit inputs; };  # `inputs = inputs;`と等しい
-  in
-  {
-    nixosConfigurations = { # システム全体の設定
-      myNixOS = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules = [ ./hosts/kokona.nix ];
-      };
-      # NixOS-WSLのFlake設定
-      wsl = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules = [ ./hosts/wsl.nix ];
-      };
-    };
-    homeConfigurations = {  # ユーザー環境用設定
-      kokona = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true; # プロプライエタリなパッケージを許可
-          # overlays = [];  # home-manager内で上書きで導入する場合
+  outputs = { self, nixpkgs, package, home-manager, rust-overlay, ... }@inputs:
+    let
+      supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      system = "x86_64-linux"; # supportedSystemsを使いたい
+      specialArgs = { inherit inputs; }; # `inputs = inputs;`と等しい
+    in
+    {
+      nixosConfigurations = {
+        # システム全体の設定
+        myNixOS = nixpkgs.lib.nixosSystem {
+          inherit system specialArgs;
+          modules = [ ./hosts/kokona.nix ];
         };
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home/home.nix ];
+        # NixOS-WSLのFlake設定
+        wsl = nixpkgs.lib.nixosSystem {
+          inherit system specialArgs;
+          modules = [ ./hosts/wsl.nix ];
+        };
       };
+      homeConfigurations = {
+        # ユーザー環境用設定
+        kokona = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true; # プロプライエタリなパッケージを許可
+            # overlays = [];  # home-manager内で上書きで導入する場合
+          };
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home/home.nix ];
+        };
+      };
+      # nix develop を使えるようにする
+      devShells = forAllSystems (system:
+        let
+          pkgs = import package {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [ (import rust-overlay) ]; # 一時シェルで上書きで導入する場合
+          };
+        in
+        with pkgs;{
+          default = mkShell {
+            buildInputs = [
+              git # poppler_utils
+              # gcc gnuplot
+              # jq unzip
+              # pcl meshlab
+              # libreoffice lapce
+              # protontricks # winetricks
+            ];
+            # shellHook = '''';
+          };
+          # $ nix develop .#<name> で使う
+          django = mkshell {
+            buildInputs = [
+              python311
+              python311Packages.django
+              python311Packages.asgiref
+              python311Packages.sqlparse
+            ];
+            shellHook = ''
+              alias runserver='python3 manage.py runserver'
+            '';
+          };
+          nkf = mkShell {
+            buildInputs = [ nkf ];
+            shellHook = ''
+              alias nkfsj='nkf -w --overwrite'
+            '';
+          };
+          rust = mkShell {
+            buildInputs = [
+              openssl
+              pkg-config # zed
+              # rust-bin.stable.latest.default
+              (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
+            ];
+            # shellHook = '''';
+          };
+          vera = mkShell {
+            buildInputs = [ veracrypt ];
+            shellHook = ''
+              WXSUPPRESS_SIZER_FLAGS_CHECK=1
+            '';
+          };
+        });
     };
-    # nix develop を使えるようにする
-    devShells = forAllSystems (system: let
-      pkgs = import package {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ (import rust-overlay) ]; # 一時シェルで上書きで導入する場合
-      };
-    in with pkgs;{
-      default = mkShell {
-        buildInputs = [
-          git # poppler_utils
-          # gcc gnuplot
-          # jq unzip
-          # pcl meshlab
-          # libreoffice lapce
-          # protontricks # winetricks
-        ];
-        # shellHook = '''';
-      };
-      # $ nix develop .#<name> で使う
-      django = mkshell {
-        buildInputs = [
-          python311
-          python311Packages.django
-          python311Packages.asgiref
-          python311Packages.sqlparse
-        ];
-        shellHook = ''
-          alias runserver='python3 manage.py runserver'
-        '';
-      };
-      nkf = mkShell {
-        buildInputs = [ nkf ];
-        shellHook = ''
-          alias nkfsj='nkf -w --overwrite'
-        '';
-      };
-      rust = mkShell {
-        buildInputs = [
-          openssl pkg-config # zed
-          # rust-bin.stable.latest.default
-          (rust-bin.stable.latest.default.override {  extensions = [ "rust-src" ];  })            
-        ];
-        # shellHook = '''';
-      };
-      vera = mkShell {
-        buildInputs = [ veracrypt ];
-        shellHook = ''
-          WXSUPPRESS_SIZER_FLAGS_CHECK=1
-        '';
-      };
-    });
-  };
 }

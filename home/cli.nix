@@ -3,10 +3,10 @@
     bash = {
       enable = true;
       shellAliases = {
-        sudo  = "sudo -k ";
+        sudo = "sudo -k ";
         flake = "cd $FLAKE";
-        clc   = "rm -r $HOME/.cache/thumbnails/*";
-        dur   = "du --max-depth=1 -h | sort -hr";
+        clc = "rm -r $HOME/.cache/thumbnails/*";
+        dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
         hm = "home-manager ";
@@ -40,7 +40,8 @@
         # vi = "nvim";
         # vim = "nvim";
       };
-      historyIgnore = [ # historyに記録されなくなる
+      historyIgnore = [
+        # historyに記録されなくなる
         "ls"
         "cd"
         "alias"
@@ -52,7 +53,7 @@
         "top"
       ];
       # shellの初期化のときに実行される(tty1~6のときは日本語じゃないようにする)
-      initExtra = "(tty|fgrep -q 'tty') && export LANG=C";
+      initExtra = ''(tty|fgrep -q 'tty') && export LANG=C'';
     };
     direnv = {
       enable = true;
