@@ -52,7 +52,7 @@
     let
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      forAllSystems = package.lib.genAttrs supportedSystems;
       system = "x86_64-linux"; # supportedSystemsを使いたい
       specialArgs = { inherit inputs; }; # `inputs = inputs;`と等しい
     in
@@ -81,7 +81,7 @@
           modules = [ ./home/home.nix ];
         };
       };
-      # nix develop を使えるようにする
+      # nix develop を使えるようにする -> ここのsystemはどうなってる？
       devShells = forAllSystems (system:
         let
           pkgs = import package {
