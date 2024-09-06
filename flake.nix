@@ -123,7 +123,7 @@
           rust = mkShell {
             buildInputs = [
               openssl
-              pkg-config # zed
+              pkg-config zed-editor
               # rust-bin.stable.latest.default
               (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
             ];
