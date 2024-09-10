@@ -3,12 +3,12 @@
   # todo: # $HOME/.vscode-oss/argv.jsonに # "locale": "ja" があるようにしたい
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ glibc shellcheck-minimal nixpkgs-fmt ]); # pkgs.vscodium-fhs;
+    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ shellcheck-minimal nixpkgs-fmt ]); # pkgs.vscodium-fhs;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     # mutableExtensionsDir = true;
     userSettings = {
-      "C_Cpp.intelliSenseEngine" = "default"; # default or Tag Parser or disabled
+      # "C_Cpp.intelliSenseEngine" = "disabled"; # default or Tag Parser or disabled
       "C_Cpp.errorSquiggles" = "disabled";
       "breadcrumbs.enabled" = true;
       "files.autoGuessEncoding" = true;
@@ -18,8 +18,8 @@
       "editor.cursorSmoothCaretAnimation" = "on";
       "editor.fontFamily" = "'moralerspace Radon HWNF','Klee One','Material Design Icons',monospace";
       "editor.fontSize" = 17;
-      "editor.formatOnSave" = true;
-      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "editor.formatOnSave" = false;
+      # "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.minimap.enabled" = false;
       "editor.renderLineHighlight" = "all";
       "editor.renderControlCharacters" = true;
@@ -72,7 +72,7 @@
       # kamadorueda.alejandra
 
       # Lua
-      sumneko.lua
+      # sumneko.lua
 
       # Rust
       rust-lang.rust-analyzer
@@ -111,8 +111,8 @@
         # 日本語化 1年前は流石に古い
         name = "vscode-language-pack-ja";
         publisher = "ms-ceintl";
-        version = "1.92.2024081409";
-        sha256 = "142qilsz5j5adwfkxbicm6jnblgvp9bc33hh8jpzzfnld33n8mfr";
+        version = "1.93.2024090409";
+        sha256 = "0mf8m65w2lm0r3yjjrlgkmc860y77bqxb6kx64a668pw7gk4rlwh";
       }
       {
         # ShellCheck
@@ -120,13 +120,6 @@
         name = "shellcheck";
         version = "0.37.1";
         sha256 = "sha256-JSS0GY76+C5xmkQ0PNjt2Nu/uTUkfiUqmPL51r64tl0=";
-      }
-      {
-        # Prettier
-        name = "prettier-vscode";
-        publisher = "esbenp";
-        version = "11.0.0";
-        sha256 = "1fcz8f4jgnf24kblf8m8nwgzd5pxs2gmrv235cpdgmqz38kf9n54";
       }
       # {
       #   # Draw.io
