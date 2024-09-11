@@ -4,12 +4,15 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ shellcheck-minimal nixpkgs-fmt ]); # pkgs.vscodium-fhs;
+    # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang clang-tools shellcheck-minimal nixpkgs-fmt ]);
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     # mutableExtensionsDir = true;
     userSettings = {
       # "C_Cpp.intelliSenseEngine" = "disabled"; # default or Tag Parser or disabled
       "C_Cpp.errorSquiggles" = "disabled";
+      # "clangd.path" = "${pkgs.clang-tools}/bin/clangd";
+      # "clang-format.executable" = "${pkgs.clang-tools}/bin/clang-format";
       "breadcrumbs.enabled" = true;
       "files.autoGuessEncoding" = true;
 
@@ -45,16 +48,11 @@
       "workbench.sideBar.location" = "left";
       "workbench.startupEditor" = "none";
       "workbench.activityBar.location" = "top";
-      "nix.serverSettings" = {
-        "nil" = {
-          "formatting" = {
-            "command" = [ "nixpkgs-fmt" ];
-          };
-        };
-      };
-      "[nix]" = {
-        "editor.defaultFormatter" = "jnoortheen.nix-ide";
-      };
+      
+      "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
+      "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
+      # "[c]"."editor.defaultFormatter" = "xaver.clang-format";
+      # "[cpp]"."editor.defaultFormatter" = "xaver.clang-format";
     };
     extensions = with pkgs.vscode-extensions; [
       # UI Language

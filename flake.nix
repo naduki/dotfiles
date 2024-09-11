@@ -18,6 +18,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # vscode marketplace
+    # nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     # hardware setting
     # nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # flake-utils
