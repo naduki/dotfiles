@@ -22,9 +22,10 @@
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
+      # flake-compat flake-utils
     };
     # hardware setting
-    # nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    # nixos-hardware.url = "github:NixOS/nixos-hardware";
     # flake-utils
     # systems.url = "github:nix-systems/default";
     # flake-utils = {
@@ -33,7 +34,7 @@
     # };
     # NixOS-WSL
     # nixos-wsl = {
-    #   url = "github:nix-community/NixOS-WSL/main";
+    #   url = "github:nix-community/NixOS-WSL";
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.flake-utils.follows = "flake-utils";
     #   # flake-compat
@@ -79,7 +80,10 @@
         kokona = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfree = true; # プロプライエタリなパッケージを許可
+            config = {
+              allowUnfree = true; # プロプライエタリなパッケージを許可
+              cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdのビルドが発生する
+            };
             overlays = [ nix-vscode-extensions.overlays.default ];  # home-manager内で上書きで導入する場合
           };
           extraSpecialArgs = { inherit inputs; };
