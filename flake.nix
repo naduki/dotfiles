@@ -19,7 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # vscode marketplace
-    # nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # hardware setting
     # nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # flake-utils
@@ -50,7 +53,7 @@
     # };
   };
 
-  outputs = { self, nixpkgs, package, home-manager, rust-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, package, home-manager, rust-overlay, nix-vscode-extensions, ... }@inputs:
     let
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
@@ -77,7 +80,7 @@
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true; # プロプライエタリなパッケージを許可
-            # overlays = [];  # home-manager内で上書きで導入する場合
+            overlays = [ nix-vscode-extensions.overlays.default ];  # home-manager内で上書きで導入する場合
           };
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./home/home.nix ];
