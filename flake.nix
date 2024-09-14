@@ -59,7 +59,7 @@
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = package.lib.genAttrs supportedSystems;
-      system = "x86_64-linux"; # supportedSystemsを使いたい
+      system = "x86_64-linux"; # supportedSystemsを使いたいな
       specialArgs = { inherit inputs; }; # `inputs = inputs;`と等しい
     in
     {
@@ -69,7 +69,7 @@
           inherit system specialArgs;
           modules = [ ./hosts/kokona.nix ];
         };
-        # NixOS-WSLのFlake設定
+        # NixOS-WSLのFlake設定 未検証
         wsl = nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
           modules = [ ./hosts/wsl.nix ];
@@ -82,7 +82,7 @@
             inherit system;
             config = {
               allowUnfree = true; # プロプライエタリなパッケージを許可
-              cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdのビルドが発生する
+              cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
             };
             overlays = [ nix-vscode-extensions.overlays.default ];  # home-manager内で上書きで導入する場合
           };

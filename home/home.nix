@@ -15,6 +15,7 @@
     activation = {
       # ブラウザのキャッシュの格納場所をRAMにする
       # Custom Order Maid 3D2 のスクショの保存先を変える
+      # VSCodeのキャッシュもRAMにする? → /home/naduki/.config/VSCodium/Cache, CachedData
       myActivationAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run \
           ln -fns /tmp ${homeDirectory}/.cache/BraveSoftware; \
