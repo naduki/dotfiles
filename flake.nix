@@ -25,7 +25,7 @@
       # flake-compat flake-utils
     };
     # hardware setting
-    # nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     # flake-utils
     # systems.url = "github:nix-systems/default";
     # flake-utils = {
@@ -54,7 +54,7 @@
     # };
   };
 
-  outputs = { self, nixpkgs, package, home-manager, rust-overlay, nix-vscode-extensions, ... }@inputs:
+  outputs = { self, nixpkgs, package, home-manager, rust-overlay, nix-vscode-extensions, nixos-hardware, ... }@inputs:
     let
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.

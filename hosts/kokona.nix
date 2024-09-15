@@ -1,12 +1,15 @@
 {
-  #inputs,
+  inputs,
   config
 , pkgs
 , ...
 }: {
   # 分割した設定ファイルのインポート
-  # inputs.nixos-hardware.nixosModules.common-cpu-amd
-  imports = [ ./extra ];
+  imports = [
+    ./extra
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
+  ];
 
   boot = {
     loader = {

@@ -1,9 +1,9 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   # todo: # $HOME/.vscode-oss/argv.jsonに # "locale": "ja" があるようにしたい
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt ]); # pkgs.vscodium-fhs;
+    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]); # pkgs.vscodium-fhs;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     # mutableExtensionsDir = true;
@@ -33,7 +33,7 @@
       "extensions.autoCheckUpdates" = false;
       "files.autoSave" = "onWindowChange";
       "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "${lib.getExe pkgs.nil}";
+      "nix.serverPath" = "${pkgs.nil}/bin/nil";  # "${lib.getExe pkgs.nil}"
       "shellcheck.disableVersionCheck" = true;
       "update.mode" = "none";
       "window.titleBarStyle" = "custom";
@@ -49,9 +49,13 @@
       "workbench.activityBar.location" = "top";
       
       "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
+      "files.associations".".envrc" = "plaintext";
+
       "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
-      "[c]"."editor.defaultFormatter" = "xaver.clang-format";
-      "[cpp]"."editor.defaultFormatter" = "xaver.clang-format";
+      "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd"; # "xaver.clang-format"
+      "[cpp]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
+      "[cu]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
+      "[cuh]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
     };
     extensions = with pkgs.vscode-marketplace; [
       # UI Language
@@ -87,13 +91,13 @@
       usernamehw.errorlens
       donjayamanne.githistory
       christian-kohler.path-intellisense
-    ] ++ [
+    ] ++ ( with pkgs.vscode-extensions; [
       # C/C++
       # nix-vscode-extensions では導入できないので
-      pkgs.vscode-extensions.ms-vscode.cpptools
+      ms-vscode.cpptools
       # Nix
       # 24.05のCodiumで動かすためにバージョンダウン
-      pkgs.vscode-extensions.jnoortheen.nix-ide
-    ];
+      jnoortheen.nix-ide
+    ]);
   };
 }
