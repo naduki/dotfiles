@@ -47,7 +47,12 @@
       "workbench.sideBar.location" = "left";
       "workbench.startupEditor" = "none";
       "workbench.activityBar.location" = "top";
-      
+
+      "path-intellisense.autoSlashAfterDirectory" = true;
+      "path-intellisense.autoTriggerNextSuggestion" = true;
+      "path-intellisense.extensionOnImport" = true;
+      "path-intellisense.showHiddenFiles" = true;
+
       "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
       "files.associations".".envrc" = "plaintext";
 
