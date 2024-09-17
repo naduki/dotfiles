@@ -84,7 +84,7 @@
               allowUnfree = true; # プロプライエタリなパッケージを許可
               cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
             };
-            overlays = [ nix-vscode-extensions.overlays.default ];  # home-manager内で上書きで導入する場合
+            overlays = [ nix-vscode-extensions.overlays.default ]; # home-manager内で上書きで導入する場合
           };
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./home/home.nix ];

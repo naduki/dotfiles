@@ -10,6 +10,8 @@
     userSettings = {
       "C_Cpp.intelliSenseEngine" = "disabled"; # default or Tag Parser or disabled
       "C_Cpp.errorSquiggles" = "disabled";
+      "C_Cpp.clang_format_style" = "Google";
+      "C_Cpp.clang_format_path" = "${pkgs.clang-tools}/bin/clang-format";
       "clangd.path" = "${pkgs.clang-tools}/bin/clangd";
       "clang-format.executable" = "${pkgs.clang-tools}/bin/clang-format";
       "breadcrumbs.enabled" = true;
@@ -33,7 +35,7 @@
       "extensions.autoCheckUpdates" = false;
       "files.autoSave" = "onWindowChange";
       "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "${pkgs.nil}/bin/nil";  # "${lib.getExe pkgs.nil}"
+      "nix.serverPath" = "${pkgs.nil}/bin/nil"; # "${lib.getExe pkgs.nil}"
       "shellcheck.disableVersionCheck" = true;
       "update.mode" = "none";
       "window.titleBarStyle" = "custom";
@@ -62,7 +64,7 @@
       "[cu]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
       "[cuh]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
     };
-    extensions = with pkgs.vscode-marketplace; [
+    extensions = (with pkgs.vscode-marketplace; [
       # UI Language
       ms-ceintl.vscode-language-pack-ja
 
@@ -96,12 +98,13 @@
       usernamehw.errorlens
       donjayamanne.githistory
       christian-kohler.path-intellisense
-    ] ++ ( with pkgs.vscode-extensions; [
+
+    ]) ++ (with pkgs.vscode-extensions; [
       # C/C++
       # nix-vscode-extensions では導入できないので
       ms-vscode.cpptools
       # Nix
-      # 24.05のCodiumで動かすためにバージョンダウン
+      # 24.05のCodiumで動かすためにダウングレード
       jnoortheen.nix-ide
     ]);
   };
