@@ -1,6 +1,6 @@
 # dotfiles -- My NixOS Settings
 
-- Version : 24.05
+- Version : Unstable
 - Desktop : Cinnamon
 - Editor : VScodium
 - Shell : bash

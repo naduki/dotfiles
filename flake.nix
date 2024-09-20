@@ -3,14 +3,14 @@
 
   inputs = {
     # nixpkgs
-    stable.url = "github:NixOS/nixpkgs/release-24.05";
-    # unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # stable.url = "github:NixOS/nixpkgs/release-24.05";
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs.follows = "stable";
+    nixpkgs.follows = "unstable";
     # home-manager
     home-manager = {
-      # url = "github:nix-community/home-manager";  # unstable
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager";  # unstable
+      # url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # rust
