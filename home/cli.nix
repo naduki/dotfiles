@@ -65,7 +65,7 @@
       userEmail = "68984205+naduki@users.noreply.github.com";
       extraConfig.init.defaultBranch = "main";
     };
-    alacritty = {
+    alacritty = { # Weztermの代替
       enable = true;
       # package = pkgs.aracritty;
       # settings = builtins.readFile ./alacritty.toml;

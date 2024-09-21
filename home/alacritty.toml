@@ -53,5 +53,13 @@ size = 13.5
 offset = { x = 0, y = 2 }
 [window]
 dynamic_padding = true
-opacity = 0.7
-# startup_mode = "Fullscreen"
+opacity = 0.85
+[mouse]
+bindings = [
+{ mouse = "Right", mods = "Control", action = "ToggleMaximized" },
+]
+[keyboard]
+bindings = [
+{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+{ key = "T", mods = "Control|Shift", action = "ToggleFullscreen" },
+]
