@@ -4,7 +4,7 @@
 - Desktop : Cinnamon
 - Editor : VScodium
 - Shell : bash
-- Terminal: Wezterm
+- Terminal: Alacritty
 - Browser : Brave
 
 ## Reference

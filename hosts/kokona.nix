@@ -134,7 +134,7 @@
     systemPackages = with pkgs; [
       unar # Windowsの文字化けを回避して解凍する
       libsForQt5.xp-pen-deco-01-v2-driver
-      cinnamon.nemo-python
+      nemo-python
       # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
       # wineWowPackages.wayland
     ];

@@ -65,8 +65,14 @@
       userEmail = "68984205+naduki@users.noreply.github.com";
       extraConfig.init.defaultBranch = "main";
     };
-    wezterm = {
+    alacritty = {
       enable = true;
+      # package = pkgs.aracritty;
+      # settings = builtins.readFile ./alacritty.toml;
+    };
+    wezterm = {
+      enable = false; # unstable + nvidia opendriverで文字が四角になって死んだ
+      # package = pkgs.wezterm;
       # バージョンアップとかで挙動が変わったら無効化して~/.config/wezterm/wezterm.luaでデバッグ
       extraConfig = builtins.readFile ./wezterm.lua;
     };
