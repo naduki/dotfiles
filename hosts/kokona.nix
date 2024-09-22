@@ -43,11 +43,6 @@
     longitude = 133.1;
   };
 
-  # Wineでまいてつ Last Run!!をやるときに使うはず
-  # hardware.graphics.enable32Bit = true;
-  # NvidiaGPUのオープンソースドライバーを使う
-  hardware.nvidia.open = true;
-
   i18n = {
     # Select internationalisation properties.
     defaultLocale = "ja_JP.UTF-8";
@@ -68,7 +63,7 @@
       # enabled = "fcitx5"; # NixOS 24.11から非推奨
       enable = true;
       type = "fcitx5";
-      fcitx5.waylandFrontend = true;
+      # fcitx5.waylandFrontend = true;  # 変換ミスが起きやすい
       fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
     };
   };
@@ -88,7 +83,7 @@
         layout = "us";
         variant = "";
       };
-      excludePackages = with pkgs; [ xterm ];
+      # excludePackages = with pkgs; [ xterm ];
     };
     # Using RedShift (時間帯で画面を赤くできる)
     redshift = {
@@ -101,6 +96,11 @@
     # Enable CUPS to print documents.
     printing.enable = false;
   };
+
+  # Wineでまいてつ Last Run!!をやるときに使うはず
+  # hardware.graphics.enable32Bit = true;
+  # NvidiaGPUのオープンソースドライバーにする
+  hardware.nvidia.open = true;
 
   # Enable sound with pipewire.
   # sound.enable = true; # Removed in NixOS 24.11
@@ -134,16 +134,16 @@
     systemPackages = with pkgs; [
       unar # Windowsの文字化けを回避して解凍する
       libsForQt5.xp-pen-deco-01-v2-driver
-      nemo-python
       # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
       # wineWowPackages.wayland
     ];
-    # CinnamonがデフォルトでインストールするソフトからHexChatを除外する(NixOS 24.11からCinnamonで削除)
+    # Cinnamonがデフォで入れるパッケージからHexChatを除外する(NixOS 24.11からCinnamonで削除)
     # cinnamon.excludePackages = with pkgs; [ hexchat ];
   };
 
   # プログラム個別設定
   # programs.geary.enable = false; # Geary(メールアプリ)を消す(NixOS 24.11からCinnamonで削除)
+  programs.gnome-terminal.enable = false; # gnome-terminalを消す(問題発生時はttyかxtermで対応)
   programs.steam.enable = true; # Steamを有効化
 
   # Some programs need SUID wrappers, can be configured further or are
