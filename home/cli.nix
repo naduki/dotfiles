@@ -51,6 +51,7 @@
         "flake"
         "nvim"
         "top"
+        "git merge main"
       ];
       # shellの初期化のときに実行される(tty1~6のときは日本語じゃないようにする)
       initExtra = ''(tty|fgrep -q 'tty') && export LANG=C'';
