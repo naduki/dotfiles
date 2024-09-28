@@ -96,7 +96,7 @@
           pkgs = import package {
             inherit system;
             config.allowUnfree = true;
-            overlays = [ (import rust-overlay) ]; # 一時シェルで上書きで導入する場合
+            overlays = [ rust-overlay.overlays.default ]; # 一時シェルで上書きで導入する場合
           };
         in
         with pkgs;{
@@ -112,7 +112,21 @@
             # shellHook = '''';
           };
           # $ nix develop .#<name> で使う
-          django = mkshell {
+          cuda = mkShell {
+            buildInputs = [
+              # cudaPackages.cudatoolkit  # all
+              cudaPackages.cuda_cudart    # runtime
+              cudaPackages.cuda_nvcc      # compiler
+              newt  # whiptail
+            ];
+            shellHook = ''
+              export CUDA_PATH=${pkgs.cudaPackages.cuda_nvcc}
+              export LD_LIBRARY_PATH=/usr/lib/wsl/lib:${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.ncurses5}/lib
+              export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
+              export EXTRA_CCFLAGS="-I/usr/include"
+            '';
+          };         
+          django = mkShell {
             buildInputs = [
               python311
               python311Packages.django
