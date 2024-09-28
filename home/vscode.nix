@@ -90,7 +90,7 @@
       serayuzgur.crates
 
       # Docker
-      ms-azuretools.vscode-docker
+      # ms-azuretools.vscode-docker
       ms-vscode-remote.remote-containers
 
       # hediet.vscode-drawio

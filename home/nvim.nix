@@ -14,8 +14,10 @@
     vimdiffAlias = true;
 
     extraPackages = with pkgs; [
-      lua-language-server
+      clang-tools
+      # lua-language-server
       nil
+      shellcheck-minimal
       rust-analyzer
       # kotlin-language-server
     ];

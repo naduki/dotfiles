@@ -17,6 +17,7 @@
         os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
         nix-clean = "nix-collect-garbage --delete-older-than 2d";
         nix-update = "nix flake update ";
+        nix-updates = "nix flake update --commit-lock-file";
         # nix-edit  = "codium --locale=ja $FLAKE";
         # hm-listgen = "home-manager generations";
         # hm-rmgen = "home-manager remove-generations ";
@@ -69,6 +70,7 @@
     alacritty = { # Weztermの代替
       enable = true;
       # package = pkgs.aracritty;
+      # tomlの形式でNixで書く必要があるのでhome.fileで代用
       # settings = builtins.readFile ./alacritty.toml;
     };
     wezterm = {
