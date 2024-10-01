@@ -13,6 +13,7 @@
             url = "https://github.com/yuru7/moralerspace/releases/download/v1.0.2/MoralerspaceHWNF_v1.0.2.zip";
             sha256 = "sha256-9jbOELf/kBMVZMPPEAZ/1ubqxNZ+6oHFoOKrG9srQkE=";
         }}"
+        # Klee One, Zen Kurenaido, Fabric External MDL2 Assetsは$HOME/.local/share/fontsに手動で配置
     ];
     # use fonts specified by user rather than default ones
     enableDefaultPackages = false;
@@ -51,20 +52,6 @@
                 </test>
                 <edit name="family" mode="prepend" binding="strong">
                     <string>Moralerspace Radon HWNF</string>
-                </edit>
-            </match>
-
-            <match>
-                <test name="prgname">
-                    <string>steamwebhelper</string>
-                </test>
-                <test name="family" qual="any">
-                    <string>sans-serif</string>
-                </test>
-                <edit mode="prepend" name="family">
-                    <string>Klee One</string>
-                    <string>Fabric External MDL2 Assets</string>
-                    <string>Zen Kurenaido</string>
                 </edit>
             </match>
             <!-- Japanese (ja) ends -->

@@ -45,7 +45,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.flake-utils.follows = "flake-utils";
     # };
-    # キー設定を変更するツール xremap
+    # キー設定を変更するツール xremap waylandで使う
     # xremap = {
     #   url = "github:xremap/nix-flake";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -82,7 +82,7 @@
             inherit system;
             config = {
               allowUnfree = true; # プロプライエタリなパッケージを許可
-              cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
+              cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい+高負荷)が発生する
             };
             overlays = [ nix-vscode-extensions.overlays.default ]; # home-manager内で上書きで導入する場合
           };
@@ -102,7 +102,7 @@
         with pkgs;{
           default = mkShell {
             buildInputs = [
-              git # poppler_utils
+              git wget # poppler_utils
               # gcc gnuplot
               # jq unzip
               # pcl meshlab

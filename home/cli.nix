@@ -74,7 +74,7 @@
       # settings = builtins.readFile ./alacritty.toml;
     };
     wezterm = {
-      enable = false; # unstable + nvidia opendriverで文字が四角になって死んだ
+      enable = false;
       # package = pkgs.wezterm;
       # バージョンアップとかで挙動が変わったら無効化して~/.config/wezterm/wezterm.luaでデバッグ
       extraConfig = builtins.readFile ./wezterm.lua;

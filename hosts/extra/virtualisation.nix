@@ -43,5 +43,7 @@
     [
       win-spice # KVM qemu の WindowsでUSBが使えるようになる？
       virtio-win
-    ] else [ ];
+    ] 
+  else if config.virtualisation.docker.enable then [ docker-compose ]
+  else [ ];
 }

@@ -1,10 +1,6 @@
+{ inputs, config, pkgs, ... }: 
 {
-  inputs,
-  config
-, pkgs
-, ...
-}: {
-  # 分割した設定ファイルのインポート
+  # 分割した設定ファイルとnixos-hardwareのインポート
   imports = [
     ./extra
     inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -21,8 +17,6 @@
       systemd-boot.consoleMode = "max";
       timeout = 10;
     };
-    # Rebuild時に出るようになったWarningを消す(2023/09/15) https://github.com/NixOS/nixpkgs/issues/254807
-    swraid.enable = false;
   };
 
   # Allow unfree packages
@@ -63,7 +57,7 @@
       # enabled = "fcitx5"; # NixOS 24.11から非推奨
       enable = true;
       type = "fcitx5";
-      # fcitx5.waylandFrontend = true;  # 変換ミスが起きやすい
+      # fcitx5.waylandFrontend = true;
       fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
     };
   };
@@ -100,6 +94,8 @@
   # Wineでまいてつ Last Run!!をやるときに使うはず
   # hardware.graphics.enable32Bit = true;
   # NvidiaGPUのオープンソースドライバーにする
+  # X11でChromiumブラウザの色がおかしくなる(youtubeのロゴが青になる等)?
+  # Weztermの文字が四角になる
   hardware.nvidia.open = true;
 
   # Enable sound with pipewire.
@@ -111,6 +107,16 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  };
+
+  # Steamでの日本語の文字化け回避
+  nixpkgs.config.packageOverrides = pkgs: {
+    steam = pkgs.steam.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          migu
+        ];
+    };
   };
 
   users.users.naduki = {
@@ -132,7 +138,9 @@
   environment = {
     # システム全体に導入するパッケージ
     systemPackages = with pkgs; [
-      unar # Windowsの文字化けを回避して解凍する
+      # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
+      # git   # home-manager で有効化中
+      unar # Windows由来の文字化けを回避して解凍する
       libsForQt5.xp-pen-deco-01-v2-driver
       # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
       # wineWowPackages.wayland
