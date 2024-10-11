@@ -17,7 +17,7 @@
     # Docker Setting
     # rootless は docker グループにユーザ追加で対応
     docker = {
-      enable = true;
+      enable = false;
       storageDriver = "btrfs";
       # rootless = {
       #     enable = true;
