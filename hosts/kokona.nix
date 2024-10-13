@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }: 
+{ inputs, config, lib, pkgs, ... }:
 {
   # 分割した設定ファイルとnixos-hardwareのインポート
   imports = [
@@ -57,7 +57,6 @@
       # enabled = "fcitx5"; # NixOS 24.11から非推奨
       enable = true;
       type = "fcitx5";
-      # fcitx5.waylandFrontend = true;
       fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
     };
   };
@@ -93,9 +92,7 @@
 
   # Wineでまいてつ Last Run!!をやるときに使うはず
   # hardware.graphics.enable32Bit = true;
-  # NvidiaGPUのオープンソースドライバーにする
-  # X11でChromiumブラウザの色がおかしくなる(youtubeのロゴが青になる等)?
-  # Weztermの文字が四角になる
+  # NvidiaGPUのオープンソースドライバーにする → Weztermの文字が四角になる?
   hardware.nvidia.open = true;
 
   # Enable sound with pipewire.
@@ -109,30 +106,14 @@
     pulse.enable = true;
   };
 
-  # Steamでの日本語の文字化け回避
-  nixpkgs.config.packageOverrides = pkgs: {
-    steam = pkgs.steam.override {
-      extraPkgs = pkgs:
-        with pkgs; [
-          migu
-        ];
-    };
-  };
-
   users.users.naduki = {
     isNormalUser = true;
     description = "naduki_nixos";
-    extraGroups =
-      if config.virtualisation.libvirtd.enable && config.virtualisation.docker.enable then
-        [
-          "docker" # Docker rootless
-          "libvirtd" # KVM and QEMU rootless
-          "networkmanager" # Wifi ?
-          "wheel" # sudo
-        ]
-      else if config.virtualisation.libvirtd.enable then [ "libvirtd" "networkmanager" "wheel" ]
-      else if config.virtualisation.docker.enable then [ "docker" "networkmanager" "wheel" ]
-      else [ "networkmanager" "wheel" ]; # グループ設定...もっといい書き方はないのか
+    extraGroups = [ "networkmanager" "wheel" ]  # 必須のグループ
+      # 追加のグループ  USERNAME があるのでここで設定してる
+      ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"  # KVM and QEMU rootless
+      ++ lib.optional config.virtualisation.docker.enable "docker"      # Docker rootless
+      ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
 
   environment = {
@@ -141,11 +122,11 @@
       # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
       # git   # home-manager で有効化中
       unar # Windows由来の文字化けを回避して解凍する
-      libsForQt5.xp-pen-deco-01-v2-driver
+      # libsForQt5.xp-pen-deco-01-v2-driver
       # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
       # wineWowPackages.wayland
     ];
-    # Cinnamonがデフォで入れるパッケージからHexChatを除外する(NixOS 24.11からCinnamonで削除)
+    # Cinnamonがデフォで入れるパッケージからHexChatを除外する(NixOS 24.11から削除)
     # cinnamon.excludePackages = with pkgs; [ hexchat ];
   };
 
@@ -153,6 +134,16 @@
   # programs.geary.enable = false; # Geary(メールアプリ)を消す(NixOS 24.11からCinnamonで削除)
   programs.gnome-terminal.enable = false; # gnome-terminalを消す(問題発生時はttyかxtermで対応)
   programs.steam.enable = true; # Steamを有効化
+
+  # Steamでの日本語の文字化け回避(必要ない)
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   steam = pkgs.steam.override {
+  #     extraPkgs = pkgs:
+  #       with pkgs; [
+  #         migu
+  #       ];
+  #   };
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

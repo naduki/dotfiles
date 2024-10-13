@@ -31,9 +31,22 @@
       #     };
       # };
     };
+    # Incus Setting
+    incus = {
+      enable = true;
+      package = pkgs.incus;
+      # preseed = {};
+    };
+    # Cinnamon Wayland が十分使えるので導入してもいいかも
+    # waydroid.enable = false;
   };
 
-  # Docker GPU
+  # incus 使用時は必ず nftables を使う
+  # Docker と libvirted は iptables の方がいい?
+  #  → Incus で Docker と KVM/QEMU をカバーできるっぽい
+  networking.nftables.enable = (config.virtualisation.incus.enable);
+
+  # Docker / Podman GPU
   hardware.nvidia-container-toolkit = {
     enable = (config.virtualisation.docker.enable);
     # mounts = [ nvidia.com/gpu=0 ];
@@ -43,7 +56,7 @@
     [
       win-spice # KVM qemu の WindowsでUSBが使えるようになる？
       virtio-win
-    ] 
+    ]
   else if config.virtualisation.docker.enable then [ docker-compose ]
   else [ ];
 }

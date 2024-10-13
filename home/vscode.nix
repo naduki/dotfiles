@@ -35,7 +35,7 @@
       "extensions.autoCheckUpdates" = false;
       "files.autoSave" = "onWindowChange";
       "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "${pkgs.nil}/bin/nil"; # "${lib.getExe pkgs.nil}"
+      "nix.serverPath" = "${pkgs.nil}/bin/nil";
       "shellcheck.disableVersionCheck" = true;
       "update.mode" = "none";
       "window.titleBarStyle" = "custom";
@@ -56,10 +56,10 @@
       "path-intellisense.showHiddenFiles" = true;
 
       "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
-      "files.associations".".envrc" = "plaintext";
+      "files.associations".".envrc" = "plaintext";  # shellcheckが反応しないようにする
 
       "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
-      "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd"; # "xaver.clang-format"
+      "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
       "[cpp]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
       "[cu]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
       "[cuh]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
@@ -79,7 +79,7 @@
       llvm-vs-code-extensions.vscode-clangd
 
       # Nix
-      # jnoortheen.nix-ide
+      jnoortheen.nix-ide
       # kamadorueda.alejandra
 
       # Lua
@@ -104,8 +104,8 @@
       # nix-vscode-extensions では導入できないので
       ms-vscode.cpptools
       # Nix
-      # 24.05のCodiumで動かすためにダウングレード
-      jnoortheen.nix-ide
+      # 安定版のCodiumで動かすためにダウングレード
+      # jnoortheen.nix-ide
     ]);
   };
 }
