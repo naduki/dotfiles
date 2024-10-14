@@ -9,11 +9,10 @@
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        hm = "home-manager ";
         os-switch = "sudo nixos-rebuild switch --flake .#myNixOS";
         os-dbuild = "sudo nixos-rebuild dry-build --flake .#myNixOS";
         hm-switch = "home-manager switch --flake .#kokona";
-        hm-act = "nix run flake:home-manager -- switch --flake .#kokona";
+        hm-act = "nix run flake:home-manager -- switch --flake .#kokona"; # home-manager activation
         os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
         nix-clean = "nix-collect-garbage --delete-older-than 2d";
         nix-update = "nix flake update ";
@@ -33,10 +32,15 @@
         gacp = "git add . && git commit && git push";
         gco = "git checkout";
 
-        dcs = "docker container start ";
-        dce = "docker container exec -it ";
-        dceu = "docker container exec -itu ";
-        dck = "docker container stop ";
+        # dcs = "docker container start ";
+        # dce = "docker container exec -it ";
+        # dceu = "docker container exec -itu ";
+        # dck = "docker container stop ";
+
+        pcs = "podman container start ";
+        pce = "podman container exec -it ";
+        pceu = "podman container exec -itu ";
+        pck = "podman container stop ";
 
         # vi = "nvim";
         # vim = "nvim";
@@ -47,12 +51,10 @@
         "cd"
         "alias"
         "du"
-        "df"
         "exit"
         "flake"
         "nvim"
         "top"
-        "git merge main"
       ];
       # shellの初期化のときに実行される(tty1~6のときは日本語じゃないようにする)
       initExtra = ''(tty|fgrep -q 'tty') && export LANG=C'';
@@ -70,7 +72,7 @@
     alacritty = { # Weztermの代替
       enable = true;
       # package = pkgs.aracritty;
-      # tomlの形式でNixで書く必要があるのでhome.fileで代用
+      # tomlの形式をNixで書く必要があるのでhome.fileで代用
       # settings = builtins.readFile ./alacritty.toml;
     };
     wezterm = {
