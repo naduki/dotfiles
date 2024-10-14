@@ -112,7 +112,6 @@
     extraGroups = [ "networkmanager" "wheel" ]  # 必須のグループ
       # 追加のグループ  USERNAME があるのでここで設定してる
       ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"  # KVM and QEMU rootless
-      ++ lib.optional config.virtualisation.docker.enable "docker"      # Docker rootless
       ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
 
