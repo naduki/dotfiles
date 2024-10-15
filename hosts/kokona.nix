@@ -126,23 +126,24 @@
       # wineWowPackages.wayland
     ];
     # Cinnamonがデフォで入れるパッケージからHexChatを除外する(NixOS 24.11から削除)
-    # cinnamon.excludePackages = with pkgs; [ hexchat ];
+    # Ubuntu Fontsを消したい
+    cinnamon.excludePackages = with pkgs; [ 
+      # hexchat
+      ubuntu-sans
+      ubuntu-classic
+      ubuntu-sans-mono 
+    ];
   };
 
   # プログラム個別設定
-  # programs.geary.enable = false; # Geary(メールアプリ)を消す(NixOS 24.11からCinnamonで削除)
-  programs.gnome-terminal.enable = false; # gnome-terminalを消す(問題発生時はttyかxtermで対応)
-  programs.steam.enable = true; # Steamを有効化
-
-  # Steamでの日本語の文字化け回避(必要ない)
-  # nixpkgs.config.packageOverrides = pkgs: {
-  #   steam = pkgs.steam.override {
-  #     extraPkgs = pkgs:
-  #       with pkgs; [
-  #         migu
-  #       ];
-  #   };
-  # };
+  programs = {
+    # geary.enable = false; # Geary(メールアプリ)を消す(NixOS 24.11からCinnamonで削除)
+    gnome-terminal.enable = false;  # gnome-terminalを消す(問題発生時はttyかxtermで対応)
+    steam = {
+      enable = false;
+      fontPackages = with pkgs; [ migu ];
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -12,19 +12,20 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/NixOS";
+    device = "/dev/disk/by-label/NIXOS";
     fsType = "btrfs";
     options = [ "subvol=@" ];
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/EFI";
-    fsType = "vfat";
+  fileSystems."/boot" ={
+      device = "/dev/disk/by-uuid/D495-75D0";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
   };
 
   fileSystems."/var/log" = {
-    device = "/dev/disk/by-label/Log";
-    fsType = "btrfs";
+    device = "/dev/disk/by-label/LOG";
+    fsType = "ext4";
   };
 
   swapDevices = [{

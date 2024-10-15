@@ -15,7 +15,7 @@
       };
     };
     # Enable Podman
-    podman.enable = true;
+    podman.enable = false;
     # Cinnamon Wayland が十分使えるので導入してもいいかも
     # waydroid.enable = false;
     # Incus Setting このままだとGPUが使えない

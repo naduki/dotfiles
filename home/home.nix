@@ -19,7 +19,7 @@
       myActivationAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run \
           ln -fns /tmp ${homeDirectory}/.cache/BraveSoftware; \
-          ln -fns ${homeDirectory}/Pictures /home/game/KISS/COM3D2/ScreenShot
+          # ln -fns ${homeDirectory}/Pictures /home/game/KISS/COM3D2/ScreenShot
       '';
     };
     sessionVariables = {
