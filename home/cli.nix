@@ -37,10 +37,10 @@
         # dceu = "docker container exec -itu ";
         # dck = "docker container stop ";
 
-        pcs = "podman container start ";
-        pce = "podman container exec -it ";
-        pceu = "podman container exec -itu ";
-        pck = "podman container stop ";
+        # pcs = "podman container start ";
+        # pce = "podman container exec -it ";
+        # pceu = "podman container exec -itu ";
+        # pck = "podman container stop ";
 
         # vi = "nvim";
         # vim = "nvim";

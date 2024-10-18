@@ -96,7 +96,6 @@
   hardware.nvidia.open = true;
 
   # Enable sound with pipewire.
-  # sound.enable = true; # Removed in NixOS 24.11
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -120,19 +119,15 @@
     systemPackages = with pkgs; [
       # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
       # git   # home-manager で有効化中
+      cinnamon-translations # cinnamon-settingsが翻訳されてないので...
       unar # Windows由来の文字化けを回避して解凍する
       # libsForQt5.xp-pen-deco-01-v2-driver
       # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
       # wineWowPackages.wayland
     ];
-    # Cinnamonがデフォで入れるパッケージからHexChatを除外する(NixOS 24.11から削除)
-    # Ubuntu Fontsを消したい
-    cinnamon.excludePackages = with pkgs; [ 
-      # hexchat
-      ubuntu-sans
-      ubuntu-classic
-      ubuntu-sans-mono 
-    ];
+    # Cinnamonがデフォで入れるパッケージからHexChatを除外する(NixOS 24.11からCinnamonで削除)
+    # Ubuntu Font を消したい
+    # cinnamon.excludePackages = with pkgs; [ hexchat ];
   };
 
   # プログラム個別設定
@@ -141,7 +136,7 @@
     gnome-terminal.enable = false;  # gnome-terminalを消す(問題発生時はttyかxtermで対応)
     steam = {
       enable = false;
-      fontPackages = with pkgs; [ migu ];
+      fontPackages = with pkgs; [ migu ]; # fontを変える?
     };
   };
 
