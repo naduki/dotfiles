@@ -18,9 +18,9 @@
   };
 
   fileSystems."/boot" ={
-      device = "/dev/disk/by-uuid/D495-75D0";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+    device = "/dev/disk/by-uuid/D495-75D0";
+    fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
   };
 
   fileSystems."/var/log" = {
