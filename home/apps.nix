@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     # bitwarden
-    blender
+    # blender
     brave
     # gnome.gnome-system-monitor
     # krita
