@@ -82,7 +82,7 @@
             inherit system;
             config = {
               allowUnfree = true; # プロプライエタリなパッケージを許可
-              cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい+高負荷)が発生する
+              cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
             };
             overlays = [ nix-vscode-extensions.overlays.default ]; # home-manager内で上書きで導入する場合
           };
@@ -106,12 +106,12 @@
               # gcc gnuplot
               # jq unzip
               # pcl meshlab
-              # libreoffice lapce
+              # libreoffice
               # protontricks # winetricks
             ];
             # shellHook = '''';
           };
-          # $ nix develop .#<name> で使う
+          # $ nix develop .#<name>
           cuda = mkShell {
             buildInputs = [
               # cudaPackages.cudatoolkit  # all
@@ -126,17 +126,6 @@
               export EXTRA_CCFLAGS="-I/usr/include"
             '';
           };         
-          django = mkShell {
-            buildInputs = [
-              python311
-              python311Packages.django
-              python311Packages.asgiref
-              python311Packages.sqlparse
-            ];
-            shellHook = ''
-              alias runserver='python3 manage.py runserver'
-            '';
-          };
           nkf = mkShell {
             buildInputs = [ nkf ];
             shellHook = ''
@@ -146,7 +135,7 @@
           rust = mkShell {
             buildInputs = [
               openssl
-              pkg-config # zed-editor
+              pkg-config
               # rust-bin.stable.latest.default
               (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
             ];
