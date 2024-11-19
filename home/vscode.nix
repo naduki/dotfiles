@@ -49,6 +49,7 @@
       "workbench.sideBar.location" = "left";
       "workbench.startupEditor" = "none";
       "workbench.activityBar.location" = "top";
+      "workbench.panel.showLabels" = false;
 
       "path-intellisense.autoSlashAfterDirectory" = true;
       "path-intellisense.autoTriggerNextSuggestion" = true;
