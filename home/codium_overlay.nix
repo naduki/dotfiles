@@ -1,6 +1,7 @@
 final: prev: {
   # https://nixos-and-flakes.thiscute.world/nixpkgs/overlays
   # https://vscodium.com/
+  # https://github.com/VSCodium/vscodium
   # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/applications/editors/vscode/vscodium.nix
   vscodium = prev.vscodium.overrideAttrs (oldAttrs: rec {
     version = "1.95.3.24321";
