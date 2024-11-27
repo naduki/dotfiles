@@ -120,6 +120,7 @@
       # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
       # git   # home-manager で有効化中
       cinnamon-translations # cinnamon-settingsが翻訳されてないので...
+      networkmanager-l2tp   # L2TP VPN
       unar # Windows由来の文字化けを回避して解凍する
       # libsForQt5.xp-pen-deco-01-v2-driver
       # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
