@@ -85,7 +85,7 @@
               cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
             };
             overlays = [
-              ( import ./home/codium_overlay.nix )
+              # ( import ./home/codium_overlay.nix )
               nix-vscode-extensions.overlays.default
             ]; # home-manager内で上書きで導入する場合
           };
