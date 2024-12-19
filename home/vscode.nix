@@ -21,7 +21,7 @@
       "editor.cursorBlinking" = "phase";
       "editor.cursorSmoothCaretAnimation" = "on";
       "editor.fontFamily" = "'moralerspace Radon HWNF','Klee One','Material Design Icons',monospace";
-      "editor.fontSize" = 17;
+      "editor.fontSize" = 19;
       "editor.formatOnSave" = false;
       # "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.minimap.enabled" = false;
@@ -104,9 +104,6 @@
       # C/C++
       # nix-vscode-extensions では導入できないので
       ms-vscode.cpptools
-      # Nix
-      # 安定版のCodiumで動かすためにダウングレード
-      # jnoortheen.nix-ide
     ]);
   };
 }
