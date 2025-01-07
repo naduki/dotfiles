@@ -82,6 +82,8 @@
             inherit system;
             config = {
               allowUnfree = true; # プロプライエタリなパッケージを許可
+              # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ unityhub ]; # vscode の C/C++が残ってる
+              # allowlistedLicenses = with lib.licenses; [ nvidiaCudaRedist ];  # CUDA redist だけ許可
               cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
             };
             overlays = [

@@ -1,5 +1,12 @@
 { inputs, config, lib, pkgs, ... }:
 {
+  # Stable と Unstableの混合?
+  # https://discourse.nixos.org/t/mixing-stable-and-unstable-packages-on-flake-based-nixos-system/50351/4
+  # _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
+  #   inherit (pkgs.stdenv.hostPlatform) system;
+  #   inherit (config.nixpkgs) config;
+  # };
+
   # 分割した設定ファイルとnixos-hardwareのインポート
   imports = [
     ./extra
@@ -20,7 +27,28 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
+  # Nvidia Driver と Steam だけ許可する
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "nvidia-x11"
+    "nvidia-settings"
+    "nvidia-persistenced"
+    "steam"
+    "steam-original"
+    "steam-unwrapped"
+    "steam-run"
+  ];
+
+  hardware = {
+    # Wineでまいてつ Last Run!!をやるときに使うはず
+    # graphics.enable32Bit = true;
+    nvidia = {
+      # beta版のドライバにする
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # NvidiaGPUのオープンソースドライバーにする → Weztermの文字が四角になる?
+      open = true;
+    };
+  };
 
   networking = {
     hostName = "kokona-hinazuki";
@@ -76,27 +104,14 @@
         layout = "us";
         variant = "";
       };
-      # excludePackages = with pkgs; [ xterm ];
     };
-    # Using RedShift (時間帯で画面を赤くできる)
-    redshift = {
-      enable = false;
-      temperature.day = 6000;
-      temperature.night = 4500;
-      # executable = "/bin/redshift-gtk";  # Tray icon
-      extraOptions = [ "-m randr" ];
-    };
-    # Enable CUPS to print documents.
+    # Disable CUPS to print documents.
     printing.enable = false;
+    # Enable sound with pipewire.
+    pulseaudio.enable = false;
   };
 
-  # Wineでまいてつ Last Run!!をやるときに使うはず
-  # hardware.graphics.enable32Bit = true;
-  # NvidiaGPUのオープンソースドライバーにする → Weztermの文字が四角になる?
-  hardware.nvidia.open = true;
-
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -119,21 +134,17 @@
     systemPackages = with pkgs; [
       # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
       # git   # home-manager で有効化中
-      cinnamon-translations # cinnamon-settingsが翻訳されてないので...
-      networkmanager-l2tp   # L2TP VPN
+      # cinnamon-translations # cinnamon-settingsが翻訳されてないので...
+      # networkmanager-l2tp   # L2TP VPN
       unar # Windows由来の文字化けを回避して解凍する
       # libsForQt5.xp-pen-deco-01-v2-driver
       # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
       # wineWowPackages.wayland
     ];
-    # Cinnamonがデフォで入れるパッケージからHexChatを除外する(NixOS 24.11からCinnamonで削除)
-    # Ubuntu Font を消したい
-    # cinnamon.excludePackages = with pkgs; [ hexchat ];
   };
 
   # プログラム個別設定
   programs = {
-    # geary.enable = false; # Geary(メールアプリ)を消す(NixOS 24.11からCinnamonで削除)
     gnome-terminal.enable = false;  # gnome-terminalを消す(問題発生時はttyかxtermで対応)
     steam = {
       enable = false;

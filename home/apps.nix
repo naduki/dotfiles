@@ -1,10 +1,9 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # bitwarden
     blender
     brave
-    # gnome.gnome-system-monitor
+    # mission-center
     # krita
     # prismlauncher # minecraft alternative launcher
     # unityhub
