@@ -94,16 +94,15 @@
       timonwong.shellcheck
 
       # Misc
-      # esbenp.prettier-vscode
       mkhl.direnv
       usernamehw.errorlens
       donjayamanne.githistory
       christian-kohler.path-intellisense
-
-    ]) ++ (with pkgs.vscode-extensions; [
-      # C/C++
-      # nix-vscode-extensions では導入できないので
-      ms-vscode.cpptools
-    ]);
+    ]
+    # ) ++ (with pkgs.vscode-extensions; [
+    #   # C/C++ | nix-vscode-extensions では導入できないので
+    #   ms-vscode.cpptools
+    # ]
+    );
   };
 }

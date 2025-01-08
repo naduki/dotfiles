@@ -3,7 +3,7 @@
 
   inputs = {
     # nixpkgs
-    # stable.url = "github:NixOS/nixpkgs/release-24.05";
+    # stable.url = "github:NixOS/nixpkgs/release-24.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.follows = "unstable";
@@ -59,7 +59,7 @@
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = package.lib.genAttrs supportedSystems;
-      system = "x86_64-linux"; # supportedSystemsを使いたいな
+      system = "x86_64-linux";
       specialArgs = { inherit inputs; }; # `inputs = inputs;`と等しい
     in
     {
@@ -81,9 +81,11 @@
           pkgs = import nixpkgs {
             inherit system;
             config = {
-              allowUnfree = true; # プロプライエタリなパッケージを許可
-              # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ unityhub ]; # vscode の C/C++が残ってる
-              # allowlistedLicenses = with lib.licenses; [ nvidiaCudaRedist ];  # CUDA redist だけ許可
+              # プロプライエタリなパッケージを許可
+              allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
+                "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl"
+                # "unityhub" "vscode-extensions.ms-vscode.cpptools"
+              ];
               cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
             };
             overlays = [
@@ -100,7 +102,7 @@
         let
           pkgs = import package {
             inherit system;
-            config.allowUnfree = true;
+            config.allowUnfree = true;  # Allow all unfree packages
             overlays = [ rust-overlay.overlays.default ]; # 一時シェルで上書きで導入する場合
           };
         in

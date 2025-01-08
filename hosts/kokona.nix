@@ -4,7 +4,6 @@
   # https://discourse.nixos.org/t/mixing-stable-and-unstable-packages-on-flake-based-nixos-system/50351/4
   # _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
   #   inherit (pkgs.stdenv.hostPlatform) system;
-  #   inherit (config.nixpkgs) config;
   # };
 
   # 分割した設定ファイルとnixos-hardwareのインポート
@@ -26,17 +25,10 @@
     };
   };
 
-  # Allow unfree packages
-  # nixpkgs.config.allowUnfree = true;
-  # Nvidia Driver と Steam だけ許可する
+  # Allow unfree packages Nvidia Driver と Steam を許可する
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11"
-    "nvidia-settings"
-    "nvidia-persistenced"
-    "steam"
-    "steam-original"
-    "steam-unwrapped"
-    "steam-run"
+    "nvidia-x11" "nvidia-settings" "nvidia-persistenced"
+    "steam" "steam-original" "steam-unwrapped" "steam-run"
   ];
 
   hardware = {

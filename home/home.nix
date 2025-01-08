@@ -11,7 +11,7 @@
     # recでAttribute Set内で他の値を参照できるようにする
     username = "naduki";
     homeDirectory = "/home/${username}"; # 文字列に値を埋め込む
-    stateVersion = "24.05";
+    stateVersion = "25.05";
     activation = {
       # ブラウザのキャッシュの格納場所をRAMにする
       # Custom Order Maid 3D2 のスクショの保存先を変える
