@@ -55,105 +55,62 @@
   };
 
   outputs = { self, nixpkgs, package, home-manager, rust-overlay, nix-vscode-extensions, nixos-hardware, ... }@inputs:
-    let
-      supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
-      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      forAllSystems = package.lib.genAttrs supportedSystems;
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; }; # `inputs = inputs;`と等しい
-    in
-    {
-      nixosConfigurations = {
-        # システム全体の設定
-        myNixOS = nixpkgs.lib.nixosSystem {
-          inherit system specialArgs;
-          modules = [ ./hosts/kokona.nix ];
-        };
-        # NixOS-WSLのFlake設定 未検証
-        wsl = nixpkgs.lib.nixosSystem {
-          inherit system specialArgs;
-          modules = [ ./hosts/wsl.nix ];
-        };
+  let
+    supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+    # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+    forAllSystems = package.lib.genAttrs supportedSystems;
+    system = "x86_64-linux";
+    specialArgs = { inherit inputs; }; # `inputs = inputs;`と等しい
+  in {
+    nixosConfigurations = {
+      # システム全体の設定
+      myNixOS = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules = [ ./hosts/kokona.nix ];
       };
-      homeConfigurations = {
-        # ユーザー環境用設定
-        kokona = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            config = {
-              # プロプライエタリなパッケージを許可
-              allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-                "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl"
-                # "unityhub" "vscode-extensions.ms-vscode.cpptools"
-              ];
-              cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
-            };
-            overlays = [
-              # ( import ./home/codium_overlay.nix )
-              nix-vscode-extensions.overlays.default
-            ]; # home-manager内で上書きで導入する場合
-          };
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home/home.nix ];
-        };
+      # NixOS-WSLのFlake設定 未検証
+      wsl = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules = [ ./hosts/wsl.nix ];
       };
-      # nix develop を使えるようにする -> ここのsystemはどうなってる？
-      devShells = forAllSystems (system:
-        let
-          pkgs = import package {
-            inherit system;
-            config.allowUnfree = true;  # Allow all unfree packages
-            overlays = [ rust-overlay.overlays.default ]; # 一時シェルで上書きで導入する場合
-          };
-        in
-        with pkgs;{
-          default = mkShell {
-            buildInputs = [
-              git wget # poppler_utils
-              # gcc gnuplot
-              # jq unzip
-              # pcl meshlab
-              # libreoffice
-              # protontricks # winetricks
-            ];
-            # shellHook = '''';
-          };
-          # $ nix develop .#<name>
-          cuda = mkShell {
-            buildInputs = [
-              # cudaPackages.cudatoolkit  # all
-              cudaPackages.cuda_cudart    # runtime
-              cudaPackages.cuda_nvcc      # compiler
-              newt  # whiptail
-            ];
-            shellHook = ''
-              export CUDA_PATH=${pkgs.cudaPackages.cuda_nvcc}
-              export LD_LIBRARY_PATH=/usr/lib/wsl/lib:${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.ncurses5}/lib
-              export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
-              export EXTRA_CCFLAGS="-I/usr/include"
-            '';
-          };         
-          nkf = mkShell {
-            buildInputs = [ nkf ];
-            shellHook = ''
-              alias nkfsj='nkf -w --overwrite'
-            '';
-          };
-          rust = mkShell {
-            buildInputs = [
-              openssl
-              pkg-config
-              # rust-bin.stable.latest.default
-              (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
-            ];
-            # shellHook = '''';
-          };
-          vera = mkShell {
-            buildInputs = [ veracrypt ];
-            shellHook = ''
-              WXSUPPRESS_SIZER_FLAGS_CHECK=1
-            '';
-          };
-        });
     };
+    homeConfigurations = {
+      # ユーザー環境用設定
+      kokona = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            # プロプライエタリなパッケージを許可
+            allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
+              "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl"
+              # "unityhub" "vscode-extensions.ms-vscode.cpptools"
+            ];
+            cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
+          };
+          overlays = [
+            # ( import ./home/codium_overlay.nix )
+            nix-vscode-extensions.overlays.default
+          ]; # home-manager内で上書きで導入する場合
+        };
+        extraSpecialArgs = { inherit inputs; };
+        modules = [ ./home/home.nix ];
+      };
+    };
+    # nix develop
+    devShells = forAllSystems (system:
+      let
+        pkgs = import package {
+          inherit system;
+          config.allowUnfree = true;  # Allow all unfree packages
+          overlays = [ rust-overlay.overlays.default ]; # 一時シェルにおいて上書きで導入する場合
+        };
+      in {
+        default = import ./shells/shell.nix { inherit pkgs; };
+        # $ nix develop .#<name>
+        cuda = import ./shells/environments/cuda/shell.nix { inherit pkgs; };
+        rust = import ./shells/environments/rust/shell.nix { inherit pkgs; };
+        tools = import ./shells/environments/tools/shell.nix { inherit pkgs; };
+      }
+    );
+  };
 }
