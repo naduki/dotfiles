@@ -98,6 +98,7 @@
       usernamehw.errorlens
       donjayamanne.githistory
       christian-kohler.path-intellisense
+      saoudrizwan.claude-dev
     ]
     # ) ++ (with pkgs.vscode-extensions; [
     #   # C/C++ | nix-vscode-extensions では導入できないので
