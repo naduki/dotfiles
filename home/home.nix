@@ -3,7 +3,7 @@
   imports = [
     ./apps.nix
     ./cli.nix
-    # ./nvim.nix
+    ./nvim.nix
     ./vscode.nix
     ./xdg-user-dirs.nix
     ./zed-editor.nix

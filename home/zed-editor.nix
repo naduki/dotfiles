@@ -15,9 +15,9 @@
       "restore_on_startup" = "none";
       "auto_update" = false;
       "ui_font_size" = 16;
-      "ui_font_family" = "moralerspace Radon HWNF";
+      "ui_font_family" = "Moralerspace Radon HWNF";
       "buffer_font_size" = 17;
-      "buffer_font_family" = "moralerspace Radon HWNF";
+      "buffer_font_family" = "Moralerspace Radon HWNF";
       "tab_size" = 2;
       # "load_direnv" = "shell_hook";
       "current_line_highlight" = "gutter";

@@ -7,7 +7,7 @@
       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
     in
   {
-    enable = true;
+    enable = false;
 
     viAlias = true;
     vimAlias = true;
