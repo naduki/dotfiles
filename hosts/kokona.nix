@@ -74,7 +74,6 @@
     };
     # Japanese input
     inputMethod = {
-      # enabled = "fcitx5"; # NixOS 24.11から非推奨
       enable = true;
       type = "fcitx5";
       fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
@@ -126,7 +125,6 @@
     systemPackages = with pkgs; [
       # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
       # git   # home-manager で有効化中
-      # cinnamon-translations # cinnamon-settingsが翻訳されてないので...
       # networkmanager-l2tp   # L2TP VPN
       unar # Windows由来の文字化けを回避して解凍する
       # libsForQt5.xp-pen-deco-01-v2-driver
@@ -184,5 +182,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

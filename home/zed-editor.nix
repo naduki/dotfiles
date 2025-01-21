@@ -30,9 +30,6 @@
       "collaboration_panel" = {
         "button" = false;
       };
-      "chat_panel" = {
-        "button" = false;
-      };
       "notification_panel" = {
         "button" = false;
       };
@@ -52,8 +49,22 @@
 	    "languages" = {
 		    "Nix" = {
 			    "language_servers" = [ "nil" "!nixd" ];
+					"formatter" = {
+            "external" = {
+              "command" = "nixpkgs-fmt";
+						};
+          };
 		    };
 	    };
+			"lsp" =  {
+        "nil" = {
+          "initialization_options" = {
+            "formatting" = {
+              "command"= [ "nixpkgs-fmt" ];
+            };
+          };
+        };
+      };
       "telemetry" = {
         "diagnostics" = false;
         "metrics" = false;
