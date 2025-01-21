@@ -6,6 +6,7 @@
     # ./nvim.nix
     ./vscode.nix
     ./xdg-user-dirs.nix
+    ./zed-editor.nix
   ];
   home = rec {
     # recでAttribute Set内で他の値を参照できるようにする
