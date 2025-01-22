@@ -1,13 +1,19 @@
 { lib, ... }:
+let
+  editor_nvim = false;
+  editor_vscode = false;
+  editor_zed = true;
+in
 {
   imports = [
     ./apps.nix
     ./cli.nix
-    ./nvim.nix
-    ./vscode.nix
     ./xdg-user-dirs.nix
-    ./zed-editor.nix
-  ];
+  ]
+  ++ lib.optional editor_nvim ./nvim.nix
+  ++ lib.optional editor_vscode ./vscode.nix
+  ++ lib.optional editor_zed ./zed-editor.nix;
+
   home = rec {
     # recでAttribute Set内で他の値を参照できるようにする
     username = "naduki";

@@ -9,8 +9,8 @@
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-switch = "sudo nixos-rebuild switch --flake .#myNixOS";
-        os-dbuild = "sudo nixos-rebuild dry-build --flake .#myNixOS";
+        os-switch = "sudo nixos-rebuild switch --flake .#kokona_OS";
+        os-dbuild = "sudo nixos-rebuild dry-build --flake .#kokona_OS";
         hm-switch = "home-manager switch --flake .#kokona";
         hm-act = "nix run flake:home-manager -- switch --flake .#kokona"; # home-manager activation
         os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";

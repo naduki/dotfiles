@@ -2,7 +2,7 @@
 {
   # todo: # $HOME/.vscode-oss/argv.jsonに # "locale": "ja" があるようにしたい
   programs.vscode = {
-    enable = false;
+    enable = true;
     package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]); # pkgs.vscodium-fhs;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;

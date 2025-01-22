@@ -19,11 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # vscode marketplace
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # flake-compat flake-utils
-    };
+    # nix-vscode-extensions = {
+    #   url = "github:nix-community/nix-vscode-extensions";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   # flake-compat flake-utils
+    # };
     # hardware setting
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     # flake-utils
@@ -54,7 +54,7 @@
     # };
   };
 
-  outputs = { self, nixpkgs, package, home-manager, rust-overlay, nix-vscode-extensions, nixos-hardware, ... }@inputs:
+  outputs = { self, nixpkgs, package, home-manager, rust-overlay, nixos-hardware, ... }@inputs:
   let
     supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
     # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
@@ -64,7 +64,7 @@
   in {
     nixosConfigurations = {
       # システム全体の設定
-      myNixOS = nixpkgs.lib.nixosSystem {
+      kokona_OS = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [ ./hosts/kokona.nix ];
       };
@@ -89,7 +89,7 @@
           };
           overlays = [
             # ( import ./home/codium_overlay.nix )
-            nix-vscode-extensions.overlays.default
+            # nix-vscode-extensions.overlays.default
           ]; # home-manager内で上書きで導入する場合
         };
         extraSpecialArgs = { inherit inputs; };
