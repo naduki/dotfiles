@@ -15,3 +15,4 @@
 [redyf/nixdots: Dotfiles for NixOS](https://github.com/redyf/nixdots)
 [NixOS Manual (unstable)](https://nixos.org/manual/nixos/unstable/)
 [NixOS Wiki](https://nixos.wiki/wiki/Main_Page)
+[Appendix A. Home Manager Configuration Options](https://nix-community.github.io/home-manager/options.xhtml)

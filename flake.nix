@@ -13,6 +13,8 @@
       # url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # hardware setting
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     # rust
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -23,14 +25,6 @@
     #   url = "github:nix-community/nix-vscode-extensions";
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   # flake-compat flake-utils
-    # };
-    # hardware setting
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    # flake-utils
-    # systems.url = "github:nix-systems/default";
-    # flake-utils = {
-    #   url  = "github:numtide/flake-utils";
-    #   inputs.systems.follows = "systems";
     # };
     # NixOS-WSL
     # nixos-wsl = {
