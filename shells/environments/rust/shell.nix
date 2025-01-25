@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs, ... }:
 
 let
   # 共通の設定を読み込む

@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? (import <nixpkgs> { config.allowUnfree = true; }), ... }:
 
 let
   # 共通の設定を読み込む
