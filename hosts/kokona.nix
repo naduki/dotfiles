@@ -1,10 +1,5 @@
 { inputs, config, lib, pkgs, ... }:
 {
-  # Stable と Unstableの混合?
-  # https://discourse.nixos.org/t/mixing-stable-and-unstable-packages-on-flake-based-nixos-system/50351/4
-  # _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
-  #   inherit (pkgs.stdenv.hostPlatform) system;
-  # };
 
   # 分割した設定ファイルとnixos-hardwareのインポート
   imports = [

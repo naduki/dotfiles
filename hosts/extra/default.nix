@@ -1,9 +1,13 @@
-{
+{ lib, ... }:
+let
+  virtualisations = false;
+  xremap = false;
+in {
   imports = [
     ./fonts.nix
     ./hardware-configuration.nix
     ./security.nix
-    ./virtualisation.nix
-    # ./xremap.nix
-  ];
+  ]
+  ++ lib.optional virtualisations ./virtualisation.nix
+  ++ lib.optional xremap ./xremap.nix;
 }

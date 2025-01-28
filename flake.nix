@@ -30,14 +30,13 @@
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
     #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.flake-utils.follows = "flake-utils";
-    #   # flake-compat
+    #   # flake-compat flake-utils
     # };
     # VScode Server
     # vscode-server = {
     #   url = "github:nix-community/nixos-vscode-server";
     #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.flake-utils.follows = "flake-utils";
+    #   # flake-utils
     # };
     # キー設定を変更するツール xremap waylandで使う
     # xremap = {
@@ -53,8 +52,9 @@
     supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
     # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
     forAllSystems = package.lib.genAttrs supportedSystems;
-    system = "x86_64-linux";
+    system = "x86_64-linux";  # Default system
     specialArgs = { inherit inputs; }; # `inputs = inputs;`と等しい
+    # pkg-stable = import stable { inherit system; }; # Use stable packages
   in {
     nixosConfigurations = {
       # システム全体の設定

@@ -3,8 +3,7 @@ let
   editor_nvim = false;
   editor_vscode = false;
   editor_zed = true;
-in
-{
+in{
   imports = [
     ./apps.nix
     ./cli.nix
