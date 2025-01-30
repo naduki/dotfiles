@@ -21,11 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # vscode marketplace
-    # nix-vscode-extensions = {
-    #   url = "github:nix-community/nix-vscode-extensions";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   # flake-compat flake-utils
-    # };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # flake-compat flake-utils
+    };
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
@@ -47,7 +47,7 @@
     # };
   };
 
-  outputs = { self, nixpkgs, package, home-manager, rust-overlay, nixos-hardware, ... }@inputs:
+  outputs = { self, nixpkgs, package, home-manager, nix-vscode-extensions, rust-overlay, nixos-hardware, ... }@inputs:
   let
     supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
     # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
@@ -76,14 +76,14 @@
           config = {
             # プロプライエタリなパッケージを許可
             allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-              "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl"
+              "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl" "code" "vscode"
               # "unityhub" "vscode-extensions.ms-vscode.cpptools"
             ];
             cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
           };
           overlays = [
             # ( import ./home/codium_overlay.nix )
-            # nix-vscode-extensions.overlays.default
+            nix-vscode-extensions.overlays.default
           ]; # home-manager内で上書きで導入する場合
         };
         extraSpecialArgs = { inherit inputs; };

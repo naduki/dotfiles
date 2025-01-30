@@ -56,7 +56,7 @@
         "nvim"
         "top"
       ];
-      # shellの初期化のときに実行される(tty1~6のときは日本語じゃないようにする)
+      # shellの初期化のときに実行される(X11,Waylandが動いてないときに日本語じゃないようにする)
       initExtra = ''(tty|fgrep -q 'tty') && export LANG=C'';
     };
     direnv = {
@@ -70,13 +70,13 @@
       extraConfig.init.defaultBranch = "main";
     };
     alacritty = { # Weztermの代替
-      enable = true;
+      enable = false;
       # package = pkgs.aracritty;
       # tomlの形式をNixで書く必要があるのでhome.fileで代用
       # settings = builtins.readFile ./alacritty.toml;
     };
     wezterm = {
-      enable = false;
+      enable = true;
       # package = pkgs.wezterm;
       # バージョンアップとかで挙動が変わったら無効化して~/.config/wezterm/wezterm.luaでデバッグ
       extraConfig = builtins.readFile ./wezterm.lua;

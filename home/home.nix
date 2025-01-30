@@ -1,8 +1,8 @@
 { lib, ... }:
 let
   editor_nvim = false;
-  editor_vscode = false;
-  editor_zed = true;
+  editor_vscode = true;
+  editor_zed = false;
 in{
   imports = [
     ./apps.nix
@@ -42,10 +42,10 @@ in{
       #   target = "Wallpaper/wallpaper.png"; # ~/Wallpaper/wallpaper.pngに配置
       #   source = ./wallpaper.png; # 配置するファイル
       # };
-      "alacritty.toml" = {
-        target = "${homeDirectory}/.config/alacritty/alacritty.toml";
-        source = ./alacritty.toml;
-      };
+#      "alacritty.toml" = {
+#        target = "${homeDirectory}/.config/alacritty/alacritty.toml";
+#        source = ./alacritty.toml;
+#      };
     };
   };
   news.display = "silent"; # home-manager news の通知が switch 時に無くなる

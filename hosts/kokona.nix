@@ -32,7 +32,7 @@
     nvidia = {
       # beta版のドライバにする
       package = config.boot.kernelPackages.nvidiaPackages.beta;
-      # NvidiaGPUのオープンソースドライバーにする → Weztermの文字が四角になる?
+      # NvidiaGPUのオープンソースドライバーにする
       open = true;
     };
   };

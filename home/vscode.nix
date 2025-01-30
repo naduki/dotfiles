@@ -3,7 +3,9 @@
   # todo: # $HOME/.vscode-oss/argv.jsonに # "locale": "ja" があるようにしたい
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]); # pkgs.vscodium-fhs;
+    package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
+    # Copilot Remote-SSH を使わないなら VSCodium でも OK
+    # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]); # pkgs.vscodium-fhs;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     # mutableExtensionsDir = true;
@@ -79,6 +81,11 @@
       # C/C++
       llvm-vs-code-extensions.vscode-clangd
 
+      # Copilot
+      github.copilot
+      # github.copilot-chat 
+      saoudrizwan.claude-dev
+
       # Nix
       jnoortheen.nix-ide
       # kamadorueda.alejandra
@@ -88,22 +95,29 @@
 
       # Rust
       rust-lang.rust-analyzer
-      serayuzgur.crates
-
-      # hediet.vscode-drawio
-      timonwong.shellcheck
+      # serayuzgur.crates   # deprecated
 
       # Misc
+      # hediet.vscode-drawio
+      timonwong.shellcheck
       mkhl.direnv
       usernamehw.errorlens
       donjayamanne.githistory
       christian-kohler.path-intellisense
-      saoudrizwan.claude-dev
     ]
     # ) ++ (with pkgs.vscode-extensions; [
     #   # C/C++ | nix-vscode-extensions では導入できないので
     #   ms-vscode.cpptools
     # ]
+    ) ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        # バージョンが合わないので直接指定
+        name = "copilot-chat";
+        publisher = "github";
+        version = "0.23.2";
+        sha256 = "sha256-OT+ynCA+z8TvDE02hkOEQcJ1mBNz6geLxLOFtgIgKZE=";
+      }
+    ]
     );
   };
 }
