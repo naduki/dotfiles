@@ -10,22 +10,24 @@
     enableExtensionUpdateCheck = false;
     # mutableExtensionsDir = true;
     userSettings = {
-      "C_Cpp.intelliSenseEngine" = "disabled"; # default or Tag Parser or disabled
-      "C_Cpp.errorSquiggles" = "disabled";
-      "C_Cpp.clang_format_style" = "Google";
-      "C_Cpp.clang_format_path" = "${pkgs.clang-tools}/bin/clang-format";
+      # "C_Cpp.intelliSenseEngine" = "disabled"; # default or Tag Parser or disabled
+      # "C_Cpp.errorSquiggles" = "disabled";
+      # "C_Cpp.clang_format_style" = "Google";
+      # "C_Cpp.clang_format_path" = "${pkgs.clang-tools}/bin/clang-format";
+      # "clang-format.executable" = "${pkgs.clang-tools}/bin/clang-format";
+      # "editor.defaultFormatter" = "esbenp.prettier-vscode";
+
       "clangd.path" = "${pkgs.clang-tools}/bin/clangd";
-      "clang-format.executable" = "${pkgs.clang-tools}/bin/clang-format";
       "breadcrumbs.enabled" = true;
       "files.autoGuessEncoding" = true;
-
+      
       "editor.bracketPairColorization.enabled" = true;
       "editor.cursorBlinking" = "phase";
       "editor.cursorSmoothCaretAnimation" = "on";
       "editor.fontFamily" = "'moralerspace Radon HWNF','Klee One','Material Design Icons',monospace";
       "editor.fontSize" = 19;
       "editor.formatOnSave" = false;
-      # "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      
       "editor.minimap.enabled" = false;
       "editor.renderLineHighlight" = "all";
       "editor.renderControlCharacters" = true;
@@ -35,6 +37,7 @@
       "editor.suggestSelection" = "first";
 
       "extensions.autoCheckUpdates" = false;
+      "extensions.autoUpdate" = false;
       "files.autoSave" = "onWindowChange";
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "${pkgs.nil}/bin/nil";
