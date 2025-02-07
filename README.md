@@ -2,9 +2,9 @@
 
 - Version : Unstable
 - Desktop : Cinnamon
-- Editor : Zed
+- Editor : VScode
 - Shell : bash
-- Terminal: Alacritty
+- Terminal: Wezterm
 - Browser : Brave
 
 ## Reference
