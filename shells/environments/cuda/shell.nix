@@ -18,8 +18,8 @@ pkgs.mkShell {
 
   shellHook = ''
     ${baseShell.shellHook}
-    echo "CUDA development environment activated"
-    # echo "Node.js version: $(node --version)"
+    echo "CUDA development environment activated "
+    # nvcc -V
     export CUDA_PATH=${pkgs.cudaPackages.cuda_nvcc}
     export LD_LIBRARY_PATH=/usr/lib/wsl/lib:${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.ncurses5}/lib
     export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"

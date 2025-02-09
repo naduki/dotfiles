@@ -18,7 +18,7 @@ pkgs.mkShell {
 
   shellHook = ''
     ${baseShell.shellHook}
-    echo "Rust development environment activated"
-    # echo "Node.js version: $(node --version)"
+    echo "Rust development environment activated "
+    # echo "Rust version: $(rustc --version)"
   '';
 }

@@ -1,30 +1,34 @@
 {
-  description = " kokona's NixOS configuration";
+  description = "kokona's NixOS configuration";
 
   inputs = {
     # nixpkgs
-    # stable.url = "github:NixOS/nixpkgs/release-24.11";
-    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    stable.url = "github:NixOS/nixpkgs/release-24.11";
     package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs.follows = "unstable";
     # home-manager
     home-manager = {
-      url = "github:nix-community/home-manager";  # unstable
+      url = "github:nix-community/home-manager"; # unstable
       # url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # hardware setting
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    # rust
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+    # flake-parts
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     # vscode marketplace
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
       # flake-compat flake-utils
+    };
+    # rust
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "package";
     };
     # NixOS-WSL
     # nixos-wsl = {
@@ -38,7 +42,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   # flake-utils
     # };
-    # キー設定を変更するツール xremap waylandで使う
+    # xremap: Tools to change keys used in Wayland
     # xremap = {
     #   url = "github:xremap/nix-flake";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -47,64 +51,96 @@
     # };
   };
 
-  outputs = { self, nixpkgs, package, home-manager, nix-vscode-extensions, rust-overlay, nixos-hardware, ... }@inputs:
-  let
-    supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
-    # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-    forAllSystems = package.lib.genAttrs supportedSystems;
-    system = "x86_64-linux";  # Default system
-    specialArgs = { inherit inputs; }; # `inputs = inputs;`と等しい
-    # pkg-stable = import stable { inherit system; }; # Use stable packages
-  in {
-    nixosConfigurations = {
-      # システム全体の設定
-      kokona_OS = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules = [ ./hosts/kokona.nix ];
-      };
-      # NixOS-WSLのFlake設定 未検証
-      wsl = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules = [ ./hosts/wsl.nix ];
-      };
-    };
-    homeConfigurations = {
-      # ユーザー環境用設定
-      kokona = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {
-            # プロプライエタリなパッケージを許可
-            allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-              "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl" "code" "vscode"
-              # "unityhub" "vscode-extensions.ms-vscode.cpptools"
-            ];
-            cudaSupport = true; # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(40分くらい)が発生する
+  outputs = inputs@{ flake-parts, ... }:
+    let
+      user.name = "naduki";
+      host.name = "kokona";
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        # To import a flake module
+        # 1. Add foo to inputs
+        # 2. Add foo as a parameter to the outputs function
+        # 3. Add here: foo.flakeModule
+      ];
+      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+      perSystem = { config, self', inputs', pkgs, system, ... }: {
+        # Per-system attributes can be defined here. The self' and inputs'
+        # module parameters provide easy access to attributes of the same system.
+        # Home-manager
+        legacyPackages.homeConfigurations =
+          let
+            # Stable packages
+            pkgs-stable = import inputs.stable {
+              inherit system;
+              config = {
+                # Allow unfree packages
+                allowUnfreePredicate = pkg: builtins.elem (inputs.stable.lib.getName pkg) [
+                  "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl" # "unityhub"
+                ];
+                # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(Ryzen7 5700Xで40分くらい)が発生する
+                cudaSupport = true;
+              };
+              overlays = [ ]; # Overlay in home-manager
+            };
+          in
+          {
+            # ユーザー環境用設定
+            ${user.name} = inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = import inputs.nixpkgs {
+                inherit system;
+                config = {
+                  # Allow unfree packages
+                  allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+                    "code" "vscode" # "vscode-extensions.ms-vscode.cpptools"
+                  ];
+                };
+                overlays = [
+                  # ( import ./home/codium_overlay.nix )
+                  inputs.nix-vscode-extensions.overlays.default
+                ]; # home-manager内で上書きで導入する場合
+              };
+              extraSpecialArgs = { inherit inputs user host pkgs-stable; };
+              modules = [ ./home/home.nix ];
+            };
           };
-          overlays = [
-            # ( import ./home/codium_overlay.nix )
-            nix-vscode-extensions.overlays.default
-          ]; # home-manager内で上書きで導入する場合
-        };
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home/home.nix ];
+        # Nix Development Shells
+        devShells =
+          let
+            _module.args.pkgs = import inputs.package {
+              config.allowUnfree = true; # Allow all unfree packages
+              # Overlay in temporary shells
+              overlays = [ inputs.rust-overlay.overlays.default ];
+            };
+          in
+          {
+            default = import ./shells/shell.nix { inherit pkgs; };
+            # $ nix develop .#<name>
+            cuda = import ./shells/environments/cuda/shell.nix { inherit pkgs; };
+            rust = import ./shells/environments/rust/shell.nix { inherit pkgs; };
+            tools = import ./shells/environments/tools/shell.nix { inherit pkgs; };
+          };
+      };
+      flake = {
+        # The usual flake attributes can be defined here, including system-
+        # agnostic ones like nixosModule and system-enumerating ones, although
+        # those are more easily expressed in perSystem.
+        nixosConfigurations =
+          let
+            specialArgs = { inherit inputs user host; };
+          in
+          {
+            # システム全体の設定
+            "${user.name}@${host.name}" = inputs.nixpkgs.lib.nixosSystem {
+              inherit specialArgs;
+              modules = [ ./hosts/kokona.nix ];
+            };
+            # NixOS-WSLのFlake設定 未検証
+            "${user.name}@${host.name}_wsl" = inputs.nixpkgs.lib.nixosSystem {
+              inherit specialArgs;
+              modules = [ ./hosts/wsl.nix ];
+            };
+          };
       };
     };
-    # nix develop
-    devShells = forAllSystems (system:
-      let
-        pkgs = import package {
-          inherit system;
-          config.allowUnfree = true;  # Allow all unfree packages
-          overlays = [ rust-overlay.overlays.default ]; # 一時シェルにおいて上書きで導入する場合
-        };
-      in {
-        default = import ./shells/shell.nix { inherit pkgs; };
-        # $ nix develop .#<name>
-        cuda = import ./shells/environments/cuda/shell.nix { inherit pkgs; };
-        rust = import ./shells/environments/rust/shell.nix { inherit pkgs; };
-        tools = import ./shells/environments/tools/shell.nix { inherit pkgs; };
-      }
-    );
-  };
 }

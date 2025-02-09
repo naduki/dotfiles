@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs-stable, ... }:
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs-stable; [
     blender
     brave
     # mission-center

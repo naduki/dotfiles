@@ -1,5 +1,5 @@
 # https://github.com/vimjoyer/nvim-nix-video
-{ pkgs, ... }:
+{ pkgs-stable, ... }:
 {
   programs.neovim =
     let
@@ -13,7 +13,7 @@
       vimAlias = true;
       vimdiffAlias = true;
 
-      extraPackages = with pkgs; [
+      extraPackages = with pkgs-stable; [
         clang-tools
         # lua-language-server
         nil
@@ -22,7 +22,7 @@
         # kotlin-language-server
       ];
 
-      plugins = with pkgs.vimPlugins; [
+      plugins = with pkgs-stable.vimPlugins; [
 
         {
           plugin = nvim-lspconfig;

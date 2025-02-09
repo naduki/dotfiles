@@ -20,14 +20,14 @@
       "clangd.path" = "${pkgs.clang-tools}/bin/clangd";
       "breadcrumbs.enabled" = true;
       "files.autoGuessEncoding" = true;
-      
+
       "editor.bracketPairColorization.enabled" = true;
       "editor.cursorBlinking" = "phase";
       "editor.cursorSmoothCaretAnimation" = "on";
       "editor.fontFamily" = "'moralerspace Radon HWNF','Klee One','Material Design Icons',monospace";
       "editor.fontSize" = 19;
       "editor.formatOnSave" = false;
-      
+
       "editor.minimap.enabled" = false;
       "editor.renderLineHighlight" = "all";
       "editor.renderControlCharacters" = true;
@@ -86,7 +86,7 @@
 
       # Copilot
       github.copilot
-      # github.copilot-chat 
+      # github.copilot-chat
       saoudrizwan.claude-dev
 
       # Nix
