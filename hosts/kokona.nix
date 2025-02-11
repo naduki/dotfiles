@@ -30,8 +30,8 @@
     # Wineでまいてつ Last Run!!をやるときに使うはず
     # graphics.enable32Bit = true;
     nvidia = {
-      # beta版のドライバにする
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # Recommended -> stable, feature -> latest, beta -> beta
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
       # NvidiaGPUのオープンソースドライバーにする
       open = true;
     };
