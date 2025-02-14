@@ -119,6 +119,8 @@
             cuda = import ./shells/environments/cuda/shell.nix { inherit pkgs; };
             rust = import ./shells/environments/rust/shell.nix { inherit pkgs; };
             tools = import ./shells/environments/tools/shell.nix { inherit pkgs; };
+            sdui = import ./shells/environments/automatic1111/shell.nix { inherit pkgs; };
+            sdui-fhs = import ./shells/environments/automatic1111/shellfhs.nix { inherit pkgs; };
           };
       };
       flake = {
