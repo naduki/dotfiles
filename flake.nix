@@ -81,7 +81,7 @@
                 # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(Ryzen7 5700Xで40分くらい)が発生する
                 cudaSupport = true;
               };
-              overlays = [ ]; # Overlay in home-manager
+              # overlays = [ ]; # Overlay in home-manager
             };
           in
           {
@@ -119,8 +119,8 @@
             cuda = import ./shells/environments/cuda/shell.nix { inherit pkgs; };
             rust = import ./shells/environments/rust/shell.nix { inherit pkgs; };
             tools = import ./shells/environments/tools/shell.nix { inherit pkgs; };
-            sdui = import ./shells/environments/automatic1111/shell.nix { inherit pkgs; };
-            sdui-fhs = import ./shells/environments/automatic1111/shellfhs.nix { inherit pkgs; };
+            # sdui = import ./shells/environments/automatic1111/shell.nix { inherit pkgs; };
+            sdui = import ./shells/environments/automatic1111/shell-fhs.nix { inherit pkgs; };
           };
       };
       flake = {

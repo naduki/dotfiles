@@ -10,7 +10,7 @@
     # python
     python310
     # Other packages
-    stdenv.cc.cc.lib
+    # stdenv.cc.cc.lib
     stdenv.cc
     libGLU libGL
     glib
