@@ -7,8 +7,7 @@
       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
     in
     {
-      enable = true;
-
+      # package = pkgs-stable.neovim;
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
@@ -23,7 +22,6 @@
       ];
 
       plugins = with pkgs-stable.vimPlugins; [
-
         {
           plugin = nvim-lspconfig;
           config = toLuaFile ./nvim/plugin/lsp.lua;

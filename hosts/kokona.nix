@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, user, host, ... }:
+{ inputs, config, lib, pkgs, names, ... }:
 {
 
   # 分割した設定ファイルとnixos-hardwareのインポート
@@ -38,7 +38,7 @@
   };
 
   networking = {
-    hostName = "${host.name}";
+    hostName = "${names.host}";
     # Enable networking
     networkmanager.enable = true;
   };
@@ -106,27 +106,26 @@
     pulse.enable = true;
   };
 
-  users.users.${user.name} = {
+  users.users.${names.user} = {
     isNormalUser = true;
-    description = "${user.name}_nixos";
+    description = "${names.user}_nixos";
     extraGroups = [ "networkmanager" "wheel" ]  # 必須のグループ
       # 追加のグループ  USERNAME があるのでここで設定してる
       ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"  # KVM and QEMU rootless
       ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
 
-  # environment = {
-  #   # システム全体に導入するパッケージ
-  #   systemPackages = with pkgs; [
-  #     # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
-  #     # git   # home-manager で有効化中
-  #     # networkmanager-l2tp   # L2TP VPN
-  #     unar # Windows由来の文字化けを回避して解凍する
-  #     # libsForQt5.xp-pen-deco-01-v2-driver
-  #     # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
-  #     # wineWowPackages.wayland
-  #   ];
-  # };
+  environment = {
+    # システム全体に導入するパッケージ
+    systemPackages = with pkgs; [
+      # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
+      # git   # home-manager で有効化中
+      # networkmanager-l2tp   # L2TP VPN
+      # unar # Windows由来の文字化けを回避して解凍する
+      # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
+      wineWowPackages.wayland
+    ];
+  };
 
   # プログラム個別設定
   programs = {

@@ -1,19 +1,28 @@
-{ user, host, ...}:
+{ names, ...}:
+let
+  thumbnauils = "/home/${names.user}/.cache/thumbnails";
+  flakedir = "/home/${names.user}/.config/.dotfiles";
+in
 {
   programs = {
+    # Editor
+    neovim.enable = false;
+    vscode.enable = true;
+    zed-editor.enable = false;
+    # Shell
     bash = {
       enable = true;
       shellAliases = {
         sudo = "sudo -k ";
-        flake = "cd $FLAKE";
-        clc = "rm -r $HOME/.cache/thumbnails/*";
+        flake = "cd ${flakedir}";
+        clc = "rm -r ${thumbnauils}}/*";
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-switch = "sudo nixos-rebuild switch --flake .#${user.name}@${host.name}";
-        os-dbuild = "sudo nixos-rebuild dry-build --flake .#${user.name}@${host.name}";
-        hm-switch = "home-manager switch --flake .#${user.name}";
-        hm-act = "nix run flake:home-manager -- switch --flake .#${user.name}"; # home-manager activation
+        os-switch = "sudo nixos-rebuild switch --flake .#${names.user}@${names.host}";
+        os-dbuild = "sudo nixos-rebuild dry-build --flake .#${names.user}@${names.host}";
+        hm-switch = "home-manager switch --flake .#${names.user}";
+        hm-act = "nix run flake:home-manager -- switch --flake .#${names.user}"; # home-manager activation
         os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
         nix-clean = "nix-collect-garbage --delete-older-than 2d";
         nix-update = "nix flake update ";
@@ -51,7 +60,6 @@
         "ls"
         "cd"
         "alias"
-        "du"
         "exit"
         "flake"
         "nvim"
@@ -69,6 +77,7 @@
       userName = "naduki";
       userEmail = "68984205+naduki@users.noreply.github.com";
       extraConfig.init.defaultBranch = "main";
+      signing.format = "ssh";
     };
     alacritty = { # Weztermの代替
       enable = false;
@@ -80,7 +89,7 @@
       enable = true;
       # package = pkgs.wezterm;
       # バージョンアップとかで挙動が変わったら無効化して~/.config/wezterm/wezterm.luaでデバッグ
-      extraConfig = builtins.readFile ./wezterm.lua;
+      extraConfig = builtins.readFile ./wezterm/wezterm.lua;
     };
   };
   # .Xresourcesの中身 (Xtermの設定)

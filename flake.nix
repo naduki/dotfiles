@@ -53,8 +53,7 @@
 
   outputs = inputs@{ flake-parts, ... }:
     let
-      user.name = "naduki";
-      host.name = "kokona";
+      names = { user = "naduki"; host = "kokona"; };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
@@ -86,7 +85,7 @@
           in
           {
             # ユーザー環境用設定
-            ${user.name} = inputs.home-manager.lib.homeManagerConfiguration {
+            ${names.user} = inputs.home-manager.lib.homeManagerConfiguration {
               pkgs = import inputs.nixpkgs {
                 inherit system;
                 config = {
@@ -98,9 +97,9 @@
                 overlays = [
                   # ( import ./home/codium_overlay.nix )
                   inputs.nix-vscode-extensions.overlays.default
-                ]; # home-manager内で上書きで導入する場合
+                ]; # Overlay in home-manager
               };
-              extraSpecialArgs = { inherit inputs user host pkgs-stable; };
+              extraSpecialArgs = { inherit inputs names pkgs-stable; };
               modules = [ ./home/home.nix ];
             };
           };
@@ -129,16 +128,16 @@
         # those are more easily expressed in perSystem.
         nixosConfigurations =
           let
-            specialArgs = { inherit inputs user host; };
+            specialArgs = { inherit inputs names; };
           in
           {
             # システム全体の設定
-            "${user.name}@${host.name}" = inputs.nixpkgs.lib.nixosSystem {
+            "${names.user}@${names.host}" = inputs.nixpkgs.lib.nixosSystem {
               inherit specialArgs;
               modules = [ ./hosts/kokona.nix ];
             };
             # NixOS-WSLのFlake設定 未検証
-            "${user.name}@${host.name}_wsl" = inputs.nixpkgs.lib.nixosSystem {
+            "wsl" = inputs.nixpkgs.lib.nixosSystem {
               inherit specialArgs;
               modules = [ ./hosts/wsl.nix ];
             };

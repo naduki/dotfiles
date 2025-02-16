@@ -2,7 +2,6 @@
 {
   # todo: # $HOME/.vscode-oss/argv.jsonに # "locale": "ja" があるようにしたい
   programs.vscode = {
-    enable = true;
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
     # Copilot Remote-SSH を使わないなら VSCodium でも OK
     # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]); # pkgs.vscodium-fhs;
