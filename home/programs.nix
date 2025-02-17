@@ -77,7 +77,11 @@ in
       userName = "naduki";
       userEmail = "68984205+naduki@users.noreply.github.com";
       extraConfig.init.defaultBranch = "main";
-      signing.format = "ssh";
+      signing = {
+        format = "ssh";
+        key = "~/.ssh/id_ed25519.pub";
+        signByDefault = true;
+      };
     };
     alacritty = { # Weztermの代替
       enable = false;

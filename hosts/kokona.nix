@@ -115,23 +115,22 @@
       ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
 
-  environment = {
-    # システム全体に導入するパッケージ
-    systemPackages = with pkgs; [
-      # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
-      # git   # home-manager で有効化中
-      # networkmanager-l2tp   # L2TP VPN
-      # unar # Windows由来の文字化けを回避して解凍する
-      # wineWowPackages.stable  # Wine本体(安定版 32bit and 64bit)
-      wineWowPackages.wayland
-    ];
-  };
+  # environment = {
+  #   # システム全体に導入するパッケージ
+  #   systemPackages = with pkgs; [
+  #     # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
+  #     # git   # home-manager で有効化中
+  #     # networkmanager-l2tp   # L2TP VPN
+  #     # wineWowPackages.stable
+  #     # wineWowPackages.wayland
+  #   ];
+  # };
 
   # プログラム個別設定
   programs = {
     gnome-terminal.enable = false;  # gnome-terminalを消す(問題発生時はttyかxtermで対応)
     steam = {
-      enable = false;
+      enable = true;
       fontPackages = with pkgs; [ migu ]; # fontを変える?
     };
   };

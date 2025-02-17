@@ -10,13 +10,15 @@ pkgs.mkShell {
 
   # 基本シェルから buildInputs を継承
   buildInputs = baseShell.buildInputs ++ (with pkgs; [
-    poppler_utils
-    gcc gnuplot
-    jq unzip
-    nkf veracrypt
-    pcl meshlab
-    libreoffice
-    protontricks # winetricks
+    unar
+    # poppler_utils
+    # gcc gnuplot
+    # jq unzip
+    # nkf veracrypt
+    # pcl meshlab
+    # libreoffice
+    # protontricks
+    # winetricks
   ]);
 
   shellHook = ''
