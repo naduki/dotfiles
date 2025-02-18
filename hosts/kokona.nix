@@ -1,6 +1,5 @@
 { inputs, config, lib, pkgs, names, ... }:
 {
-
   # 分割した設定ファイルとnixos-hardwareのインポート
   imports = [
     ./extra
@@ -132,7 +131,7 @@
     gnome-terminal.enable = false;  # gnome-terminalを消す(問題発生時はttyかxtermで対応)
     steam = {
       enable = true;
-      fontPackages = with pkgs; [ migu ]; # fontを変える?
+      # fontPackages = with pkgs; [ migu ]; # fontを変える?
     };
   };
 

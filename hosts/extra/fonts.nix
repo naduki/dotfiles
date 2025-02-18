@@ -8,12 +8,8 @@
       noto-fonts-emoji
       material-design-icons
 
-      # Moralerspace
-      "${pkgs.fetchzip {
-            url = "https://github.com/yuru7/moralerspace/releases/download/v1.0.2/MoralerspaceHWNF_v1.0.2.zip";
-            sha256 = "sha256-9jbOELf/kBMVZMPPEAZ/1ubqxNZ+6oHFoOKrG9srQkE=";
-        }}"
-        # Klee One, Zen Kurenaido, Fabric External MDL2 Assetsは$HOME/.local/share/fontsに手動で配置
+      moralerspace-hwnf
+      # Klee One, Zen Kurenaido, Fabric External MDL2 Assetsは$HOME/.local/share/fontsに手動で配置
     ];
     # use fonts specified by user rather than default ones
     enableDefaultPackages = false;

@@ -1,19 +1,16 @@
 { pkgs, ... }:
 {
-  # todo: # $HOME/.vscode-oss/argv.jsonに # "locale": "ja" があるようにしたい
   programs.vscode = {
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
     # Copilot Remote-SSH を使わないなら VSCodium でも OK
-    # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]); # pkgs.vscodium-fhs;
+    # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
-    # mutableExtensionsDir = true;
     userSettings = {
       # "C_Cpp.intelliSenseEngine" = "disabled"; # default or Tag Parser or disabled
       # "C_Cpp.errorSquiggles" = "disabled";
       # "C_Cpp.clang_format_style" = "Google";
       # "C_Cpp.clang_format_path" = "${pkgs.clang-tools}/bin/clang-format";
-      # "clang-format.executable" = "${pkgs.clang-tools}/bin/clang-format";
       # "editor.defaultFormatter" = "esbenp.prettier-vscode";
 
       "clangd.path" = "${pkgs.clang-tools}/bin/clangd";
@@ -26,6 +23,7 @@
       "editor.fontFamily" = "'moralerspace Radon HWNF','Klee One','Material Design Icons',monospace";
       "editor.fontSize" = 19;
       "editor.formatOnSave" = false;
+      "editor.tabSize" = 2;
 
       "editor.minimap.enabled" = false;
       "editor.renderLineHighlight" = "all";
@@ -83,21 +81,14 @@
       # C/C++
       llvm-vs-code-extensions.vscode-clangd
 
-      # Copilot
-      github.copilot
-      # github.copilot-chat
+      # AI
       saoudrizwan.claude-dev
 
       # Nix
       jnoortheen.nix-ide
-      # kamadorueda.alejandra
 
       # Lua
       # sumneko.lua
-
-      # Rust
-      rust-lang.rust-analyzer
-      # serayuzgur.crates   # deprecated
 
       # Misc
       # hediet.vscode-drawio
@@ -107,19 +98,19 @@
       donjayamanne.githistory
       christian-kohler.path-intellisense
     ]
+    ) ++ (with pkgs.vscode-marketplace-release; [
+      # Copilot
+      github.copilot
+      github.copilot-chat
+      # Rust
+      rust-lang.rust-analyzer
+      # Misc
+      # ms-vscode-remote.remote-ssh
+    ]
     # ) ++ (with pkgs.vscode-extensions; [
     #   # C/C++ | nix-vscode-extensions では導入できないので
     #   ms-vscode.cpptools
     # ]
-    ) ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        # バージョンが合わないので直接指定
-        name = "copilot-chat";
-        publisher = "github";
-        version = "0.23.2";
-        sha256 = "sha256-OT+ynCA+z8TvDE02hkOEQcJ1mBNz6geLxLOFtgIgKZE=";
-      }
-    ]
     );
   };
 }

@@ -84,7 +84,6 @@
             };
           in
           {
-            # ユーザー環境用設定
             ${names.user} = inputs.home-manager.lib.homeManagerConfiguration {
               pkgs = import inputs.nixpkgs {
                 inherit system;
@@ -119,7 +118,7 @@
             rust = import ./shells/environments/rust/shell.nix { inherit pkgs; };
             tools = import ./shells/environments/tools/shell.nix { inherit pkgs; };
             # sdui = import ./shells/environments/automatic1111/shell.nix { inherit pkgs; };
-            sdui = import ./shells/environments/automatic1111/shell-fhs.nix { inherit pkgs; };
+            # sdui = import ./shells/environments/automatic1111/shell-fhs.nix { inherit pkgs; };
           };
       };
       flake = {
@@ -131,12 +130,12 @@
             specialArgs = { inherit inputs names; };
           in
           {
-            # システム全体の設定
+            # NixOS Configuration
             "${names.user}@${names.host}" = inputs.nixpkgs.lib.nixosSystem {
               inherit specialArgs;
               modules = [ ./hosts/kokona.nix ];
             };
-            # NixOS-WSLのFlake設定 未検証
+            # NixOS-WSL Configuration
             "wsl" = inputs.nixpkgs.lib.nixosSystem {
               inherit specialArgs;
               modules = [ ./hosts/wsl.nix ];
