@@ -115,16 +115,17 @@
       ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
 
-  # environment = {
-  #   # システム全体に導入するパッケージ
-  #   systemPackages = with pkgs; [
-  #     # wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
-  #     # git   # home-manager で有効化中
-  #     # networkmanager-l2tp   # L2TP VPN
-  #     # wineWowPackages.stable
-  #     # wineWowPackages.wayland
-  #   ];
-  # };
+  environment = {
+    cinnamon.excludePackages = [ pkgs.warpinator ];
+    # システム全体に導入するパッケージ
+    systemPackages = [
+      # pkgs.wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
+      # pkgs.git   # home-manager で有効化中
+      # pkgs.networkmanager-l2tp   # L2TP VPN
+      # pkgs.wineWowPackages.stable
+      # pkgs.wineWowPackages.wayland
+    ];
+  };
 
   # プログラム個別設定
   programs = {

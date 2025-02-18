@@ -15,7 +15,7 @@ in
       shellAliases = {
         sudo = "sudo -k ";
         flake = "cd ${flakedir}";
-        clc = "rm -r ${thumbnauils}}/*";
+        clc = "rm -r ${thumbnauils}/*";
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
