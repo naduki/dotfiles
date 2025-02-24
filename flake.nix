@@ -87,12 +87,9 @@
             ${names.user} = inputs.home-manager.lib.homeManagerConfiguration {
               pkgs = import inputs.nixpkgs {
                 inherit system;
-                config = {
-                  # Allow unfree packages
-                  allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
-                    "code" "vscode" # "vscode-extensions.ms-vscode.cpptools"
-                  ];
-                };
+                config.allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+                  "code" "vscode" # "vscode-extensions.ms-vscode.cpptools"
+                ];  # Allow unfree packages
                 overlays = [
                   # ( import ./home/codium_overlay.nix )
                   inputs.nix-vscode-extensions.overlays.default
@@ -105,10 +102,10 @@
         # Nix Development Shells
         devShells =
           let
-            _module.args.pkgs = import inputs.package {
+            pkgs = import inputs.package {
+              inherit system;
               config.allowUnfree = true; # Allow all unfree packages
-              # Overlay in temporary shells
-              overlays = [ inputs.rust-overlay.overlays.default ];
+              overlays = [ inputs.rust-overlay.overlays.default ];  # Overlay in temporary shells
             };
           in
           {
@@ -117,8 +114,8 @@
             cuda = import ./shells/environments/cuda/shell.nix { inherit pkgs; };
             rust = import ./shells/environments/rust/shell.nix { inherit pkgs; };
             tools = import ./shells/environments/tools/shell.nix { inherit pkgs; };
-            # sdui = import ./shells/environments/automatic1111/shell.nix { inherit pkgs; };
-            # sdui = import ./shells/environments/automatic1111/shell-fhs.nix { inherit pkgs; };
+            # sdui = import ./shells/environments/stablediffusion/shell.nix { inherit pkgs; };
+            # sdui = import ./shells/environments/stablediffusion/shell-fhs.nix { inherit pkgs; };
           };
       };
       flake = {

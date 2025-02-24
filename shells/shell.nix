@@ -9,6 +9,6 @@ pkgs.mkShell {
   pure = true;
 
   shellHook = ''
-    echo " Welcome to nix development environment"
+    echo " Welcome to nix development environment!"
   '';
 }
