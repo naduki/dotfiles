@@ -9,6 +9,8 @@
 
 {
   imports = [
+    ./config/i18n.nix
+    ./config/nix.nix
     inputs.nixos-wsl.nixosModules.default
     inputs.vscode-server.nixosModules.default
   ];
@@ -18,38 +20,11 @@
 
   services.vscode-server.enable = true;
 
-  environment.systemPackages = with pkgs;[
+  environment.systemPackages = with pkgs; [
     git
     wget
     nix-ld
   ];
-
-  i18n = {
-    # Select internationalisation properties.
-    defaultLocale = "ja_JP.UTF-8";
-
-    extraLocaleSettings = {
-      LC_ADDRESS = "ja_JP.UTF-8";
-      LC_IDENTIFICATION = "ja_JP.UTF-8";
-      LC_MEASUREMENT = "ja_JP.UTF-8";
-      LC_MONETARY = "ja_JP.UTF-8";
-      LC_NAME = "ja_JP.UTF-8";
-      LC_NUMERIC = "ja_JP.UTF-8";
-      LC_PAPER = "ja_JP.UTF-8";
-      LC_TELEPHONE = "ja_JP.UTF-8";
-      LC_TIME = "ja_JP.UTF-8";
-    };
-  };
-
-  # Nix Setting
-  nix = {
-    package = pkgs.nixVersions.latest;
-    settings = {
-      auto-optimise-store = true; # Nix storeの最適化
-      experimental-features = [ "nix-command" "flakes" ]; # 実験機能 (Flakeを有効化)
-      warn-dirty = false; # Git の dirty を抑止
-    };
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

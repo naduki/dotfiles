@@ -12,8 +12,6 @@
       # url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # hardware setting
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
     # flake-parts
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -30,6 +28,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "package";
     };
+    # hardware setting
+    # nixos-hardware.url = "github:NixOS/nixos-hardware";
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
@@ -89,7 +89,7 @@
                 inherit system;
                 config.allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
                   "code" "vscode" # "vscode-extensions.ms-vscode.cpptools"
-                ];  # Allow unfree packages
+                ]; # Allow unfree packages
                 overlays = [
                   # ( import ./home/codium_overlay.nix )
                   inputs.nix-vscode-extensions.overlays.default
@@ -105,7 +105,7 @@
             pkgs = import inputs.package {
               inherit system;
               config.allowUnfree = true; # Allow all unfree packages
-              overlays = [ inputs.rust-overlay.overlays.default ];  # Overlay in temporary shells
+              overlays = [ inputs.rust-overlay.overlays.default ]; # Overlay in temporary shells
             };
           in
           {
@@ -122,22 +122,18 @@
         # The usual flake attributes can be defined here, including system-
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
-        nixosConfigurations =
-          let
+        nixosConfigurations = {
+          # NixOS Configuration
+          "${names.user}@${names.host}" = inputs.nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs names; };
-          in
-          {
-            # NixOS Configuration
-            "${names.user}@${names.host}" = inputs.nixpkgs.lib.nixosSystem {
-              inherit specialArgs;
-              modules = [ ./hosts/kokona.nix ];
-            };
-            # NixOS-WSL Configuration
-            "wsl" = inputs.nixpkgs.lib.nixosSystem {
-              inherit specialArgs;
-              modules = [ ./hosts/wsl.nix ];
-            };
+            modules = [ ./hosts/${names.host}.nix ];
           };
+          # NixOS-WSL Configuration
+          "wsl" = inputs.nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs; };
+            modules = [ ./hosts/wsl.nix ];
+          };
+        };
       };
     };
 }

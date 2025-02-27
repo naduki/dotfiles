@@ -1,23 +1,11 @@
-{ inputs, config, lib, pkgs, names, ... }:
+{ config, lib, pkgs, names, ... }:
 {
   # 分割した設定ファイルとnixos-hardwareのインポート
   imports = [
-    ./extra
-    inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-pc-ssd
+    ./config
+    ./extras
+    ./hardware-configuration.nix
   ];
-
-  boot = {
-    loader = {
-      # Use systemd-boot
-      systemd-boot.enable = true;
-      # 起動時のEFI変数の書き換えの許可?
-      # efi.canTouchEfiVariables = true;
-      # GPUドライバー使用中に、CUIの解像度を最適な値にする
-      systemd-boot.consoleMode = "max";
-      timeout = 10;
-    };
-  };
 
   # Allow unfree packages Nvidia Driver と Steam を許可する
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -25,91 +13,17 @@
     "steam" "steam-original" "steam-unwrapped" "steam-run"
   ];
 
-  hardware = {
-    # Wineでまいてつ Last Run!!をやるときに使うはず
-    # graphics.enable32Bit = true;
-    nvidia = {
-      # Recommended -> stable, feature -> latest, beta -> beta
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
-      # NvidiaGPUのオープンソースドライバーにする
-      open = true;
-    };
-  };
-
   networking = {
     hostName = "${names.host}";
     # Enable networking
     networkmanager.enable = true;
   };
 
-  # Set your time zone.
-  time.timeZone = "Asia/Tokyo";
-
-  location = {
-    # Japan ( use redshift )
-    latitude = 33.2;
-    longitude = 133.1;
-  };
-
-  i18n = {
-    # Select internationalisation properties.
-    defaultLocale = "ja_JP.UTF-8";
-
-    extraLocaleSettings = {
-      LC_ADDRESS = "ja_JP.UTF-8";
-      LC_IDENTIFICATION = "ja_JP.UTF-8";
-      LC_MEASUREMENT = "ja_JP.UTF-8";
-      LC_MONETARY = "ja_JP.UTF-8";
-      LC_NAME = "ja_JP.UTF-8";
-      LC_NUMERIC = "ja_JP.UTF-8";
-      LC_PAPER = "ja_JP.UTF-8";
-      LC_TELEPHONE = "ja_JP.UTF-8";
-      LC_TIME = "ja_JP.UTF-8";
-    };
-    # Japanese input
-    inputMethod = {
-      enable = true;
-      type = "fcitx5";
-      fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
-    };
-  };
-
-  services = {
-    # X11 settings
-    xserver = {
-      # Enable the X11 windowing system.
-      enable = true;
-      # GPU Driver
-      videoDrivers = [ "nvidia" ];
-      # Enable the Cinnamon Desktop Environment.
-      displayManager.lightdm.enable = true;
-      desktopManager.cinnamon.enable = true;
-      # Configure keymap in X11
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-    };
-    # Disable CUPS to print documents.
-    printing.enable = false;
-    # Enable sound with pipewire.
-    pulseaudio.enable = false;
-  };
-
-  # Enable sound with pipewire.
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   users.users.${names.user} = {
     isNormalUser = true;
     description = "${names.user}_nixos";
     extraGroups = [ "networkmanager" "wheel" ]  # 必須のグループ
-      # 追加のグループ  USERNAME があるのでここで設定してる
+      # Additional Groups
       ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"  # KVM and QEMU rootless
       ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
@@ -142,21 +56,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Nix Setting
-  nix = {
-    # nixversion -> nix , latest , git , lix
-    package = pkgs.nixVersions.latest;
-    settings = {
-      auto-optimise-store = true; # Nix storeの最適化
-      experimental-features = [ "nix-command" "flakes" ]; # 実験機能 (Flakeを有効化)
-      warn-dirty = false; # Git の dirty を抑止
-    };
-    extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-    '';
-  };
 
   # List services that you want to enable:
 

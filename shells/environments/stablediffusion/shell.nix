@@ -1,10 +1,10 @@
-{ pkgs ? import <nixpkgs> {}, ... }:
+{ pkgs ? (import <nixpkgs> { config.allowUnfree = true; }), ... }:
 
 let
   # 共通の設定を読み込む
   baseShell = import ../../shell.nix { inherit pkgs; };
 in
-pkgs.mkShell rec{
+pkgs.mkShell rec {
   # 基本シェルから設定を継承
   # inherit (baseShell) pure;
 
