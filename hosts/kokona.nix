@@ -1,6 +1,5 @@
 { config, lib, pkgs, names, ... }:
 {
-  # 分割した設定ファイルとnixos-hardwareのインポート
   imports = [
     ./config
     ./extras
@@ -19,6 +18,7 @@
     networkmanager.enable = true;
   };
 
+  # user settings
   users.users.${names.user} = {
     isNormalUser = true;
     description = "${names.user}_nixos";
@@ -35,7 +35,7 @@
       # pkgs.wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
       # pkgs.git   # home-manager で有効化中
       # pkgs.networkmanager-l2tp   # L2TP VPN
-      # pkgs.wineWowPackages.stable
+      # pkgs.wineWowPackages.stable # wine-stable
       # pkgs.wineWowPackages.wayland
     ];
   };
@@ -43,10 +43,7 @@
   # プログラム個別設定
   programs = {
     gnome-terminal.enable = false;  # gnome-terminalを消す(問題発生時はttyかxtermで対応)
-    steam = {
-      enable = true;
-      # fontPackages = with pkgs; [ migu ]; # fontを変える?
-    };
+    steam.enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

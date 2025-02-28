@@ -1,6 +1,7 @@
 { lib, names, ... }:
 {
   imports = [
+    ./fonts.nix
     ./packages.nix
     ./programs.nix
     ./xdg-user-dirs.nix
