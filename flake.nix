@@ -53,6 +53,7 @@
 
   outputs = inputs@{ flake-parts, ... }:
     let
+      # マルチユーザになったら使用者に応じてブランチを変更する
       names = { user = "naduki"; host = "kokona"; };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -77,7 +78,8 @@
                 allowUnfreePredicate = pkg: builtins.elem (inputs.stable.lib.getName pkg) [
                   "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl" # "unityhub"
                 ];
-                # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド(Ryzen7 5700Xで40分くらい)が発生する
+                # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド
+                # (Ryzen7 5700Xで40分くらい)が発生する
                 cudaSupport = true;
               };
               # overlays = [ ]; # Overlay in home-manager
