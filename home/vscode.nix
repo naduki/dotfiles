@@ -36,6 +36,7 @@
 
         "extensions.autoCheckUpdates" = false;
         "extensions.autoUpdate" = false;
+        "extensions.ignoreRecommendations" = true;
         "files.autoSave" = "onWindowChange";
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
