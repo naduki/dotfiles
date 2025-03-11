@@ -24,7 +24,7 @@ in
         hm-switch = "home-manager switch --flake .#${names.user}";
         hm-act = "nix run flake:home-manager -- switch --flake .#${names.user}"; # home-manager activation
         os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-        nix-clean = "nix-collect-garbage --delete-older-than 2d";
+        nix-clean = "nix-collect-garbage --delete-older-than ";
         nix-update = "nix flake update ";
         nix-updates = "nix flake update --commit-lock-file";
         # nix-edit  = "codium --locale=ja $FLAKE";
