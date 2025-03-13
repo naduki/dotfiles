@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
   ];
 
-  # Allow unfree packages Nvidia Driver と Steam を許可する
+  # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "nvidia-x11" "nvidia-settings" "nvidia-persistenced"
     "steam" "steam-original" "steam-unwrapped" "steam-run"
@@ -22,7 +22,7 @@
   users.users.${names.user} = {
     isNormalUser = true;
     description = "${names.user}_nixos";
-    extraGroups = [ "networkmanager" "wheel" ]  # 必須のグループ
+    extraGroups = [ "networkmanager" "wheel" ]
       # Additional Groups
       ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"  # KVM and QEMU rootless
       ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
@@ -30,19 +30,20 @@
 
   environment = {
     cinnamon.excludePackages = [ pkgs.warpinator ];
-    # システム全体に導入するパッケージ
     systemPackages = [
-      # pkgs.wget  # curlが使えてるので誤魔化す(かdevshellで一時的に...)
-      # pkgs.git   # home-manager で有効化中
+      # pkgs.wget
+      # pkgs.git
       # pkgs.networkmanager-l2tp   # L2TP VPN
-      # pkgs.wineWowPackages.stable # wine-stable
+      # pkgs.wineWowPackages.stable
       # pkgs.wineWowPackages.wayland
+      pkgs.floorp
     ];
   };
 
-  # プログラム個別設定
   programs = {
-    gnome-terminal.enable = false;  # gnome-terminalを消す(問題発生時はttyかxtermで対応)
+    # Disable gnome-terminal
+    gnome-terminal.enable = false;
+    # Install steam
     steam.enable = true;
   };
 
@@ -71,5 +72,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
