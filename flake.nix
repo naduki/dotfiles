@@ -118,7 +118,7 @@
             rust = import ./shells/environments/rust/shell.nix { inherit pkgs; };
             tools = import ./shells/environments/tools/shell.nix { inherit pkgs; };
             # sdui = import ./shells/environments/stablediffusion/shell.nix { inherit pkgs; };
-            # sdui = import ./shells/environments/stablediffusion/shell-fhs.nix { inherit pkgs; };
+            sdui = import ./shells/environments/stablediffusion/shell-fhs.nix { inherit pkgs; };
           };
       };
       flake = {
