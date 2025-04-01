@@ -19,14 +19,14 @@ in
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-switch = "sudo nixos-rebuild switch --flake .#${names.user}@${names.host}";
-        os-dbuild = "sudo nixos-rebuild dry-build --flake .#${names.user}@${names.host}";
-        hm-switch = "home-manager switch --flake .#${names.user}";
-        hm-act = "nix run flake:home-manager -- switch --flake .#${names.user}"; # home-manager activation
+        os-switch = "sudo nixos-rebuild switch --flake ${flakedir}#${names.user}@${names.host}";
+        os-dbuild = "sudo nixos-rebuild dry-build --flake ${flakedir}#${names.user}@${names.host}";
+        hm-switch = "home-manager switch --flake ${flakedir}#${names.user}";
+        hm-act = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # home-manager activation
         os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
         nix-clean = "nix-collect-garbage --delete-older-than ";
         nix-update = "nix flake update ";
-        nix-updates = "nix flake update --commit-lock-file";
+        nix-updates = "nix flake update --flake ${flakedir} --commit-lock-file ";
         # nix-edit  = "codium --locale=ja $FLAKE";
         # hm-listgen = "home-manager generations";
         # hm-rmgen = "home-manager remove-generations ";
@@ -35,6 +35,7 @@ in
         ga = "git add .";
         gb = "git branch";
         gc = "git commit";
+        gp = "git push";
         gf = "git fetch";
         gs = "git stash";
         gg = "git gc";
@@ -79,7 +80,7 @@ in
       extraConfig.init.defaultBranch = "main";
       signing = {
         format = "ssh";
-        key = "~/.ssh/id_ed25519.pub";
+        key = "/home/${names.user}/.ssh/id_ed25519.pub";
         signByDefault = true;
       };
     };
