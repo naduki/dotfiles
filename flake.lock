@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744618730,
-        "narHash": "sha256-n3gN7aHwVRnnBZI64EDoKyJnWidNYJ0xezhqQtdjH2Q=",
+        "lastModified": 1744663884,
+        "narHash": "sha256-a6QGaZMDM1miK8VWzAITsEPOdmLk+xTPyJSTjVs3WhI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "85dd758c703ffbf9d97f34adcef3a898b54b4014",
+        "rev": "d5cdf55bd9f19a3debd55b6cb5d38f7831426265",
         "type": "github"
       },
       "original": {
@@ -66,11 +66,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744595919,
-        "narHash": "sha256-lFuezewhTch2FFZfB6Bx31Ls3+ixt2UYp7rJtpOlgFI=",
+        "lastModified": 1744682419,
+        "narHash": "sha256-mS501Cff7cxofR5YwV5e8lyKuZz07uF/U7EKFy9IIv4=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "rev": "ea3fe071c83dae7e6a485f7f648b4914eabea683",
+        "rev": "317477b679d95ad2f40c960272324987e81786a4",
         "type": "github"
       },
       "original": {
@@ -129,11 +129,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744599145,
-        "narHash": "sha256-yzaDPkJwZdUtRj/dzdOeB74yryWzpngYaD7BedqFKk8=",
+        "lastModified": 1744684506,
+        "narHash": "sha256-pDPDMT1rdkTWi8MIoZ67gT3L817R7P0Jo+PP+BrnyJI=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "fd6795d3d28f956de01a0458b6fa7baae5c793b4",
+        "rev": "47beae969336c05e892e1e4a9dbaac9593de34ab",
         "type": "github"
       },
       "original": {
@@ -144,11 +144,11 @@
     },
     "stable": {
       "locked": {
-        "lastModified": 1744623737,
-        "narHash": "sha256-9RTYRjRHkhhVIH8BLCVZWFE9KpkgQlUFr5/hZk3FM60=",
+        "lastModified": 1744664988,
+        "narHash": "sha256-tv5QkwoHUT7957XYPOWpyBD440SdfPBPBVymbXlmqsc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "61be37bf6431f84137ee876209b865c22af6681f",
+        "rev": "eff64d6c1a13c9a3348f332f75cbde1935dc3d21",
         "type": "github"
       },
       "original": {
