@@ -54,7 +54,7 @@
         "workbench.startupEditor" = "none";
         "workbench.activityBar.location" = "top";
         "workbench.panel.showLabels" = false;
-        # "diffEditor.ignoreTrimWhitespace": false
+        "diffEditor.ignoreTrimWhitespace" = false;
 
         "path-intellisense.autoSlashAfterDirectory" = true;
         "path-intellisense.autoTriggerNextSuggestion" = true;
