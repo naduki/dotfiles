@@ -12,12 +12,15 @@
       vimAlias = true;
       vimdiffAlias = true;
 
+      withNodeJs = true;  # for copilot
+      withRuby = false;
+      withPython3 = false;
+
       extraPackages = with pkgs; [
+        bash-language-server
         clang-tools
         fd # for telescope
-        # lua-language-server
         nil
-        nodejs-slim # for copilot
         shellcheck-minimal
         ripgrep # for telescope
         rust-analyzer
@@ -25,11 +28,10 @@
       ];
 
       plugins = with pkgs-stable.vimPlugins; [
-        # Language Server Protocol
-        {
-          plugin = nvim-lspconfig;
-          config = toLuaFile ./nvim/plugin/lsp.lua;
-        }
+        # {
+        #   plugin = nvim-lspconfig;
+        #   config = toLuaFile ./nvim/plugin/lsp.lua;
+        # }
         # コメントアウト
         {
           plugin = comment-nvim;
@@ -71,6 +73,7 @@
           plugin = lualine-nvim;
           config = toLuaFile ./nvim/plugin/lualine.lua;
         }
+        lsp-progress-nvim
         nvim-web-devicons
         # Copilot
         {
@@ -84,11 +87,13 @@
         friendly-snippets
         # ファイラ
         neo-tree-nvim
-        # Nix用
+        # Nix
         vim-nix
       ];
 
       extraLuaConfig = ''
+        vim.env.NIL_PATH = "${pkgs.nil}/bin/nil"
+        vim.env.CLANGD_PATH = "${pkgs.clang-tools}/bin/clangd"
         ${builtins.readFile ./nvim/options.lua}
       '';
     };

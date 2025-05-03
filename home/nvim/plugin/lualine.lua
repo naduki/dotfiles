@@ -1,21 +1,9 @@
 -- Lualine
 local function lualine_lspstatus()
-  local icon = 'LSP:'
-  local msg = 'No Active'
-  local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-  local clients = vim.lsp.get_clients()
-  if next(clients) == nil then
-    return icon .. msg
-  end
-  for _, client in ipairs(clients) do
-    local filetypes = client.config.filetypes
-    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-    return icon .. client.name
-    end
-  end
-  return icon .. msg
+  return require('lsp-progress').progress()
 end
 
+require("lsp-progress").setup()
 require("lualine").setup({
   icons_enabled = true,
   theme = 'poimandres',
@@ -39,4 +27,12 @@ require("lualine").setup({
     lualine_y = { 'branch', 'diff' },
     lualine_z = { 'filetype'},
   },
+})
+
+-- listen lsp-progress event and refresh lualine
+vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+vim.api.nvim_create_autocmd("User", {
+  group = "lualine_augroup",
+  pattern = "LspProgressStatusUpdated",
+  callback = require("lualine").refresh,
 })
