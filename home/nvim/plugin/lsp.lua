@@ -24,27 +24,28 @@ local on_attach = function(_, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require('neodev').setup()
-require('lspconfig').lua_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    root_dir = function()
-        return vim.loop.cwd()
-    end,
-    cmd = { "lua-lsp" },
-    settings = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    }
-}
+-- 現状、動いてない
+vim.lsp.config('*', {
+  on_attach = on_attach,
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
+  -- カレントディレクトリにする
+  root_dir = function()
+    return vim.loop.cwd()
+  end
+})
 
-require('lspconfig').nil_ls.setup {}
+vim.lsp.config('nil_ls', {
+  cmd = { 'nil' },
+  filetypes = { 'nix' },
+})
 
-require('lspconfig').rust_analyzer.setup{
+vim.lsp.config('clangd', {
+  cmd = { 'clangd' },
+  filetypes = { 'c', 'cpp', 'cu', 'h', 'cuh' }
+})
+
+vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {
       diagnostics = {
@@ -52,4 +53,18 @@ require('lspconfig').rust_analyzer.setup{
       }
     }
   }
-}
+})
+
+-- vim.lsp.config('lua_ls', {
+--   cmd = { 'lua-language-server' },
+--   settings = {
+--     Lua = {
+--       workspace = { checkThirdParty = false },
+--       telemetry = { enable = false },
+--       -- neodev.nvimを使わないため、警告の表示を抑制で入れている
+--       diagnostics = { globals = { "vim" }, },
+--     },
+--   }
+-- })
+
+vim.lsp.enable({'nil_ls', 'rust_analyzer', 'clangd'})

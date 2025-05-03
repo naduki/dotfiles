@@ -1,7 +1,6 @@
----@diagnostic disable: undefined-field
-
 -- 名前空間、インクルード？
 local wezterm = require 'wezterm';
+local config = wezterm.config_builder();
 local act = wezterm.action;
 -- 関数系
 -- Equivalent to POSIX basename(3)
@@ -10,62 +9,58 @@ local act = wezterm.action;
 local function basename(s)
     return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
--- 基本設定
-return {
-    -- 使うフォント
-    font = wezterm.font_with_fallback {
-        -- moralerspace
-        {family="Moralerspace Radon HWNF", weight="Regular", stretch="Normal", style="Normal"},
-        -- BuiltIn
-        "JetBrains Mono", "Noto Color Emoji", "Symbols Nerd Font Mono"
-    },
-    -- フォントサイズ
-    font_size = 13.0,
-    -- グリフがないときの警告の抑制
-    -- warn_about_missing_glyphs = false,
-    -- テーマ
-    color_scheme = "Poimandres",
-    -- 初期(ウィンドウ)サイズ
-    initial_cols = 100,  -- 幅
-    initial_rows = 24,  -- 高さ
-    -- 背景透過
-    window_background_opacity = 0.85,
-    -- タイトルバー無効
-    window_decorations = 'RESIZE',
-    -- リーダーキー
-    leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 5000 },
-    -- ショートカットキー設定
-    keys = {
-      -- フルスクリーン切り替え
-      { key = 'f', mods = 'LEADER', action = act.ToggleFullScreen },
-      -- 新規タブ
-      { key = 't', mods = 'LEADER', action = act.SpawnTab("CurrentPaneDomain") },
-      -- タブを閉じる
-      { key = "w", mods = "LEADER", action = act.CloseCurrentTab{ confirm = true } },
-      -- タブ左右移動
-      { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
-      { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
-      -- タブリスト
-      { key = "q", mods = "LEADER", action = act.ShowTabNavigator },
-      -- 新規ペイン(縦)
-      { key = 'v', mods = 'LEADER', action = act.SplitHorizontal{ domain = 'CurrentPaneDomain' } },
-      -- 新規ペイン(横)
-      { key = "s", mods = "LEADER", action = act.SplitVertical{ domain = "CurrentPaneDomain" } },
-      -- ペインを閉じる
-      { key = "x", mods = "LEADER", action = act.CloseCurrentPane{ confirm = true } },
-      -- ペインの上下左右移動
-      { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-      { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-      { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-      { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-    }
-},
+-- 使うフォント
+config.font = wezterm.font_with_fallback {
+    -- moralerspace
+    {family="Moralerspace Radon HWNF", weight="Regular", stretch="Normal", style="Normal"},
+    -- BuiltIn
+    "JetBrains Mono", "Noto Color Emoji", "Symbols Nerd Font Mono"
+}
+-- フォントサイズ
+config.font_size = 13.0
+-- テーマ
+config.color_scheme = "Poimandres"
+-- 初期(ウィンドウ)サイズ
+config.initial_cols = 100  -- 幅
+config.initial_rows = 24  -- 高さ
+-- 背景透過
+config.window_background_opacity = 0.85
+-- タイトルバー無効
+config.window_decorations = 'RESIZE'
+-- リーダーキー
+config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 5000 }
+-- ショートカットキー設定
+config.keys = {
+    -- フルスクリーン切り替え
+    { key = 'f', mods = 'LEADER', action = act.ToggleFullScreen },
+    -- 新規タブ
+    { key = 't', mods = 'LEADER', action = act.SpawnTab("CurrentPaneDomain") },
+    -- タブを閉じる
+    { key = "w", mods = "LEADER", action = act.CloseCurrentTab{ confirm = true } },
+    -- タブ左右移動
+    { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
+    { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+    -- タブリスト
+    { key = "q", mods = "LEADER", action = act.ShowTabNavigator },
+    -- 新規ペイン(縦)
+    { key = 'v', mods = 'LEADER', action = act.SplitHorizontal{ domain = 'CurrentPaneDomain' } },
+    -- 新規ペイン(横)
+    { key = "s", mods = "LEADER", action = act.SplitVertical{ domain = "CurrentPaneDomain" } },
+    -- ペインを閉じる
+    { key = "x", mods = "LEADER", action = act.CloseCurrentPane{ confirm = true } },
+    -- ペインの上下左右移動
+    { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+    { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+    { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+    { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+}
 -- タブ (すぐには更新されない)
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     -- プロセスに合わせてアイコン表示
     local nerd_icons = {
-        -- nvim = wezterm.nerdfonts.custom_vim,
+        nvim = wezterm.nerdfonts.custom_vim,
         docker = wezterm.nerdfonts.dev_docker,
+        podman = wezterm.nerdfonts.dev_podman,
         bash = wezterm.nerdfonts.dev_terminal,
         -- ssh  = wezterm.nerdfonts.mdi_server,
         top  = wezterm.nerdfonts.mdi_monitor,
@@ -93,7 +88,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     return {
         { Text = " " .. title .. " " },
     }
-end),
+end)
 -- 右ステータス
 wezterm.on('update-right-status', function(window, pane)
     -- 表示内容変数
@@ -168,3 +163,5 @@ wezterm.on('update-right-status', function(window, pane)
     -- 右ステータス更新
     window:set_right_status(wezterm.format(right_status))
 end)
+-- 基本設定の適用
+return config
