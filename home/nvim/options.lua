@@ -54,7 +54,7 @@ vim.lsp.config('*', {
 })
 
 vim.lsp.config('nil_ls', {
-  cmd = { vim.env.NIL_PATH or 'nil' },
+  cmd = { 'nil' },
   filetypes = { 'nix' },
   root_markers = { 'flake.nix', '.git' },
   settings = {
@@ -66,8 +66,13 @@ vim.lsp.config('nil_ls', {
   }
 })
 
+vim.lsp.config('bashls', {
+  cmd = { 'bash-language-server', 'start' },
+  filetypes = { 'sh' },
+})
+
 vim.lsp.config('clangd', {
-  cmd = { vim.env.CLANGD_PATH or 'clangd' },
+  cmd = { 'clangd' },
   filetypes = { 'c', 'cpp', 'cuda' }
 })
 
@@ -81,7 +86,7 @@ vim.lsp.config('rust_analyzer', {
   }
 })
 
-vim.lsp.enable({'nil_ls', 'rust_analyzer', 'clangd'})
+vim.lsp.enable({'nil_ls', 'bashls', 'clangd', 'rust_analyzer'})
 
 -- 全体設定
 local g = vim.g
@@ -116,9 +121,10 @@ opt.smartindent = true
 -- highlight
 opt.cursorline = true
 -- tab, indent
-opt.tabstop = 4
 opt.expandtab = true
-opt.shiftwidth = 4
+opt.tabstop = 2
+opt.expandtab = true
+opt.shiftwidth = 2
 opt.smartindent = true
 --
 opt.list = true
@@ -129,3 +135,4 @@ keymap.set('n', ':', ';')
 
 keymap.set('n', '<leader>n', '<cmd>Neotree toggle<CR>')
 keymap.set('n', '<leader>t', '<cmd>belowright new<CR><cmd>terminal<CR>')
+

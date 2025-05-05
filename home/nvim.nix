@@ -92,8 +92,6 @@
       ];
 
       extraLuaConfig = ''
-        vim.env.NIL_PATH = "${pkgs.nil}/bin/nil"
-        vim.env.CLANGD_PATH = "${pkgs.clang-tools}/bin/clangd"
         ${builtins.readFile ./nvim/options.lua}
       '';
     };
