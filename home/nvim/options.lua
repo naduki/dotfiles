@@ -1,3 +1,4 @@
+
 -- neo-tree
 require("neo-tree").setup({
   filesystem = {
@@ -135,4 +136,3 @@ keymap.set('n', ':', ';')
 
 keymap.set('n', '<leader>n', '<cmd>Neotree toggle<CR>')
 keymap.set('n', '<leader>t', '<cmd>belowright new<CR><cmd>terminal<CR>')
-

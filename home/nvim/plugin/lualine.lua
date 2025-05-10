@@ -1,9 +1,11 @@
 -- Lualine
+-- lsp-progress-nvim function
 local function lualine_lspstatus()
   return require('lsp-progress').progress()
 end
-
+-- lsp-progress-nvim setup
 require("lsp-progress").setup()
+-- lualine setup
 require("lualine").setup({
   icons_enabled = true,
   theme = 'poimandres',

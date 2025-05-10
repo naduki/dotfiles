@@ -25,7 +25,6 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
--- 現状、動いてない
 vim.lsp.config('*', {
   on_attach = on_attach,
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
@@ -33,26 +32,6 @@ vim.lsp.config('*', {
   root_dir = function()
     return vim.loop.cwd()
   end
-})
-
-vim.lsp.config('nil_ls', {
-  cmd = { 'nil' },
-  filetypes = { 'nix' },
-})
-
-vim.lsp.config('clangd', {
-  cmd = { 'clangd' },
-  filetypes = { 'c', 'cpp', 'cu', 'h', 'cuh' }
-})
-
-vim.lsp.config('rust_analyzer', {
-  settings = {
-    ['rust-analyzer'] = {
-      diagnostics = {
-        enable = false;
-      }
-    }
-  }
 })
 
 -- vim.lsp.config('lua_ls', {
@@ -67,4 +46,4 @@ vim.lsp.config('rust_analyzer', {
 --   }
 -- })
 
-vim.lsp.enable({'nil_ls', 'rust_analyzer', 'clangd'})
+vim.lsp.enable({'nil_ls', 'bashls', 'clangd', 'rust_analyzer'})
