@@ -27,6 +27,7 @@ in
         nix-clean = "nix-collect-garbage --delete-older-than ";
         nix-update = "nix flake update ";
         nix-updates = "nix flake update --flake ${flakedir} --commit-lock-file ";
+        neofetchs = "nix run nixpkgs#neofetch";
         # nix-edit  = "codium --locale=ja $FLAKE";
         # hm-listgen = "home-manager generations";
         # hm-rmgen = "home-manager remove-generations ";
@@ -63,7 +64,6 @@ in
         "alias"
         "exit"
         "flake"
-        "nvim"
         "top"
       ];
       # shellの初期化のときに実行される(X11,Waylandが動いてないときに日本語じゃないようにする)
@@ -90,6 +90,7 @@ in
       # tomlの形式をNixで書く必要があるのでhome.fileで代用
       # settings = builtins.readFile ./alacritty.toml;
     };
+    htop.enable = true;
     wezterm = {
       enable = true;
       # package = pkgs.wezterm;

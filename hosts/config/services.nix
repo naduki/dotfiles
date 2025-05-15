@@ -15,6 +15,9 @@
         variant = "";
       };
     };
+    # Cosmic Desktop Environment.
+    desktopManager.cosmic.enable = false;
+    displayManager.cosmic-greeter.enable = false;
     # File system trim
     fstrim.enable = true;
     # Disable CUPS to print documents.
