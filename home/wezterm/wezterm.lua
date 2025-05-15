@@ -18,6 +18,7 @@ config.font = wezterm.font_with_fallback {
 }
 -- フォントサイズ
 config.font_size = 13.0
+config.use_ime = true
 -- テーマ
 config.color_scheme = "Poimandres"
 -- 初期(ウィンドウ)サイズ
@@ -94,7 +95,7 @@ wezterm.on('update-right-status', function(window, pane)
     -- 表示内容変数
     local right_status = {}
     local DEFAULT_FG = { Color = '#9a9eab' }
-    local DEFAULT_BG = { Color = '#333333' }
+    local DEFAULT_BG = { Color = '#1B1E28' }
     local date = wezterm.strftime '%m/%e(%a) %H:%M'
     local cwd_uri = pane:get_current_working_dir()
     -- リーダーキー有効表示
