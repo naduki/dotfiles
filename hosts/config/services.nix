@@ -7,7 +7,7 @@
       # GPU Driver
       videoDrivers = [ "nvidia" ];
       # Enable the Cinnamon Desktop Environment.
-      displayManager.lightdm.enable = true;
+      displayManager.lightdm.enable = false;
       desktopManager.cinnamon.enable = true;
       # Configure keymap in X11
       xkb = {
@@ -16,8 +16,8 @@
       };
     };
     # Cosmic Desktop Environment.
-    desktopManager.cosmic.enable = false;
-    displayManager.cosmic-greeter.enable = false;
+    desktopManager.cosmic.enable = true;
+    displayManager.cosmic-greeter.enable = true;
     # File system trim
     fstrim.enable = true;
     # Disable CUPS to print documents.

@@ -27,7 +27,25 @@ config.initial_rows = 24  -- 高さ
 -- 背景透過
 config.window_background_opacity = 0.85
 -- タイトルバー無効
-config.window_decorations = 'RESIZE'
+-- config.window_decorations = 'RESIZE'
+-- タブの位置
+config.tab_bar_at_bottom = false
+-- タブバーの透明化
+if config.tab_bar_at_bottom then
+    config.use_fancy_tab_bar = true
+    if config.use_fancy_tab_bar then
+        config.window_frame = {
+            inactive_titlebar_bg = "none",
+            active_titlebar_bg = "none",
+        }
+    else
+        config.colors = {
+            tab_bar = {
+                background = "none",
+            },
+        }
+    end
+end
 -- リーダーキー
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 5000 }
 -- ショートカットキー設定
@@ -102,11 +120,11 @@ wezterm.on('update-right-status', function(window, pane)
     if window:leader_is_active() then
         table.insert(right_status, { Foreground = { Color = '#7fffd4' }})
         table.insert(right_status, { Background = DEFAULT_BG })
-        table.insert(right_status, { Text = '' .. 'LEADER' .. '  ' })
+        table.insert(right_status, { Text = ' ' .. 'LEADER' .. ' ' })
     else
         table.insert(right_status, { Foreground = DEFAULT_FG })
         table.insert(right_status, { Background = DEFAULT_BG })
-        table.insert(right_status, { Text = '' .. '' .. ' ' })
+        table.insert(right_status, { Text = '' .. '' .. '' })
     end
     -- Current Working Directoru
     if cwd_uri then
@@ -144,7 +162,7 @@ wezterm.on('update-right-status', function(window, pane)
         -- 表示内容作成 関数にすべきかな...?
         table.insert(right_status, { Foreground = { Color = '#75b1a9' }})
         table.insert(right_status, { Background = DEFAULT_BG })
-        table.insert(right_status, { Text = '' .. wezterm.nerdfonts.fa_desktop .. '    ' })
+        table.insert(right_status, { Text = ' ' .. wezterm.nerdfonts.fa_desktop .. '    ' })
         table.insert(right_status, { Text = '' .. hostname .. '  ' })
         table.insert(right_status, { Foreground = { Color = '#92aac7' }})
         table.insert(right_status, { Background = DEFAULT_BG })
