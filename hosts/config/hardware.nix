@@ -8,6 +8,8 @@
       package = config.boot.kernelPackages.nvidiaPackages.latest;
       # NvidiaGPUのオープンソースドライバーにする
       open = true;
+
+      nvidiaSettings = false;
     };
   };
 }
