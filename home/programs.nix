@@ -1,6 +1,5 @@
 { names, ...}:
 let
-  thumbnauils = "/home/${names.user}/.cache/thumbnails";
   flakedir = "/home/${names.user}/.config/.dotfiles";
 in
 {
@@ -15,47 +14,40 @@ in
       shellAliases = {
         sudo = "sudo -k ";
         flake = "cd ${flakedir}";
-        clc = "rm -r ${thumbnauils}/*";
+        thmcl = "rm -r /home/${names.user}/.cache/thumbnails/*";
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-switch = "sudo nixos-rebuild switch --flake ${flakedir}#${names.user}@${names.host}";
-        os-dbuild = "sudo nixos-rebuild dry-build --flake ${flakedir}#${names.user}@${names.host}";
-        hm-switch = "home-manager switch --flake ${flakedir}#${names.user}";
-        hm-act = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # home-manager activation
-        os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-        nix-clean = "nix-collect-garbage --delete-older-than ";
-        nix-update = "nix flake update ";
-        nix-updates = "nix flake update --flake ${flakedir} --commit-lock-file ";
-        neofetchs = "nix run nixpkgs#neofetch";
-        # nix-edit  = "codium --locale=ja $FLAKE";
-        # hm-listgen = "home-manager generations";
-        # hm-rmgen = "home-manager remove-generations ";
+        os-switch = "nixos-rebuild switch  --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";
+        os-test   = "nixos-rebuild test --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";
+        os-vm     = "nixos-rebuild build-vm --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";  # ./result/bin/run-\*-vm
+        # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
+        os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
+        os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
-        g = "git";
-        ga = "git add .";
-        gb = "git branch";
-        gc = "git commit";
-        gp = "git push";
-        gf = "git fetch";
-        gs = "git stash";
-        gg = "git gc";
+        hm-switch = "home-manager switch --flake ${flakedir}#${names.user}";
+        hm-act    = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # standalone home-manager activation
+
+        nix-update  = "nix flake update ";
+        nix-updates = "nix flake update --flake ${flakedir} --commit-lock-file ";
+
+        g   = "git";
+        ga  = "git add .";
+        gb  = "git branch";
+        gc  = "git commit";
+        gp  = "git push";
+        gf  = "git fetch";
+        gs  = "git stash";
+        gg  = "git gc";
         gac = "git add . && git commit";
         gacp = "git add . && git commit && git push";
         gco = "git checkout";
 
-        # dcs = "docker container start ";
-        # dce = "docker container exec -it ";
-        # dceu = "docker container exec -itu ";
-        # dck = "docker container stop ";
-
+        # neofetch = "nix run nixpkgs#neofetch";
         # pcs = "podman container start ";
         # pce = "podman container exec -it ";
         # pceu = "podman container exec -itu ";
         # pck = "podman container stop ";
-
-        # vi = "nvim";
-        # vim = "nvim";
       };
       historyIgnore = [
         # historyに記録されなくなる
@@ -83,12 +75,6 @@ in
         key = "/home/${names.user}/.ssh/id_ed25519.pub";
         signByDefault = true;
       };
-    };
-    alacritty = { # Weztermの代替
-      enable = false;
-      # package = pkgs.aracritty;
-      # tomlの形式をNixで書く必要があるのでhome.fileで代用
-      # settings = builtins.readFile ./alacritty.toml;
     };
     htop.enable = true;
     wezterm = {

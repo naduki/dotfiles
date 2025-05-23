@@ -7,6 +7,10 @@
 - Terminal: Wezterm
 - Browser : Brave
 
+# Caution
+Cinnamon Wayland だと Wezterm のメニューバーが表示されないので、ウィンドウを移動できない。またフルスクリーンにしたら戻せなくなる
+代替は、Alacrittyだったけど、Rio Terminal も良さそう。
+
 ## Reference
 
 [NixOS で最強の Linux デスクトップを作ろう](https://zenn.dev/asa1984/articles/nixos-is-the-best)
