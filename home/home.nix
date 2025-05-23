@@ -14,7 +14,7 @@
     # recでAttribute Set内で他の値を参照できるようにする
     username = "${names.user}";
     homeDirectory = "/home/${username}"; # 文字列に値を埋め込む
-    stateVersion = "25.05";
+    stateVersion = "25.11";
     activation = {
       # ブラウザのキャッシュの格納場所をRAMにする
       # ln -fns ${homeDirectory}/Pictures /home/game/KISS/COM3D2/ScreenShot
