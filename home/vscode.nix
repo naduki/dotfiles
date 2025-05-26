@@ -85,7 +85,7 @@
         llvm-vs-code-extensions.vscode-clangd
 
         # AI
-        saoudrizwan.claude-dev
+        # saoudrizwan.claude-dev
 
         # Nix
         jnoortheen.nix-ide
