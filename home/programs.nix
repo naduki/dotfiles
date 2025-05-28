@@ -18,7 +18,7 @@ in
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-switch = "nixos-rebuild switch  --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";
+        os-switch = "nixos-rebuild switch --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";
         os-test   = "nixos-rebuild test --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";
         os-vm     = "nixos-rebuild build-vm --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";  # ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
@@ -28,8 +28,7 @@ in
         hm-switch = "home-manager switch --flake ${flakedir}#${names.user}";
         hm-act    = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # standalone home-manager activation
 
-        nix-update  = "nix flake update ";
-        nix-updates = "nix flake update --flake ${flakedir} --commit-lock-file ";
+        nix-update = "nix flake update --flake ${flakedir} --commit-lock-file ";
 
         g   = "git";
         ga  = "git add .";
