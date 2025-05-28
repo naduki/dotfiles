@@ -28,8 +28,6 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "package";
     };
-    # hardware setting
-    # nixos-hardware.url = "github:NixOS/nixos-hardware";
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
@@ -53,7 +51,6 @@
 
   outputs = inputs@{ flake-parts, ... }:
     let
-      # マルチユーザになったら使用者に応じてブランチを変更する
       names = { user = "naduki"; host = "kokona"; };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
