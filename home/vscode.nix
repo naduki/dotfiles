@@ -1,5 +1,7 @@
 { pkgs, ... }:
-{
+let
+  version = pkgs.vscode.version;
+in {
   programs.vscode = {
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
     # Copilot Remote-SSH を使わないなら VSCodium でも OK
@@ -102,13 +104,14 @@
         christian-kohler.path-intellisense
       ]
       ) ++ (with pkgs.vscode-marketplace-release; [
-        # Copilot
-        github.copilot
-        github.copilot-chat
         # Rust
         rust-lang.rust-analyzer
         # Misc
         # ms-vscode-remote.remote-ssh
+      ]) ++ (with (pkgs.forVSCodeVersion "${version}").vscode-marketplace-release; [
+        # Copilot
+        github.copilot
+        github.copilot-chat
       ]
       # ) ++ (with pkgs.vscode-extensions; [
       #   # C/C++ | nix-vscode-extensions では導入できないので
