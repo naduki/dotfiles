@@ -8,7 +8,7 @@
 - Browser : Brave
 
 # Caution
-Cinnamon Wayland だと Wezterm のメニューバーが表示されないので、ウィンドウを移動できない。またフルスクリーンにしたら戻せなくなる
+Cinnamon Wayland だと Wezterm のメニューバーが表示されないので、ウィンドウを移動できない。またフルスクリーンにしたら戻せなくなる  
 代替は、Alacrittyだったけど、Rio Terminal も良さそう。
 
 ## Reference
