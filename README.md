@@ -2,14 +2,10 @@
 
 - Version : Unstable
 - Desktop : Cinnamon
-- Editor : VSCode
+- Editor : VSCode, Neovim
 - Shell : Bash
 - Terminal: Wezterm
 - Browser : Brave
-
-# Caution
-Cinnamon Wayland だと Wezterm のメニューバーが表示されないので、ウィンドウを移動できない。またフルスクリーンにしたら戻せなくなる  
-代替は、Alacrittyだったけど、Rio Terminal も良さそう。
 
 ## Reference
 
