@@ -1,12 +1,17 @@
+{ lib, ... }:
 {
   boot = {
     loader = {
       # Use systemd-boot
-      systemd-boot.enable = true;
-      # 起動時のEFI変数の書き換えの許可?
-      # efi.canTouchEfiVariables = true;
-      # GPUドライバー使用中に、CUIの解像度を最適な値にする
-      systemd-boot.consoleMode = "max";
+      systemd-boot = {
+        enable = lib.mkForce false;
+        # GPUドライバー使用中に、CUIの解像度を最適な値にする
+        consoleMode = "max";
+      };
+      limine = {
+        enable = true;
+        secureBoot.enable = true; # Enable secure boot
+      };
       timeout = 10;
     };
     # Enable AMD P-State driver
