@@ -16,6 +16,8 @@ config.font = wezterm.font_with_fallback {
     -- BuiltIn
     "JetBrains Mono", "Noto Color Emoji", "Symbols Nerd Font Mono"
 }
+-- XWaylandで動かす Cinnamon Waylandで面倒なことになってるので
+config.enable_wayland = false
 -- フォントサイズ
 config.font_size = 13.0
 config.use_ime = true

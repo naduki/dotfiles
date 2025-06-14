@@ -18,9 +18,9 @@ in
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-switch = "nixos-rebuild switch --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";
-        os-test   = "nixos-rebuild test --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";
-        os-vm     = "nixos-rebuild build-vm --use-remote-sudo --flake ${flakedir}#${names.user}@${names.host}";  # ./result/bin/run-\*-vm
+        os-switch = "nixos-rebuild switch --sudo --flake ${flakedir}#${names.user}@${names.host}";
+        os-test   = "nixos-rebuild test --flake ${flakedir}#${names.user}@${names.host}";
+        os-vm     = "nixos-rebuild build-vm --flake ${flakedir}#${names.user}@${names.host}";  # ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
         os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
