@@ -21,6 +21,7 @@
   # user settings
   users.users.${names.user} = {
     isNormalUser = true;
+    initialHashedPassword = "$y$j9T$DvGj7T6HlYCo2M4jtp5ZK1$ykxX0xXUjLvz.7ZEKx/tXIo7hEOJY6MYJoEhI/Dud2.";
     description = "${names.user}_nixos";
     extraGroups = [ "networkmanager" "wheel" ]
       # Additional Groups
