@@ -62,6 +62,7 @@ in {
         "path-intellisense.autoTriggerNextSuggestion" = true;
         "path-intellisense.extensionOnImport" = true;
         "path-intellisense.showHiddenFiles" = true;
+        "geminicodeassist.enableTelemetry" = false;
 
         "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
         "files.associations".".envrc" = "plaintext";  # shellcheckが反応しないようにする
@@ -88,6 +89,7 @@ in {
 
         # AI
         # saoudrizwan.claude-dev
+        # google.geminicodeassist
 
         # Nix
         jnoortheen.nix-ide
