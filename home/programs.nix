@@ -75,6 +75,10 @@ in
         signByDefault = true;
       };
     };
+    floorp = {
+      enable = false;
+      languagePacks = [ "ja" ];
+    };
     htop.enable = true;
     wezterm = {
       enable = true;

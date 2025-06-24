@@ -3,6 +3,7 @@ let
   code_v = pkgs.vscode.version;
 in {
   programs.vscode = {
+    # ELECTRON_OZONE_PLATFORM_HINT=wayland code --enable-features=WaylandTextInputV3 %F
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
     # Copilot Remote-SSH を使わないなら VSCodium でも OK
     # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
