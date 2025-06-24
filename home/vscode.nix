@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  version = pkgs.vscode.version;
+  code_v = pkgs.vscode.version;
 in {
   programs.vscode = {
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
@@ -64,6 +64,17 @@ in {
         "path-intellisense.showHiddenFiles" = true;
         "geminicodeassist.enableTelemetry" = false;
 
+        "github.copilot.chat.codeGeneration.instructions" = [
+          {
+            "file" = "/home/naduki/.config/copilot-chat-instructions.md"; 
+          }
+        ];
+        "github.copilot.chat.commitMessageGeneration.instructions" = [
+          {
+            "text" = "Please make sure to write in English."; 
+          }
+        ];
+
         "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
         "files.associations".".envrc" = "plaintext";  # shellcheckが反応しないようにする
 
@@ -105,15 +116,16 @@ in {
         donjayamanne.githistory
         christian-kohler.path-intellisense
       ]
+      ) ++ (with (pkgs.forVSCodeVersion "${code_v}").vscode-marketplace-release; [
+        # Copilot
+        github.copilot
+        github.copilot-chat
+      ]
       ) ++ (with pkgs.vscode-marketplace-release; [
         # Rust
         rust-lang.rust-analyzer
         # Misc
         # ms-vscode-remote.remote-ssh
-      ]) ++ (with (pkgs.forVSCodeVersion "${version}").vscode-marketplace-release; [
-        # Copilot
-        github.copilot
-        github.copilot-chat
       ]
       # ) ++ (with pkgs.vscode-extensions; [
       #   # C/C++ | nix-vscode-extensions では導入できないので
