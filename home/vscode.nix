@@ -67,7 +67,7 @@ in {
 
         "github.copilot.chat.codeGeneration.instructions" = [
           {
-            "file" = "/home/naduki/.config/copilot-chat-instructions.md"; 
+            "file" = "/home/naduki/.config/copilot_instruction/copilot-instructions.md"; 
           }
         ];
         "github.copilot.chat.commitMessageGeneration.instructions" = [
