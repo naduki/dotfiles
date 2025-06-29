@@ -20,7 +20,7 @@ in
 
         os-switch = "nixos-rebuild switch --sudo --flake ${flakedir}#${names.user}@${names.host}";
         os-test   = "nixos-rebuild test --flake ${flakedir}#${names.user}@${names.host}";
-        os-vm     = "nixos-rebuild build-vm --flake ${flakedir}#${names.user}@${names.host}";  # ./result/bin/run-\*-vm
+        os-vm     = "nixos-rebuild build-vm --flake ${flakedir}#${names.user}@${names.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
         os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
