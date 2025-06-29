@@ -5,6 +5,7 @@ let
 in {
   imports = [
     ./security.nix
+    ./hyprland.nix
   ]
   ++ lib.optional virtualisations ./virtualisation.nix
   ++ lib.optional xremap ./xremap.nix;
