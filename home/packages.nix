@@ -6,7 +6,7 @@
     gemini-cli
     # mission-center
     # krita
-    # prismlauncher # minecraft alternative launcher
+    prismlauncher # minecraft alternative launcher
     # unityhub
     simplescreenrecorder
     # virt-manager

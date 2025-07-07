@@ -16,6 +16,8 @@
     hostName = "${names.host}";
     # Enable networking
     networkmanager.enable = true;
+    # Enable L2TP VPN
+    # networkmanager.plugins = [ pkgs.networkmanager-l2tp ];
   };
 
   # user settings
@@ -34,7 +36,6 @@
     systemPackages = [
       # pkgs.wget
       # pkgs.git
-      # pkgs.networkmanager-l2tp   # L2TP VPN
       # pkgs.wineWowPackages.stable
       # pkgs.wineWowPackages.wayland
       # pkgs.floorp
