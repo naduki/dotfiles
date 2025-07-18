@@ -1,4 +1,3 @@
-{pkgs, ...}:
 {
   programs = {
     hyprland = {
@@ -6,12 +5,8 @@
       withUWSM  = true;
     };
   };
-  programs.uwsm.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   security.pam.services = {
-    login.kwallet = {
-      enable = true;
-      package = pkgs.kdePackages.kwallet-pam;
-    };
     hyprlock = {};
   };
   # Optional, hint Electron apps to use Wayland:

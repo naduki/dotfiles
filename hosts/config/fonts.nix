@@ -12,6 +12,8 @@
       noto-fonts-monochrome-emoji
       noto-fonts-color-emoji
       material-design-icons
+      material-icons
+      material-symbols
       # default fonts
       lxgw-wenkai
       moralerspace-hwnf
