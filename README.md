@@ -1,8 +1,8 @@
 # dotfiles -- My NixOS Settings
 
 - Version : Unstable
-- Desktop : Cinnamon
-- Editor : VSCode, Neovim
+- Desktop : Hyprland + Quickshell (調整中)
+- Editor : VSCode
 - Shell : Bash
 - Terminal: Wezterm
 - Browser : Brave
