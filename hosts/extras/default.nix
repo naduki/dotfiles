@@ -1,14 +1,9 @@
-{ lib, ... }:
-let
-  virtualisations = false;
-  xremap = false;
-in {
+{
   imports = [
     ./security.nix
-    # ./hyprland.nix
-  ]
-  ++ lib.optional virtualisations ./virtualisation.nix
-  ++ lib.optional xremap ./xremap.nix;
+    # ./virtualisation.nix
+    # ./xremap.nix
+  ];
 
   system.rebuild.enableNg = true; # Enable NixOS rebuildng command
 

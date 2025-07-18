@@ -1,4 +1,4 @@
-{ config, lib, pkgs, names, ... }:
+{ config, lib, names, ... }:
 {
   imports = [
     ./config
@@ -32,7 +32,6 @@
   };
 
   environment = {
-    cinnamon.excludePackages = [ pkgs.warpinator ];
     systemPackages = [
       # pkgs.wget
       # pkgs.git
@@ -42,12 +41,8 @@
     ];
   };
 
-  programs = {
-    # Disable gnome-terminal
-    gnome-terminal.enable = false;
-    # Install steam
-    steam.enable = true;
-  };
+  # Install steam
+  programs.steam.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
