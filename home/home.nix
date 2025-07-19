@@ -8,7 +8,7 @@
     ./nvim.nix
     ./vscode.nix
     ./zed-editor.nix
-    # ./hyprland.nix
+    ./hyprland.nix
   ];
 
   home = rec {
