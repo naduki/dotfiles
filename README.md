@@ -18,16 +18,16 @@ occurs.
 This can be resolved by setting `QML2_IMPORT_PATH`.
 
 ## TODO
-[] Migrate Hyprland configuration to Home-manager
-[] Want to migrate from links to Quickshell's configs option
-[] Introduce minimum missing packages for illogical-impulse to enable Translator and other features
+- [ ] Migrate Hyprland configuration to Home-manager
+- [ ] Want to migrate from links to Quickshell's configs option
+- [ ] Introduce minimum missing packages for illogical-impulse to enable Translator and other features
 
 ## Reference
 
-[NixOS で最強の Linux デスクトップを作ろう](https://zenn.dev/asa1984/articles/nixos-is-the-best)
-[Nix Flakeで作る開発環境管理](https://zenn.dev/stmn_inc/articles/create-environment-to-nix-flake)
+[NixOS で最強の Linux デスクトップを作ろう](https://zenn.dev/asa1984/articles/nixos-is-the-best)  
+[Nix Flakeで作る開発環境管理](https://zenn.dev/stmn_inc/articles/create-environment-to-nix-flake)  
 [vimjoyer/nvim-nix-video](https://github.com/vimjoyer/nvim-nix-video/tree/main)
-[redyf/nixdots: Dotfiles for NixOS](https://github.com/redyf/nixdots)
-[NixOS Manual (unstable)](https://nixos.org/manual/nixos/unstable/)
-[NixOS Wiki](https://wiki.nixos.org/wiki/NixOS_Wiki)
-[Appendix A. Home Manager Configuration Options](https://nix-community.github.io/home-manager/options.xhtml)
+[redyf/nixdots: Dotfiles for NixOS](https://github.com/redyf/nixdots)  
+[NixOS Manual (unstable)](https://nixos.org/manual/nixos/unstable/)  
+[NixOS Wiki](https://wiki.nixos.org/wiki/NixOS_Wiki)  
+[Appendix A. Home Manager Configuration Options](https://nix-community.github.io/home-manager/options.xhtml)  
