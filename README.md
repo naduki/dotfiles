@@ -1,11 +1,26 @@
 # dotfiles -- My NixOS Settings
+This document is translated into English using GitHub Copilot (Claude Sonnet 4), except for the Reference section.  
+この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。  
 
 - Version : Unstable
-- Desktop : Hyprland + Quickshell (調整中)
+- Desktop : Hyprland + Quickshell (under adjustment)
 - Editor : VSCode
 - Shell : Bash
 - Terminal: Wezterm
 - Browser : Brave
+
+## Using illogical-impulse with NixOS + Hyprland
+When introducing Qt via home.packages, the error
+```
+module "Qt5Compat.GraphicalEffects" is not installed
+```
+occurs.  
+This can be resolved by setting `QML2_IMPORT_PATH`.
+
+## TODO
+[] Migrate Hyprland configuration to Home-manager
+[] Want to migrate from links to Quickshell's configs option
+[] Introduce minimum missing packages for illogical-impulse to enable Translator and other features
 
 ## Reference
 
