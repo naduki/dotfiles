@@ -1,4 +1,4 @@
-{ names, ...}:
+{ names, pkgs-stable, ...}:
 let
   flakedir = "/home/${names.user}/.config/.dotfiles";
 in
@@ -19,6 +19,7 @@ in
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
         os-switch = "nixos-rebuild switch --sudo --flake ${flakedir}#${names.user}@${names.host}";
+        os-boot   = "nixos-rebuild boot --sudo --flake ${flakedir}#${names.user}@${names.host}";
         os-test   = "nixos-rebuild test --flake ${flakedir}#${names.user}@${names.host}";
         os-vm     = "nixos-rebuild build-vm --flake ${flakedir}#${names.user}@${names.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
@@ -59,6 +60,10 @@ in
       ];
       # shellの初期化のときに実行される(X11,Waylandが動いてないときに日本語じゃないようにする)
       initExtra = ''(tty|fgrep -q 'tty') && export LANG=C'';
+    };
+    chromium = {
+      enable = true;
+      package = pkgs-stable.brave;
     };
     direnv = {
       enable = true;

@@ -24,7 +24,7 @@ in {
         "editor.bracketPairColorization.enabled" = true;
         "editor.cursorBlinking" = "phase";
         "editor.cursorSmoothCaretAnimation" = "on";
-        "editor.fontFamily" = "'moralerspace Radon HWNF', 'LXGW WenKai Mono Light', 'Material Design Icons', 'monospace', monospace";
+        "editor.fontFamily" = "'moralerspace Radon HWNF', 'LXGW WenKai Mono Light', 'Material Symbols Sharp', 'monospace', monospace";
         "editor.fontSize" = 19;
         "editor.formatOnSave" = false;
         "editor.tabSize" = 2;

@@ -1,9 +1,9 @@
 { pkgs-stable, pkgs, inputs, lib, ...}:
 let
   quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  colloid-icon-theme = pkgs-stable.colloid-icon-theme.override {
-    colorVariants = [ "teal" ];
-  };
+  # colloid-icon-theme = pkgs-stable.colloid-icon-theme.override {
+  #   colorVariants = [ "teal" ];
+  # };
   colloid-gtk-theme = pkgs-stable.colloid-gtk-theme.override {
     colorVariants = [ "dark" ];
     themeVariants = [ "teal" ];
@@ -18,6 +18,12 @@ in {
       enable = true;
       # package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
+    chromium = {
+      commandLineArgs = [
+        "--ozone-platform-hint=auto"
+        "--enable-wayland-ime"
+      ];
+    };
   };
   services = {
     hypridle = {
@@ -29,16 +35,13 @@ in {
       systemd.enable = false;
       # package = inputs.hyprshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
-    hyprpaper = {
-      enable = true;
-    };
   };
   # Icons and themes
   gtk = {
     enable = true;
     iconTheme = {
       # name = "Colloid-teal-dark";
-      # package = colloid-gtk-theme;
+      # package = colloid-icon-theme;
       name = "MoreWaita";
       package = pkgs-stable.morewaita-icon-theme;
     };
@@ -53,8 +56,6 @@ in {
     slurp
     wl-screenrec
 
-    swaynotificationcenter
-    
     gnome-calculator
     glib  # for trash
 
@@ -80,7 +81,7 @@ in {
     kdePackages.qtvirtualkeyboard
     kdePackages.qtwayland
     kdePackages.syntax-highlighting
-  ] ++ [ colloid-icon-theme ];
+  ];
 
   home.sessionVariables.QML2_IMPORT_PATH = lib.concatStringsSep ":" [
     "${quickshell}/lib/qt-6/qml"
@@ -97,6 +98,7 @@ in {
   home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
 
   xdg.configFile."quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
+  xdg.configFile."hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
   # Additional icons
   home.file = {
     ".local/share/icons/MoreWaita/scalable/apps" = {
