@@ -1,24 +1,32 @@
-{pkgs, ...}:
+{ pkgs, ...}:
 {
+  # Hyprland Desktop Environment.
   programs = {
     hyprland = {
       enable = true;
       withUWSM  = true;
     };
-    # nm-applet.enable = true;
+  };
+  # services
+  services = {
+    blueman.enable = true;
+    displayManager.cosmic-greeter.enable = true;
+    gnome.gnome-keyring.enable = true;
+    gvfs.enable = true;
   };
   hardware.bluetooth.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  security.polkit.enable = true;
-  security.pam.services = {
-    hyprlock = {};
+  # Security
+  security = {
+    polkit.enable = true;
+    pam.services = {
+      login.enableGnomeKeyring = true;
+      hyprlock = {};
+    };
   };
-  # Override packages
-  nixpkgs.config.packageOverrides = pkgs: {
-    colloid-icon-theme = pkgs.colloid-icon-theme.override { colorVariants = ["teal"]; };
-  };
+  # Environment
+  xdg.icons.enable = true;
   environment.systemPackages = with pkgs; [
-    colloid-icon-theme
+    networkmanager_dmenu
   ];
 
   # Optional, hint Electron apps to use Wayland:

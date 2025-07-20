@@ -1,7 +1,7 @@
 {
   imports = [
     # ./desktop/cinnamon.nix
-    ./desktop/cosmic.nix
+    # ./desktop/cosmic.nix
     ./desktop/hyprland.nix
     ./boot.nix
     ./fonts.nix
