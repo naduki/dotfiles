@@ -18,7 +18,6 @@
       ];
       emoji = [
         "Noto Color Emoji"
-        "Material Design Icons"
         "Noto Emoji"
       ];
     };

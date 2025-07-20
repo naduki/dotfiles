@@ -8,7 +8,7 @@
     # krita
     # prismlauncher # minecraft alternative launcher
     # unityhub
-    simplescreenrecorder
+    # simplescreenrecorder  # x11 only
     # virt-manager
   ];
 }
