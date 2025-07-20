@@ -24,7 +24,7 @@
     };
   };
   # Environment
-  xdg.icons.enable = true;
+  # xdg.icons.enable = true;
   environment.systemPackages = with pkgs; [
     networkmanager_dmenu
   ];
