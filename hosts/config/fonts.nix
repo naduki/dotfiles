@@ -1,5 +1,12 @@
 { pkgs, ... }:
-{
+let
+  google-fonts = (pkgs.google-fonts.override {
+    fonts = [
+      "Noto Sans Symbols"   # for special characters
+      "Klee One"
+    ];
+  });
+in {
   fonts = {
     fontDir.enable = true;
     # use fonts specified by user rather than default ones
@@ -15,6 +22,6 @@
       # default fonts
       lxgw-wenkai
       moralerspace-hwnf
-    ];
+    ] ++ [ google-fonts ];
   };
 }

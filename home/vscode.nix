@@ -24,7 +24,7 @@ in {
         "editor.bracketPairColorization.enabled" = true;
         "editor.cursorBlinking" = "phase";
         "editor.cursorSmoothCaretAnimation" = "on";
-        "editor.fontFamily" = "'moralerspace Radon HWNF', 'LXGW WenKai Mono Light', 'Material Symbols Sharp', 'monospace', monospace";
+        "editor.fontFamily" = "'moralerspace Radon HWNF', 'LXGW WenKai Mono Light', 'Noto Sans Symbols', 'monospace', monospace";
         "editor.fontSize" = 19;
         "editor.formatOnSave" = false;
         "editor.tabSize" = 2;
@@ -65,11 +65,6 @@ in {
         "path-intellisense.showHiddenFiles" = true;
         "geminicodeassist.enableTelemetry" = false;
 
-        "github.copilot.chat.codeGeneration.instructions" = [
-          {
-            "file" = "/home/naduki/.config/copilot_instruction/copilot-instructions.md"; 
-          }
-        ];
         "github.copilot.chat.commitMessageGeneration.instructions" = [
           {
             "text" = "Please make sure to write in English."; 
