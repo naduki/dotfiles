@@ -3,11 +3,13 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。  
 
 - Version : Unstable
-- Desktop : Hyprland + Quickshell([end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/)) (under adjustment)
+- Desktop : Hyprland + Quickshell ([end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/)) (under adjustment)
 - Editor : VSCode
 - Shell : Bash
 - Terminal: Wezterm
 - Browser : Brave
+
+![desktop_environment](./desktop.png "Current Hyprland Desktop")
 
 ## Using illogical-impulse with NixOS(Home-manager) + Hyprland
 In Home-manager, set `qt6.enable = true;`!

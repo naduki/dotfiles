@@ -8,6 +8,7 @@
 !/README.md
 !/home/
 !/hosts/
-!/shells
+!/shells/
+!/desktop.png
 !/flake.nix
 !/flake.lock
