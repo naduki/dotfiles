@@ -30,11 +30,6 @@ in {
       enable = true;
       # package = inputs.hypridle.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
-    hyprshell = {
-      enable = true;
-      systemd.enable = false;
-      # package = inputs.hyprshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    };
   };
   # Icons and themes
   gtk = {
@@ -56,16 +51,25 @@ in {
     slurp
     wl-screenrec
 
+    file-roller
     gnome-calculator
     glib  # for trash
 
+    adwaita-icon-theme
+    hicolor-icon-theme
     mint-y-icons
+
+    celluloid
     nemo-with-extensions
     xed-editor
+    xviewer
 
     cliphist
     ddcutil
+    swww
+    translate-shell # for left sidebar
 
+    hyprland-qt-support
     kdePackages.kdialog
     kdePackages.qt5compat
     kdePackages.qtbase
