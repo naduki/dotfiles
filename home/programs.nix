@@ -30,6 +30,8 @@ in
         hm-act    = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # standalone home-manager activation
 
         nix-update = "nix flake update --flake ${flakedir} --commit-lock-file ";
+        xeyes = "nix run nixpkgs#xorg.xeyes";
+        dconf-editor = "nix run nixpkgs#dconf-editor";
 
         g   = "git";
         ga  = "git add .";
