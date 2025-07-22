@@ -1,9 +1,6 @@
-{ pkgs-stable, pkgs, inputs, lib, ...}:
+{ pkgs-stable, pkgs, inputs, ...}:
 let
   quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  # colloid-icon-theme = pkgs-stable.colloid-icon-theme.override {
-  #   colorVariants = [ "teal" ];
-  # };
   colloid-gtk-theme = pkgs-stable.colloid-gtk-theme.override {
     colorVariants = [ "dark" ];
     themeVariants = [ "teal" ];
@@ -14,37 +11,55 @@ in {
       enable = true;
       package = quickshell;
     };
-    hyprlock = {
-      enable = true;
-      # package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    };
-    chromium = {
-      commandLineArgs = [
-        "--ozone-platform-hint=auto"
-        "--enable-wayland-ime"
+    hyprlock.enable = true;
+    chromium.commandLineArgs = [
+      "--ozone-platform-hint=auto"
+      "--enable-wayland-ime"
+    ];
+
+  };
+  wayland.windowManager.hyprland = {
+    enable = true;
+    # systemd.enable = false;
+
+    settings = {
+      exec = [
+        "hyprctl dispatch submap global"
       ];
+      submap = "global"; # This is required for catchall to work
     };
+
+    extraConfig = ''
+      $qsConfig = ii
+      # Defaults
+      source=~/.config/hypr/hyprland/general.conf
+      source=~/.config/hypr/hyprland/rules.conf
+      source=~/.config/hypr/hyprland/colors.conf
+      source=~/.config/hypr/hyprland/keybinds.conf
+
+      # Custom 
+      source=~/.config/hypr/custom/env.conf
+      source=~/.config/hypr/custom/execs.conf
+      source=~/.config/hypr/custom/general.conf
+      source=~/.config/hypr/custom/rules.conf
+      source=~/.config/hypr/custom/keybinds.conf
+    '';
   };
-  services = {
-    hypridle = {
-      enable = true;
-      # package = inputs.hypridle.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    };
-  };
+  services.hypridle.enable = true;
   # Icons and themes
   gtk = {
     enable = true;
     iconTheme = {
-      # name = "Colloid-teal-dark";
-      # package = colloid-icon-theme;
-      name = "MoreWaita";
-      package = pkgs-stable.morewaita-icon-theme;
+      name = "Mint-Y-Cyan";
+      package = pkgs-stable.mint-y-icons;
     };
     theme = {
       name = "Colloid-Teal-Dark";
       package = colloid-gtk-theme;
     };
   };
+  # setting up QML2_IMPORT_PATH
+  qt.enable = true;
 
   home.packages = with pkgs-stable; [
     hyprshot
@@ -54,10 +69,6 @@ in {
     file-roller
     gnome-calculator
     glib  # for trash
-
-    adwaita-icon-theme
-    hicolor-icon-theme
-    mint-y-icons
 
     celluloid
     nemo-with-extensions
@@ -86,26 +97,21 @@ in {
     kdePackages.qtwayland
     kdePackages.syntax-highlighting
   ];
-
-  home.sessionVariables.QML2_IMPORT_PATH = lib.concatStringsSep ":" [
-    "${quickshell}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.qt5compat}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.qtdeclarative}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.qtmultimedia}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.qtpositioning}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.qtquicktimeline}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.qtsensors}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.qtvirtualkeyboard}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.qtwayland}/lib/qt-6/qml"
-    "${pkgs-stable.kdePackages.syntax-highlighting}/lib/qt-6/qml"
-  ];
-  home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
-
-  xdg.configFile."quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
-  xdg.configFile."hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
+  # Illogical Impulse's file links
+  xdg.configFile = {
+    "quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
+    "hypr/hyprland".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprland";
+    "hypr/hyprlock".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock";
+    "hypr/shaders".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/shaders";
+    "hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
+    "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
+    # "hypr/custom".source = "./hypr_custom";
+  };
   # Additional icons
   home.file = {
-    ".local/share/icons/MoreWaita/scalable/apps" = {
+    # ".local/share/icons/MoreWaita/scalable/apps" = 
+    ".local/share/icons/Mint-Y/apps/48@2x" = 
+    {
       source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
     };
   };
