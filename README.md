@@ -9,17 +9,12 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 - Terminal: Wezterm
 - Browser : Brave
 
-## Using illogical-impulse with NixOS + Hyprland
-```
-module "Qt5Compat.GraphicalEffects" is not installed
-```
-This can be resolved by setting `QML2_IMPORT_PATH`.
+## Using illogical-impulse with NixOS(Home-manager) + Hyprland
+In Home-manager, set `qt6.enable = true;`!
 
 ## TODO
-- [ ] Icon configuration (some icons are missing)
-- [ ] Migrate Hyprland configuration to Home-manager
-- [ ] Want to migrate from links to Quickshell's configs option
-- [ ] Introduce minimum missing packages for illogical-impulse to enable Translator and other features
+- [ ] Fix: Window name not displayed in the top-left of the bar
+- [ ] Fix: VSCode symbolic link icons are missing
 
 ## Reference
 
@@ -28,6 +23,7 @@ This can be resolved by setting `QML2_IMPORT_PATH`.
 - [vimjoyer/nvim-nix-video](https://github.com/vimjoyer/nvim-nix-video/tree/main)
 - [redyf/nixdots](https://github.com/redyf/nixdots)
 - [xBLACKICEx/end-4-dots-hyprland-nixos](https://github.com/xBLACKICEx/end-4-dots-hyprland-nixos)
+- [pabloagn/rhodium](https://github.com/pabloagn/rhodium)
 - [NixOS Manual (unstable)](https://nixos.org/manual/nixos/unstable/)
 - [NixOS Wiki](https://wiki.nixos.org/wiki/NixOS_Wiki)
 - [Appendix A. Home Manager Configuration Options](https://nix-community.github.io/home-manager/options.xhtml)
