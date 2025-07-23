@@ -46,7 +46,8 @@
   # Environment
   environment = {
     systemPackages = with pkgs; [
-      networkmanager_dmenu
+      # networkmanager_dmenu
+      polkit_gnome
     ];
     etc."greetd/hyprland.conf".text = ''
       exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit

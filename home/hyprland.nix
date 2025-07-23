@@ -22,6 +22,11 @@ in {
     enable = true;
     # systemd.enable = false;
 
+    plugins = with pkgs-stable.hyprlandPlugins;[
+      # hyprbars
+      hyprexpo
+    ];
+
     settings = {
       exec = [
         "hyprctl dispatch submap global"
@@ -75,12 +80,26 @@ in {
     xed-editor
     xviewer
 
+    ## Screenshot
+    # grim
+    # imagemagick_light
+    # swappy
+    # wl-clipboard-rs
+
+    ## Audio
+    # cava
+
+    # curl
+    # python313
     cliphist
     ddcutil
-    swww
+    # hyprsunset
+    jq  # for HyprlandData
+    libqalculate  # for searchwidget
+    networkmanagerapplet
+    # swww
     translate-shell # for left sidebar
 
-    hyprland-qt-support
     kdePackages.kdialog
     kdePackages.qt5compat
     kdePackages.qtbase
@@ -107,6 +126,7 @@ in {
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
     # "hypr/custom".source = "./hypr_custom";
   };
+  home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
   # Additional icons
   home.file = {
     # ".local/share/icons/MoreWaita/scalable/apps" = 

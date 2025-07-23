@@ -15,7 +15,6 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 In Home-manager, set `qt6.enable = true;`!
 
 ## TODO
-- [ ] Fix: Window name not displayed in the top-left of the bar
 - [ ] Fix: VSCode symbolic link icons are missing
 
 ## Reference
