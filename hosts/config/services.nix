@@ -1,9 +1,9 @@
+# {pkgs, ...}:
 {
   services = {
     # X11 settings
     xserver = {
-      # Enable the X11 windowing system.
-      enable = true;
+      # excludePackages = [ pkgs.xterm ];
       # GPU Driver
       videoDrivers = [ "nvidia" ];
       # Configure keymap in X11
@@ -11,7 +11,6 @@
         layout = "us";
         variant = "";
       };
-      desktopManager.xterm.enable = false;
     };
     # File system trim
     fstrim.enable = true;

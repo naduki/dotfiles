@@ -1,4 +1,4 @@
-{ pkgs-stable, pkgs, inputs, ...}:
+{ inputs, pkgs-stable, pkgs, ...}:
 let
   quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
   colloid-gtk-theme = pkgs-stable.colloid-gtk-theme.override {
@@ -98,7 +98,7 @@ in {
     networkmanagerapplet    
     translate-shell # for left sidebar
 
-    # python313
+    # python312
     jq  # for HyprlandData
     kdePackages.kdialog
     kdePackages.qt5compat
@@ -125,6 +125,7 @@ in {
     "hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
     # "hypr/custom".source = "./hypr_custom";
+    # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "/home/${names.user}/.config/.dotfiles/hypr_custom";
   };
   home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
   # Additional icons

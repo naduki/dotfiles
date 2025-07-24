@@ -45,7 +45,9 @@
   };
   # Environment
   environment = {
-    # systemPackages = with pkgs; [ ];
+    systemPackages = with pkgs; [
+      adwaita-icon-theme
+    ];
     etc."greetd/hyprland.conf".text = ''
       exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
       misc {
