@@ -29,6 +29,7 @@ in {
 
     settings = {
       exec = [
+        "${pkgs-stable.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "hyprctl dispatch submap global"
       ];
       submap = "global"; # This is required for catchall to work
@@ -73,6 +74,7 @@ in {
     gnome-calculator
     glib  # for trash
     nemo-with-extensions
+    polkit_gnome
     xed-editor
     xviewer
 
