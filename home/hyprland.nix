@@ -22,7 +22,7 @@ in {
     enable = true;
     # systemd.enable = false;
 
-    plugins = with pkgs-stable.hyprlandPlugins;[
+    plugins = with pkgs.hyprlandPlugins;[
       # hyprbars
       hyprexpo
     ];
@@ -67,39 +67,37 @@ in {
   qt.enable = true;
 
   home.packages = with pkgs-stable; [
-    hyprshot
-    slurp
-    wl-screenrec
-
+    # My packages
+    celluloid
     file-roller
     gnome-calculator
     glib  # for trash
-
-    celluloid
     nemo-with-extensions
     xed-editor
     xviewer
 
     ## Screenshot
     # grim
-    # imagemagick_light
     # swappy
     # wl-clipboard-rs
+    imagemagick_light
+    hyprshot
+    slurp
+    wl-screenrec
 
     ## Audio
     # cava
 
     # curl
-    # python313
     cliphist
     ddcutil
-    # hyprsunset
-    jq  # for HyprlandData
-    libqalculate  # for searchwidget
-    networkmanagerapplet
     # swww
+    libqalculate  # for searchwidget
+    networkmanagerapplet    
     translate-shell # for left sidebar
 
+    # python313
+    jq  # for HyprlandData
     kdePackages.kdialog
     kdePackages.qt5compat
     kdePackages.qtbase
@@ -115,7 +113,7 @@ in {
     kdePackages.qtvirtualkeyboard
     kdePackages.qtwayland
     kdePackages.syntax-highlighting
-  ];
+  ] ++ (with pkgs;[ hyprsunset ]);
   # Illogical Impulse's file links
   xdg.configFile = {
     "quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
