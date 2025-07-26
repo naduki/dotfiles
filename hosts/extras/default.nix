@@ -1,6 +1,7 @@
 {
   imports = [
     ./security.nix
+    # ./hypr_regreet.nix
     # ./virtualisation.nix
     # ./xremap.nix
   ];
