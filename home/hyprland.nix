@@ -28,7 +28,7 @@ in {
     ];
 
     settings = {
-      exec = [
+      exec-once = [
         "${pkgs-stable.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "hyprctl dispatch submap global"
       ];
@@ -52,6 +52,7 @@ in {
     '';
   };
   services.hypridle.enable = true;
+
   # Icons and themes
   gtk = {
     enable = true;
@@ -69,6 +70,7 @@ in {
 
   home.packages = with pkgs-stable; [
     # My packages
+    bulky
     celluloid
     file-roller
     gnome-calculator
@@ -115,7 +117,8 @@ in {
     kdePackages.qtvirtualkeyboard
     kdePackages.qtwayland
     kdePackages.syntax-highlighting
-  ] ++ (with pkgs;[ hyprsunset ]);
+  ] ++ (with pkgs; [ hyprsunset ]);
+  dbus.packages = [ pkgs-stable.nemo-with-extensions ];
   # Illogical Impulse's file links
   xdg.configFile = {
     "quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
