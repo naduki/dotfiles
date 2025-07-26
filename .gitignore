@@ -6,6 +6,7 @@
 ### not ignore ###
 !/.gitignore
 !/README.md
+!/hardware-configuration.nix
 !/home/
 !/hosts/
 !/shells/

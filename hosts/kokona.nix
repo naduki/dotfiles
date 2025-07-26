@@ -3,7 +3,7 @@
   imports = [
     ./config
     ./extras
-    ./hardware-configuration.nix
+    ../hardware-configuration.nix
   ];
 
   # Allow unfree packages
@@ -31,15 +31,13 @@
       ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
 
-  environment = {
-    systemPackages = [
-      # pkgs.wget
-      # pkgs.git
-      # pkgs.wineWowPackages.stable
-      # pkgs.wineWowPackages.wayland
-      # pkgs.floorp
-    ];
-  };
+  environment.systemPackages = [
+    # pkgs.wget
+    # pkgs.git
+    # pkgs.wineWowPackages.stable
+    # pkgs.wineWowPackages.wayland
+    # pkgs.floorp
+  ];
 
   # Install steam
   programs.steam.enable = true;
