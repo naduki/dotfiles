@@ -4,7 +4,7 @@
   inputs = {
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/release-25.05";
+    stable.url  = "github:NixOS/nixpkgs/release-25.05";
     package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     # home-manager
     home-manager = {
@@ -17,13 +17,13 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    # vscode marketplace
+    # VSCode marketplace
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
       # flake-compat flake-utils
     };
-    # rust
+    # Rust
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "package";
@@ -35,6 +35,7 @@
       url = "github:quickshell-mirror/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Hyprland and Quickshell base configuration
     illogical-impulse-dotfiles = {
       url = "github:end-4/dots-hyprland";
       flake = false;
@@ -86,9 +87,6 @@
                 allowUnfreePredicate = pkg: builtins.elem (inputs.stable.lib.getName pkg) [
                   "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl" # "unityhub"
                 ];
-                # Blender CUDAを使えるようにするけどpython-openusdとblenderのビルド
-                # (Ryzen7 5700Xで40分くらい)が発生する
-                cudaSupport = true;
               };
               # overlays = [ ]; # Overlay in home-manager
             };

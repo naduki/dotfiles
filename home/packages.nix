@@ -1,7 +1,9 @@
 { pkgs-stable, ... }:
 {
   home.packages = with pkgs-stable; [
-    blender
+    (blender.override {
+      cudaSupport = true;
+    })
     gemini-cli
     # mission-center
     # krita
