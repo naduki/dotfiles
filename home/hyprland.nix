@@ -1,4 +1,4 @@
-{ inputs, pkgs-stable, pkgs, ...}:
+{ inputs, pkgs-stable, pkgs, ... }:
 let
   quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
   colloid-gtk-theme = pkgs-stable.colloid-gtk-theme.override {
@@ -16,16 +16,12 @@ in {
       "--ozone-platform-hint=auto"
       "--enable-wayland-ime"
     ];
-
   };
+
   wayland.windowManager.hyprland = {
     enable = true;
-    # systemd.enable = false;
 
-    plugins = with pkgs.hyprlandPlugins;[
-      # hyprbars
-      hyprexpo
-    ];
+    plugins = with pkgs.hyprlandPlugins;[ hyprexpo ];
 
     settings = {
       exec-once = [
@@ -74,8 +70,9 @@ in {
     celluloid
     file-roller
     gnome-calculator
-    glib  # for trash
+    glib # for trash
     nemo-with-extensions
+    networkmanagerapplet
     polkit_gnome
     xed-editor
     xviewer
@@ -83,7 +80,6 @@ in {
     ## Screenshot
     # grim
     # swappy
-    # wl-clipboard-rs
     imagemagick_light
     hyprshot
     slurp
@@ -92,16 +88,23 @@ in {
     ## Audio
     # cava
 
+    # switchwall.sh
+    # bc
+    # gsettings-desktop-schemas
+    # xdg-user-dirs
+
     # curl
+    wl-clipboard-rs
     cliphist
     ddcutil
     # swww
-    libqalculate  # for searchwidget
-    networkmanagerapplet    
+    libqalculate # for searchwidget    
     translate-shell # for left sidebar
 
+    # python
     # python312
-    jq  # for HyprlandData
+    # ...
+    jq # for HyprlandData
     kdePackages.kdialog
     kdePackages.qt5compat
     kdePackages.qtbase
@@ -134,9 +137,9 @@ in {
   # Additional icons
   home.file = {
     # ".local/share/icons/MoreWaita/scalable/apps" = 
-    ".local/share/icons/Mint-Y/apps/48@2x" = 
-    {
-      source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
-    };
+    ".local/share/icons/Mint-Y/apps/48@2x" =
+      {
+        source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
+      };
   };
 }
