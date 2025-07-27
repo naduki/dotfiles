@@ -37,7 +37,8 @@
     };
     # Hyprland and Quickshell base configuration
     illogical-impulse-dotfiles = {
-      url = "github:end-4/dots-hyprland/0ff4cc572c7d484bbe31f0e9014fd7dda50316d9";
+      # url = "github:end-4/dots-hyprland/38c76fe86b74a6ec01e9ddaa4c2240ca032b8ae0";
+      url = "github:naduki/dots-hyprland/my_nixos";
       flake = false;
     };
     # NixOS-WSL

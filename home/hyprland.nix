@@ -1,6 +1,5 @@
 { inputs, pkgs-stable, pkgs, ... }:
 let
-  quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
   colloid-gtk-theme = pkgs-stable.colloid-gtk-theme.override {
     colorVariants = [ "dark" ];
     themeVariants = [ "teal" ];
@@ -9,7 +8,7 @@ in {
   programs = {
     quickshell = {
       enable = true;
-      package = quickshell;
+      package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
     hyprlock.enable = true;
     chromium.commandLineArgs = [
@@ -28,7 +27,7 @@ in {
         "${pkgs-stable.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "hyprctl dispatch submap global"
       ];
-      submap = "global"; # This is required for catchall to work
+      submap = "global";
     };
 
     extraConfig = ''
@@ -94,12 +93,12 @@ in {
     # xdg-user-dirs
 
     # curl
-    wl-clipboard-rs
+    wl-clipboard
     cliphist
     ddcutil
     # swww
     libqalculate # for searchwidget
-    matugen  
+    # matugen
     translate-shell # for left sidebar
 
     # python
@@ -133,15 +132,12 @@ in {
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
     # "hypr/custom".source = "./hypr_custom";
     # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "/home/${names.user}/.config/.dotfiles/hypr_custom";
-    "matugen".source = "${inputs.illogical-impulse-dotfiles}/.config/matugen";
   };
   home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
   # Additional icons
   home.file = {
-    # ".local/share/icons/MoreWaita/scalable/apps" = 
-    ".local/share/icons/Mint-Y/apps/48@2x" =
-      {
-        source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
-      };
+    ".local/share/icons/Mint-Y/apps/48@2x" ={
+      source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
+    };
   };
 }
