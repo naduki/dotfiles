@@ -98,7 +98,8 @@ in {
     cliphist
     ddcutil
     # swww
-    libqalculate # for searchwidget    
+    libqalculate # for searchwidget
+    matugen  
     translate-shell # for left sidebar
 
     # python
@@ -132,6 +133,7 @@ in {
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
     # "hypr/custom".source = "./hypr_custom";
     # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "/home/${names.user}/.config/.dotfiles/hypr_custom";
+    "matugen".source = "${inputs.illogical-impulse-dotfiles}/.config/matugen";
   };
   home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
   # Additional icons

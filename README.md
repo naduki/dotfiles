@@ -11,6 +11,8 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 
 ![desktop_environment](./desktop.png "Current Hyprland Desktop")
 
+- Some scripts (especially Python) are not working due to missing required packages.
+
 ## Using illogical-impulse with NixOS(Home-manager) + Hyprland
 In Home-manager, set `qt6.enable = true;`!
 
