@@ -61,16 +61,17 @@
     "illogical-impulse-dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1753581103,
-        "narHash": "sha256-Z4/3E6n0NO5cwRl9St6swDL7p42feuDrUMmwUjBWFWM=",
+        "lastModified": 1753360647,
+        "narHash": "sha256-DPB33KCmbW8+RLLqrWK7vL6oUJ97Dl/jcFRD+brR3VQ=",
         "owner": "end-4",
         "repo": "dots-hyprland",
-        "rev": "fe07298adbc33e5d2dd4e88592e7c01185c97ea4",
+        "rev": "0ff4cc572c7d484bbe31f0e9014fd7dda50316d9",
         "type": "github"
       },
       "original": {
         "owner": "end-4",
         "repo": "dots-hyprland",
+        "rev": "0ff4cc572c7d484bbe31f0e9014fd7dda50316d9",
         "type": "github"
       }
     },
@@ -182,11 +183,11 @@
     },
     "stable": {
       "locked": {
-        "lastModified": 1753591331,
-        "narHash": "sha256-i+vD4qeN3l63/z3CO8TrOE37mATPsqA8MWXB85QHTv4=",
+        "lastModified": 1753601157,
+        "narHash": "sha256-XSUoQoLhTJCZ/PN2OhbwMVE/CgDVKsv+uJDAUF8MM5s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "70dc2728548f79fcc5a466597323d1ed219243e9",
+        "rev": "8e94fe27e69eea8aecef2229d540fb3f514b163a",
         "type": "github"
       },
       "original": {
