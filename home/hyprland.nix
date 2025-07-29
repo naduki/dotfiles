@@ -79,7 +79,7 @@ in {
     ## Screenshot
     # grim
     # swappy
-    imagemagick_light
+    imagemagick # _light not work
     libnotify
     hyprshot
     slurp

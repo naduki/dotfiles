@@ -4,7 +4,7 @@ let
 in {
   programs.vscode = {
     # ELECTRON_OZONE_PLATFORM_HINT=wayland code --enable-features=WaylandTextInputV3 %F
-    package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
+    package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools kdePackages.qtdeclarative nixpkgs-fmt nil shellcheck-minimal ]);
     # Copilot Remote-SSH を使わないなら VSCodium でも OK
     # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
     profiles.default = {
@@ -75,6 +75,12 @@ in {
         "files.associations".".envrc" = "plaintext";  # shellcheckが反応しないようにする
 
         "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
+        "qt-core.additionalQtPaths" = [
+          {
+            "name" = "Qt Paths";
+            "path" = "/home/naduki/.nix-profile/bin/qtpaths";
+          }
+        ];
 
         "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
         "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
