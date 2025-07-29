@@ -80,19 +80,11 @@ in {
     # grim
     # swappy
     imagemagick_light
+    libnotify
     hyprshot
     slurp
-    wl-screenrec
+    wf-recorder
 
-    ## Audio
-    # cava
-
-    # switchwall.sh
-    # bc
-    # gsettings-desktop-schemas
-    # xdg-user-dirs
-
-    # curl
     wl-clipboard
     cliphist
     ddcutil
@@ -102,7 +94,9 @@ in {
     translate-shell # for left sidebar
 
     # python
-    # python312
+    (python3.withPackages (python-pkgs: [
+      python-pkgs.pywayland
+    ]))
     # ...
     jq # for HyprlandData
     kdePackages.kdialog

@@ -74,6 +74,8 @@ in {
         "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
         "files.associations".".envrc" = "plaintext";  # shellcheckが反応しないようにする
 
+        "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
+
         "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
         "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
         "[cpp]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
@@ -103,6 +105,10 @@ in {
 
         # Lua
         # sumneko.lua
+
+        # Qt QML (Quickshell)
+        theqtcompany.qt-core
+        theqtcompany.qt-qml
 
         # Misc
         # hediet.vscode-drawio
