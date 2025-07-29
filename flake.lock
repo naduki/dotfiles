@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753761827,
-        "narHash": "sha256-mrVNT+aF4yR8P8Fx570W2vz+LzukSlf68Yr2YhUJHjo=",
+        "lastModified": 1753803071,
+        "narHash": "sha256-O8l1+c8L6NE+kW4MJvJMLKKz6cElV/FOcomr+qTZjZs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "50adf8fcaa97c9d64309f2d507ed8be54ea23110",
+        "rev": "cfe397c8c091a06a5a0a4e683e6fca2e57a8312f",
         "type": "github"
       },
       "original": {
@@ -61,11 +61,11 @@
     "illogical-impulse-dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1753711858,
-        "narHash": "sha256-uPKaYxQlvBuGFKVpGZc8ksv4vl9ecTa0qOTVaZMfwpk=",
+        "lastModified": 1753804749,
+        "narHash": "sha256-MybhEwsd4U5XO+ZqhZ5o9rV49cmuzR81zMGL+QWXA+A=",
         "owner": "naduki",
         "repo": "dots-hyprland",
-        "rev": "5312bcf4c563cc44e24d47fd4573bde132b995d3",
+        "rev": "cd068dc041d78868ac390fb6d477c7dfd423d34f",
         "type": "github"
       },
       "original": {
@@ -183,11 +183,11 @@
     },
     "stable": {
       "locked": {
-        "lastModified": 1753791875,
-        "narHash": "sha256-JKBRmJbOZ+XEJM/iziQZgBb+ROQtfCCHQvvKcfjyKpM=",
+        "lastModified": 1753802321,
+        "narHash": "sha256-5aNoXJymhDsOD/GB8/o86YYdhWIV8k8EjIEVxPwoUYQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "045d4002a8bebb5e728a07780b511db8f48ed0c8",
+        "rev": "e0edf257cee4b8eac64df41fba8a5f6bda13a225",
         "type": "github"
       },
       "original": {
