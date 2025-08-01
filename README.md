@@ -17,6 +17,7 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 In Home-manager, set `qt6.enable = true;`!
 
 ## TODO
+- [ ] Clock not displaying
 - [ ] Fix: VSCode symbolic link icons are missing
 
 ## Reference

@@ -18,32 +18,31 @@ in
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-switch = "nixos-rebuild switch --sudo --flake ${flakedir}#${names.user}@${names.host}";
-        os-boot   = "nixos-rebuild boot --sudo --flake ${flakedir}#${names.user}@${names.host}";
+        os-update = "nixos-rebuild --flake ${flakedir}#${names.user}@${names.host} --sudo ";
         os-test   = "nixos-rebuild test --flake ${flakedir}#${names.user}@${names.host}";
         os-vm     = "nixos-rebuild build-vm --flake ${flakedir}#${names.user}@${names.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
         os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
-        hm-switch = "home-manager switch --flake ${flakedir}#${names.user}";
+        hm-update = "home-manager --flake ${flakedir}#${names.user} ";
         hm-act    = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # standalone home-manager activation
 
-        nix-update = "nix flake update --flake ${flakedir} --commit-lock-file ";
+        nix-update = "nix flake update --flake ${flakedir} --commit-lock-file";
         xeyes = "nix run nixpkgs#xorg.xeyes";
         dconf-editor = "nix run nixpkgs#dconf-editor";
 
-        g   = "git";
+        g   = "git ";
         ga  = "git add .";
-        gb  = "git branch";
-        gc  = "git commit";
-        gp  = "git push";
-        gf  = "git fetch";
-        gs  = "git stash";
+        gb  = "git branch ";
+        gc  = "git commit ";
+        gp  = "git push ";
+        gf  = "git fetch ";
+        gs  = "git stash ";
         gg  = "git gc";
-        gac = "git add . && git commit";
-        gacp = "git add . && git commit && git push";
-        gco = "git checkout";
+        gac = "git add . && git commit ";
+        gacp = "git add . && git commit && git push ";
+        gco = "git checkout ";
 
         # neofetch = "nix run nixpkgs#neofetch";
         # pcs = "podman container start ";
