@@ -1,11 +1,11 @@
-{
-  imports = [ ../../extras/hypr_regreet.nix ];
+{ pkgs, ... }:{
+  # imports = [ ../../extras/hypr_regreet.nix ];
 
   # Hyprland Desktop Environment.
   programs.hyprland.enable = true;
 
   environment.systemPackages = [ ];
-
+ 
   hardware.bluetooth.enable = true;
 
   # Security
@@ -20,8 +20,18 @@
   # services
   services = {
     blueman.enable = true;
+    cinnamon.apps.enable = false;
     dbus.enable = true;
+
+    displayManager.ly.enable = true;
+
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
+    udisks2.enable = true;
+    libinput.enable = true;
+    xserver.updateDbusEnvironment = true;
   };
+
+  xdg.portal.enable = true;
+  xdg.portal.configPackages = [ pkgs.xdg-desktop-portal-hyprland ];
 }

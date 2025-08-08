@@ -18,15 +18,15 @@ in
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-update = "nixos-rebuild --flake ${flakedir}#${names.user}@${names.host} --sudo ";
-        os-test   = "nixos-rebuild test --flake ${flakedir}#${names.user}@${names.host}";
-        os-vm     = "nixos-rebuild build-vm --flake ${flakedir}#${names.user}@${names.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
+        os-upd  = "nixos-rebuild --flake ${flakedir}#${names.user}@${names.host} --sudo ";
+        os-test = "nixos-rebuild test --flake ${flakedir}#${names.user}@${names.host}";
+        os-vm   = "nixos-rebuild build-vm --flake ${flakedir}#${names.user}@${names.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
         os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
-        hm-update = "home-manager --flake ${flakedir}#${names.user} ";
-        hm-act    = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # standalone home-manager activation
+        hm-upd  = "home-manager --flake ${flakedir}#${names.user} ";
+        hm-act  = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # standalone home-manager activation
 
         nix-update = "nix flake update --flake ${flakedir} --commit-lock-file";
         xeyes = "nix run nixpkgs#xorg.xeyes";
@@ -94,13 +94,13 @@ in
     };
   };
   # .Xresourcesの中身 (Xtermの設定)
-  xresources.properties = {
-    "XTerm*termName" = "xterm-256color";
-    "XTerm*locale" = true;
-    "XTerm*selectToClipboard" = true;
-    "XTerm*saveLines" = 2000;
-    "XTerm*faceName" = "Moralerspace Radon HWNF Complete:size=14";
-    "XTerm*font" = "4x10";
-    "XTerm*reverseVideo" = "on";
-  };
+  # xresources.properties = {
+  #   "XTerm*termName" = "xterm-256color";
+  #   "XTerm*locale" = true;
+  #   "XTerm*selectToClipboard" = true;
+  #   "XTerm*saveLines" = 2000;
+  #   "XTerm*faceName" = "Moralerspace Radon HWNF Complete:size=14";
+  #   "XTerm*font" = "4x10";
+  #   "XTerm*reverseVideo" = "on";
+  # };
 }
