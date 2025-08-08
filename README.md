@@ -3,7 +3,7 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。  
 
 - Version : Unstable
-- Desktop : Hyprland + Quickshell ([end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/)) (under adjustment)
+- Desktop : Hyprland + Quickshell ([end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/)) (under adjustment) / Cinnamon
 - Editor : VSCode
 - Shell : Bash
 - Terminal: Wezterm
@@ -15,10 +15,6 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 
 ## Using illogical-impulse with NixOS(Home-manager) + Hyprland
 In Home-manager, set `qt6.enable = true;`!
-
-## TODO
-- [ ] Clock not displaying
-- [ ] Fix: VSCode symbolic link icons are missing
 
 ## Reference
 

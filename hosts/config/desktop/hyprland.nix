@@ -1,6 +1,4 @@
 { pkgs, ... }:{
-  # imports = [ ../../extras/hypr_regreet.nix ];
-
   # Hyprland Desktop Environment.
   programs.hyprland.enable = true;
 
@@ -19,19 +17,28 @@
 
   # services
   services = {
-    blueman.enable = true;
+    xserver.desktopManager.cinnamon.enable = true;
     cinnamon.apps.enable = false;
-    dbus.enable = true;
 
     displayManager.ly.enable = true;
 
+    blueman.enable = true;
+    dbus.enable = true;
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
-    udisks2.enable = true;
-    libinput.enable = true;
-    xserver.updateDbusEnvironment = true;
   };
 
-  xdg.portal.enable = true;
-  xdg.portal.configPackages = [ pkgs.xdg-desktop-portal-hyprland ];
+  environment.cinnamon.excludePackages = with pkgs; [
+    onboard
+    sound-theme-freedesktop
+    nixos-artwork.wallpapers.simple-dark-gray
+    mint-artwork
+    mint-cursor-themes
+    mint-l-icons
+    mint-l-theme
+    mint-themes
+    mint-x-icons
+    mint-y-icons
+    xapp
+  ];
 }

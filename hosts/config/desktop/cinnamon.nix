@@ -7,7 +7,7 @@
       enable = true;
       # Enable the Cinnamon Desktop Environment.
       displayManager.lightdm.enable = false;
-      desktopManager.cinnamon.enable = false;
+      desktopManager.cinnamon.enable = true;
     };
   };
   environment.cinnamon.excludePackages = [ pkgs.warpinator ];
