@@ -53,7 +53,7 @@ in {
     enable = true;
     iconTheme = {
       name = "Mint-Y-Cyan";
-      package = pkgs-stable.mint-y-icons;
+      # package = pkgs-stable.mint-y-icons;
     };
     theme = {
       name = "Colloid-Teal-Dark";
@@ -68,13 +68,14 @@ in {
     bulky
     celluloid
     file-roller
-    gnome-calculator
-    glib # for trash
-    nemo-with-extensions
+    # gnome-calculator
+    # glib # for trash
+    # nemo-with-extensions
     networkmanagerapplet
     polkit_gnome
-    xed-editor
     xviewer
+    xreader
+    xed-editor
 
     ## Screenshot
     # grim
@@ -115,7 +116,7 @@ in {
     kdePackages.qtwayland
     kdePackages.syntax-highlighting
   ] ++ (with pkgs; [ hyprsunset ]);
-  dbus.packages = [ pkgs-stable.nemo-with-extensions ];
+  # dbus.packages = [ pkgs-stable.nemo-with-extensions ];
   # Illogical Impulse's file links
   xdg.configFile = {
     "quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";

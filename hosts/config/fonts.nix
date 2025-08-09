@@ -2,7 +2,6 @@
 let
   google-fonts = (pkgs.google-fonts.override {
     fonts = [
-      "Noto Sans Symbols"   # for special characters
       "Klee One"
     ];
   });

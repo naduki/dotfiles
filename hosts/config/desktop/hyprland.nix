@@ -38,7 +38,6 @@
     mint-l-theme
     mint-themes
     mint-x-icons
-    mint-y-icons
     xapp
   ];
 }
