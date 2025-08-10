@@ -1,7 +1,5 @@
 { pkgs, ... }:
-let
-  code_v = pkgs.vscode.version;
-in {
+{
   programs.vscode = {
     # ELECTRON_OZONE_PLATFORM_HINT=wayland code --enable-features=WaylandTextInputV3 %F
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools kdePackages.qtdeclarative nixpkgs-fmt nil shellcheck-minimal ]);
@@ -124,7 +122,7 @@ in {
         donjayamanne.githistory
         christian-kohler.path-intellisense
       ]
-      ) ++ (with (pkgs.forVSCodeVersion "${code_v}").vscode-marketplace-release; [
+      ) ++ (with (pkgs.forVSCodeVersion "${pkgs.vscode.version}").vscode-marketplace-release; [
         # Copilot
         github.copilot
         github.copilot-chat

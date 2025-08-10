@@ -68,7 +68,6 @@ in {
     bulky
     celluloid
     file-roller
-    # gnome-calculator
     # glib # for trash
     # nemo-with-extensions
     networkmanagerapplet
@@ -86,13 +85,16 @@ in {
     slurp
     wf-recorder
 
-    wl-clipboard
     cliphist
     ddcutil
-    # swww
+    easyeffects
+    swww
     libqalculate # for searchwidget
     # matugen
+    pomodoro
     translate-shell # for left sidebar
+    wl-clipboard
+    wl-clip-persist
 
     # python
     (python3.withPackages (python-pkgs: [
@@ -126,7 +128,7 @@ in {
     "hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
     # "hypr/custom".source = "./hypr_custom";
-    # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "/home/${names.user}/.config/.dotfiles/hypr_custom";
+    # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/.dotfiles/hypr_custom";
   };
   home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
   # Additional icons

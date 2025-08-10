@@ -2,13 +2,13 @@
 {
   imports = [
     ./fonts.nix
-    ./packages.nix
-    ./programs.nix
-    ./xdg-user-dirs.nix
-    ./nvim.nix
-    ./vscode.nix
-    ./zed-editor.nix
     ./hyprland.nix
+    ./nvim.nix
+    ./programs.nix
+    ./vscode.nix
+    ./xdg-user-dirs.nix
+    # ./xresource.nix    
+    ./zed-editor.nix
   ];
 
   home = rec {
@@ -18,7 +18,6 @@
     stateVersion = "25.11";
     activation = {
       # ブラウザのキャッシュの格納場所をRAMにする
-      # ln -fns ${homeDirectory}/Pictures /home/game/KISS/COM3D2/ScreenShot
       makeSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run ln -fns /tmp ${homeDirectory}/.cache/BraveSoftware
       '';

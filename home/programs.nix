@@ -1,8 +1,19 @@
-{ names, pkgs-stable, ...}:
+{ names, config, pkgs-stable, ...}:
 let
-  flakedir = "/home/${names.user}/.config/.dotfiles";
+  flakeRoot = "${config.home.homeDirectory}/.config/.dotfiles";
 in
 {
+  home.packages = with pkgs-stable; [
+    (blender.override {
+      cudaSupport = true;
+    })
+    gemini-cli
+    # mission-center
+    # prismlauncher # minecraft alternative launcher
+    # unityhub
+    # virt-manager
+  ];
+
   programs = {
     # Editor
     neovim.enable = false;
@@ -13,22 +24,22 @@ in
       enable = true;
       shellAliases = {
         sudo = "sudo -k ";
-        flake = "cd ${flakedir}";
-        thmcl = "rm -r /home/${names.user}/.cache/thumbnails/*";
+        flake = "cd ${flakeRoot}";
+        thmcl = "rm -r ${config.home.homeDirectory}/.cache/thumbnails/*";
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-upd  = "nixos-rebuild --flake ${flakedir}#${names.user}@${names.host} --sudo ";
-        os-test = "nixos-rebuild test --flake ${flakedir}#${names.user}@${names.host}";
-        os-vm   = "nixos-rebuild build-vm --flake ${flakedir}#${names.user}@${names.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
+        os-upd  = "nixos-rebuild --flake ${flakeRoot}#${names.user}@${names.host} --sudo ";
+        os-test = "nixos-rebuild test --flake ${flakeRoot}#${names.user}@${names.host}";
+        os-vm   = "nixos-rebuild build-vm --flake ${flakeRoot}#${names.user}@${names.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
         os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
-        hm-upd  = "home-manager --flake ${flakedir}#${names.user} ";
-        hm-act  = "nix run flake:home-manager -- switch --flake ${flakedir}#${names.user}"; # standalone home-manager activation
+        hm-upd  = "home-manager --flake ${flakeRoot}#${names.user} ";
+        hm-act  = "nix run flake:home-manager -- switch --flake ${flakeRoot}#${names.user}"; # standalone home-manager activation
 
-        nix-update = "nix flake update --flake ${flakedir} --commit-lock-file";
+        nix-update = "nix flake update --flake ${flakeRoot} --commit-lock-file";
         xeyes = "nix run nixpkgs#xorg.xeyes";
         dconf-editor = "nix run nixpkgs#dconf-editor";
 
@@ -93,14 +104,5 @@ in
       extraConfig = builtins.readFile ./wezterm/wezterm.lua;
     };
   };
-  # .Xresourcesの中身 (Xtermの設定)
-  # xresources.properties = {
-  #   "XTerm*termName" = "xterm-256color";
-  #   "XTerm*locale" = true;
-  #   "XTerm*selectToClipboard" = true;
-  #   "XTerm*saveLines" = 2000;
-  #   "XTerm*faceName" = "Moralerspace Radon HWNF Complete:size=14";
-  #   "XTerm*font" = "4x10";
-  #   "XTerm*reverseVideo" = "on";
-  # };
+
 }
