@@ -6,15 +6,36 @@ let
   };
 in {
   programs = {
-    quickshell = {
-      enable = true;
-      package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    };
-    hyprlock.enable = true;
     chromium.commandLineArgs = [
       "--ozone-platform-hint=auto"
       "--enable-wayland-ime"
     ];
+    hyprlock.enable = true;
+    jq = { # for HyprlandData
+      enable = true;
+      package = pkgs-stable.jq;
+    };
+    quickshell = {
+      enable = true;
+      # package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    };
+  };
+
+  services = {
+    cliphist = {
+      enable = true;
+      package = pkgs-stable.cliphist;
+    };
+    easyeffects = {
+      enable = true;
+      package = pkgs-stable.easyeffects;
+    };
+    hypridle.enable = true;
+    hyprsunset.enable = true;
+    swww = {
+      enable = true;
+      package = pkgs-stable.swww;
+    };
   };
 
   wayland.windowManager.hyprland = {
@@ -46,15 +67,11 @@ in {
       source=~/.config/hypr/custom/keybinds.conf
     '';
   };
-  services.hypridle.enable = true;
 
   # Icons and themes
   gtk = {
     enable = true;
-    iconTheme = {
-      name = "Mint-Y-Cyan";
-      # package = pkgs-stable.mint-y-icons;
-    };
+    iconTheme.name = "Mint-Y-Cyan";
     theme = {
       name = "Colloid-Teal-Dark";
       package = colloid-gtk-theme;
@@ -63,62 +80,64 @@ in {
   # setting up QML2_IMPORT_PATH
   qt.enable = true;
 
-  home.packages = with pkgs-stable; [
-    # My packages
-    bulky
-    celluloid
-    file-roller
-    # glib # for trash
-    # nemo-with-extensions
-    networkmanagerapplet
-    polkit_gnome
-    xviewer
-    xreader
-    xed-editor
-
-    ## Screenshot
-    # grim
-    # swappy
-    imagemagick # _light not work
-    libnotify
-    hyprshot
-    slurp
-    wf-recorder
-
-    cliphist
-    ddcutil
-    easyeffects
-    swww
-    libqalculate # for searchwidget
-    # matugen
-    pomodoro
-    translate-shell # for left sidebar
-    wl-clipboard
-    wl-clip-persist
-
-    # python
-    (python3.withPackages (python-pkgs: [
-      python-pkgs.pywayland
-    ]))
-    # ...
-    jq # for HyprlandData
-    kdePackages.kdialog
-    kdePackages.qt5compat
-    kdePackages.qtbase
-    kdePackages.qtdeclarative
-    kdePackages.qtimageformats
-    kdePackages.qtmultimedia
-    kdePackages.qtpositioning
-    kdePackages.qtquicktimeline
-    kdePackages.qtsensors
-    kdePackages.qtsvg
-    kdePackages.qttools
-    kdePackages.qttranslations
-    kdePackages.qtvirtualkeyboard
-    kdePackages.qtwayland
-    kdePackages.syntax-highlighting
-  ] ++ (with pkgs; [ hyprsunset ]);
   # dbus.packages = [ pkgs-stable.nemo-with-extensions ];
+  home = {
+    # Additional icons
+    file = {
+      ".local/share/icons/Mint-Y/apps/48@2x".source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
+    };
+    sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
+    packages = with pkgs-stable; [
+      # My packages
+      bulky
+      celluloid
+      file-roller
+      # glib # for trash
+      # nemo-with-extensions
+      networkmanagerapplet
+      polkit_gnome
+      xviewer
+      xreader
+      xed-editor
+
+      ## Screenshot
+      # grim
+      # swappy
+      imagemagick # _light not work
+      libnotify
+      hyprshot
+      slurp
+      wf-recorder
+
+      ddcutil
+      libqalculate # for searchwidget
+      # matugen
+      pomodoro
+      translate-shell # for left sidebar
+      wl-clipboard
+
+      # python
+      (python3.withPackages (python-pkgs: [
+        python-pkgs.pywayland
+      ]))
+      # ...
+      kdePackages.kdialog
+      kdePackages.qt5compat
+      kdePackages.qtbase
+      kdePackages.qtdeclarative
+      kdePackages.qtimageformats
+      kdePackages.qtmultimedia
+      kdePackages.qtpositioning
+      kdePackages.qtquicktimeline
+      kdePackages.qtsensors
+      kdePackages.qtsvg
+      kdePackages.qttools
+      kdePackages.qttranslations
+      kdePackages.qtvirtualkeyboard
+      kdePackages.qtwayland
+      kdePackages.syntax-highlighting
+    ];
+  };
   # Illogical Impulse's file links
   xdg.configFile = {
     "quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
@@ -129,12 +148,5 @@ in {
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
     # "hypr/custom".source = "./hypr_custom";
     # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/.dotfiles/hypr_custom";
-  };
-  home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
-  # Additional icons
-  home.file = {
-    ".local/share/icons/Mint-Y/apps/48@2x" ={
-      source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
-    };
   };
 }

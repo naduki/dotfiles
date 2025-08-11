@@ -28,19 +28,18 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "package";
     };
-    # Quickshell
-    quickshell = {
-      # add ?ref=<tag> to track a tag
-      # url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      url = "github:quickshell-mirror/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # Hyprland and Quickshell base configuration
     illogical-impulse-dotfiles = {
       # url = "github:end-4/dots-hyprland/38c76fe86b74a6ec01e9ddaa4c2240ca032b8ae0";
       url = "github:naduki/dots-hyprland/my_nixos";
       flake = false;
     };
+    # Quickshell
+    # quickshell = {
+    #   # url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    #   url = "github:quickshell-mirror/quickshell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
