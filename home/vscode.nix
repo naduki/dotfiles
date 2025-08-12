@@ -3,7 +3,7 @@
   programs.vscode = {
     # ELECTRON_OZONE_PLATFORM_HINT=wayland code --enable-features=WaylandTextInputV3 %F
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools kdePackages.qtdeclarative nixpkgs-fmt nil shellcheck-minimal ]);
-    # Copilot Remote-SSH を使わないなら VSCodium でも OK
+    # If you don't use Copilot or Remote-SSH, you can also use VSCodium.
     # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
     profiles.default = {
       enableUpdateCheck = false;
@@ -70,15 +70,15 @@
         ];
 
         "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
-        "files.associations".".envrc" = "plaintext";  # shellcheckが反応しないようにする
+        "files.associations".".envrc" = "plaintext";  # Prevent shellcheck from triggering on .envrc files
 
-        "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
-        "qt-core.additionalQtPaths" = [
-          {
-            "name" = "Qt Paths";
-            "path" = "/home/naduki/.nix-profile/bin/qtpaths";
-          }
-        ];
+        # "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
+        # "qt-core.additionalQtPaths" = [
+        #   {
+        #     "name" = "Qt Paths";
+        #     "path" = "/home/naduki/.nix-profile/bin/qtpaths";
+        #   }
+        # ];
 
         "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
         "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
@@ -91,7 +91,6 @@
         ms-ceintl.vscode-language-pack-ja
 
         # Theme & flair
-        # pkief.material-icon-theme
         # sazumiviki.kawaine-theme
         pmndrs.pmndrs
         cdonohue.quill-icons
@@ -101,7 +100,7 @@
         llvm-vs-code-extensions.vscode-clangd
 
         # AI
-        # saoudrizwan.claude-dev
+        # saoudrizwan.claude-dev  # Cline
         # google.geminicodeassist
 
         # Nix
@@ -111,8 +110,8 @@
         # sumneko.lua
 
         # Qt QML (Quickshell)
-        theqtcompany.qt-core
-        theqtcompany.qt-qml
+        # theqtcompany.qt-core
+        # theqtcompany.qt-qml
 
         # Misc
         # hediet.vscode-drawio
@@ -134,7 +133,7 @@
         # ms-vscode-remote.remote-ssh
       ]
       # ) ++ (with pkgs.vscode-extensions; [
-      #   # C/C++ | nix-vscode-extensions では導入できないので
+      #   # C/C++ | It cannot be installed with nix-vscode-extensions, so if necessary
       #   ms-vscode.cpptools
       # ]
       );

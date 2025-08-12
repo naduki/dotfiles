@@ -37,7 +37,7 @@ in {
       package = pkgs-stable.swww;
     };
   };
-
+  # Hyprland configuration
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -88,7 +88,7 @@ in {
     };
     sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
     packages = with pkgs-stable; [
-      # My packages
+      ## My packages
       bulky
       celluloid
       file-roller
@@ -103,12 +103,18 @@ in {
       ## Screenshot
       # grim
       # swappy
-      imagemagick # _light not work
+      imagemagick ## _light not work
       libnotify
       hyprshot
       slurp
       wf-recorder
 
+      ## Python
+      (python3.withPackages (python-pkgs: [
+        python-pkgs.pywayland
+      ]))
+
+      ## etc ...
       ddcutil
       libqalculate # for searchwidget
       # matugen
@@ -116,11 +122,7 @@ in {
       translate-shell # for left sidebar
       wl-clipboard
 
-      # python
-      (python3.withPackages (python-pkgs: [
-        python-pkgs.pywayland
-      ]))
-      # ...
+      ## Quickshell
       kdePackages.kdialog
       kdePackages.qt5compat
       kdePackages.qtbase

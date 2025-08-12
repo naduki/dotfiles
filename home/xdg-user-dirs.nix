@@ -1,7 +1,7 @@
 {
   xdg = {
     enable = true;
-    # ディレクトリ名が日本語にならないようにする
+    # Ensure user directories use English names instead of localized names
     userDirs = {
       enable = true;
       createDirectories = true;

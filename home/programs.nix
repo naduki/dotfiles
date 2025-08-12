@@ -99,8 +99,6 @@ in
     htop.enable = true;
     wezterm = {
       enable = true;
-      # package = pkgs.wezterm;
-      # バージョンアップとかで挙動が変わったら無効化して~/.config/wezterm/wezterm.luaでデバッグ
       extraConfig = builtins.readFile ./wezterm/wezterm.lua;
     };
   };

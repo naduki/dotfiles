@@ -1,5 +1,5 @@
 # https://github.com/vimjoyer/nvim-nix-video
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, ... }:
 {
   programs.neovim =
     let
@@ -12,7 +12,7 @@
       vimAlias = true;
       vimdiffAlias = true;
 
-      withNodeJs = true;  # for copilot
+      withNodeJs = true; # for copilot
       withRuby = false;
       withPython3 = false;
 
@@ -27,35 +27,31 @@
         # kotlin-language-server
       ];
 
-      plugins = with pkgs-stable.vimPlugins; [
-        # {
-        #   plugin = nvim-lspconfig;
-        #   config = toLuaFile ./nvim/plugin/lsp.lua;
-        # }
-        # コメントアウト
+      plugins = with pkgs.vimPlugins; [
+        # Comment support
         {
           plugin = comment-nvim;
           config = toLua "require(\"Comment\").setup()";
         }
-        # Theme
+        # Color theme
         {
           plugin = poimandres-nvim;
           config = "colorscheme poimandres";
         }
-        # 補完候補
+        # Autocompletion
         {
           plugin = nvim-cmp;
           config = toLuaFile ./nvim/plugin/cmp.lua;
         }
         cmp_luasnip
         cmp-nvim-lsp
-        # 検索
+        # Fuzzy finder
         {
           plugin = telescope-nvim;
           config = toLuaFile ./nvim/plugin/telescope.lua;
         }
         telescope-fzf-native-nvim
-        # コードのハイライト
+        # Syntax highlighting
         {
           plugin = (nvim-treesitter.withPlugins (p: [
             p.tree-sitter-bash
@@ -67,26 +63,26 @@
           ]));
           config = toLuaFile ./nvim/plugin/treesitter.lua;
         }
-        # ステータスライン
+        # Status line
         {
           plugin = lualine-nvim;
           config = toLuaFile ./nvim/plugin/lualine.lua;
         }
         lsp-progress-nvim
         nvim-web-devicons
-        # Copilot
+        # GitHub Copilot
         {
           plugin = copilot-lua;
           config = toLuaFile ./nvim/plugin/copilot_lua.lua;
         }
         copilot-cmp
         copilot-lualine
-        # スニペット
+        # Code snippets
         luasnip
         friendly-snippets
-        # ファイラ
+        # File explorer
         neo-tree-nvim
-        # Nix
+        # Nix language support
         vim-nix
       ];
 

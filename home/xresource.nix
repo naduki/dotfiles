@@ -1,5 +1,5 @@
 {
-  # .Xresourcesの中身 (Xtermの設定)
+  # XTerm configuration via .Xresources
   xresources.properties = {
     "XTerm*termName" = "xterm-256color";
     "XTerm*locale" = true;

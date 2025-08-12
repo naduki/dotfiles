@@ -12,17 +12,21 @@
   ];
 
   home = rec {
-    # recでAttribute Set内で他の値を参照できるようにする
     username = "${names.user}";
-    homeDirectory = "/home/${username}"; # 文字列に値を埋め込む
+    homeDirectory = "/home/${username}";
     stateVersion = "25.11";
     activation = {
-      # ブラウザのキャッシュの格納場所をRAMにする
-      makeSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      # Make Brave's cache directory a symlink to /tmp
+      makeBraveSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run ln -fns /tmp ${homeDirectory}/.cache/BraveSoftware
       '';
+      # Create a symbolic link for Hyprland's custom directory
+      makeHyprSymbolic = lib.hm.dag.entryAfter [ "makeBraveSymbolic" ] ''
+        run ln -fns ${homeDirectory}/.config/.dotfiles/home/hypr_custom ${homeDirectory}/.config/hypr/custom
+      '';
+      ## This is effectively an --impure state
     };
   };
-  news.display = "silent"; # home-manager news の通知が switch 時に無くなる
-  programs.home-manager.enable = true; # home-manager自身でhome-managerを有効化
+  news.display = "silent";  # Disable home-manager news notifications on switch
+  programs.home-manager.enable = true;  # Enable home-manager itself
 }
