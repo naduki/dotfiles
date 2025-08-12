@@ -1,9 +1,7 @@
-# {pkgs, ...}:
 {
   services = {
     # X11 settings
     xserver = {
-      # excludePackages = [ pkgs.xterm ];
       # GPU Driver
       videoDrivers = [ "nvidia" ];
       # Configure keymap in X11

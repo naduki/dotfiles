@@ -1,7 +1,6 @@
 {
   imports = [
     ./security.nix
-    # ./hypr_regreet.nix
     # ./virtualisation.nix
     # ./xremap.nix
   ];
@@ -11,7 +10,7 @@
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {
-      memorySize =  2048; # Use 2048MiB memory.
+      memorySize = 2048;
       cores = 2;
     };         
   };
