@@ -3,8 +3,8 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。  
 
 - Version : Unstable
-- Desktop : Hyprland + Quickshell ([end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/)) (under adjustment) / Cinnamon
-- Editor : VSCode
+- Desktop : Hyprland + Quickshell ([end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/)) / Cinnamon
+- Editor : VSCode / Neovim
 - Shell : Bash
 - Terminal: Wezterm
 - Browser : Brave
