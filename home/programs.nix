@@ -16,7 +16,7 @@ in
 
   programs = {
     # Editor
-    neovim.enable = false;
+    neovim.enable = true;
     vscode.enable = true;
     zed-editor.enable = false;
     # Shell

@@ -126,12 +126,12 @@
         github.copilot
         github.copilot-chat
       ]
-      ) ++ (with pkgs.vscode-marketplace-release; [
-        # Rust
-        rust-lang.rust-analyzer
-        # Misc
-        # ms-vscode-remote.remote-ssh
-      ]
+      # ) ++ (with pkgs.vscode-marketplace-release; [
+      #   # Rust
+      #   rust-lang.rust-analyzer
+      #   # Misc
+      #   # ms-vscode-remote.remote-ssh
+      # ]
       # ) ++ (with pkgs.vscode-extensions; [
       #   # C/C++ | It cannot be installed with nix-vscode-extensions, so if necessary
       #   ms-vscode.cpptools

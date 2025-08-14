@@ -20,10 +20,11 @@
         bash-language-server
         clang-tools
         fd # for telescope
+        # kdePackages.qtdeclarative
         nil
         shellcheck-minimal
         ripgrep # for telescope
-        rust-analyzer
+        # rust-analyzerss
         # kotlin-language-server
       ];
 
