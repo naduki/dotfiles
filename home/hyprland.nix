@@ -110,8 +110,8 @@ in {
       wf-recorder
 
       ## Python
-      (python3.withPackages (python-pkgs: [
-        python-pkgs.pywayland
+      (python3.withPackages (ps: with ps; [
+        pywayland
       ]))
 
       ## etc ...

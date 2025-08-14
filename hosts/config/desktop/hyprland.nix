@@ -8,7 +8,10 @@
     # Disable Cinnamon apps
     cinnamon.apps.enable = false;
     # Enable ly display manager
-    displayManager.ly.enable = true;
+    displayManager.ly = {
+      enable = true;
+      x11Support = false; # Use Wayland only
+    };
   };
   # Enable Hyprlock to unlock from Home-manager
   security.pam.services.hyprlock = {};
@@ -26,7 +29,9 @@
       mint-themes
       mint-x-icons
     ];
-    # systemPackages = [ ];
+    systemPackages = with pkgs; [
+      rose-pine-cursor
+    ];
   };
 
   # Enable these if services.xserver.desktopManager.cinnamon.enable is false

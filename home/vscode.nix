@@ -2,7 +2,7 @@
 {
   programs.vscode = {
     # ELECTRON_OZONE_PLATFORM_HINT=wayland code --enable-features=WaylandTextInputV3 %F
-    package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools kdePackages.qtdeclarative nixpkgs-fmt nil shellcheck-minimal ]);
+    package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools nixpkgs-fmt nil shellcheck-minimal ]);
     # If you don't use Copilot or Remote-SSH, you can also use VSCodium.
     # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
     profiles.default = {
