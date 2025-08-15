@@ -114,6 +114,10 @@ in {
         pywayland
       ]))
 
+      ## Switchwall
+      bc
+      # xdg-user-dirs
+
       ## etc ...
       ddcutil
       libqalculate # for searchwidget
@@ -148,7 +152,6 @@ in {
     "hypr/shaders".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/shaders";
     "hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
-    # "hypr/custom".source = "./hypr_custom";
     # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/.dotfiles/hypr_custom";
   };
 }

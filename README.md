@@ -11,7 +11,7 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 
 ![desktop_environment](./desktop.png "Current Hyprland Desktop")
 
-- Cinnamon is installed to enable gcr-prompter for private key unlocking and Change wallpaper functionality.
+- Cinnamon is installed to Gsetting schema.
 
 - Some scripts (especially Python) are not working due to missing required packages.
 

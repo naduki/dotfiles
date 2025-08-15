@@ -1,11 +1,5 @@
 { pkgs, ... }:
-let
-  google-fonts = (pkgs.google-fonts.override {
-    fonts = [
-      "Klee One"
-    ];
-  });
-in {
+{
   fonts = {
     fontDir.enable = true;
     # use fonts specified by user rather than default ones
@@ -14,6 +8,7 @@ in {
       # fallback fonts
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
+      dejavu_fonts
       # emoji, icon fonts
       noto-fonts-monochrome-emoji
       noto-fonts-color-emoji
@@ -21,6 +16,11 @@ in {
       # default fonts
       lxgw-wenkai
       moralerspace-hwnf
-    ] ++ [ google-fonts ];
+      (google-fonts.override {
+        fonts = [
+          "Klee One"
+        ];
+      })
+    ];
   };
 }
