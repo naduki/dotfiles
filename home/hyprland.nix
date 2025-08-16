@@ -1,4 +1,4 @@
-{ inputs, pkgs-stable, pkgs, ... }:
+{ config, inputs, pkgs-stable, pkgs, ... }:
 let
   colloid-gtk-theme = pkgs-stable.colloid-gtk-theme.override {
     colorVariants = [ "dark" ];
@@ -71,7 +71,10 @@ in {
   # Icons and themes
   gtk = {
     enable = true;
-    iconTheme.name = "Mint-Y-Cyan";
+    iconTheme = {
+      name = "Mint-Y-Cyan";
+      package = pkgs-stable.mint-y-icons;
+    };
     theme = {
       name = "Colloid-Teal-Dark";
       package = colloid-gtk-theme;
@@ -80,20 +83,23 @@ in {
   # setting up QML2_IMPORT_PATH
   qt.enable = true;
 
-  # dbus.packages = [ pkgs-stable.nemo-with-extensions ];
+  dbus.packages = [ pkgs-stable.nemo-with-extensions ];
   home = {
     # Additional icons
     file = {
       ".local/share/icons/Mint-Y/apps/48@2x".source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
     };
-    sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
+    sessionVariables = {
+      NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";   # for gsettings schemas
+      ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv"; 
+    };
     packages = with pkgs-stable; [
       ## My packages
       bulky
       celluloid
       file-roller
-      # glib # for trash
-      # nemo-with-extensions
+      glib # for trash
+      nemo-with-extensions
       networkmanagerapplet
       polkit_gnome
       xviewer
@@ -103,7 +109,7 @@ in {
       ## Screenshot
       # grim
       # swappy
-      imagemagick ## _light not work
+      imagemagick ## _light not work (need image format support)
       libnotify
       hyprshot
       slurp
@@ -115,8 +121,8 @@ in {
       ]))
 
       ## Switchwall
-      bc
-      # xdg-user-dirs
+      bc 
+      xdg-user-dirs
 
       ## etc ...
       ddcutil
@@ -152,6 +158,10 @@ in {
     "hypr/shaders".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/shaders";
     "hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
+    "kwalletrc".text = ''
+      [Wallet]
+      Enabled=false
+    '';
     # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/.dotfiles/hypr_custom";
   };
 }
