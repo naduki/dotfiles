@@ -24,7 +24,7 @@
         nil
         shellcheck-minimal
         ripgrep # for telescope
-        # rust-analyzerss
+        rust-analyzer
         # kotlin-language-server
       ];
 
