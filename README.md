@@ -17,7 +17,8 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 In Home-manager, set `qt6.enable = true;`!
 
 ## TODO
-- Fix privilege escalation in Nemo
+- Fix privilege escalation in Nemo 
+- After Suspend/wake, logout and re-login makes the system unusable (probably due to nvidia settings)
 
 ## Reference
 
