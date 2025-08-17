@@ -1,10 +1,37 @@
 { config, inputs, pkgs-stable, pkgs, ... }:
-let
-  colloid-gtk-theme = pkgs-stable.colloid-gtk-theme.override {
-    colorVariants = [ "dark" ];
-    themeVariants = [ "teal" ];
+{
+  # Hyprland configuration
+  wayland.windowManager.hyprland = {
+    enable = true;
+
+    plugins = with pkgs.hyprlandPlugins;[ hyprexpo ];
+
+    settings = {
+      "$qsConfig" = "ii";
+      exec-once = [
+        "${pkgs-stable.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+        "hyprctl dispatch submap global"
+      ];
+      submap = "global";
+    };
+
+    extraConfig = ''
+      # Defaults
+      source=~/.config/hypr/hyprland/general.conf
+      source=~/.config/hypr/hyprland/rules.conf
+      source=~/.config/hypr/hyprland/colors.conf
+      source=~/.config/hypr/hyprland/keybinds.conf
+
+      # Custom 
+      source=~/.config/hypr/custom/env.conf
+      source=~/.config/hypr/custom/execs.conf
+      source=~/.config/hypr/custom/general.conf
+      source=~/.config/hypr/custom/rules.conf
+      source=~/.config/hypr/custom/keybinds.conf
+    '';
   };
-in {
+  # setting up QML2_IMPORT_PATH
+  qt.enable = true;
   programs = {
     chromium.commandLineArgs = [
       "--ozone-platform-hint=auto"
@@ -20,7 +47,6 @@ in {
       # package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
   };
-
   services = {
     cliphist = {
       enable = true;
@@ -37,52 +63,6 @@ in {
       package = pkgs-stable.swww;
     };
   };
-  # Hyprland configuration
-  wayland.windowManager.hyprland = {
-    enable = true;
-
-    plugins = with pkgs.hyprlandPlugins;[ hyprexpo ];
-
-    settings = {
-      exec-once = [
-        "${pkgs-stable.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-        "hyprctl dispatch submap global"
-      ];
-      submap = "global";
-    };
-
-    extraConfig = ''
-      $qsConfig = ii
-      # Defaults
-      source=~/.config/hypr/hyprland/general.conf
-      source=~/.config/hypr/hyprland/rules.conf
-      source=~/.config/hypr/hyprland/colors.conf
-      source=~/.config/hypr/hyprland/keybinds.conf
-
-      # Custom 
-      source=~/.config/hypr/custom/env.conf
-      source=~/.config/hypr/custom/execs.conf
-      source=~/.config/hypr/custom/general.conf
-      source=~/.config/hypr/custom/rules.conf
-      source=~/.config/hypr/custom/keybinds.conf
-    '';
-  };
-
-  # Icons and themes
-  gtk = {
-    enable = true;
-    iconTheme = {
-      name = "Mint-Y-Cyan";
-      package = pkgs-stable.mint-y-icons;
-    };
-    theme = {
-      name = "Colloid-Teal-Dark";
-      package = colloid-gtk-theme;
-    };
-  };
-  # setting up QML2_IMPORT_PATH
-  qt.enable = true;
-
   dbus.packages = [ pkgs-stable.nemo-with-extensions ];
   home = {
     # Additional icons
@@ -106,7 +86,6 @@ in {
       glib # for trash
       nemo-with-extensions
       networkmanagerapplet
-      # polkit_gnome
       xviewer
       xreader
       xed-editor
@@ -122,7 +101,17 @@ in {
 
       ## Python
       (python3.withPackages (ps: with ps; [
+        # build
+        # kde-material-you-colors
+        # libsass
+        # materialyoucolor
+        # material-color-utilities
+        # pillow
+        # psutil
         pywayland
+        # setproctitle
+        # setuptools-scm
+        # wheel
       ]))
 
       ## Switchwall
@@ -159,6 +148,7 @@ in {
   # Illogical Impulse's file links
   xdg.configFile = {
     "quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
+    "matugen/templates/kde/kde-material-you-colors-wrapper.sh".source = "${inputs.illogical-impulse-dotfiles}/.config/matugen/templates/kde/kde-material-you-colors-wrapper.sh";
     "hypr/hyprland".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprland";
     "hypr/hyprlock".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock";
     "hypr/shaders".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/shaders";

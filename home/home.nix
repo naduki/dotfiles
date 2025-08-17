@@ -2,6 +2,7 @@
 {
   imports = [
     ./fonts.nix
+    ./gtk-theme.nix
     ./hyprland.nix
     ./nvim.nix
     ./programs.nix

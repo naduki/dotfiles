@@ -94,6 +94,7 @@ in
     };
     floorp = {
       enable = false;
+      package = pkgs-stable.floorp;
       languagePacks = [ "ja" ];
     };
     htop.enable = true;

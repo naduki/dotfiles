@@ -16,7 +16,7 @@ config.font = wezterm.font_with_fallback {
     -- BuiltIn
     "JetBrains Mono", "Noto Color Emoji", "Symbols Nerd Font Mono"
 }
--- XWaylandで動かす Cinnamon Waylandで面倒なことになってるので
+-- Waylandで動かす
 config.enable_wayland = true
 -- フォントサイズ
 config.font_size = 13.0
@@ -85,6 +85,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         bash = wezterm.nerdfonts.dev_terminal,
         -- ssh  = wezterm.nerdfonts.mdi_server,
         top  = wezterm.nerdfonts.mdi_monitor,
+        htop  = wezterm.nerdfonts.mdi_monitor,
         git  = wezterm.nerdfonts.dev_git,
         nix  = wezterm.nerdfonts.md_nix,
         nano = wezterm.nerdfonts.md_note_edit,
