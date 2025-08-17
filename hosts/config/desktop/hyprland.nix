@@ -1,13 +1,11 @@
 { config, lib, pkgs, ... }:{
   # Enable Hyprland desktop environment.
   programs.hyprland.enable = true;
-  # Enable ly display manager
-  services.displayManager.ly = {
-    enable = true;
-    x11Support = false; # Use Wayland only
-  };
   # Enable Hyprlock to unlock from Home-manager
   security.pam.services.hyprlock = {};
+  # Fix Suspend/wakeup issues with Hyprland
+  # Because this uses open drivers, this may not resolve the issue.
+  hardware.nvidia.powerManagement.enable = true;
 
   environment.systemPackages = with pkgs; [
     # kitty   # If you don't have a terminal, be sure to install it

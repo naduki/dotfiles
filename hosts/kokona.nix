@@ -7,10 +7,16 @@
   ];
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11" "nvidia-persistenced" # "nvidia-settings"
-    "steam" "steam-original" "steam-unwrapped" "steam-run"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg: let
+    inherit (lib) getName optionals;
+    name = getName pkg;
+
+    allowed = []  # Add package names to always allow in this list
+      ++ optionals (lib.lists.elem "nvidia" config.services.xserver.videoDrivers) [ "nvidia-x11" ]  # When using the NVIDIA driver
+      ++ optionals (config.hardware.nvidia.nvidiaSettings.enable or false) [ "nvidia-settings" ]
+      # ++ optionals (config.hardware.nvidia.modesetting.enable or false) [ "nvidia-persistenced" ]
+      ++ optionals (config.programs.steam.enable or false) [ "steam" "steam-original" "steam-unwrapped" "steam-run" ];
+  in builtins.elem name allowed;
 
   networking = {
     hostName = "${names.host}";
@@ -18,6 +24,15 @@
     networkmanager.enable = true;
     # Enable L2TP VPN
     # networkmanager.plugins = [ pkgs.networkmanager-l2tp ];
+  };
+  # Install steam
+  programs.steam.enable = true;
+
+  services = {
+    # GPU Driver
+    xserver.videoDrivers = [ "nvidia" ];
+    # File system trim
+    fstrim.enable = true;
   };
 
   # user settings
@@ -38,9 +53,6 @@
     # pkgs.wineWowPackages.wayland
     # pkgs.floorp
   ];
-
-  # Install steam
-  programs.steam.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

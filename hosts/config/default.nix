@@ -9,7 +9,6 @@
     ./ime.nix
     ./locale.nix
     ./nix.nix
-    ./services.nix
     ./sound.nix
   ];
 }
