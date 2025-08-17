@@ -18,7 +18,7 @@ In Home-manager, set `qt6.enable = true;`!
 
 ## TODO
 - Fix privilege escalation in Nemo 
-- After Suspend/wake, logout and re-login makes the system unusable (probably due to nvidia settings)
+- After resuming from suspend, the monitor displays nothing. It's unclear whether other TTYs are still operational (likely caused by nvidia driver issues)
 
 ## Reference
 
