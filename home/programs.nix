@@ -62,7 +62,7 @@ in
         # pck = "podman container stop ";
       };
       historyIgnore = [
-        # historyに記録されなくなる
+        # Commands not recorded in history
         "ls"
         "cd"
         "alias"
@@ -70,8 +70,8 @@ in
         "flake"
         "top"
       ];
-      # shellの初期化のときに実行される(X11,Waylandが動いてないときに日本語じゃないようにする)
-      initExtra = ''(tty|fgrep -q 'tty') && export LANG=C'';
+      # Executed during shell initialization (set LANG=C on ttys other than /dev/tty1 used to launch Hyprland)
+      initExtra = ''[ "$(tty)" != "/dev/tty1" ] && export LANG=C'';
     };
     chromium = {
       enable = true;
@@ -88,7 +88,7 @@ in
       extraConfig.init.defaultBranch = "main";
       signing = {
         format = "ssh";
-        key = "/home/${names.user}/.ssh/id_ed25519.pub";
+        key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
         signByDefault = true;
       };
     };

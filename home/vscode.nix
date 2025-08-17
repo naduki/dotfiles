@@ -122,7 +122,7 @@
         christian-kohler.path-intellisense
       ]
       ## Not working currently, use this when fixed
-      # ) ++ (with (pkgs.forVSCodeVersion "${pkgs.vscode.version}").vscode-marketplace; [
+      # ) ++ (with (pkgs.forVSCodeVersion "${pkgs.vscode.version}").vscode-marketplace-release; [
       #   # Copilot
       #   github.copilot
       #   github.copilot-chat

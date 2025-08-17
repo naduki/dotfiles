@@ -90,7 +90,12 @@ in {
       ".local/share/icons/Mint-Y/apps/48@2x".source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
     };
     sessionVariables = {
-      NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";   # for gsettings schemas
+      # Prevents "No GSettings schemas are installed on the system" error in kdialog
+      # Disable when using Cinnamon
+      NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
+      # Python virtual environment path
+      # No longer used with fork, so setting is optional,
+      # but if not set, required packages must be added to home.packages for proper operation
       ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv"; 
     };
     packages = with pkgs-stable; [
@@ -101,7 +106,7 @@ in {
       glib # for trash
       nemo-with-extensions
       networkmanagerapplet
-      polkit_gnome
+      # polkit_gnome
       xviewer
       xreader
       xed-editor
@@ -121,7 +126,8 @@ in {
       ]))
 
       ## Switchwall
-      bc 
+      bc
+      # mpvpaper
       xdg-user-dirs
 
       ## etc ...
