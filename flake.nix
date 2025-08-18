@@ -97,7 +97,7 @@
                 inherit system;
                 config.allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
                   "code" "vscode" # "vscode-extensions.ms-vscode.cpptools"
-                  "vscode-extension-github-copilot" "vscode-extension-github-copilot-chat"
+                  "vscode-extension-github-copilot"
                 ]; # Allow unfree packages
                 overlays = [
                   # ( import ./home/codium_overlay.nix )

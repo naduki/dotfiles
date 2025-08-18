@@ -121,15 +121,15 @@
         donjayamanne.githistory
         christian-kohler.path-intellisense
       ]
-      ## Not working currently, use this when fixed
-      # ) ++ (with (pkgs.forVSCodeVersion "${pkgs.vscode.version}").vscode-marketplace-release; [
-      #   # Copilot
-      #   github.copilot
-      #   github.copilot-chat
-      # ]
-      ) ++ (with pkgs.vscode-marketplace-release; [
+      ) ++ (with (pkgs.forVSCodeVersion "${pkgs.vscode.version}").vscode-marketplace-release; [
         # Copilot
         github.copilot
+        ## Cannot be installed because engineversion contains a date
+        # github.copilot-chat
+      ]
+      ) ++ (with pkgs.vscode-marketplace-release; [
+        # Copilot
+        # github.copilot
         github.copilot-chat
         # Rust
         rust-lang.rust-analyzer
