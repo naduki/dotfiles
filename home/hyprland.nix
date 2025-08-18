@@ -38,6 +38,7 @@
       "--enable-wayland-ime"
     ];
     hyprlock.enable = true;
+    hyprshot.enable = true;
     jq = { # for HyprlandData
       enable = true;
       package = pkgs-stable.jq;
@@ -95,7 +96,6 @@
       # swappy
       imagemagick ## _light not work (need image format support)
       libnotify
-      hyprshot
       slurp
       wf-recorder
 

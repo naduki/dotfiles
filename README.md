@@ -16,10 +16,6 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 ## Using illogical-impulse with NixOS(Home-manager) + Hyprland
 In Home-manager, set `qt6.enable = true;`!
 
-## TODO
-- Fix privilege escalation in Nemo 
-- After resuming from suspend, the monitor displays nothing. It's unclear whether other TTYs are still operational (likely caused by nvidia driver issues)
-
 ## Reference
 
 - [NixOS で最強の Linux デスクトップを作ろう](https://zenn.dev/asa1984/articles/nixos-is-the-best)
