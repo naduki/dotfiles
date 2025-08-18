@@ -70,12 +70,12 @@ in
         "flake"
         "top"
       ];
-      # Executed during shell initialization (set LANG=C on ttys other than /dev/tty1 used to launch Hyprland)
+      # Set LANG=C on virtual consoles except /dev/tty1
       initExtra = ''
         ttydev="$(tty 2>/dev/null || true)"
         case "$ttydev" in
-          /dev/tty1) ;;    # Hyprland 起動用: 変更しない
-          /dev/tty[2-9]|/dev/tty[1-9][0-9]*) export LANG=C ;;  # 物理コンソールのみ
+          /dev/tty1) ;;    # Used for Hyprland startup: do not change
+          /dev/tty[2-9]|/dev/tty[1-9][0-9]*) export LANG=C ;;  # Virtual consoles only
         esac
       '';
     };
