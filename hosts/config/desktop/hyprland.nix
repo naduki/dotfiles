@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }:{
+{ config, lib, ... }:
+{
   # Enable Hyprland desktop environment.
   programs.hyprland.enable = true;
   # Enable Hyprlock to unlock from Home-manager
@@ -7,9 +8,8 @@
   # Because this uses open drivers, this may not resolve the issue.
   hardware.nvidia.powerManagement.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    # kitty   # If you don't have a terminal, be sure to install it
-    rose-pine-cursor
+  environment.systemPackages = [
+    # pkgs.kitty   # If you don't have a terminal, be sure to install it
   ];
 
   # Enable these if services.xserver.desktopManager.cinnamon.enable is false
