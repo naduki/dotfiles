@@ -71,7 +71,13 @@ in
         "top"
       ];
       # Executed during shell initialization (set LANG=C on ttys other than /dev/tty1 used to launch Hyprland)
-      initExtra = ''[ "$(tty)" != "/dev/tty1" ] && export LANG=C'';
+      initExtra = ''
+        ttydev="$(tty 2>/dev/null || true)"
+        case "$ttydev" in
+          /dev/tty1) ;;    # Hyprland 起動用: 変更しない
+          /dev/tty[2-9]|/dev/tty[1-9][0-9]*) export LANG=C ;;  # 物理コンソールのみ
+        esac
+      '';
     };
     chromium = {
       enable = true;
