@@ -1,7 +1,4 @@
-{ names, config, pkgs-stable, ...}:
-let
-  flakeRoot = "${config.home.homeDirectory}/.config/.dotfiles";
-in
+{ config, lib, myconf, pkgs-stable, ...}:
 {
   home.packages = with pkgs-stable; [
     (blender.override {
@@ -24,22 +21,22 @@ in
       enable = true;
       shellAliases = {
         sudo = "sudo -k ";
-        flake = "cd ${flakeRoot}";
+        flake = "cd ${myconf.flakeRoot}";
         thmcl = "rm -r ${config.home.homeDirectory}/.cache/thumbnails/*";
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-upd  = "nixos-rebuild --flake ${flakeRoot}#${names.user}@${names.host} --sudo ";
-        os-test = "nixos-rebuild test --flake ${flakeRoot}#${names.user}@${names.host}";
-        os-vm   = "nixos-rebuild build-vm --flake ${flakeRoot}#${names.user}@${names.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
+        os-upd  = "nixos-rebuild --flake ${myconf.flakeRoot}#${myconf.user}@${myconf.host} --sudo ";
+        os-test = "nixos-rebuild test --flake ${myconf.flakeRoot}#${myconf.user}@${myconf.host}";
+        os-vm   = "nixos-rebuild build-vm --flake ${myconf.flakeRoot}#${myconf.user}@${myconf.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
         os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
-        hm-upd  = "home-manager --flake ${flakeRoot}#${names.user} ";
-        hm-act  = "nix run flake:home-manager -- switch --flake ${flakeRoot}#${names.user}"; # standalone home-manager activation
+        hm-upd  = "home-manager --flake ${myconf.flakeRoot}#${myconf.user} ";
+        hm-act  = "nix run flake:home-manager -- switch --flake ${myconf.flakeRoot}#${myconf.user}"; # standalone home-manager activation
 
-        nix-update = "nix flake update --flake ${flakeRoot} --commit-lock-file";
+        nix-update = "nix flake update --flake ${myconf.flakeRoot} --commit-lock-file";
         xeyes = "nix run nixpkgs#xorg.xeyes";
         dconf-editor = "nix run nixpkgs#dconf-editor";
 
@@ -54,6 +51,8 @@ in
         gac = "git add . && git commit ";
         gacp = "git add . && git commit && git push ";
         gco = "git checkout ";
+
+
 
         # neofetch = "nix run nixpkgs#neofetch";
         # pcs = "podman container start ";
@@ -70,18 +69,18 @@ in
         "flake"
         "top"
       ];
-      # Set LANG=C on virtual consoles except /dev/tty1
-      initExtra = ''
-        ttydev="$(tty 2>/dev/null || true)"
-        case "$ttydev" in
-          /dev/tty1) ;;    # Used for Hyprland startup: do not change
-          /dev/tty[2-9]|/dev/tty[1-9][0-9]*) export LANG=C ;;  # Virtual consoles only
-        esac
+      # Set LANG=C on virtual consoles
+      initExtra = lib.mkDefault ''
+        [ -z "$DISPLAY" ] && export LANG=C
       '';
     };
     chromium = {
       enable = true;
       package = pkgs-stable.brave;
+      # commandLineArgs = [
+      #   "--ozone-platform-hint=auto"
+      #   "--enable-wayland-ime"
+      # ];
     };
     direnv = {
       enable = true;
@@ -106,7 +105,7 @@ in
     htop.enable = true;
     wezterm = {
       enable = true;
-      extraConfig = builtins.readFile ./wezterm/wezterm.lua;
+      extraConfig = builtins.readFile ../../../config/wezterm/wezterm.lua;
     };
   };
 

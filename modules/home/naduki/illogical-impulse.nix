@@ -2,8 +2,6 @@
 {
   # Hyprland configuration
   wayland.windowManager.hyprland = {
-    enable = true;
-
     plugins = with pkgs.hyprlandPlugins;[ hyprexpo ];
 
     settings = {
@@ -33,10 +31,9 @@
   # setting up QML2_IMPORT_PATH
   qt.enable = true;
   programs = {
-    chromium.commandLineArgs = [
-      "--ozone-platform-hint=auto"
-      "--enable-wayland-ime"
-    ];
+    bash.initExtra = ''
+      [ -z "$DISPLAY" ] && { [ "''${XDG_VTNR:-0}" -eq 1 ] && exec Hyprland >"$HOME/.hyprland.log" 2>&1 || export LANG=C; }
+    '';
     hyprlock.enable = true;
     hyprshot.enable = true;
     jq = { # for HyprlandData

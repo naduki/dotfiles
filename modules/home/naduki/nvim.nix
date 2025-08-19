@@ -5,6 +5,7 @@
     let
       toLua = str: "lua << EOF\n${str}\nEOF\n";
       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+      myconfigDir = "../../../config/nvim";
     in
     {
       # package = pkgs-stable.neovim;
@@ -42,14 +43,14 @@
         # Autocompletion
         {
           plugin = nvim-cmp;
-          config = toLuaFile ./nvim/plugin/cmp.lua;
+          config = toLuaFile ./${myconfigDir}/plugin/cmp.lua;
         }
         cmp_luasnip
         cmp-nvim-lsp
         # Fuzzy finder
         {
           plugin = telescope-nvim;
-          config = toLuaFile ./nvim/plugin/telescope.lua;
+          config = toLuaFile ./${myconfigDir}/plugin/telescope.lua;
         }
         telescope-fzf-native-nvim
         # Syntax highlighting
@@ -62,19 +63,19 @@
             p.tree-sitter-nix
             p.tree-sitter-rust
           ]));
-          config = toLuaFile ./nvim/plugin/treesitter.lua;
+          config = toLuaFile ./${myconfigDir}/plugin/treesitter.lua;
         }
         # Status line
         {
           plugin = lualine-nvim;
-          config = toLuaFile ./nvim/plugin/lualine.lua;
+          config = toLuaFile ./${myconfigDir}/plugin/lualine.lua;
         }
         lsp-progress-nvim
         nvim-web-devicons
         # GitHub Copilot
         {
           plugin = copilot-lua;
-          config = toLuaFile ./nvim/plugin/copilot_lua.lua;
+          config = toLuaFile ./${myconfigDir}/plugin/copilot_lua.lua;
         }
         copilot-cmp
         copilot-lualine
@@ -88,7 +89,7 @@
       ];
 
       extraLuaConfig = ''
-        ${builtins.readFile ./nvim/options.lua}
+        ${builtins.readFile ./${myconfigDir}/options.lua}
       '';
     };
 }

@@ -15,4 +15,12 @@
       LC_TIME = "ja_JP.UTF-8";
     };
   };
+
+  location = {
+    # Japan ( use redshift )
+    latitude = 33.2;
+    longitude = 133.1;
+  };
+  # Set your time zone.
+  time.timeZone = "Asia/Tokyo";
 }

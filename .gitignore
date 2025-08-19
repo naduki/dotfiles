@@ -5,11 +5,10 @@
 
 ### not ignore ###
 !/.gitignore
-!/README.md
-!/hardware-configuration.nix
-!/home/
-!/hosts/
-!/shells/
+!/config/
+!/modules/
 !/desktop.png
-!/flake.nix
+!/README.md
 !/flake.lock
+!/flake.nix
+!/hardware-configuration.nix

@@ -1,9 +1,7 @@
-{ config, lib, names, ... }:
+{ config, lib, myconf, ... }:
 {
   imports = [
-    ./config
-    ./extras
-    ../hardware-configuration.nix
+    ./${myconf.host}
   ];
 
   # Allow unfree packages
@@ -19,7 +17,7 @@
   in builtins.elem name allowed;
 
   networking = {
-    hostName = "${names.host}";
+    hostName = "${myconf.host}";
     # Enable networking
     networkmanager.enable = true;
     # Enable L2TP VPN
@@ -34,12 +32,16 @@
     # File system trim
     fstrim.enable = true;
   };
-
+  # Enable Sudo-rs
+  security = {
+    sudo-rs.enable = true;
+    sudo.enable = lib.mkForce (!(config.security.sudo-rs.enable));
+  };
   # user settings
-  users.users.${names.user} = {
+  users.users.${myconf.user} = {
     isNormalUser = true;
     initialHashedPassword = "$y$j9T$DvGj7T6HlYCo2M4jtp5ZK1$ykxX0xXUjLvz.7ZEKx/tXIo7hEOJY6MYJoEhI/Dud2.";
-    description = "${names.user}_nixos";
+    description = "${myconf.user}_nixos";
     extraGroups = [ "networkmanager" "wheel" ]
       # Additional Groups
       ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"  # KVM and QEMU rootless

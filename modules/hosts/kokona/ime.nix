@@ -8,9 +8,9 @@
       {
         catppuccin-fcitx5 =
           let
-            withRoundedCorners = true;
             pallet = "mocha";
             color = "teal";
+            withRoundedCorners = final.withRoundedCorners or prev.withRoundedCorners;
           in
           prev.catppuccin-fcitx5.overrideAttrs (old: {
             installPhase =

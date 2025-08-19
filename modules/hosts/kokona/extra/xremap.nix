@@ -1,9 +1,9 @@
-{ inputs, ... }:
+{ inputs, myconf, ... }:
 {
   imports = [ inputs.xremap.nixosModules.default ];
   # xremap setting
   services.xremap = {
-    userName = "kokona";
+    userName = "${myconf.host}";
     serviceMode = "system";
     config = {
       keymap = [
