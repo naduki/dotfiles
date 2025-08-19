@@ -52,8 +52,6 @@
         gacp = "git add . && git commit && git push ";
         gco = "git checkout ";
 
-
-
         # neofetch = "nix run nixpkgs#neofetch";
         # pcs = "podman container start ";
         # pce = "podman container exec -it ";
@@ -77,6 +75,7 @@
     chromium = {
       enable = true;
       package = pkgs-stable.brave;
+      # if use wayland, enable the options
       # commandLineArgs = [
       #   "--ozone-platform-hint=auto"
       #   "--enable-wayland-ime"
