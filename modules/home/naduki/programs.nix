@@ -21,22 +21,22 @@
       enable = true;
       shellAliases = {
         sudo = "sudo -k ";
-        flake = "cd ${myconf.flakeRoot}";
+        flake = "cd ${config.home.homeDirectory}/${myconf.flakeRoot}";
         thmcl = "rm -r ${config.home.homeDirectory}/.cache/thumbnails/*";
         dur = "du --max-depth=1 -h | sort -hr";
         # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
 
-        os-upd  = "nixos-rebuild --flake ${myconf.flakeRoot}#${myconf.user}@${myconf.host} --sudo ";
-        os-test = "nixos-rebuild test --flake ${myconf.flakeRoot}#${myconf.user}@${myconf.host}";
-        os-vm   = "nixos-rebuild build-vm --flake ${myconf.flakeRoot}#${myconf.user}@${myconf.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
+        os-upd  = "nixos-rebuild --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user}@${myconf.host} --sudo ";
+        os-test = "nixos-rebuild test --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user}@${myconf.host}";
+        os-vm   = "nixos-rebuild build-vm --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user}@${myconf.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
         # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
         os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
-        hm-upd  = "home-manager --flake ${myconf.flakeRoot}#${myconf.user} ";
-        hm-act  = "nix run flake:home-manager -- switch --flake ${myconf.flakeRoot}#${myconf.user}"; # standalone home-manager activation
+        hm-upd  = "home-manager --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user} ";
+        hm-act  = "nix run flake:home-manager -- switch --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user}"; # standalone home-manager activation
 
-        nix-update = "nix flake update --flake ${myconf.flakeRoot} --commit-lock-file";
+        nix-update = "nix flake update --flake ${config.home.homeDirectory}/${myconf.flakeRoot} --commit-lock-file";
         xeyes = "nix run nixpkgs#xorg.xeyes";
         dconf-editor = "nix run nixpkgs#dconf-editor";
 

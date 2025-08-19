@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, myconf, pkgs, ... }:
 {
   # Enable Hyprland desktop environment.
   programs.hyprland.enable = true;
@@ -36,5 +36,27 @@
     dbus.enable = true;
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
+  };
+  # xdg.portal
+  # From the import condition of this file, when the WM is only Hyprland, the number of elements in myconf.desktop is 1
+  xdg.portal = lib.mkIf (builtins.length myconf.environment == 1) {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-xapp
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      hyprland = {
+        default = [
+          "hyprland"
+          "xapp"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+    };
   };
 }

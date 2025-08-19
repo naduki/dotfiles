@@ -1,4 +1,4 @@
-{ config, inputs, pkgs-stable, pkgs, ... }:
+{ config, inputs, lib, myconf, pkgs-stable, pkgs, ... }:
 {
   # Hyprland configuration
   wayland.windowManager.hyprland = {
@@ -31,6 +31,7 @@
   # setting up QML2_IMPORT_PATH
   qt.enable = true;
   programs = {
+    # Automatically start Hyprland on tty1. If it fails or is run on another virtual terminal, set LANG=C.
     bash.initExtra = ''
       [ -z "$DISPLAY" ] && { [ "''${XDG_VTNR:-0}" -eq 1 ] && exec Hyprland >"$HOME/.hyprland.log" 2>&1 || export LANG=C; }
     '';
@@ -68,13 +69,13 @@
       ".local/share/icons/Mint-Y/apps/48@2x".source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
     };
     sessionVariables = {
-      # Prevents "No GSettings schemas are installed on the system" error in kdialog
-      # Disable when using Cinnamon
-      NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
       # Python virtual environment path
       # No longer used with fork, so setting is optional,
       # but if not set, required packages must be added to home.packages for proper operation
       ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv"; 
+    } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
+      # Prevents "No GSettings schemas are installed on the system" error in kdialog
+      NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
     };
     packages = with pkgs-stable; [
       ## My packages

@@ -10,7 +10,7 @@
           let
             pallet = "mocha";
             color = "teal";
-            withRoundedCorners = final.withRoundedCorners or prev.withRoundedCorners;
+            withRoundedCorners = final.withRoundedCorners or prev.lib.withRoundedCorners or true;
           in
           prev.catppuccin-fcitx5.overrideAttrs (old: {
             installPhase =
