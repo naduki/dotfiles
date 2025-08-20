@@ -1,4 +1,5 @@
 { inputs, ... }: {
+  # nix devshells
   perSystem = { system, ... }:
     let
       pkgs = import inputs.package {
@@ -7,6 +8,7 @@
         overlays = [ inputs.rust-overlay.overlays.default ];
       };
     in {
+      # nix develop <flakeDir>#<name>
       devShells = {
         default = import ./shells/shell.nix { inherit pkgs; };
         cuda    = import ./shells/environments/cuda/shell.nix { inherit pkgs; };

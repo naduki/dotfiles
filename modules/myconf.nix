@@ -1,5 +1,5 @@
 {
-  # /home/$USERからのflake.nixがあるディレクトリの相対パス
+  # Relative path (from /home/$USER) to the directory containing flake.nix
   flakeRoot = ".config/.dotfiles";
   # Username
   user = "naduki";
@@ -9,7 +9,6 @@
   environment = [ 
     # "cinnamon"
     "Hyprland"
-    # "wsl"
   ];
   # other settings
   xremap = false;

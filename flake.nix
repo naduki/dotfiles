@@ -36,7 +36,6 @@
     };
     # Quickshell
     # quickshell = {
-    #   # url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
     #   url = "github:quickshell-mirror/quickshell";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
@@ -57,7 +56,8 @@
     #   url = "github:xremap/nix-flake";
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.home-manager.follows = "home-manager";
-    #   # devshell hyprland flake-parts crane treefmt-nix
+    #   inputs.flake-parts.follows = "flake-parts";
+    #   # devshell hyprland crane treefmt-nix
     # };
   };
 
@@ -68,8 +68,8 @@
         # 1. Add foo to inputs
         # 2. Add foo as a parameter to the outputs function
         # 3. Add here: foo.flakeModule
-        ./modules/home-manager.nix
         ./modules/devshells.nix
+        ./modules/home-manager.nix
         ./modules/nixos-configs.nix
       ];
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];

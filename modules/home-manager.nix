@@ -1,30 +1,27 @@
 { inputs, ... }:
 let
   myconf = import ./myconf.nix;
-in {
+in
+{
   perSystem = { system, ... }: {
-    legacyPackages.homeConfigurations =
-      let
-        pkgs-stable = import inputs.stable {
-          inherit system;
-          config.allowUnfreePredicate = pkg: builtins.elem (inputs.stable.lib.getName pkg) [
-            "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl"
-          ];
-        };
-      in {
-        ${myconf.user} = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = import inputs.nixpkgs {
+    # Home-manager Standalone Setting
+    legacyPackages.homeConfigurations = {
+      ${myconf.user} = inputs.home-manager.lib.homeManagerConfiguration {
+        # Use unstable packages by default
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = {
+          inherit inputs myconf;
+          # Pass stable package set with alias for use
+          pkgs-stable = import inputs.stable {
             inherit system;
-            config.allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
-              "code" "vscode" "vscode-extension-github-copilot"
-            ];
-            overlays = [
-              inputs.nix-vscode-extensions.overlays.default
+            config.allowUnfreePredicate = pkg: builtins.elem (inputs.stable.lib.getName pkg) [
+              # Allow Blender CUDA
+              "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl"
             ];
           };
-          extraSpecialArgs = { inherit inputs myconf pkgs-stable; };
-          modules = [ ./home/home.nix ];
         };
+        modules = [ ./home/home.nix ];
       };
+    };
   };
 }

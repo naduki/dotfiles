@@ -1,5 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  # nixpkgs.overlays / allowUnfreePredicate を設定
+  nixpkgs = {
+    overlays = [ inputs.nix-vscode-extensions.overlays.default ];
+    config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+      "code" "vscode" "vscode-extension-github-copilot"
+    ];
+  };
+
   programs.vscode = {
     # ELECTRON_OZONE_PLATFORM_HINT=wayland code --enable-features=WaylandTextInputV3 %F
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools nixpkgs-fmt nil shellcheck-minimal ]);
