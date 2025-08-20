@@ -41,6 +41,7 @@
       enable = true;
       package = pkgs-stable.jq;
     };
+    micro.package = lib.mkForce pkgs-stable.micro-with-wl-clipboard;
     quickshell = {
       enable = true;
       # package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;

@@ -1,16 +1,18 @@
 { config, lib, myconf, pkgs-stable, ...}:
 {
-  home.packages = with pkgs-stable; [
-    (blender.override {
-      cudaSupport = true;
-    })
-    gemini-cli
-    # mission-center
-    # prismlauncher # minecraft alternative launcher
-    # unityhub
-    # virt-manager
-  ];
-
+  home = {
+    packages = with pkgs-stable; [
+      (blender.override {
+        cudaSupport = true;
+      })
+      gemini-cli
+      # mission-center
+      # prismlauncher # minecraft alternative launcher
+      # unityhub
+      # virt-manager
+    ];
+    sessionVariables.EDITOR = "micro";
+  };
   programs = {
     # Editor
     neovim.enable = true;
@@ -102,10 +104,13 @@
       languagePacks = [ "ja" ];
     };
     htop.enable = true;
+    micro = {
+      enable = true;
+      package = lib.mkDefault pkgs-stable.micro;
+    };
     wezterm = {
       enable = true;
       extraConfig = builtins.readFile ../../../config/wezterm/wezterm.lua;
     };
   };
-
 }
