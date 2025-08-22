@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 {
-  # nixpkgs.overlays / allowUnfreePredicate を設定
+  # nixpkgs.overlays / allowUnfreePredicate Settings
   nixpkgs = {
     overlays = [ inputs.nix-vscode-extensions.overlays.default ];
     config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
@@ -9,7 +9,6 @@
   };
 
   programs.vscode = {
-    # ELECTRON_OZONE_PLATFORM_HINT=wayland code --enable-features=WaylandTextInputV3 %F
     package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools nixpkgs-fmt nil shellcheck-minimal ]);
     # If you don't use Copilot or Remote-SSH, you can also use VSCodium.
     # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
@@ -136,8 +135,7 @@
         # github.copilot-chat
       ]
       ) ++ (with pkgs.vscode-marketplace-release; [
-        # Copilot
-        # github.copilot
+        # Copilot-chat
         github.copilot-chat
         # Rust
         rust-lang.rust-analyzer
