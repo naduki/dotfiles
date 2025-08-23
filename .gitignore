@@ -7,6 +7,7 @@
 !/.gitignore
 !/config/
 !/modules/
+!/update.sh
 !/desktop.png
 !/README.md
 !/flake.lock
