@@ -6,7 +6,6 @@
         cudaSupport = true;
       })
       gemini-cli
-      # mission-center
       # prismlauncher # minecraft alternative launcher
       # unityhub
       # virt-manager
@@ -23,24 +22,17 @@
       enable = true;
       shellAliases = {
         sudo = "sudo -k ";
-        flake = "cd ${config.home.homeDirectory}/${myconf.flakeRoot}";
         thmcl = "rm -r ${config.home.homeDirectory}/.cache/thumbnails/*";
         dur = "du --max-depth=1 -h | sort -hr";
-        # wine32 = "env WINEPREFIX=$WINE32_HOME WINEARCH=win32 wine ";
-
-        os-upd  = "nixos-rebuild --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user}@${myconf.host} --sudo ";
-        os-test = "nixos-rebuild test --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user}@${myconf.host}";
-        os-vm   = "nixos-rebuild build-vm --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user}@${myconf.host}";  # QEMU_OPTS="-display gtk" ./result/bin/run-\*-vm
-        # os-listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations"; # old (not nix-command)
+        
+        nix-update = "nix-shell -p newt --command 'bash ${config.home.homeDirectory}/${myconf.flakeRoot}/update.sh'";
         os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
-        hm-upd  = "home-manager --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user} ";
-        hm-act  = "nix run flake:home-manager -- switch --flake ${config.home.homeDirectory}/${myconf.flakeRoot}#${myconf.user}"; # standalone home-manager activation
-
-        nix-update = "nix flake update --flake ${config.home.homeDirectory}/${myconf.flakeRoot} --commit-lock-file";
         xeyes = "nix run nixpkgs#xorg.xeyes";
         dconf-editor = "nix run nixpkgs#dconf-editor";
+        # neofetch = "nix run nixpkgs#neofetch";
+        # mission-center = "nix run nixpkgs#mission-center";
 
         g   = "git ";
         ga  = "git add .";
@@ -54,7 +46,6 @@
         gacp = "git add . && git commit && git push ";
         gco = "git checkout ";
 
-        # neofetch = "nix run nixpkgs#neofetch";
         # pcs = "podman container start ";
         # pce = "podman container exec -it ";
         # pceu = "podman container exec -itu ";
@@ -66,8 +57,6 @@
         "cd"
         "alias"
         "exit"
-        "flake"
-        "top"
       ];
       # Set LANG=C on virtual consoles
       initExtra = lib.mkDefault ''
@@ -77,11 +66,6 @@
     chromium = {
       enable = true;
       package = pkgs-stable.brave;
-      # if use wayland, enable the options
-      # commandLineArgs = [
-      #   "--ozone-platform-hint=auto"
-      #   "--enable-wayland-ime"
-      # ];
     };
     direnv = {
       enable = true;
