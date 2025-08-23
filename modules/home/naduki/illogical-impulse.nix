@@ -59,7 +59,7 @@
     hypridle.enable = true;
     hyprsunset.enable = true;
     swww = {
-      enable = true;
+      enable = false;
       package = pkgs-stable.swww;
     };
   };
