@@ -6,8 +6,6 @@
         "Klee One"
         "LXGW WenKai Light"
         "Noto Sans CJK JP"
-        "Material Symbols Rounded"
-        "Noto Sans Symbols"
       ];
       serif = [
         "Klee One"
