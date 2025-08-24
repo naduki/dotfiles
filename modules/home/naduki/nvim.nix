@@ -55,13 +55,13 @@
         telescope-fzf-native-nvim
         # Syntax highlighting
         {
-          plugin = (nvim-treesitter.withPlugins (p: [
-            p.tree-sitter-bash
-            p.tree-sitter-cuda
-            p.tree-sitter-lua
-            p.tree-sitter-make
-            p.tree-sitter-nix
-            p.tree-sitter-rust
+          plugin = (nvim-treesitter.withPlugins (p: with p; [
+            tree-sitter-bash
+            tree-sitter-cuda
+            tree-sitter-lua
+            tree-sitter-make
+            tree-sitter-nix
+            tree-sitter-rust
           ]));
           config = toLuaFile ./${myconfigDir}/plugin/treesitter.lua;
         }

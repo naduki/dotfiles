@@ -2,7 +2,7 @@
 {
   # Hyprland configuration
   wayland.windowManager.hyprland = {
-    plugins = with pkgs.hyprlandPlugins;[ hyprexpo ];
+    plugins = with pkgs.hyprlandPlugins; [ hyprexpo ];
 
     settings = {
       "$qsConfig" = "ii";
@@ -20,7 +20,7 @@
       source=~/.config/hypr/hyprland/colors.conf
       source=~/.config/hypr/hyprland/keybinds.conf
 
-      # Custom 
+      # Custom
       source=~/.config/hypr/custom/env.conf
       source=~/.config/hypr/custom/execs.conf
       source=~/.config/hypr/custom/general.conf
@@ -73,7 +73,7 @@
       # Python virtual environment path
       # No longer used with fork, so setting is optional,
       # but if not set, required packages must be added to home.packages for proper operation
-      ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv"; 
+      ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv";
     } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
       # Prevents "No GSettings schemas are installed on the system" error in kdialog
       NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";

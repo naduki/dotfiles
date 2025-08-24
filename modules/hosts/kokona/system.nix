@@ -15,10 +15,10 @@
     '';
   };
   # Enable NixOS rebuildng command
-  system.rebuild.enableNg = true; 
+  system.rebuild.enableNg = true;
   # following configuration is added only when building VM with build-vm
   virtualisation.vmVariant.virtualisation = {
     memorySize = 2048;
-    cores = 2;         
+    cores = 2;
   };
 }
