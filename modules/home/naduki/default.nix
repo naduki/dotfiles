@@ -8,7 +8,8 @@
     ./xdg-user-dirs.nix
     ./zed-editor.nix
   ]
-  ++ lib.optional (builtins.elem "cinnamon" (myconf.environment or [ ])) "./xresource.nix"
+  ++ lib.optional myconf.enablePodman ./podman.nix
+  ++ lib.optional (builtins.elem "cinnamon" (myconf.environment or [ ])) ./xresource.nix
   ++ (lib.optionals (builtins.elem "Hyprland" (myconf.environment or [ ])) [
     ./gtk-theme.nix
     ./illogical-impulse.nix

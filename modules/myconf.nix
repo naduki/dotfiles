@@ -12,7 +12,7 @@
   ];
   # other settings
   # Enable Podman in Home-manager
-  enablePodman = false;
+  enablePodman = true;
   # Enable Xremap
   enableXremap = false;
 }
