@@ -23,6 +23,7 @@ usage() {
   echo " -hm  Update Home-manager"
   close "$1"
 }
+ttyclear() { [ -z "$DISPLAY" ] && clear; }
 # NixOS update function
 nixos(){
   # Select arguments to pass to nixos-rebuild with whiptail
@@ -32,6 +33,7 @@ nixos(){
     "test"   "Test the new configuration" \
     "build-vm" "Build and launch a VM image" \
     3>&1 1>&2 2>&3) || canceled
+  ttyclear
   # Execute process according to mode
   case "$MODE" in
     (switch)
@@ -57,6 +59,7 @@ home(){
     "switch" "Switch to the new configuration" \
     "build"  "Build the new configuration" \
     3>&1 1>&2 2>&3) || canceled
+  ttyclear
   # Execute process according to mode
   case "$MODE" in
     (activate)
@@ -84,6 +87,7 @@ cd "$(dirname "$0")" || close 1
 # Check if flake.nix exists, otherwise input directory with whiptail
 if [ ! -f "flake.nix" ]; then
   DIR=$(whiptail --title "Flake Directory" --inputbox "Enter the directory containing flake.nix:" 10 60 3>&1 1>&2 2>&3) || canceled
+  ttyclear
   cd "$DIR" || close 2
 fi
 # Infinite loop
@@ -96,7 +100,8 @@ while true; do
       "os" "Update NixOS" \
       "hm" "Update Home-manager standalone" \
       "q"  "Quit" \
-      3>&1 1>&2 2>&3) || canceled
+      --clear 3>&1 1>&2 2>&3) || canceled
+    ttyclear
     LOOP_FLAG=true
   else
     # If arguments exist, remove hyphen and set mode
