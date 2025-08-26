@@ -8,7 +8,7 @@
   # Enable Hyprland desktop environment.
   programs.hyprland.enable = true;
   # Enable Hyprlock to unlock from Home-manager
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
   # Fix Suspend/wakeup issues with Hyprland
   hardware.nvidia.powerManagement.enable = (lib.lists.elem "nvidia" config.services.xserver.videoDrivers);
 

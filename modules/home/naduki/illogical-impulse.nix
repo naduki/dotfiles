@@ -37,7 +37,8 @@
     '';
     hyprlock.enable = true;
     hyprshot.enable = true;
-    jq = { # for HyprlandData
+    jq = {
+      # for HyprlandData
       enable = true;
       package = pkgs-stable.jq;
     };

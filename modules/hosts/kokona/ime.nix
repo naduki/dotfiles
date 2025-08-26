@@ -3,7 +3,7 @@
   nixpkgs.overlays = [
     (final: prev:
       let
-        lib = final.lib or prev.lib; # lib を束縛
+        lib = final.lib or prev.lib;
       in
       {
         catppuccin-fcitx5 =
