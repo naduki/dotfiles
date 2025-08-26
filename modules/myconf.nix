@@ -1,15 +1,18 @@
 {
   # Relative path (from /home/$USER) to the directory containing flake.nix
   flakeRoot = ".config/.dotfiles";
-  # Username
-  user = "naduki";
   # Hostname
   host = "kokona";
+  # Username
+  user = "naduki";
   # environments
   environment = [ 
     # "cinnamon"
     "Hyprland"
   ];
   # other settings
-  xremap = false;
+  # Enable Podman in Home-manager
+  enablePodman = false;
+  # Enable Xremap
+  enableXremap = false;
 }

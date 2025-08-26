@@ -1,23 +1,22 @@
-{ config, pkgs, ... }:
+{ config, lib, myconf, pkgs, ... }:
+let
+  EnableNvidia = (lib.lists.elem "nvidia" config.services.xserver.videoDrivers);
+in
 {
   virtualisation = {
     # KVM/QEMU host settings
     libvirtd = {
       enable = false;
       qemu = {
-        # Enable TPM for Windows 11
-        swtpm.enable = (config.virtualisation.libvirtd.enable);
         # Enable UEFI support
         ovmf = {
           enable = (config.virtualisation.libvirtd.enable);
           packages = [ pkgs.OVMFFull.fd ];
         };
+        # Enable TPM for Windows 11
+        swtpm.enable = (config.virtualisation.libvirtd.enable);
       };
     };
-    # Enable Podman container runtime
-    podman.enable = false;
-    # Waydroid
-    # waydroid.enable = false;
     # Incus settings - GPU passthrough not configured yet
     incus = {
       enable = false;
@@ -27,14 +26,14 @@
   };
   # KVM/QEMU extra packages
   environment.systemPackages = with pkgs; if config.virtualisation.libvirtd.enable then
-  [
-    win-spice # Enable USB support for Windows guests in KVM/QEMU
-    virtio-win
-  ]
+    [
+      win-spice # Enable USB support for Windows guests in KVM/QEMU
+      virtio-win
+    ]
   else [ ];
   # Container GPU acceleration
   hardware.nvidia-container-toolkit = {
-    enable = (config.virtualisation.podman.enable);
+    enable = (EnableNvidia && (myconf.enablePodman || config.virtualisation.incus.enable));
     # mounts = [ nvidia.com/gpu=0 ];
   };
 
@@ -43,6 +42,6 @@
     # libvirtd works better with iptables
     # Note: Incus can potentially cover both Docker and KVM/QEMU use cases
     nftables.enable = (config.virtualisation.incus.enable);
-    firewall.trustedInterfaces = if config.virtualisation.incus.enable then [ "incusbr0" ] else [];
+    firewall.trustedInterfaces = if config.virtualisation.incus.enable then [ "incusbr0" ] else [ ];
   };
 }
