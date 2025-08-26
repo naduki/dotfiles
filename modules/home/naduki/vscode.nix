@@ -79,14 +79,6 @@
         "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
         "files.associations".".envrc" = "plaintext";  # Prevent shellcheck from triggering on .envrc files
 
-        # "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
-        # "qt-core.additionalQtPaths" = [
-        #   {
-        #     "name" = "Qt Paths";
-        #     "path" = "/home/naduki/.nix-profile/bin/qtpaths";
-        #   }
-        # ];
-
         "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
         "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
         "[cpp]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
@@ -112,13 +104,6 @@
 
         # Nix
         jnoortheen.nix-ide
-
-        # Lua
-        # sumneko.lua
-
-        # Qt QML (Quickshell)
-        # theqtcompany.qt-core
-        # theqtcompany.qt-qml
 
         # Misc
         # hediet.vscode-drawio

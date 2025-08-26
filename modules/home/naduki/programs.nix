@@ -1,4 +1,4 @@
-{ config, lib, myconf, pkgs-stable, ...}:
+{ config, lib, myconf, pkgs-stable, ... }:
 {
   home = {
     packages = with pkgs-stable; [
@@ -24,32 +24,24 @@
         sudo = "sudo -k ";
         thmcl = "rm -r ${config.home.homeDirectory}/.cache/thumbnails/*";
         dur = "du --max-depth=1 -h | sort -hr";
-        
+
         nix-update = "nix-shell -p newt --command 'bash ${config.home.homeDirectory}/${myconf.flakeRoot}/update.sh'";
-        os-list  = "nix profile history --profile /nix/var/nix/profiles/system";
-        os-wipe  = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
+        os-list = "nix profile history --profile /nix/var/nix/profiles/system";
+        os-wipe = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
         xeyes = "nix run nixpkgs#xorg.xeyes";
         dconf-editor = "nix run nixpkgs#dconf-editor";
         # neofetch = "nix run nixpkgs#neofetch";
         # mission-center = "nix run nixpkgs#mission-center";
 
-        g   = "git ";
-        ga  = "git add .";
-        gb  = "git branch ";
-        gc  = "git commit ";
-        gp  = "git push ";
-        gf  = "git fetch ";
-        gs  = "git stash ";
-        gg  = "git gc";
+        ga = "git add .";
+        gb = "git branch ";
+        gc = "git commit ";
+        gp = "git push ";
+        gf = "git fetch ";
+        gs = "git stash ";
+        gg = "git gc";
         gac = "git add . && git commit ";
-        gacp = "git add . && git commit && git push ";
-        gco = "git checkout ";
-
-        # pcs = "podman container start ";
-        # pce = "podman container exec -it ";
-        # pceu = "podman container exec -itu ";
-        # pck = "podman container stop ";
       };
       historyIgnore = [
         # Commands not recorded in history
