@@ -25,7 +25,7 @@
         thmcl = "rm -r ${config.home.homeDirectory}/.cache/thumbnails/*";
         dur = "du --max-depth=1 -h | sort -hr";
 
-        nix-update = "nix-shell -p newt --command 'bash ${config.home.homeDirectory}/${myconf.flakeRoot}/update.sh'";
+        nix-update = "nix-shell -p newt --command 'bash ${myconf.flakeRoot}/update.sh'";
         os-list = "nix profile history --profile /nix/var/nix/profiles/system";
         os-wipe = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
@@ -67,7 +67,10 @@
       enable = true;
       userName = "naduki";
       userEmail = "68984205+naduki@users.noreply.github.com";
-      extraConfig.init.defaultBranch = "main";
+      extraConfig = {
+        init.defaultBranch = "main";
+        safe.directory = "${myconf.flakeRoot}";
+      };
       signing = {
         format = "ssh";
         key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";

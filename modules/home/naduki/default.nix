@@ -23,7 +23,7 @@
       '';
       # Create a symbolic link for Hyprland's custom directory
       makeHyprSymbolic = lib.hm.dag.entryAfter [ "makeBraveSymbolic" ] ''
-        run ln -fns ${config.home.homeDirectory}/.config/.dotfiles/config/hypr/custom ${config.home.homeDirectory}/.config/hypr/custom
+        run ln -fns ${myconf.flakeRoot}/config/hypr/custom ${config.home.homeDirectory}/.config/hypr/custom
       '';
       ## This is effectively an --impure state
     };

@@ -5,7 +5,7 @@
       # Use systemd-boot
       systemd-boot = {
         enable = lib.mkForce false;
-        # sSet the console resolution to the optimal value when using GPU drivers
+        # Set the console resolution to the optimal value when using GPU drivers
         consoleMode = "max";
       };
       limine = {

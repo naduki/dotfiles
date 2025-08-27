@@ -1,6 +1,6 @@
 {
-  # Relative path (from /home/$USER) to the directory containing flake.nix
-  flakeRoot = ".config/.dotfiles";
+  # Path to the directory containing flake.nix
+  flakeRoot = "/home/share/dotfiles";
   # Hostname
   host = "kokona";
   # Username
