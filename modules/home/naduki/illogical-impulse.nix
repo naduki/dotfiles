@@ -83,6 +83,7 @@
       ## My packages
       bulky
       celluloid
+      cinnamon-translations
       file-roller
       glib # for trash
       nemo-with-extensions
