@@ -8,6 +8,7 @@
 close(){
   unset DIR MODE LOOP_FLAG USER HOSTNAME
   unset -f usage nixos home canceled os_failed hm_failed
+  exit "$1"
 }
 # Define functions for error handling
 canceled() { echo "Cancelled."; close 1; }
@@ -54,7 +55,7 @@ nixos(){
 # Home-manager update function
 home(){
   # Select arguments to pass to home-manager with whiptail
-  MODE=$(whiptail --title "Home-manager standalone Update Mode" --menu "Choose Home-manager standalone update mode:" 15 80 4 \
+  MODE=$(whiptail --title "Home-manager standalone Update Mode" --menu "Choose Home-manager standalone update mode:" 15 80 3 \
     "activate" "Activate home-manager standalone" \
     "switch" "Switch to the new configuration" \
     "build"  "Build the new configuration" \
@@ -94,7 +95,7 @@ fi
 while true; do
   # If no arguments, select operation mode with whiptail
   if [ $# -eq 0 ]; then
-    MODE=$(whiptail --title "Update Mode" --menu "Choose update mode:" 15 60 4 \
+    MODE=$(whiptail --title "Update Mode" --menu "Choose update mode:" 15 60 5 \
       "f"  "Update Flake.lock" \
       "fc" "Update Flake.lock (Commit)" \
       "os" "Update NixOS" \
