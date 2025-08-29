@@ -1,4 +1,4 @@
-{ config, inputs, lib, myconf, pkgs-stable, pkgs, ... }:
+{ inputs, lib, myconf, pkgs-stable, pkgs, ... }:
 {
   # Hyprland configuration
   wayland.windowManager.hyprland = {
@@ -74,9 +74,10 @@
       # Python virtual environment path
       # No longer used with fork, so setting is optional,
       # but if not set, required packages must be added to home.packages for proper operation
-      ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv";
+      # ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv";
     } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
       # Prevents "No GSettings schemas are installed on the system" error in kdialog
+      # zenityを使えるようにしたため、必須ではなくなったが、設定しない場合はgtk-theme.nixをimportする必要がある?
       NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
     };
     packages = with pkgs-stable; [
@@ -102,6 +103,7 @@
 
       ## Python
       (python3.withPackages (ps: with ps; [
+        ## generate_colors_material
         # build
         # kde-material-you-colors
         # libsass
@@ -109,27 +111,37 @@
         # material-color-utilities
         # pillow
         # psutil
-        pywayland
         # setproctitle
         # setuptools-scm
         # wheel
+        ## thumbgen
+        # click
+        # loguru
+        # pygobject3
+        # tqdm
+        ## wayland-idle-inhibitor
+        pywayland
       ]))
-
       ## Switchwall
       bc
-      # mpvpaper
       xdg-user-dirs
+      zenity
+      ## fix: dbus.exceptions.DBusException: org.freedesktop.DBus.Error.ServiceUnknown: 
+      ##      The name org.kde.KWin was not provided by any .service files
+      # kdePackages.plasma-workspace  # for plasma-apply-colorscheme
+      # matugen
+      # mpvpaper
 
       ## etc ...
       ddcutil
+      # gobject-introspection
       libqalculate # for searchwidget
-      # matugen
       pomodoro
       translate-shell # for left sidebar
       wl-clipboard
 
       ## Quickshell
-      kdePackages.kdialog
+      # kdePackages.kdialog
       kdePackages.qt5compat
       kdePackages.qtbase
       kdePackages.qtdeclarative
