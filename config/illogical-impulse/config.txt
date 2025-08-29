@@ -1,0 +1,14 @@
+{
+  // config.jsonを開いて手動で編集する箇所
+  "apps": {
+    "bluetooth": "blueman",
+    "network": "wezterm start nmtui",
+    "networkEthernet": "nm-connection-editor",
+    "taskManager": "wezterm start htop",
+    "terminal": "wezterm"
+  },
+  "time": {
+    "dateFormat": " MM/dd (ddd)",
+    "shortDateFormat": "MM/dd"
+  }
+}
