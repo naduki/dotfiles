@@ -77,22 +77,9 @@
       # ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv";
     } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
       # Prevents "No GSettings schemas are installed on the system" error in kdialog
-      # zenityを使えるようにしたため、必須ではなくなったが、設定しない場合はgtk-theme.nixをimportする必要がある?
       NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
     };
     packages = with pkgs-stable; [
-      ## My packages
-      bulky
-      celluloid
-      cinnamon-translations
-      file-roller
-      glib # for trash
-      nemo-with-extensions
-      networkmanagerapplet
-      xviewer
-      xreader
-      xed-editor
-
       ## Screenshot
       # grim
       # swappy
@@ -122,6 +109,7 @@
         ## wayland-idle-inhibitor
         pywayland
       ]))
+      
       ## Switchwall
       bc
       xdg-user-dirs

@@ -2,7 +2,7 @@
   imports = [
     ./fonts.nix
     ./ime.nix
-    ./limine_amd.nix
+    ./limine.nix
     ./locale_jp.nix
     ./nvidia.nix
     ./extra/security.nix

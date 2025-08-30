@@ -1,9 +1,12 @@
 {
+  # Initial setup mode
+  # When set to true, Blender CUDA and Steam will not be installed.
+  naduki_initialSetup = false;
   # Path to the directory containing flake.nix
   flakeRoot = "/home/share/dotfiles";
-  # Hostname
+  # Hostname  "kokona"
   host = "kokona";
-  # Username
+  # Username  "naduki"
   user = "naduki";
   # environments
   environment = [ 

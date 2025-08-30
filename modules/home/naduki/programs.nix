@@ -1,15 +1,30 @@
 { config, lib, myconf, pkgs-stable, ... }:
 {
   home = {
-    packages = with pkgs-stable; [
-      (blender.override {
-        cudaSupport = true;
-      })
+    packages = with pkgs-stable; ([
       gemini-cli
       # prismlauncher # minecraft alternative launcher
       # unityhub
       # virt-manager
-    ];
+    ]
+    ++ lib.optionals (! myconf.naduki_initialSetup) [
+      (blender.override {
+        cudaSupport = true;
+      })
+    ]
+    # Only install when Cinnamon is not enabled
+    ++ lib.optionals (! lib.lists.elem "cinnamon" (myconf.environment or [ ])) [
+      bulky
+      celluloid
+      cinnamon-translations
+      file-roller
+      glib # for trash
+      nemo-with-extensions
+      networkmanagerapplet
+      xviewer
+      xreader
+      xed-editor
+    ]);
     sessionVariables.EDITOR = "micro";
   };
   programs = {

@@ -14,7 +14,5 @@
       };
       timeout = 15;
     };
-    # Enable AMD P-State driver
-    kernelParams = [ "amd_pstate=active" ];
   };
 }

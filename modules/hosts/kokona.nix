@@ -16,6 +16,9 @@
       ++ optionals (config.programs.steam.enable or false) [ "steam" "steam-original" "steam-unwrapped" "steam-run" ];
   in builtins.elem name allowed;
 
+  # Enable AMD P-State driver
+  boot.kernelParams = [ "amd_pstate=active" ];
+
   networking = {
     hostName = "${myconf.host}";
     # Enable networking
@@ -24,7 +27,7 @@
     # networkmanager.plugins = [ pkgs.networkmanager-l2tp ];
   };
   # Install steam
-  programs.steam.enable = true;
+  programs.steam.enable = lib.mkDefault (! myconf.naduki_initialSetup);
 
   services = {
     # GPU Driver
