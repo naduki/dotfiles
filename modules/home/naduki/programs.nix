@@ -40,8 +40,8 @@
         thmcl = "rm -r ${config.home.homeDirectory}/.cache/thumbnails/*";
         dur = "du --max-depth=1 -h | sort -hr";
 
-        nix-update = "nix-shell -p newt --command 'bash ${myconf.flakeRoot}/update.sh'";
-        os-list = "nix profile history --profile /nix/var/nix/profiles/system";
+        nix-update = "${myconf.flakeRoot}/update.sh";
+        os-list = "nixos-rebuild list-generations ";
         os-wipe = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
         xeyes = "nix run nixpkgs#xorg.xeyes";

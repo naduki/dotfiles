@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p git newt
+# shellcheck shell=sh
 # This script is used to update NixOS / Home-manager.
 
 # If "-h" option is specified, display usage
@@ -39,6 +41,7 @@ nixos(){
   case "$MODE" in
     (switch)
       echo "Switching to the new configuration..."
+      # nixos-rebuild switch --upgrade --use-remote-sudo --flake .#"$USER"@"$HOSTNAME"
       nixos-rebuild switch --sudo --flake .#"$USER"@"$HOSTNAME" || os_failed ;;
     (boot)
       echo "Applying new configuration at next startup..."
@@ -130,6 +133,6 @@ while true; do
   esac
   # If loop flag is "false", break the loop
   ${LOOP_FLAG} || break
-  sleep 5
+  sleep 3
 done
 
