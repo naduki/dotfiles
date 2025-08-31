@@ -61,11 +61,11 @@
     "illogical-impulse-dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1756639887,
-        "narHash": "sha256-FGmB76pSdpMxUou0wW+0dHGJNg0bN6AO6SFKz080KiY=",
+        "lastModified": 1756640981,
+        "narHash": "sha256-65r3eD8aYYk5M44aZ44xWOetHVMajms0YIlPowIRyCE=",
         "owner": "naduki",
         "repo": "dots-hyprland",
-        "rev": "ea53647c99ccc55df5030246a3c8d16e361140c1",
+        "rev": "87203c32ca7d4b512d90bda615a1bb352c58b2b0",
         "type": "github"
       },
       "original": {
