@@ -35,7 +35,7 @@ nixos(){
     "boot"   "Apply new configuration at next startup" \
     "test"   "Test the new configuration" \
     "build-vm" "Build and launch a VM image" \
-    3>&1 1>&2 2>&3) || canceled
+    3>&1 1>&2 2>&3) || return 0
   ttyclear
   # Execute process according to mode
   case "$MODE" in
@@ -62,7 +62,7 @@ home(){
     "activate" "Activate home-manager standalone" \
     "switch" "Switch to the new configuration" \
     "build"  "Build the new configuration" \
-    3>&1 1>&2 2>&3) || canceled
+    3>&1 1>&2 2>&3) || return 0
   ttyclear
   # Execute process according to mode
   case "$MODE" in
