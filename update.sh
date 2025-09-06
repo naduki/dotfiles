@@ -18,7 +18,7 @@ os_failed() { echo "NixOS update failed."; close 3; }
 hm_failed() { echo "Home-manager update failed."; close 4; }
 # Usage output function
 usage() {
-  echo "Usage: $(basename "$0") [mode]"
+  echo -e "\nUsage: $(basename "$0") [mode]"
   echo "Modes:"
   echo " -f   Update Flake.lock"
   echo " -fc  Update Flake.lock and commit flake.lock"
@@ -40,17 +40,17 @@ nixos(){
   # Execute process according to mode
   case "$MODE" in
     (switch)
-      echo "Switching to the new configuration..."
+      echo -e "\nSwitching to the new configuration..."
       # nixos-rebuild switch --upgrade --use-remote-sudo --flake .#"$USER"@"$HOSTNAME"
       nixos-rebuild switch --sudo --flake .#"$USER"@"$HOSTNAME" || os_failed ;;
     (boot)
-      echo "Applying new configuration at next startup..."
+      echo -e "\nApplying new configuration at next startup..."
       nixos-rebuild boot --sudo --flake .#"$USER"@"$HOSTNAME" || os_failed ;;
     (test)
-      echo "Testing the new configuration..."
+      echo -e "\nTesting the new configuration..."
       nixos-rebuild test --sudo --flake .#"$USER"@"$HOSTNAME" || os_failed ;;
     (build-vm)
-      echo "Building and launching a VM image..."
+      echo -e "\nBuilding and launching a VM image..."
       nixos-rebuild build-vm --flake .#"$USER"@"$HOSTNAME" || os_failed
       QEMU_OPTS="-display gtk" ./result/bin/run-"$HOSTNAME"-vm ;;
   esac
@@ -67,13 +67,13 @@ home(){
   # Execute process according to mode
   case "$MODE" in
     (activate)
-      echo "Activating home-manager standalone..."
+      echo -e "\nActivating home-manager standalone..."
       nix run flake:home-manager -- switch --flake .#"$USER" || hm_failed ;;
     (switch)
-      echo "Switching to the new configuration..."
+      echo -e "\nSwitching to the new configuration..."
       home-manager switch --flake .#"$USER" || hm_failed ;;
     (build)
-      echo "Building the new configuration..."
+      echo -e "\nBuilding the new configuration..."
       home-manager build --flake .#"$USER" || hm_failed ;;
   esac
 }
@@ -115,10 +115,10 @@ while true; do
   # Execute process according to mode
   case "$MODE" in
     (f)
-      echo "Updating Flake.lock..."
+      echo -e "\nUpdating Flake.lock..."
       nix flake update ;;
     (fc)
-      echo "Updating Flake.lock and committing..."
+      echo -e "\nUpdating Flake.lock and committing..."
       nix flake update --commit-lock-file ;;
     (os)
       nixos ;;
@@ -135,4 +135,3 @@ while true; do
   ${LOOP_FLAG} || break
   sleep 3
 done
-

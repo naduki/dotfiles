@@ -1,10 +1,10 @@
 # dotfiles -- My NixOS Settings
-This document is translated into English using GitHub Copilot (Claude Sonnet 4), except for the Reference section.  
-この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。  
+This document is translated into English using GitHub Copilot (Claude Sonnet 4), except for the Reference section.
+この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。
 
 - Version : Unstable
 - Desktop : Hyprland + Quickshell ([end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/))
-- Editor : VSCode / Neovim
+- Editor : Zed
 - Shell : Bash
 - Terminal: Wezterm
 - Browser : Brave

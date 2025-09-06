@@ -2,15 +2,12 @@
 {
   home = {
     packages = with pkgs-stable; ([
-      gemini-cli
       # prismlauncher # minecraft alternative launcher
       # unityhub
       # virt-manager
     ]
     ++ lib.optionals (! myconf.naduki_initialSetup) [
-      (blender.override {
-        cudaSupport = true;
-      })
+      (blender.override { cudaSupport = true; })
     ]
     # Only install when Cinnamon is not enabled
     ++ lib.optionals (! lib.lists.elem "cinnamon" (myconf.environment or [ ])) [
@@ -21,6 +18,7 @@
       glib # for trash
       nemo-with-extensions
       networkmanagerapplet
+      xapp
       xviewer
       xreader
       xed-editor
@@ -29,9 +27,9 @@
   };
   programs = {
     # Editor
-    neovim.enable = true;
-    vscode.enable = true;
-    zed-editor.enable = false;
+    neovim.enable = false;
+    vscode.enable = false;
+    zed-editor.enable = true;
     # Shell
     bash = {
       enable = true;
@@ -44,8 +42,8 @@
         os-list = "nixos-rebuild list-generations ";
         os-wipe = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
-        xeyes = "nix run nixpkgs#xorg.xeyes";
-        dconf-editor = "nix run nixpkgs#dconf-editor";
+        # xeyes = "nix run nixpkgs#xorg.xeyes";
+        # dconf-editor = "nix run nixpkgs#dconf-editor";
         # neofetch = "nix run nixpkgs#neofetch";
         # mission-center = "nix run nixpkgs#mission-center";
 
@@ -70,6 +68,7 @@
         [ -z "$DISPLAY" ] && export LANG=C
       '';
     };
+    # Browser
     chromium = {
       enable = true;
       package = pkgs-stable.brave;
@@ -78,6 +77,7 @@
       enable = true;
       nix-direnv.enable = true;
     };
+    gemini-cli.enable = false;
     git = {
       enable = true;
       userName = "naduki";
@@ -92,6 +92,7 @@
         signByDefault = true;
       };
     };
+    # Browser (alternative)
     floorp = {
       enable = false;
       package = pkgs-stable.floorp;
@@ -102,6 +103,7 @@
       enable = true;
       package = lib.mkDefault pkgs-stable.micro;
     };
+    # Terminal
     wezterm = {
       enable = true;
       extraConfig = builtins.readFile ../../../config/wezterm/wezterm.lua;

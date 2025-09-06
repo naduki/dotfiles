@@ -1,6 +1,7 @@
-{ config, lib, myconf, ... }:
+{ lib, myconf, ... }:
 {
   imports = [
+    ../activation
     ./fonts.nix
     ./nvim.nix
     ./programs.nix
@@ -15,19 +16,23 @@
     ./illogical-impulse.nix
   ]);
 
-  home = {
-    activation = {
-      # Make Brave's cache directory a symlink to /tmp
-      makeBraveSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        run ln -fns /tmp ${config.home.homeDirectory}/.cache/BraveSoftware
-      '';
-      # Create a symbolic link for Hyprland's custom directory
-      makeHyprSymbolic = lib.hm.dag.entryAfter [ "makeBraveSymbolic" ] ''
-        run ln -fns ${myconf.flakeRoot}/config/hypr/custom ${config.home.homeDirectory}/.config/hypr/custom
-      '';
-      ## This is effectively an --impure state
-    };
-  };
+  # home = {
+  #   activation = {
+  #     # Make Brave's cache directory a symlink to /tmp
+  #     makeBraveSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #       run ln -fns /tmp ${config.home.homeDirectory}/.cache/BraveSoftware
+  #     '';
+  #     # Zed Global Setting Symbolic (AI設定で書き換えれる必要があるため)
+  #     makeZedSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #       run ln -fns ${myconf.flakeRoot}/config/zed/settings.json ${config.home.homeDirectory}/.config/zed/settings.json
+  #     '';
+  #     # Create a symbolic link for Hyprland's custom directory
+  #     makeHyprSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #       run ln -fns ${myconf.flakeRoot}/config/hypr/custom ${config.home.homeDirectory}/.config/hypr/custom
+  #     '';
+  #     ## This is effectively an --impure state
+  #   };
+  # };
   news.display = "silent"; # Disable home-manager news notifications on switch
   wayland.windowManager.hyprland.enable = builtins.elem "Hyprland" (myconf.environment or [ ]); # Enable Hyprland if configured
 }
