@@ -29,7 +29,7 @@
         "editor.bracketPairColorization.enabled" = true;
         "editor.cursorBlinking" = "phase";
         "editor.cursorSmoothCaretAnimation" = "on";
-        "editor.fontFamily" = "'moralerspace Radon HWNF', 'LXGW WenKai Mono Light', 'Noto Sans Symbols', 'monospace', monospace";
+        "editor.fontFamily" = "'moralerspace Radon HW', 'LXGW WenKai Mono Light', 'Noto Sans Symbols', 'monospace', monospace";
         "editor.fontSize" = 19;
         "editor.formatOnSave" = false;
         "editor.tabSize" = 2;
@@ -72,12 +72,12 @@
 
         "github.copilot.chat.commitMessageGeneration.instructions" = [
           {
-            "text" = "Please make sure to write in English."; 
+            "text" = "Please make sure to write in English.";
           }
         ];
 
         "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
-        "files.associations".".envrc" = "plaintext";  # Prevent shellcheck from triggering on .envrc files
+        "files.associations".".envrc" = "plaintext"; # Prevent shellcheck from triggering on .envrc files
 
         "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
         "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
@@ -127,10 +127,10 @@
         # Misc
         # ms-vscode-remote.remote-ssh
       ]
-      # ) ++ (with pkgs.vscode-extensions; [
-      #   # C/C++ | It cannot be installed with nix-vscode-extensions, so if necessary
-      #   ms-vscode.cpptools
-      # ]
+        # ) ++ (with pkgs.vscode-extensions; [
+        #   # C/C++ | It cannot be installed with nix-vscode-extensions, so if necessary
+        #   ms-vscode.cpptools
+        # ]
       );
     };
   };

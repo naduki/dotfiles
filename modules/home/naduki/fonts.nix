@@ -13,7 +13,7 @@
         "Noto Serif CJK JP"
       ];
       monospace = [
-        "Moralerspace Radon HWNF"
+        "Moralerspace Radon HW"
         "LXGW WenKai Mono"
       ];
       emoji = [

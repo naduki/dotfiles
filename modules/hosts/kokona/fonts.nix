@@ -17,7 +17,7 @@
       material-symbols
       # default fonts
       lxgw-wenkai
-      moralerspace-hwnf
+      moralerspace-hw
       (google-fonts.override {
         fonts = [
           "Klee One"

@@ -45,10 +45,10 @@ cyan = "0x89ddff"
 white = "0xffffff"
 #----
 [font]
-normal = { family = "Moralerspace Radon HWNF", style = "Regular" }
-bold = { family = "Moralerspace Radon HWNF", style = "Bold" }
-italic = { family = "Moralerspace Radon HWNF", style = "Italic" }
-bold_italic = { family = "Moralerspace Radon HWNF", style = "Bold Italic" }
+normal = { family = "Moralerspace Radon HW", style = "Regular" }
+bold = { family = "Moralerspace Radon HW", style = "Bold" }
+italic = { family = "Moralerspace Radon HW", style = "Italic" }
+bold_italic = { family = "Moralerspace Radon HW", style = "Bold Italic" }
 size = 13.5
 offset = { x = 0, y = 2 }
 [window]

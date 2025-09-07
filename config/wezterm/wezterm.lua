@@ -12,7 +12,7 @@ end
 -- 使うフォント
 config.font = wezterm.font_with_fallback {
     -- moralerspace
-    {family="Moralerspace Radon HWNF", weight="Regular", stretch="Normal", style="Normal"},
+    {family="Moralerspace Radon HW", weight="Regular", stretch="Normal", style="Normal"},
     -- BuiltIn
     "JetBrains Mono", "Noto Color Emoji", "Symbols Nerd Font Mono"
 }
