@@ -1,7 +1,7 @@
 { config, ... }:
 {
   hardware = {
-    # Wineでまいてつ Last Run!!をやるときに使うはず
+    # Likely required to run "まいてつ Last Run!!" under Wine.
     # graphics.enable32Bit = true;
     nvidia = {
       # Recommended -> stable, feature -> latest, beta -> beta

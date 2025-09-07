@@ -4,7 +4,7 @@
   inputs = {
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url  = "github:NixOS/nixpkgs/release-25.05";
+    stable.url = "github:NixOS/nixpkgs/release-25.05";
     package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     # home-manager
     home-manager = {
@@ -17,12 +17,6 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    # VSCode marketplace
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # flake-compat flake-utils
-    };
     # Rust
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -34,6 +28,12 @@
       url = "github:naduki/dots-hyprland/mynixos";
       flake = false;
     };
+    # VSCode marketplace
+    # nix-vscode-extensions = {
+    #   url = "github:nix-community/nix-vscode-extensions";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   # flake-compat flake-utils
+    # };
     # Quickshell
     # quickshell = {
     #   url = "github:quickshell-mirror/quickshell";
