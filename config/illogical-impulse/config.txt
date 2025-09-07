@@ -1,7 +1,7 @@
 {
   // config.jsonを開いて手動で編集する箇所
   "apps": {
-    "bluetooth": "blueman",
+    "bluetooth": "blueman-manager",
     "network": "wezterm start nmtui",
     "networkEthernet": "nm-connection-editor",
     "taskManager": "wezterm start htop",

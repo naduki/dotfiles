@@ -13,7 +13,9 @@
     ./illogical-impulse.nix
   ]);
 
-  news.display = "silent"; # Disable home-manager news notifications on switch
+  # Disable home-manager news notifications on switch
+  news.display = "silent";
+  # Add Blender (CUDA Support)
   home.packages = [
     (pkgs-stable.blender.override { cudaSupport = true; })
   ];
@@ -33,5 +35,6 @@
     gemini-cli.enable = false;
     htop.enable = true;
   };
+  # Enable Podman
   services.podman.enable = true;
 }
