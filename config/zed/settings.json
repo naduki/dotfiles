@@ -2,7 +2,7 @@
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "model": "gpt-5"
     }
   },
   "restore_on_startup": "none",
@@ -29,7 +29,7 @@
       "function": false
     }
   },
-  "buffer_font_family": "Moralerspace Radon HWNF",
+  "buffer_font_family": "Moralerspace Radon HW",
   "buffer_font_features": {
     "calt": 1
   },
@@ -64,10 +64,7 @@
   ],
   "languages": {
     "Nix": {
-      "language_servers": [
-        "nil",
-        "!nixd"
-      ],
+      "language_servers": ["nil", "!nixd"],
       "formatter": {
         "external": {
           "command": "nixpkgs-fmt"

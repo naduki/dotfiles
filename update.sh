@@ -41,6 +41,7 @@ nixos(){
   case "$MODE" in
     (switch)
       echo -e "\nSwitching to the new configuration..."
+      # cp /etc/nixos/hardware-configuration.nix ./
       # nixos-rebuild switch --upgrade --use-remote-sudo --flake .#"$USER"@"$HOSTNAME"
       nixos-rebuild switch --sudo --flake .#"$USER"@"$HOSTNAME" || os_failed ;;
     (boot)

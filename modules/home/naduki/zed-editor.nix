@@ -12,9 +12,10 @@
     ];
     extraPackages = with pkgs; [
       clang-tools
-      shellcheck-minimal
-      nixpkgs-fmt
       nil
+      nixpkgs-fmt
+      package-version-server
+      shellcheck-minimal
     ];
   };
 }
