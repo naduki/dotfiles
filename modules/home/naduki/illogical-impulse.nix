@@ -2,6 +2,7 @@
 {
   # Hyprland configuration
   wayland.windowManager.hyprland = {
+    enable = true;
     plugins = with pkgs.hyprlandPlugins; [ hyprexpo ];
 
     settings = {
@@ -109,12 +110,12 @@
         ## wayland-idle-inhibitor
         pywayland
       ]))
-      
+
       ## Switchwall
       bc
       xdg-user-dirs
       zenity
-      ## fix: dbus.exceptions.DBusException: org.freedesktop.DBus.Error.ServiceUnknown: 
+      ## fix: dbus.exceptions.DBusException: org.freedesktop.DBus.Error.ServiceUnknown:
       ##      The name org.kde.KWin was not provided by any .service files
       # kdePackages.plasma-workspace  # for plasma-apply-colorscheme
       # matugen

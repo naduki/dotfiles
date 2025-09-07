@@ -1,38 +1,37 @@
-{ lib, myconf, ... }:
+{ lib, myconf, pkgs-stable, ... }:
 {
   imports = [
-    ../activation
     ./fonts.nix
-    ./nvim.nix
+    ./editor
     ./programs.nix
-    ./vscode.nix
     ./xdg-user-dirs.nix
-    ./zed-editor.nix
   ]
-  ++ lib.optional myconf.enablePodman ./podman.nix
+  ++ lib.optional (myconf.naduki_Initial or false) ../activation
   ++ lib.optional (builtins.elem "cinnamon" (myconf.environment or [ ])) ./xresource.nix
   ++ (lib.optionals (builtins.elem "Hyprland" (myconf.environment or [ ])) [
     ./gtk-theme.nix
     ./illogical-impulse.nix
   ]);
 
-  # home = {
-  #   activation = {
-  #     # Make Brave's cache directory a symlink to /tmp
-  #     makeBraveSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #       run ln -fns /tmp ${config.home.homeDirectory}/.cache/BraveSoftware
-  #     '';
-  #     # Zed Global Setting Symbolic (AI設定で書き換えれる必要があるため)
-  #     makeZedSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #       run ln -fns ${myconf.flakeRoot}/config/zed/settings.json ${config.home.homeDirectory}/.config/zed/settings.json
-  #     '';
-  #     # Create a symbolic link for Hyprland's custom directory
-  #     makeHyprSymbolic = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #       run ln -fns ${myconf.flakeRoot}/config/hypr/custom ${config.home.homeDirectory}/.config/hypr/custom
-  #     '';
-  #     ## This is effectively an --impure state
-  #   };
-  # };
   news.display = "silent"; # Disable home-manager news notifications on switch
-  wayland.windowManager.hyprland.enable = builtins.elem "Hyprland" (myconf.environment or [ ]); # Enable Hyprland if configured
+  home.packages = [
+    (pkgs-stable.blender.override { cudaSupport = true; })
+  ];
+  programs = {
+    # Editor
+    micro.enable = true;
+    neovim.enable = false;
+    vscode.enable = false;
+    zed-editor.enable = true;
+    # Browser
+    chromium.enable = true;
+    # Browser (alternative)
+    floorp.enable = false;
+    # Terminal
+    wezterm.enable = true;
+    # Other
+    gemini-cli.enable = false;
+    htop.enable = true;
+  };
+  services.podman.enable = true;
 }

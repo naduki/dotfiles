@@ -27,7 +27,7 @@
     # networkmanager.plugins = [ pkgs.networkmanager-l2tp ];
   };
   # Install steam
-  programs.steam.enable = lib.mkDefault (! myconf.naduki_initialSetup);
+  programs.steam.enable = true;
 
   services = {
     # GPU Driver

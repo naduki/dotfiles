@@ -1,35 +1,32 @@
-{ config, lib, myconf, pkgs-stable, ... }:
+{ config, lib, myconf, pkgs, pkgs-stable, ... }:
 {
   home = {
-    packages = with pkgs-stable; ([
-      # prismlauncher # minecraft alternative launcher
-      # unityhub
-      # virt-manager
-    ]
-    ++ lib.optionals (! myconf.naduki_initialSetup) [
-      (blender.override { cudaSupport = true; })
-    ]
-    # Only install when Cinnamon is not enabled
-    ++ lib.optionals (! lib.lists.elem "cinnamon" (myconf.environment or [ ])) [
-      bulky
-      celluloid
-      cinnamon-translations
-      file-roller
-      glib # for trash
-      nemo-with-extensions
-      networkmanagerapplet
-      xapp
-      xviewer
-      xreader
-      xed-editor
-    ]);
-    sessionVariables.EDITOR = "micro";
+    packages = with pkgs-stable; (
+      [
+        # prismlauncher # minecraft alternative launcher
+        # unityhub
+        # virt-manager
+      ]
+      # Only install when Cinnamon is not enabled
+      ++ lib.optionals (! lib.lists.elem "cinnamon" (myconf.environment or [ ])) [
+        bulky
+        celluloid
+        cinnamon-translations
+        file-roller
+        glib # for trash
+        nemo-with-extensions
+        networkmanagerapplet
+        xapp
+        xviewer
+        xreader
+        xed-editor
+      ]
+    ) ++ lib.optionals (config.services.podman.enable or false) [
+      pkgs.podman-desktop
+    ];
+
   };
   programs = {
-    # Editor
-    neovim.enable = false;
-    vscode.enable = false;
-    zed-editor.enable = true;
     # Shell
     bash = {
       enable = true;
@@ -69,15 +66,19 @@
       '';
     };
     # Browser
-    chromium = {
-      enable = true;
-      package = pkgs-stable.brave;
+    chromium.package = pkgs-stable.brave;
+    # Browser (alternative)
+    floorp = {
+      package = pkgs-stable.floorp;
+      languagePacks = [ "ja" ];
     };
+    # Terminal
+    wezterm.extraConfig = builtins.readFile ../../../config/wezterm/wezterm.lua;
+
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
-    gemini-cli.enable = false;
     git = {
       enable = true;
       userName = "naduki";
@@ -92,21 +93,6 @@
         signByDefault = true;
       };
     };
-    # Browser (alternative)
-    floorp = {
-      enable = false;
-      package = pkgs-stable.floorp;
-      languagePacks = [ "ja" ];
-    };
-    htop.enable = true;
-    micro = {
-      enable = true;
-      package = lib.mkDefault pkgs-stable.micro;
-    };
-    # Terminal
-    wezterm = {
-      enable = true;
-      extraConfig = builtins.readFile ../../../config/wezterm/wezterm.lua;
-    };
+    micro.package = lib.mkDefault pkgs-stable.micro;
   };
 }
