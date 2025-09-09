@@ -34,11 +34,6 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   # flake-compat flake-utils
     # };
-    # Quickshell
-    # quickshell = {
-    #   url = "github:quickshell-mirror/quickshell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
@@ -50,14 +45,6 @@
     #   url = "github:nix-community/nixos-vscode-server";
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   # flake-utils
-    # };
-    # xremap: Tools to change keys used in Wayland
-    # xremap = {
-    #   url = "github:xremap/nix-flake";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.home-manager.follows = "home-manager";
-    #   inputs.flake-parts.follows = "flake-parts";
-    #   # devshell hyprland crane treefmt-nix
     # };
   };
 
