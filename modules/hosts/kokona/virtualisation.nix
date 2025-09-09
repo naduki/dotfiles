@@ -33,7 +33,7 @@ in
   else [ ];
   # Container GPU acceleration
   hardware.nvidia-container-toolkit = {
-    enable = (EnableNvidia && (myconf.enablePodman || config.virtualisation.incus.enable));
+    enable = (EnableNvidia && (myconf.VirtualizationGPU || config.virtualisation.incus.enable));
     # mounts = [ nvidia.com/gpu=0 ];
   };
 

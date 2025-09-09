@@ -10,7 +10,7 @@
     name = getName pkg;
 
     allowed = []  # Add package names to always allow in this list
-      ++ optionals (lib.lists.elem "nvidia" config.services.xserver.videoDrivers) [ "nvidia-x11" ]  # When using the NVIDIA driver
+      ++ optionals (lib.lists.elem "nvidia" (config.services.xserver.videoDrivers or [ ])) [ "nvidia-x11" ]  # When using the NVIDIA driver
       ++ optionals (config.hardware.nvidia.nvidiaSettings.enable or false) [ "nvidia-settings" ]
       # ++ optionals (config.hardware.nvidia.modesetting.enable or false) [ "nvidia-persistenced" ]
       ++ optionals (config.programs.steam.enable or false) [ "steam" "steam-original" "steam-unwrapped" "steam-run" ];

@@ -13,4 +13,6 @@
     # "cinnamon"
     "Hyprland"
   ];
+  # GPU Virtualization
+  VirtualizationGPU = true;
 }
