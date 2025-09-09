@@ -11,11 +11,12 @@
       "LaTeX"
     ];
     extraPackages = with pkgs; [
-      clang-tools
+      # clang-tools
       nil
       nixpkgs-fmt
       package-version-server
       shellcheck-minimal
+      # texlab
     ];
 
     userSettings = {
