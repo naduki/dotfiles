@@ -81,6 +81,13 @@
       NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
     };
     packages = with pkgs-stable; [
+      ## Audio
+      # cava
+      # lxqt.pavucontrol-qt
+      # wireplumber
+      # libdbusmenu-gtk3
+      # playerctl
+
       ## Screenshot
       # grim
       # swappy
@@ -114,7 +121,7 @@
       ## Switchwall
       bc
       xdg-user-dirs
-      zenity
+      # zenity
       ## fix: dbus.exceptions.DBusException: org.freedesktop.DBus.Error.ServiceUnknown:
       ##      The name org.kde.KWin was not provided by any .service files
       # kdePackages.plasma-workspace  # for plasma-apply-colorscheme
@@ -122,7 +129,7 @@
       # mpvpaper
 
       ## etc ...
-      ddcutil
+      # ddcutil # for brightness
       # gobject-introspection
       libqalculate # for searchwidget
       pomodoro
