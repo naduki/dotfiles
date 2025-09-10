@@ -35,7 +35,7 @@ nixos(){
     "boot"   "Apply new configuration at next startup" \
     "test"   "Test the new configuration" \
     "build-vm" "Build and launch a VM image" \
-    3>&1 1>&2 2>&3) || return 0
+    3>&1 1>&2 2>&3) || SLEEP=false
   ttyclear
   # Execute process according to mode
   case "$MODE" in
@@ -63,7 +63,7 @@ home(){
     "activate" "Activate home-manager standalone" \
     "switch" "Switch to the new configuration" \
     "build"  "Build the new configuration" \
-    3>&1 1>&2 2>&3) || return 0
+    3>&1 1>&2 2>&3) || SLEEP=false
   ttyclear
   # Execute process according to mode
   case "$MODE" in
@@ -99,11 +99,12 @@ fi
 while true; do
   # If no arguments, select operation mode with whiptail
   if [ $# -eq 0 ]; then
-    MODE=$(whiptail --title "Update Mode" --menu "Choose update mode:" 15 60 5 \
+    MODE=$(whiptail --title "Update Mode" --menu "Choose update mode:" 15 60 6 \
       "f"  "Update Flake.lock" \
       "fc" "Update Flake.lock (Commit)" \
       "os" "Update NixOS" \
       "hm" "Update Home-manager standalone" \
+      "cl" "OS Clean up" \
       "q"  "Quit" \
       --clear 3>&1 1>&2 2>&3) || canceled
     ttyclear
@@ -113,6 +114,7 @@ while true; do
     MODE=$(echo "$1" | sed 's/^-//')
     LOOP_FLAG=false
   fi
+  SLEEP=true
   # Execute process according to mode
   case "$MODE" in
     (f)
@@ -125,6 +127,9 @@ while true; do
       nixos ;;
     (hm)
       home ;;
+    (cl)
+      sudo nix-collect-garbage --delete-older-than 1d
+      nix-collect-garbage --delete-older-than 1d ;;
     (q)
       LOOP_FLAG=false ;;
     (*)
@@ -134,5 +139,5 @@ while true; do
   esac
   # If loop flag is "false", break the loop
   ${LOOP_FLAG} || break
-  sleep 3
+  ${SLEEP} && sleep 3
 done
