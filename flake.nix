@@ -28,6 +28,10 @@
       url = "github:naduki/dots-hyprland/mynixos";
       flake = false;
     };
+    quickshell = {
+      url = "github:quickshell-mirror/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # VSCode marketplace
     # nix-vscode-extensions = {
     #   url = "github:nix-community/nix-vscode-extensions";
