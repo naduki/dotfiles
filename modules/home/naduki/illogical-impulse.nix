@@ -1,9 +1,8 @@
-{ inputs, lib, myconf, pkgs-stable, pkgs, ... }:
+{ inputs, lib, myconf, pkgs-stable, ... }:
 {
   # Hyprland configuration
   wayland.windowManager.hyprland = {
     enable = true;
-    plugins = with pkgs.hyprlandPlugins; [ hyprexpo ];
 
     settings = {
       "$qsConfig" = "ii";
@@ -43,10 +42,15 @@
       enable = true;
       package = pkgs-stable.jq;
     };
+    starship = {
+      enable = false;
+      enableBashIntegration = true;
+      package = pkgs-stable.starship;
+    };
     micro.package = lib.mkForce pkgs-stable.micro-with-wl-clipboard;
     quickshell = {
       enable = true;
-      # package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      package = inputs.quickshell.packages.${pkgs-stable.system}.default;
     };
   };
   services = {
@@ -77,7 +81,6 @@
       # but if not set, required packages must be added to home.packages for proper operation
       # ILLOGICAL_IMPULSE_VIRTUAL_ENV = "${config.home.homeDirectory}/.local/state/quickshell/.venv";
     } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
-      # Prevents "No GSettings schemas are installed on the system" error in kdialog
       NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
     };
     packages = with pkgs-stable; [
@@ -97,7 +100,8 @@
       wf-recorder
 
       ## Python
-      (python3.withPackages (ps: with ps; [
+      python3
+      # (python3.withPackages (ps: with ps; [
         ## generate_colors_material
         # build
         # kde-material-you-colors
@@ -114,14 +118,11 @@
         # loguru
         # pygobject3
         # tqdm
-        ## wayland-idle-inhibitor
-        pywayland
-      ]))
+      # ]))
 
       ## Switchwall
       bc
       xdg-user-dirs
-      # zenity
       ## fix: dbus.exceptions.DBusException: org.freedesktop.DBus.Error.ServiceUnknown:
       ##      The name org.kde.KWin was not provided by any .service files
       # kdePackages.plasma-workspace  # for plasma-apply-colorscheme
@@ -156,6 +157,10 @@
   };
   # Illogical Impulse's file links
   xdg.configFile = {
+    "kwalletrc".text = ''
+      [Wallet]
+      Enabled=false
+    '';
     "quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
     "matugen/templates/kde/kde-material-you-colors-wrapper.sh".source = "${inputs.illogical-impulse-dotfiles}/.config/matugen/templates/kde/kde-material-you-colors-wrapper.sh";
     "hypr/hyprland".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprland";
@@ -163,10 +168,7 @@
     "hypr/shaders".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/shaders";
     "hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
-    "kwalletrc".text = ''
-      [Wallet]
-      Enabled=false
-    '';
+    # "starship.toml".source = "${inputs.illogical-impulse-dotfiles}/.config/starship.toml";
     # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/.dotfiles/hypr_custom";
   };
 }
