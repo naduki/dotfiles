@@ -24,6 +24,7 @@ usage() {
   echo " -fc  Update Flake.lock and commit flake.lock"
   echo " -os  Update NixOS"
   echo " -hm  Update Home-manager"
+  echo " -cl  Clean up Nix"
   close "$1"
 }
 ttyclear() { [ -z "$DISPLAY" ] && clear; }
@@ -35,7 +36,7 @@ nixos(){
     "boot"   "Apply new configuration at next startup" \
     "test"   "Test the new configuration" \
     "build-vm" "Build and launch a VM image" \
-    3>&1 1>&2 2>&3) || SLEEP=false
+    3>&1 1>&2 2>&3) || SLEEP=0
   ttyclear
   # Execute process according to mode
   case "$MODE" in
@@ -63,7 +64,7 @@ home(){
     "activate" "Activate home-manager standalone" \
     "switch" "Switch to the new configuration" \
     "build"  "Build the new configuration" \
-    3>&1 1>&2 2>&3) || SLEEP=false
+    3>&1 1>&2 2>&3) || SLEEP=0
   ttyclear
   # Execute process according to mode
   case "$MODE" in
@@ -95,6 +96,7 @@ if [ ! -f "flake.nix" ]; then
   ttyclear
   cd "$DIR" || close 2
 fi
+git add .
 # Infinite loop
 while true; do
   # If no arguments, select operation mode with whiptail
@@ -104,7 +106,7 @@ while true; do
       "fc" "Update Flake.lock (Commit)" \
       "os" "Update NixOS" \
       "hm" "Update Home-manager standalone" \
-      "cl" "OS Clean up" \
+      "cl" "Clean up Nix" \
       "q"  "Quit" \
       --clear 3>&1 1>&2 2>&3) || canceled
     ttyclear
@@ -114,22 +116,23 @@ while true; do
     MODE=$(echo "$1" | sed 's/^-//')
     LOOP_FLAG=false
   fi
-  SLEEP=true
+  SLEEP=3
   # Execute process according to mode
   case "$MODE" in
     (f)
       echo -e "\nUpdating Flake.lock..."
-      nix flake update ;;
+      nix flake update && SLEEP=5 ;;
     (fc)
       echo -e "\nUpdating Flake.lock and committing..."
-      nix flake update --commit-lock-file ;;
+      nix flake update --commit-lock-file && SLEEP=5 ;;
     (os)
       nixos ;;
     (hm)
       home ;;
     (cl)
       sudo nix-collect-garbage --delete-older-than 1d
-      nix-collect-garbage --delete-older-than 1d ;;
+      nix-collect-garbage --delete-older-than 1d
+      nix flake archive && SLEEP=0 ;;
     (q)
       LOOP_FLAG=false ;;
     (*)
@@ -139,5 +142,5 @@ while true; do
   esac
   # If loop flag is "false", break the loop
   ${LOOP_FLAG} || break
-  ${SLEEP} && sleep 3
+  sleep "$SLEEP"
 done
