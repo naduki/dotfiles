@@ -53,13 +53,8 @@
         gg = "git gc";
         gac = "git add . && git commit ";
       };
-      historyIgnore = [
-        # Commands not recorded in history
-        "ls"
-        "cd"
-        "alias"
-        "exit"
-      ];
+      # Do not save lines that start with a space or duplicate lines to history
+      historyControl = [ "ignoreboth" "erasedups" ];
       # Set LANG=C on virtual consoles
       initExtra = lib.mkDefault ''
         [ -z "$DISPLAY" ] && export LANG=C
