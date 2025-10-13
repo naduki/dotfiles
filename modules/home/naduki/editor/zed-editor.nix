@@ -75,6 +75,9 @@
             "language_servers" = [ "nil" "!nixd" ];
             "formatter"."external"."command" = "nixpkgs-fmt";
           };
+          "Makefile" = {
+            "hard_tabs" = true;
+          };
         };
         "lsp" = {
           "nil"."initialization_options"."formatting"."command" = [ "nixpkgs-fmt" ];
