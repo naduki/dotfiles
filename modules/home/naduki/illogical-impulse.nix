@@ -73,7 +73,7 @@
   home = {
     # Additional icons
     file = {
-      ".local/share/icons/Mint-Y/apps/48@2x".source = "${inputs.illogical-impulse-dotfiles}/.local/share/icons";
+      ".local/share/icons/Mint-Y/apps/48@2x".source = "${inputs.illogical-impulse-dotfiles}/dots/.local/share/icons";
     };
     sessionVariables = {
       # Python virtual environment path
@@ -161,14 +161,14 @@
       [Wallet]
       Enabled=false
     '';
-    "quickshell".source = "${inputs.illogical-impulse-dotfiles}/.config/quickshell";
-    "matugen/templates/kde/kde-material-you-colors-wrapper.sh".source = "${inputs.illogical-impulse-dotfiles}/.config/matugen/templates/kde/kde-material-you-colors-wrapper.sh";
-    "hypr/hyprland".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprland";
-    "hypr/hyprlock".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock";
-    "hypr/shaders".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/shaders";
-    "hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hypridle.conf";
-    "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/.config/hypr/hyprlock.conf";
-    # "starship.toml".source = "${inputs.illogical-impulse-dotfiles}/.config/starship.toml";
-    # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/.dotfiles/hypr_custom";
+    "quickshell".source = "${inputs.illogical-impulse-dotfiles}/dots/.config/quickshell";
+    "matugen/templates/kde/kde-material-you-colors-wrapper.sh".source = "${inputs.illogical-impulse-dotfiles}/dots/.config/matugen/templates/kde/kde-material-you-colors-wrapper.sh";
+    "hypr/hyprland".source = "${inputs.illogical-impulse-dotfiles}/dots/.config/hypr/hyprland";
+    "hypr/hyprlock".source = "${inputs.illogical-impulse-dotfiles}/dots/.config/hypr/hyprlock";
+    # "hypr/shaders".source = "${inputs.illogical-impulse-dotfiles}/dots/.config/hypr/shaders";
+    "hypr/hypridle.conf".source = "${inputs.illogical-impulse-dotfiles}/dots/.config/hypr/hypridle.conf";
+    "hypr/hyprlock.conf".source = "${inputs.illogical-impulse-dotfiles}/dots/.config/hypr/hyprlock.conf";
+    # "starship.toml".source = "${inputs.illogical-impulse-dotfiles}/dots/.config/starship.toml";
+    # "hypr/custom".source =  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/.config/.dotfiles/hypr_custom";
   };
 }
