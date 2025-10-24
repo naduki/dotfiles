@@ -54,7 +54,7 @@
         gac = "git add . && git commit ";
       };
       # Do not save lines that start with a space or duplicate lines to history
-      historyControl = [ "ignoreboth" "erasedups" ];
+      historyControl = [ "erasedups" ];
       # Set LANG=C on virtual consoles
       initExtra = lib.mkDefault ''
         [ -z "$DISPLAY" ] && export LANG=C
@@ -76,11 +76,12 @@
     };
     git = {
       enable = true;
-      userName = "naduki";
-      userEmail = "68984205+naduki@users.noreply.github.com";
-      extraConfig = {
+      settings = {
         init.defaultBranch = "main";
-        safe.directory = "${myconf.flakeRoot}";
+        user = {
+          name = "naduki";
+          email = "68984205+naduki@users.noreply.github.com";
+        };
       };
       signing = {
         format = "ssh";
