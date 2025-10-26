@@ -30,7 +30,7 @@
     };
     quickshell = {
       url = "github:quickshell-mirror/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "stable";
     };
     # VSCode marketplace
     # nix-vscode-extensions = {

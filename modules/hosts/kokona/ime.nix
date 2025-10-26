@@ -10,22 +10,22 @@
           let
             pallet = "mocha";
             color = "teal";
-            withRoundedCorners = final.withRoundedCorners or prev.lib.withRoundedCorners or true;
+            withRoundedCorners = final.withRoundedCorners or prev.lib.withRoundedCorners or false;
           in
           prev.catppuccin-fcitx5.overrideAttrs (old: {
-            installPhase =
-              ''
-                runHook preInstall
-                local variant="catppuccin-${pallet}-${color}"
-              ''
-              + lib.optionalString withRoundedCorners ''
-                find src/$variant -name theme.conf -exec sed -iE 's/^# \(Image=\(panel|highlight\).svg\)/\1/' {} +
-              ''
-              + ''
-                mkdir -p $out/share/fcitx5/themes
-                cp -r src/$variant $out/share/fcitx5/themes/$variant
-                runHook postInstall
-              '';
+            installPhase = ''
+              runHook preInstall
+              local variant="catppuccin-${pallet}-${color}"
+            ''
+            + lib.optionalString withRoundedCorners ''
+              find src -name theme.conf -exec sed -i -E 's/^# (Image=(panel|highlight).svg)/\1/' {} +
+            ''
+            + ''
+              mkdir -p $out/share/fcitx5/themes
+              cp -r src/$variant $out/share/fcitx5/themes/$variant
+
+              runHook postInstall
+            '';
           });
       })
   ];
@@ -36,7 +36,7 @@
     type = "fcitx5";
     fcitx5 = {
       waylandFrontend = (config.programs.hyprland.enable);
-      addons = with pkgs; [ fcitx5-mozc catppuccin-fcitx5 ];
+      addons = with pkgs; [ fcitx5-mozc (catppuccin-fcitx5.override { withRoundedCorners = true; }) ];
     };
   };
 }
