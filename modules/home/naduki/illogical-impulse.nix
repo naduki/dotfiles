@@ -1,4 +1,4 @@
-{ inputs, lib, myconf, pkgs-stable, ... }:
+{ inputs, lib, myconf, pkgs, pkgs-stable, ... }:
 {
   # Hyprland configuration
   wayland.windowManager.hyprland = {
@@ -50,7 +50,7 @@
     micro.package = lib.mkForce pkgs-stable.micro-with-wl-clipboard;
     quickshell = {
       enable = true;
-      package = inputs.quickshell.packages.${pkgs-stable.system}.default;
+      package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
   };
   services = {
@@ -83,7 +83,7 @@
     } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
       NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
     };
-    packages = with pkgs-stable; [
+    packages = (with pkgs-stable; [
       ## Audio
       # cava
       # lxqt.pavucontrol-qt
@@ -136,7 +136,7 @@
       pomodoro
       translate-shell # for left sidebar
       wl-clipboard
-
+    ]) ++ (with pkgs; [
       ## Quickshell
       # kdePackages.kdialog
       kdePackages.qt5compat
@@ -153,7 +153,7 @@
       kdePackages.qtvirtualkeyboard
       kdePackages.qtwayland
       kdePackages.syntax-highlighting
-    ];
+    ]);
   };
   # Illogical Impulse's file links
   xdg.configFile = {
