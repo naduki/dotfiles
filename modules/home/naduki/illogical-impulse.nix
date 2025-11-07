@@ -133,6 +133,7 @@
       # ddcutil # for brightness
       # gobject-introspection
       libqalculate # for searchwidget
+      pavucontrol
       pomodoro
       translate-shell # for left sidebar
       wl-clipboard
