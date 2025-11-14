@@ -29,7 +29,7 @@
       flake = false;
     };
     quickshell = {
-      url = "github:quickshell-mirror/quickshell";
+      url = "github:quickshell-mirror/quickshell/fc704e6b5d445899a1565955268c91942a4f263f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # VSCode marketplace
