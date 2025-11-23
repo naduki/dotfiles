@@ -22,7 +22,7 @@
         xed-editor
       ]
     ) ++ lib.optionals (config.services.podman.enable or false) [
-      pkgs.podman-desktop
+      # pkgs.podman-desktop
     ];
 
   };

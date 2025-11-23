@@ -11,6 +11,9 @@
   ++ (lib.optionals (builtins.elem "Hyprland" (myconf.environment or [ ])) [
     ./gtk-theme.nix
     ./illogical-impulse.nix
+  ])
+  ++ (lib.optionals (builtins.elem "Sway" (myconf.environment or [ ])) [
+    ./sway-settings.nix
   ]);
 
   # Disable home-manager news notifications on switch
@@ -21,7 +24,7 @@
   ];
   programs = {
     # Editor
-    micro.enable = true;
+    micro.enable = false;
     neovim.enable = false;
     vscode.enable = false;
     zed-editor.enable = true;
@@ -36,5 +39,5 @@
     htop.enable = true;
   };
   # Enable Podman
-  services.podman.enable = true;
+  services.podman.enable = false;
 }

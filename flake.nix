@@ -23,15 +23,15 @@
       inputs.nixpkgs.follows = "package";
     };
     # Hyprland and Quickshell base configuration
-    illogical-impulse-dotfiles = {
-      # url = "github:end-4/dots-hyprland/38c76fe86b74a6ec01e9ddaa4c2240ca032b8ae0";
-      url = "github:naduki/dots-hyprland/mynixos";
-      flake = false;
-    };
-    quickshell = {
-      url = "github:quickshell-mirror/quickshell/fc704e6b5d445899a1565955268c91942a4f263f";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # illogical-impulse-dotfiles = {
+    #   # url = "github:end-4/dots-hyprland/38c76fe86b74a6ec01e9ddaa4c2240ca032b8ae0";
+    #   url = "github:naduki/dots-hyprland/mynixos";
+    #   flake = false;
+    # };
+    # quickshell = {
+    #   url = "github:quickshell-mirror/quickshell/fc704e6b5d445899a1565955268c91942a4f263f";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # VSCode marketplace
     # nix-vscode-extensions = {
     #   url = "github:nix-community/nix-vscode-extensions";

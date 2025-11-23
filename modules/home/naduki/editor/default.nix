@@ -1,6 +1,7 @@
 { config, lib, ... }:
 {
   imports = [
+    ./antigravity.nix
     ./nvim.nix
     ./vscode.nix
     ./zed-editor.nix

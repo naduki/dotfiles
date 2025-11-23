@@ -11,8 +11,9 @@
   # environments
   environment = [
     # "cinnamon"
-    "Hyprland"
+    "Sway"
+    # "Hyprland"
   ];
   # GPU Virtualization
-  VirtualizationGPU = true;
+  VirtualizationGPU = false;
 }

@@ -11,5 +11,6 @@
     ./virtualisation.nix
   ]
   ++ lib.optional (lib.lists.elem "cinnamon" (myconf.environment or [ ])) ./desktop/cinnamon.nix
+  ++ lib.optional (lib.lists.elem "Sway" (myconf.environment or [ ])) ./desktop/sway.nix
   ++ lib.optional (lib.lists.elem "Hyprland" (myconf.environment or [ ])) ./desktop/hyprland.nix;
 }
