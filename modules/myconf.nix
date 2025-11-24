@@ -15,5 +15,5 @@
     # "Hyprland"
   ];
   # GPU Virtualization
-  VirtualizationGPU = false;
+  VirtualizationGPU = true;
 }
