@@ -10,7 +10,7 @@
   environment.systemPackages = [
     # pkgs.kitty   # If you don't have a terminal, be sure to install it
   ];
-} // lib.optionalAttrs (!config.services.cinnamon.desktop.enable) {
+} // lib.optionalAttrs (!builtins.elem "cinnamon" (myconf.environment or [])) {
   # Settings enabled on other desktops (Cinnamon, ...)
   # gcr-ssh-agent setting (for cinnamon)
   environment.extraInit = lib.optionalString config.services.gnome.gcr-ssh-agent.enable ''

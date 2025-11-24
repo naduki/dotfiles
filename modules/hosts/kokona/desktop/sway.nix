@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, myconf, ... }:
 
 {
   # Swayの有効化
@@ -14,9 +14,10 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1"; # ElectronアプリなどをWaylandネイティブで動作させる
   };
+} // lib.optionalAttrs (!builtins.elem "cinnamon" (myconf.environment or [])) {
   # Settings that should NOT be enabled when Cinnamon is active
   # (Cinnamon manages these services itself)
-} // lib.optionalAttrs (!config.services.cinnamon.desktop.enable) {
+
   # gcr-ssh-agent setting (for cinnamon)
   environment.extraInit = lib.optionalString config.services.gnome.gcr-ssh-agent.enable ''
     if [ -z "$SSH_AUTH_SOCK" ] && [ -n "$XDG_RUNTIME_DIR" ]; then
