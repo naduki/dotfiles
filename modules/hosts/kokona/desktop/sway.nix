@@ -17,6 +17,7 @@
     swaylock      # 画面ロック
     swayidle      # アイドル管理
     mako          # 通知
+    wlogout       # ログアウトメニュー
     
     # --- ユーティリティ ---
     wl-clipboard  # クリップボード操作
@@ -26,6 +27,19 @@
     # --- ステータスバー ---
     waybar
   ];
+  # Enable Bluetooth support
+  hardware.bluetooth.enable = true;
+  # Security
+  security = {
+    polkit.enable = true;
+    pam.services.login.enableGnomeKeyring = true;
+  };
+  # Services
+  services = {
+    blueman.enable = true;
+    gnome.gnome-keyring.enable = true;
+    gvfs.enable = true;
+  };
   
   # 画面共有などを動作させるためのポータル設定
   xdg.portal = {

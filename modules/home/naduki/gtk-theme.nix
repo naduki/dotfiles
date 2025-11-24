@@ -6,10 +6,7 @@
     gtk2.enable = false;
     gtk3 = {
       enable = true;
-      cursorTheme = {
-        name = "catppuccin-mocha-teal-cursors";
-        package = pkgs-stable.catppuccin-cursors.mochaTeal;
-      };
+      # cursorTheme is managed by home.pointerCursor in sway-settings.nix
       iconTheme = {
         name = "Mint-Y-Cyan";
         package = pkgs-stable.mint-y-icons;
