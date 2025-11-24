@@ -219,7 +219,7 @@ bindsym $mod+r mode "resize"
     bindsym Print exec grim
 
     # Show Cheatsheet
-    bindsym $mod+slash exec "cat ~/.config/sway/cheatsheet.txt | wofi --show dmenu --width 800 --height 600 --prompt 'Sway Cheatsheet (Press Esc to close)'"
+    bindsym $mod+slash exec sh -c "cat ~/.config/sway/cheatsheet.txt | wofi --show dmenu --width 800 --height 600 --prompt 'Sway Cheatsheet (Press Esc to close)'"
 
 #
 # Status Bar:
