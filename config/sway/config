@@ -90,7 +90,8 @@ default_floating_border pixel 2
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec wlogout
 #
 # Moving around:
 #
@@ -216,6 +217,9 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
     bindsym Print exec grim
+
+    # Show Cheatsheet
+    bindsym $mod+slash exec "cat ~/.config/sway/cheatsheet.txt | wofi --show dmenu --width 800 --height 600 --prompt 'Sway Cheatsheet (Press Esc to close)'"
 
 #
 # Status Bar:

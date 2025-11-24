@@ -1,0 +1,40 @@
+Key Bindings
+--------------------------------------------------------------------------------
+Mod+Enter           Terminal (Wezterm)
+Mod+d               Launcher (Wofi)
+Mod+Shift+q         Close Window
+Mod+Shift+e         Power Menu (wlogout)
+Mod+Shift+c         Reload Config
+
+Navigation
+--------------------------------------------------------------------------------
+Mod+Arrow           Move Focus
+Mod+Shift+Arrow     Move Window
+Mod+1~9             Switch Workspace
+Mod+Shift+1~9       Move Window to Workspace
+
+Layout
+--------------------------------------------------------------------------------
+Mod+b / Mod+v       Split Horizontal / Vertical
+Mod+s               Stacking Layout (Tabs like browser)
+Mod+w               Tabbed Layout
+Mod+e               Toggle Split
+Mod+f               Fullscreen
+Mod+Shift+Space     Float / Tile Toggle
+Mod+Space           Focus Float / Tile
+Mod+a               Focus Parent
+
+Scratchpad (Hidden Workspace)
+--------------------------------------------------------------------------------
+Mod+Shift+minus     Move to Scratchpad
+Mod+minus           Show Scratchpad
+
+Resize Mode
+--------------------------------------------------------------------------------
+Mod+r               Enter Resize Mode
+  Arrow / hjkl      Resize
+  Esc / Enter       Exit Resize Mode
+
+Screenshot
+--------------------------------------------------------------------------------
+Print               Full Screenshot
