@@ -28,14 +28,24 @@
     style.name = "gtk2";
   };
 
-  # --- Essential Packages (from illogical-impulse.nix) ---
+  # --- Essential Packages (from illogical-impulse.nix & sway.nix) ---
   home.packages = with pkgs; [
     # GUI Tools
     pavucontrol
     
+    # Sway Essentials
+    wofi          # ランチャー
+    swaylock      # 画面ロック
+    swayidle      # アイドル管理
+    mako          # 通知
+    wlogout       # ログアウトメニュー
+    waybar        # ステータスバー
+    
     # Utilities
     libnotify
     wl-clipboard
+    grim          # スクリーンショット
+    slurp         # 範囲選択
     playerctl     # メディアキー制御
   ];
 }

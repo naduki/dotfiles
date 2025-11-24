@@ -10,23 +10,19 @@
     wrapperFeatures.gtk = true; # GTKアプリケーションの動作を最適化します
   };
 
-  # 必要なパッケージのインストール
-  environment.systemPackages = with pkgs; [
-    # --- 必須ツール ---
-    wofi          # ランチャー
-    swaylock      # 画面ロック
-    swayidle      # アイドル管理
-    mako          # 通知
-    wlogout       # ログアウトメニュー
-    
-    # --- ユーティリティ ---
-    wl-clipboard  # クリップボード操作
-    grim          # スクリーンショット
-    slurp         # 範囲選択
-    
-    # --- ステータスバー ---
-    waybar
-  ];
+  # Nvidia GPU向けの環境変数設定
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1"; # ElectronアプリなどをWaylandネイティブで動作させる
+  };
+  # Settings that should NOT be enabled when Cinnamon is active
+  # (Cinnamon manages these services itself)
+} // lib.optionalAttrs (!config.services.cinnamon.desktop.enable) {
+  # gcr-ssh-agent setting (for cinnamon)
+  environment.extraInit = lib.optionalString config.services.gnome.gcr-ssh-agent.enable ''
+    if [ -z "$SSH_AUTH_SOCK" ] && [ -n "$XDG_RUNTIME_DIR" ]; then
+      export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
+    fi
+  '';
   # Enable Bluetooth support
   hardware.bluetooth.enable = true;
   # Security
@@ -40,16 +36,10 @@
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
   };
-  
   # 画面共有などを動作させるためのポータル設定
   xdg.portal = {
     enable = true;
     wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
-
-  # Nvidia GPU向けの環境変数設定
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1"; # ElectronアプリなどをWaylandネイティブで動作させる
   };
 }
