@@ -48,4 +48,17 @@
     slurp         # 範囲選択
     playerctl     # メディアキー制御
   ];
+
+  # --- Configuration Files Management ---
+  xdg.configFile = {
+    "sway/config".source = ../../../config/sway/config;
+    "sway/cheatsheet.txt".source = ../../../config/sway/cheatsheet.txt;
+    "waybar/config".source = ../../../config/waybar/config;
+    "waybar/style.css".source = ../../../config/waybar/style.css;
+    "wlogout/layout".source = ../../../config/wlogout/layout;
+    "wlogout/style.css".source = ../../../config/wlogout/style.css;
+    # Icons for wlogout (recursive copy is not directly supported by source, so we link the directory if possible or individual files)
+    # For simplicity, we assume icons are handled by the previous manual copy or we can link the directory if it exists in the repo
+    # "wlogout/icons".source = ../../../config/wlogout/icons; 
+  };
 }
