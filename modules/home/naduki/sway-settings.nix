@@ -12,6 +12,9 @@
     '';
   };
 
+  # Enable playerctld daemon for media player control
+  services.playerctld.enable = true;
+
   # --- Cursor Theme Settings ---
   home.pointerCursor = {
     gtk.enable = true;

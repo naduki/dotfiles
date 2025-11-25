@@ -168,6 +168,9 @@ default_floating_border pixel 2
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+
+    # Toggle border (titlebar)
+    bindsym $mod+Shift+b border toggle
 #
 # Scratchpad:
 #
