@@ -35,7 +35,7 @@
     enable = true;
     type = "fcitx5";
     fcitx5 = {
-      waylandFrontend = (config.programs.hyprland.enable);
+      waylandFrontend = (config.programs.hyprland.enable or config.programs.sway.enable);
       addons = with pkgs; [ fcitx5-mozc (catppuccin-fcitx5.override { withRoundedCorners = true; }) ];
     };
   };
