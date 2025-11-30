@@ -18,16 +18,30 @@ set $term wezterm
 # Your preferred application launcher
 set $menu wofi --show drun
 
+### Colors (Mint Green Pastel)
+set $mint #a8e6cf
+set $pale_mint #dcedc1
+set $dark_green #2f3e46
+set $text_color #2f3e46
+set $urgent #ff6b6b
+
+# class                 border     backgr.    text        indicator  child_border
+client.focused          $mint      $mint      $text_color $mint      $mint
+client.focused_inactive $pale_mint $pale_mint $text_color $pale_mint $pale_mint
+client.unfocused        $pale_mint $pale_mint $text_color $pale_mint $pale_mint
+client.urgent           $urgent    $urgent    $text_color $urgent    $urgent
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
-output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/naduki/Pictures/homework/Wallpapers/wallpaper.png fill
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+output DP-1 mode 2560x1440@75Hz pos 0 0
 
 ### Window configuration
 #
@@ -233,6 +247,12 @@ bar {
 }
 
 include /etc/sway/config.d/*
+
+### Window Rules
+#
+# Brave Picture-in-Picture
+for_window [title="(?i)picture in picture"] floating enable, sticky enable, resize set width 640 height 360, move position 1880 1040
+for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enable, sticky enable, resize set width 640 height 360, move position 1880 1040
 
 ### Autostart
 #

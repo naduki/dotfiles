@@ -8,66 +8,66 @@
 
 window#waybar {
     background: transparent;
-    color: white;
+    color: #2f3e46;
 }
 
 /* Islands */
 .modules-left, .modules-center, .modules-right {
-    background: #1e1e2e; /* Dark background like catppuccin or similar dark theme */
+    background: rgba(220, 237, 193, 0.9); /* #dcedc1 Pale Mint */
     border-radius: 10px;
     padding: 5px 10px;
     margin: 5px;
-    border: 1px solid #313244;
+    border: 1px solid #a8e6cf;
 }
 
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: #cdd6f4;
+    color: #2f3e46;
     border-radius: 5px;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(47, 62, 70, 0.1);
 }
 
 #workspaces button.focused {
-    color: #cba6f7; /* Accent color */
-    background: rgba(255, 255, 255, 0.1);
+    color: #2f3e46;
+    background: #a8e6cf; /* Mint */
 }
 
 #clock, #battery, #cpu, #memory, #disk, #temperature, #backlight, #network, #bluetooth, #pulseaudio, #mpris, #custom-media, #tray, #mode, #idle_inhibitor, #mpd {
     padding: 0 10px;
-    color: #cdd6f4;
+    color: #2f3e46;
 }
 
 #window {
     margin: 0 4px;
-    color: #cdd6f4;
+    color: #2f3e46;
 }
 
 #clock {
     font-weight: bold;
-    color: #89b4fa;
+    color: #2f3e46;
 }
 
 #battery {
-    color: #a6e3a1;
+    color: #2f3e46;
 }
 
 #battery.charging {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: #2f3e46;
+    background-color: #a8e6cf;
 }
 
 #battery.warning:not(.charging) {
     background-color: #ffbe61;
-    color: black;
+    color: #2f3e46;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: white;
+    background-color: #ff6b6b;
+    color: #2f3e46;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
