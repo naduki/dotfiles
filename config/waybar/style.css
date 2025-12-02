@@ -36,7 +36,7 @@ window#waybar {
     background: #a8e6cf; /* Mint */
 }
 
-#clock, #battery, #cpu, #memory, #disk, #temperature, #backlight, #network, #bluetooth, #pulseaudio, #mpris, #custom-media, #tray, #mode, #idle_inhibitor, #mpd {
+#clock, #battery, #cpu, #memory, #disk, #temperature, #backlight, #network, #bluetooth, #pulseaudio, #mpris, #custom-media, #tray, #mode, #idle_inhibitor, #mpd, #custom-wlogout {
     padding: 0 10px;
     color: #2f3e46;
 }

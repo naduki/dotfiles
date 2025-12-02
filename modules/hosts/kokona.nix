@@ -1,4 +1,4 @@
-{ config, lib, myconf, ... }:
+{ config, lib, myconf, pkgs, ... }:
 {
   imports = [
     ./${myconf.host}
@@ -57,6 +57,7 @@
     # pkgs.wineWowPackages.stable
     # pkgs.wineWowPackages.wayland
     # pkgs.floorp
+    pkgs.steamtinkerlaunch
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
