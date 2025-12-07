@@ -7,7 +7,7 @@
     "margin-right": 10,
     "modules-left": ["sway/workspaces", "sway/window"],
     "modules-center": ["clock", "mpris"],
-    "modules-right": ["pulseaudio", "bluetooth", "network", "battery", "tray", "custom/wlogout"],
+    "modules-right": ["pulseaudio", "bluetooth", "network", "battery", "tray", "idle_inhibitor", "custom/wlogout"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -102,5 +102,12 @@
         "format": "",
         "on-click": "wlogout",
         "tooltip": false
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
     }
 }

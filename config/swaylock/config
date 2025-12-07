@@ -1,0 +1,40 @@
+# Swaylock configuration (Mint Green Pastel)
+daemonize
+show-failed-attempts
+ignore-empty-password
+
+image=/home/naduki/Pictures/homework/Wallpapers/wallpaper.png
+
+# Appearance
+color=2f3e46
+font=Sans
+
+# Ring colors
+inside-color=2f3e46
+ring-color=a8e6cf
+line-color=2f3e46
+separator-color=2f3e46
+
+# Text colors
+text-color=dcedc1
+key-hl-color=a8e6cf
+bs-hl-color=ff6b6b
+
+# Ring colors (verifying)
+inside-ver-color=2f3e46
+ring-ver-color=dcedc1
+text-ver-color=dcedc1
+
+# Ring colors (wrong)
+inside-wrong-color=2f3e46
+ring-wrong-color=ff6b6b
+text-wrong-color=ff6b6b
+
+# Ring colors (clear)
+inside-clear-color=2f3e46
+ring-clear-color=f5e0dc
+text-clear-color=f5e0dc
+
+# Layout text
+layout-bg-color=2f3e46
+layout-text-color=dcedc1
