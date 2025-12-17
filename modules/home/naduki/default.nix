@@ -39,5 +39,5 @@
     htop.enable = true;
   };
   # Enable Podman
-  services.podman.enable = false;
+  services.podman.enable = true;
 }

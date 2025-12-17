@@ -1,4 +1,4 @@
-{ config, lib, myconf, pkgs, pkgs-stable, ... }:
+{ config, lib, myconf, pkgs-stable, ... }:
 {
   home = {
     packages = with pkgs-stable; (
