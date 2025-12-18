@@ -60,9 +60,10 @@ nixos(){
 # Home-manager update function
 home(){
   # Select arguments to pass to home-manager with whiptail
-  MODE=$(whiptail --title "Home-manager standalone Update Mode" --menu "Choose Home-manager standalone update mode:" 15 80 3 \
+  MODE=$(whiptail --title "Home-manager standalone Update Mode" --menu "Choose Home-manager standalone update mode:" 15 80 4 \
     "activate" "Activate home-manager standalone" \
     "switch" "Switch to the new configuration" \
+    "backup" "-b backup" \
     "build"  "Build the new configuration" \
     3>&1 1>&2 2>&3) || SLEEP=0
   ttyclear
@@ -74,6 +75,9 @@ home(){
     (switch)
       echo -e "\nSwitching to the new configuration..."
       home-manager switch --flake .#"$USER" || hm_failed ;;
+    (backup)
+      echo -e "\nSwitching to the new configuration..."
+      home-manager switch --flake .#"$USER" -b backup || hm_failed ;;
     (build)
       echo -e "\nBuilding the new configuration..."
       home-manager build --flake .#"$USER" || hm_failed ;;
