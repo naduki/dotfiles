@@ -10,7 +10,7 @@
     ./system.nix
     ./virtualisation.nix
   ]
-  ++ lib.optional (lib.lists.elem "cinnamon" (myconf.environment or [ ])) ./desktop/cinnamon.nix
-  ++ lib.optional (lib.lists.elem "Sway" (myconf.environment or [ ])) ./desktop/sway.nix
-  ++ lib.optional (lib.lists.elem "Hyprland" (myconf.environment or [ ])) ./desktop/hyprland.nix;
+  ++ lib.optional (builtins.elem "Cinnamon" (myconf.environment or [ ])) ./desktop/cinnamon.nix
+  ++ lib.optional (builtins.elem "Sway" (myconf.environment or [ ])) ./desktop/sway.nix
+  ++ lib.optional (builtins.elem "Hyprland" (myconf.environment or [ ])) ./desktop/hyprland.nix;
 }

@@ -8,7 +8,7 @@
         # virt-manager
       ]
       # Only install when Cinnamon is not enabled
-      ++ lib.optionals (! lib.lists.elem "cinnamon" (myconf.environment or [ ])) [
+      ++ lib.optionals (! lib.lists.elem "Cinnamon" (myconf.environment or [ ])) [
         bulky
         celluloid
         cinnamon-translations

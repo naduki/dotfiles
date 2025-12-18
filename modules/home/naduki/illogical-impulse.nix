@@ -156,14 +156,14 @@
       kdePackages.qtwayland
       kdePackages.syntax-highlighting
     ]);
-  };
-  # --- Cursor Theme Settings ---
-  pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    name = "catppuccin-mocha-teal-cursors";
-    package = pkgs-stable.catppuccin-cursors.mochaTeal;
-    size = 24;
+    # --- Cursor Theme Settings ---
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+      name = "catppuccin-mocha-teal-cursors";
+      package = pkgs-stable.catppuccin-cursors.mochaTeal;
+      size = 24;
+    };
   };
   # Illogical Impulse's file links
   xdg.configFile = {

@@ -14,7 +14,7 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1"; # ElectronアプリなどをWaylandネイティブで動作させる
   };
-} // lib.optionalAttrs (!builtins.elem "cinnamon" (myconf.environment or [])) {
+} // lib.optionalAttrs (!builtins.elem "Cinnamon" (myconf.environment or [])) {
   # Settings that should NOT be enabled when Cinnamon is active
   # (Cinnamon manages these services itself)
 

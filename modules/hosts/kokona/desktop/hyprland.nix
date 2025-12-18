@@ -1,58 +1,75 @@
 { config, lib, myconf, pkgs, ... }:
-{
-  # Enable Hyprland desktop environment.
-  programs.hyprland.enable = true;
-  # Enable Hyprlock to unlock from Home-manager
-  security.pam.services.hyprlock = { };
-  # Fix Suspend/wakeup issues with Hyprland
-  hardware.nvidia.powerManagement.enable = (lib.lists.elem "nvidia" config.services.xserver.videoDrivers);
+lib.mkMerge [
+  {
+    # Enable Hyprland desktop environment.
+    programs.hyprland.enable = true;
+    # Enable Hyprlock to unlock from Home-manager
+    security.pam.services.hyprlock = { };
+    # Fix Suspend/wakeup issues with Hyprland
+    hardware.nvidia.powerManagement.enable = (lib.lists.elem "nvidia" config.services.xserver.videoDrivers);
 
-  environment.systemPackages = [
-    # pkgs.kitty   # If you don't have a terminal, be sure to install it
-  ];
-} // lib.optionalAttrs (!builtins.elem "cinnamon" (myconf.environment or [])) {
-  # Settings enabled on other desktops (Cinnamon, ...)
-  # gcr-ssh-agent setting (for cinnamon)
-  environment.extraInit = lib.optionalString config.services.gnome.gcr-ssh-agent.enable ''
-    if [ -z "$SSH_AUTH_SOCK" ] && [ -n "$XDG_RUNTIME_DIR" ]; then
-      export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
-    fi
-  '';
-  # Enable Bluetooth support
-  hardware.bluetooth.enable = true;
-  # Enable dconf
-  programs.dconf.enable = true;
-  # Security
-  security = {
-    polkit.enable = true;
-    pam.services.hyprland.enableGnomeKeyring = true;
-  };
-  # Services
-  services = {
-    blueman.enable = true;
-    dbus.enable = true;
-    gnome.gnome-keyring.enable = true;
-    gvfs.enable = true;
-  };
-  # xdg.portal
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-xapp
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
+    environment.systemPackages = [
+      # pkgs.kitty   # If you don't have a terminal, be sure to install it
     ];
-    config = {
-      hyprland = {
-        default = [
-          "hyprland"
-          "xapp"
-          "gtk"
-        ];
-        "org.freedesktop.impl.portal.Secret" = [
-          "xapp-gnome-keyring"
-        ];
+  }
+
+  (lib.mkIf (lib.lists.elem "danklinux" myconf.rice) {
+    programs.dms-shell = {
+      enable = true;
+      enableSystemMonitoring = true;
+      enableDynamicTheming = true;
+      enableClipboard = true;
+    };
+    services.displayManager.dms-greeter = {
+      enable = true;
+      compositor.name = "hyprland";
+    };
+  })
+
+  (lib.mkIf (! (lib.lists.elem "Cinnamon" myconf.environment)) {
+    # Settings enabled on other desktops (Cinnamon, ...)
+    # gcr-ssh-agent setting (for cinnamon)
+    environment.extraInit = lib.optionalString config.services.gnome.gcr-ssh-agent.enable ''
+      if [ -z "$SSH_AUTH_SOCK" ] && [ -n "$XDG_RUNTIME_DIR" ]; then
+        export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
+      fi
+    '';
+    # Enable Bluetooth support
+    hardware.bluetooth.enable = true;
+    # Enable dconf -> hyprlandを起動すらできなくなります
+    programs.dconf.enable = true;
+    # Security
+    security = {
+      polkit.enable = true;
+      pam.services.hyprland.enableGnomeKeyring = true;
+    };
+    # Services
+    services = {
+      blueman.enable = true;
+      dbus.enable = true;
+      gnome.gnome-keyring.enable = true;
+      gvfs.enable = true;
+    };
+    # xdg.portal
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-xapp
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+      ];
+      config = {
+        hyprland = {
+          default = [
+            "hyprland"
+            "xapp"
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.Secret" = [
+            "xapp-gnome-keyring"
+          ];
+        };
       };
     };
-  };
-}
+  })
+]

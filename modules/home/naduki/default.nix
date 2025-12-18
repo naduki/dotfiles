@@ -7,14 +7,11 @@
     ./xdg-user-dirs.nix
   ]
   ++ lib.optional (myconf.naduki_Initial or false) ../activation
-  ++ lib.optional (builtins.elem "cinnamon" (myconf.environment or [ ])) ./xresource.nix
-  ++ (lib.optionals (builtins.elem "Hyprland" (myconf.environment or [ ])) [
-    ./gtk-theme.nix
-    ./illogical-impulse.nix
-  ])
-  ++ (lib.optionals (builtins.elem "Sway" (myconf.environment or [ ])) [
-    ./sway-settings.nix
-  ]);
+  ++ lib.optional (builtins.elem "Cinnamon" (myconf.environment or [ ])) ./xresource.nix
+  ++ lib.optional (builtins.elem "Hyprland" (myconf.environment or [ ])) ./gtk-theme.nix
+  ++ lib.optional (builtins.elem "Sway" (myconf.environment or [ ])) ./sway-settings.nix
+  ++ lib.optional (builtins.elem "illogical-impulse" (myconf.rice or [ ])) ./illogical-impulse.nix
+  ++ lib.optional (builtins.elem "danklinux" (myconf.rice or [ ])) ./danklinux.nix;
 
   # Disable home-manager news notifications on switch
   news.display = "silent";

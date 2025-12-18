@@ -10,9 +10,14 @@
   user = "naduki";
   # environments
   environment = [
-    # "cinnamon"
-    "Sway"
-    # "Hyprland"
+    # "Cinnamon"
+    # "Sway"
+    "Hyprland"
+  ];
+  # Rice
+  rice = [
+    # "illogical-impulse"
+    "danklinux"
   ];
   # GPU Virtualization
   VirtualizationGPU = true;
