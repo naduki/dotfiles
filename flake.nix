@@ -24,13 +24,9 @@
     };
     # Hyprland and Quickshell base configuration
     # illogical-impulse-dotfiles = {
-    #   # url = "github:end-4/dots-hyprland/38c76fe86b74a6ec01e9ddaa4c2240ca032b8ae0";
-    #   url = "github:naduki/dots-hyprland/mynixos";
+    #   url = "github:end-4/dots-hyprland";
     #   flake = false;
-    # };
-    # quickshell = {
-    #   url = "github:quickshell-mirror/quickshell/fc704e6b5d445899a1565955268c91942a4f263f";
-    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   submodule = true;
     # };
     # VSCode marketplace
     # nix-vscode-extensions = {
@@ -43,12 +39,6 @@
     #   url = "github:nix-community/NixOS-WSL";
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   # flake-compat flake-utils
-    # };
-    # VScode Server
-    # vscode-server = {
-    #   url = "github:nix-community/nixos-vscode-server";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   # flake-utils
     # };
   };
 

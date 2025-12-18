@@ -1,19 +1,39 @@
 # dotfiles -- My NixOS Settings
 This document is translated into English using GitHub Copilot (Claude Sonnet 4), except for the Reference section.
+
 この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。
 
 - Version : Unstable
-- Desktop : Sway
 - Editor : Zed + Google Antigravity
 - Shell : Bash
 - Terminal: Wezterm
 - Browser : Brave
 
-![desktop_environment](./desktop_sway.png "Current Sway Desktop")
+
+# Desktop Environment
+
+## Sway
+
+![sway_desktop_environment](./desktop_sway.png "Sway Desktop")
 
 - Sway related settings were created using Gemini3 Pro.
 
-## Reference
+
+## Hyprland(illogical-impulse)
+
+![hyprland_desktop_environment](./desktop.png "Hyprland Desktop")
+
+- Some scripts (especially Python) are not working due to missing required packages.
+
+### Using illogical-impulse with NixOS(Home-manager) + Hyprland
+In Home-manager, set `qt6.enable = true;`!
+
+## Hyprland(Dank Linux / now)
+
+Adjusting...
+
+
+# Reference
 
 - [NixOS で最強の Linux デスクトップを作ろう](https://zenn.dev/asa1984/articles/nixos-is-the-best)
 - [Nix Flakeで作る開発環境管理](https://zenn.dev/stmn_inc/articles/create-environment-to-nix-flake)
