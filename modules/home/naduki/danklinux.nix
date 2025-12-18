@@ -243,7 +243,7 @@
     executable = true;
     text = ''
       #!/usr/bin/env nix-shell
-      #!nix-shell -i bash -p notify-send
+      #!nix-shell -i bash -p libnotify
 
       # Check if wf-recorder is running
       if pgrep -x "wf-recorder" > /dev/null; then
