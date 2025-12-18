@@ -12,12 +12,9 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 
 # Desktop Environment
 
-## Sway
+## Cinnamon
 
-![sway_desktop_environment](./desktop_sway.png "Sway Desktop")
-
-- Sway related settings were created using Gemini3 Pro.
-
+## Dank Linux(Hyprland) / now
 
 ## Hyprland(illogical-impulse)
 
@@ -28,10 +25,11 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 ### Using illogical-impulse with NixOS(Home-manager) + Hyprland
 In Home-manager, set `qt6.enable = true;`!
 
-## Hyprland(Dank Linux / now)
+## Sway
 
-Adjusting...
+![sway_desktop_environment](./desktop_sway.png "Sway Desktop")
 
+- Sway related settings were created using Gemini3 Pro.
 
 # Reference
 
