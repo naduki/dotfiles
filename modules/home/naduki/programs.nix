@@ -7,6 +7,9 @@
         # unityhub
         # virt-manager
       ]
+      # ++ lib.optionals (config.services.podman.enable or false) [
+      #   pkgs.podman-desktop
+      # ]
       # Only install when Cinnamon is not enabled
       ++ lib.optionals (! lib.lists.elem "Cinnamon" (myconf.environment or [ ])) [
         bulky
@@ -20,11 +23,7 @@
         xviewer
         xreader
         xed-editor
-      ]
-    ) ++ lib.optionals (config.services.podman.enable or false) [
-      # pkgs.podman-desktop
-    ];
-
+      ]);
   };
   programs = {
     # Shell

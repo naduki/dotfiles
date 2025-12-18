@@ -18,7 +18,6 @@
   # --- Cursor Theme Settings ---
   home.pointerCursor = {
     gtk.enable = true;
-    x11.enable = true;
     name = "catppuccin-mocha-teal-cursors";
     package = pkgs.catppuccin-cursors.mochaTeal;
     size = 24;
