@@ -12,22 +12,16 @@
     };
 
     programs.vscode = {
-      package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools nixpkgs-fmt nil shellcheck-minimal ]);
+      package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools nixd nixfmt-rfc-style shellcheck-minimal ]);
       # If you don't use Copilot or Remote-SSH, you can also use VSCodium.
       # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
       profiles.default = {
         enableUpdateCheck = false;
         enableExtensionUpdateCheck = false;
         userSettings = {
-          # "C_Cpp.intelliSenseEngine" = "disabled"; # default or Tag Parser or disabled
-          # "C_Cpp.errorSquiggles" = "disabled";
-          # "C_Cpp.clang_format_style" = "Google";
-          # "C_Cpp.clang_format_path" = "${pkgs.clang-tools}/bin/clang-format";
-          # "editor.defaultFormatter" = "esbenp.prettier-vscode";
-
-          "clangd.path" = "${pkgs.clang-tools}/bin/clangd";
           "breadcrumbs.enabled" = true;
-          "files.autoGuessEncoding" = true;
+          "clangd.path" = "clangd";
+          "diffEditor.ignoreTrimWhitespace" = false;
 
           "editor.bracketPairColorization.enabled" = true;
           "editor.cursorBlinking" = "phase";
@@ -36,7 +30,6 @@
           "editor.fontSize" = 19;
           "editor.formatOnSave" = false;
           "editor.tabSize" = 2;
-
           "editor.minimap.enabled" = false;
           "editor.renderLineHighlight" = "all";
           "editor.renderControlCharacters" = true;
@@ -48,11 +41,24 @@
           "extensions.autoCheckUpdates" = false;
           "extensions.autoUpdate" = false;
           "extensions.ignoreRecommendations" = true;
+
           "files.autoSave" = "onWindowChange";
-          "nix.enableLanguageServer" = true;
-          "nix.serverPath" = "${pkgs.nil}/bin/nil";
+          "files.autoGuessEncoding" = true;
+          "files.associations".".envrc" = "plaintext"; # Prevent shellcheck from triggering on .envrc files
+
+          "nix.enableLSP" = true;
+          "nix.serverPath" = "nixd";
+          "nix.formatterPath" = "nixfmt";
+          "nix.serverSettings"."nixd"."formatting"."command" = [ "nixfmt" ];
+
+          "path-intellisense.autoSlashAfterDirectory" = true;
+          "path-intellisense.autoTriggerNextSuggestion" = true;
+          "path-intellisense.extensionOnImport" = true;
+          "path-intellisense.showHiddenFiles" = true;
+
           "shellcheck.disableVersionCheck" = true;
           "update.mode" = "none";
+
           "window.titleBarStyle" = "custom";
           "window.zoomLevel" = 0.5;
           "workbench.colorTheme" = "poimandres";
@@ -65,28 +71,16 @@
           "workbench.startupEditor" = "none";
           "workbench.activityBar.location" = "top";
           "workbench.panel.showLabels" = false;
-          "diffEditor.ignoreTrimWhitespace" = false;
 
-          "path-intellisense.autoSlashAfterDirectory" = true;
-          "path-intellisense.autoTriggerNextSuggestion" = true;
-          "path-intellisense.extensionOnImport" = true;
-          "path-intellisense.showHiddenFiles" = true;
-          "geminicodeassist.enableTelemetry" = false;
-
-          "github.copilot.chat.commitMessageGeneration.instructions" = [
-            {
-              "text" = "Please make sure to write in English.";
-            }
-          ];
-
-          "nix.serverSettings"."nil"."formatting"."command" = [ "nixpkgs-fmt" ];
-          "files.associations".".envrc" = "plaintext"; # Prevent shellcheck from triggering on .envrc files
-
-          "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
           "[c]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
           "[cpp]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
           "[cu]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
           "[cuh]"."editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
+          "[nix]" = {
+            "editor.defaultFormatter" = "jnoortheen.nix-ide";
+            "editor.autoClosingBrackets" = "always";
+            "editor.tabSize" = 2;
+          };
         };
         extensions = (with pkgs.vscode-marketplace; [
           # UI Language
@@ -100,10 +94,6 @@
 
           # C/C++
           llvm-vs-code-extensions.vscode-clangd
-
-          # AI
-          # saoudrizwan.claude-dev  # Cline
-          # google.geminicodeassist
 
           # Nix
           jnoortheen.nix-ide

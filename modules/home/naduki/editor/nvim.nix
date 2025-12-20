@@ -21,12 +21,11 @@
         bash-language-server
         clang-tools
         fd # for telescope
-        # kdePackages.qtdeclarative
-        nil
+        nixd # nil
+        nixfmt-rfc-style
         shellcheck-minimal
         ripgrep # for telescope
         rust-analyzer
-        # kotlin-language-server
       ];
 
       plugins = with pkgs.vimPlugins; [

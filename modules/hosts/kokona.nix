@@ -29,6 +29,9 @@
   # Install steam
   programs.steam.enable = true;
 
+  # Disable Bluetooth on boot
+  hardware.bluetooth.powerOnBoot = false;
+
   services = {
     # GPU Driver
     xserver.videoDrivers = [ "nvidia" ];

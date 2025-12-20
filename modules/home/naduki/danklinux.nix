@@ -1,5 +1,31 @@
 { inputs, lib, myconf, pkgs, pkgs-stable, ... }:
 {
+  dbus.packages = [ pkgs-stable.nemo-with-extensions ];
+  
+  home = {
+    sessionVariables = { } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
+      NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
+    };
+    packages = with pkgs-stable; [
+      ## screen recorder
+      slurp
+      wf-recorder
+
+      ## etc ...
+      pavucontrol
+      xdg-user-dirs
+    ];
+    # --- Cursor Theme Settings ---
+    pointerCursor = {
+      gtk.enable = true;
+      hyprcursor.enable = true;
+      name = "catppuccin-mocha-teal-cursors";
+      package = pkgs-stable.catppuccin-cursors.mochaTeal;
+      size = 24;
+    };
+  };
+  programs.chromium.commandLineArgs = [ "--ozone-platform-hint=auto" ];
+
   # Hyprland configuration
   wayland.windowManager.hyprland = {
     enable = true;
@@ -230,6 +256,22 @@
         "move 73% 72%, title:^(ピクチャー イン ピクチャー)(.*)$"
         "size 25%, title:^(ピクチャー イン ピクチャー)(.*)$"
         "pin, title:^(ピクチャー イン ピクチャー)(.*)$"
+
+        "float, title:^(ファイルを保存)(.*)$"
+        "float, title:^(.*)(を要求しています)(.*)$"
+        "size 50%, title:^(.*)(を要求しています)(.*)$"
+
+        "float, title:^(.*)(を開く)(.*)$"
+        "size 70%, title:^(.*)(を開く)(.*)$"
+
+        "size 70%, title:^(別名で保存)(.*)$"
+        "size 70%, title:^(展開)(.*)$, class:^(org.gnome.FileRoller)$"
+
+        "float, title:^(名前を付けて保存)(.*)$, class:^(code|codium|antigravity)$"
+        "float, title:^(ワークスペースにフォルダーを追加)(.*)$, class:^(code|codium|antigravity)$"
+        "size 75%, title:^(ワークスペースにフォルダーを追加)(.*)$, class:^(code|codium|antigravity)$"
+        "float, title:^(ワークスペースを保存)(.*)$, class:^(code|codium|antigravity)$"
+        "size 75%, title:^(ワークスペースを保存)(.*)$, class:^(code|codium|antigravity)$"
       ];
     };
     extraConfig = ''
@@ -272,31 +314,4 @@
       fi
     '';
   };
-
-  dbus.packages = [ pkgs-stable.nemo-with-extensions ];
-  
-  home = {
-    sessionVariables = { } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
-      NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
-    };
-    packages = with pkgs-stable; [
-      ## screen recorder
-      slurp
-      wf-recorder
-
-      ## etc ...
-      pavucontrol
-      xdg-user-dirs
-    ];
-    # --- Cursor Theme Settings ---
-    pointerCursor = {
-      gtk.enable = true;
-      hyprcursor.enable = true;
-      name = "catppuccin-mocha-teal-cursors";
-      package = pkgs-stable.catppuccin-cursors.mochaTeal;
-      size = 24;
-    };
-  };
-
-  programs.chromium.commandLineArgs = [ "--ozone-platform-hint=auto" ];
 }
