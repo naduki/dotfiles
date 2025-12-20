@@ -1,14 +1,14 @@
 { pkgs ? import <nixpkgs> {}, ... }:
 
 pkgs.mkShell {
-  # 基本的な開発ツール
-  buildInputs = with pkgs; [ git wget ];
+  # Basic development tools
+  nativeBuildInputs = with pkgs; [ git wget nixd nixfmt-rfc-style ];
 
-  # ホストの環境と完全に分離する
-  # この指定がないと、ホスト側の環境を継承するので継承をさせないための設定
+  # Isolate the host environment (for nix-shell)
+  # This setting prevents inheritance of the host environment
   pure = true;
 
   shellHook = ''
-    echo " Welcome to nix development environment!"
+    echo "Welcome to nix development environment!"
   '';
 }

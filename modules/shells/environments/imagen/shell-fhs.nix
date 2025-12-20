@@ -18,11 +18,6 @@
     freeglut
     util-linux
   ];
-  # LD_LIBRARY_PATHは無くても動いた
-  # profile = ''
-  #   echo "Welcome to the AUTOMATIC1111/stable-diffusion-webui environment."
-  #   alias cds='cd ~/stable-diffusion-webui'
-  # '';
 
   unshareUser = false;
   unshareIpc = false;

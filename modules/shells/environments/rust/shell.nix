@@ -1,19 +1,23 @@
 { pkgs, ... }:
 
 let
-  # 共通の設定を読み込む
+  # Load common settings
   baseShell = import ../../shell.nix { inherit pkgs; };
 in
 pkgs.mkShell {
-  # 基本シェルから設定を継承
+  # Inherit settings from base shell
   inherit (baseShell) pure;
 
-  # 基本シェルから buildInputs を継承
-  buildInputs = baseShell.buildInputs ++ (with pkgs; [
-    openssl
+  # Inherit buildInputs from base shell
+  nativeBuildInputs = (baseShell.nativeBuildInputs or []) ++ (with pkgs; [
     pkg-config
     # rust-bin.stable.latest.default
     (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
+  ]);
+
+  # Inherit buildInputs from base shell
+  buildInputs = (baseShell.buildInputs or []) ++ (with pkgs; [
+    openssl
   ]);
 
   shellHook = ''
