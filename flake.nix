@@ -9,7 +9,6 @@
     # home-manager
     home-manager = {
       url = "github:nix-community/home-manager"; # unstable
-      # url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # flake-parts
@@ -22,7 +21,7 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "package";
     };
-    # Hyprland and Quickshell base configuration
+    # Quickshell base configuration
     # illogical-impulse-dotfiles = {
     #   url = "github:end-4/dots-hyprland";
     #   flake = false;

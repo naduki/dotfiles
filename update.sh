@@ -60,7 +60,7 @@ nixos(){
 # Home-manager update function
 home(){
   # Select arguments to pass to home-manager with whiptail
-  MODE=$(whiptail --title "Home-manager standalone Update Mode" --menu "Choose Home-manager standalone update mode:" 15 80 4 \
+  MODE=$(whiptail --title "Home-manager standalone Update Mode" --menu "Choose Home-manager standalone update mode:" 15 80 4 -- \
     "activate" "Activate home-manager standalone" \
     "switch" "Switch to the new configuration" \
     "backup" "-b backup" \
