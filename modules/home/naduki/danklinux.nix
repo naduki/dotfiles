@@ -1,11 +1,8 @@
-{ inputs, lib, myconf, pkgs, pkgs-stable, ... }:
+{ pkgs-stable, ... }:
 {
   dbus.packages = [ pkgs-stable.nemo-with-extensions ];
-  
+
   home = {
-    sessionVariables = { } // lib.optionalAttrs (builtins.length myconf.environment == 1) {
-      NIX_GSETTINGS_OVERRIDES_DIR = "${pkgs-stable.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
-    };
     packages = with pkgs-stable; [
       ## screen recorder
       slurp
@@ -52,7 +49,7 @@
         "QT_QPA_PLATFORMTHEME_QT6,gtk3"
         "GTK_THEME, Colloid-Teal-Dark"
         "XDG_MENU_PREFIX, cinnamon-"
-        
+
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
         "NIXOS_OZONE_WL,1"
       ];
@@ -60,7 +57,7 @@
       # Autostart
       exec-once = [
         "fcitx5 -d -r"
-        "bash -c \"wl-paste --watch cliphist store &\""
+        "wl-paste --watch cliphist store &"
       ];
 
       # Look and Feel
@@ -144,12 +141,12 @@
         follow_mouse = 1;
         sensitivity = 0;
         touchpad = {
-            natural_scroll = false;
+          natural_scroll = false;
         };
       };
 
       ecosystem = {
-          no_update_news = true;
+        no_update_news = true;
       };
 
       # Keybindings
@@ -162,7 +159,7 @@
         "SUPER, R, togglefloating,"
         "SUPER, P, pseudo,"
         "SUPER, J, togglesplit,"
-        
+
         "CTRL SHIFT, escape, exec, hyprctl reload"
 
         "SUPER, space, exec, dms ipc call spotlight toggle"
@@ -176,12 +173,12 @@
 
         # Screen recording
         "SUPER ALT, R, exec, ~/.config/hypr/scripts/screen-record.sh"
-        
+
         # Screenshot (dms)
         ", Print, exec, dms screenshot region"
         "SHIFT, Print, exec, dms screenshot full"
         "CTRL, Print, exec, dms screenshot window"
-        
+
         "$mod ALT, L, exec, dms ipc call lock lock"
 
         "SUPER, left, movefocus, l"
@@ -251,27 +248,29 @@
 
       windowrulev2 = [
         "float, class:^(org.quickshell)$,title:^(設定)(.*)$"
-        "float, title:^(ピクチャー イン ピクチャー)(.*)$"
-        "keepaspectratio, title:^(ピクチャー イン ピクチャー)(.*)$"
-        "move 73% 72%, title:^(ピクチャー イン ピクチャー)(.*)$"
-        "size 25%, title:^(ピクチャー イン ピクチャー)(.*)$"
-        "pin, title:^(ピクチャー イン ピクチャー)(.*)$"
+        "float, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
+        "keepaspectratio, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
+        "move 73% 72%, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
+        "size 25%, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
+        "pin, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
 
-        "float, title:^(ファイルを保存)(.*)$"
-        "float, title:^(.*)(を要求しています)(.*)$"
-        "size 50%, title:^(.*)(を要求しています)(.*)$"
+        # Brave ファイル保存/オープン系をフロート＆中央寄せ
+        "float, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
+        "center, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
+        "size 70% 70%, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
+        "float, class:^(brave)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存)(.*)$"
+        "center, class:^(brave)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存)(.*)$"
+        "size 70% 70%, class:^(brave)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存)(.*)$"
 
-        "float, title:^(.*)(を開く)(.*)$"
-        "size 70%, title:^(.*)(を開く)(.*)$"
+        # VS Code / VSCodium (Electron) のファイル/フォルダー/ワークスペース系をフロート＆中央寄せ
+        "float, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
+        "center, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
+        "size 70% 70%, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
 
-        "size 70%, title:^(別名で保存)(.*)$"
-        "size 70%, title:^(展開)(.*)$, class:^(org.gnome.FileRoller)$"
-
-        "float, title:^(名前を付けて保存)(.*)$, class:^(code|codium|antigravity)$"
-        "float, title:^(ワークスペースにフォルダーを追加)(.*)$, class:^(code|codium|antigravity)$"
-        "size 75%, title:^(ワークスペースにフォルダーを追加)(.*)$, class:^(code|codium|antigravity)$"
-        "float, title:^(ワークスペースを保存)(.*)$, class:^(code|codium|antigravity)$"
-        "size 75%, title:^(ワークスペースを保存)(.*)$, class:^(code|codium|antigravity)$"
+        # xdg-desktop-portal-gtk 経由のダイアログ保険
+        "float, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
+        "center, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
+        "size 70% 70%, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
       ];
     };
     extraConfig = ''
@@ -294,18 +293,18 @@
       else
           # Define file name with timestamp
           FILENAME="$HOME/Videos/recording_$(date +'%Y-%m-%d_%H-%M-%S').mp4"
-          
+
           # Ensure Videos directory exists
           mkdir -p "$HOME/Videos"
-          
+
           # Select region with slurp
           REGION=$(slurp)
-          
+
           # If selection was cancelled (empty region), exit
           if [ -z "$REGION" ]; then
               exit 0
           fi
-          
+
           # Start recording
           # -g: geometry from slurp
           # -f: output file

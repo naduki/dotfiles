@@ -34,6 +34,7 @@ lib.mkMerge [
         export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
       fi
     '';
+    environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR = lib.mkDefault "${pkgs.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
     # Enable Bluetooth support
     hardware.bluetooth.enable = true;
     # Enable dconf -> hyprlandを起動すらできなくなります
@@ -45,7 +46,7 @@ lib.mkMerge [
     };
     # Services
     services = {
-      blueman.enable = true;
+      # blueman.enable = true;
       dbus.enable = true;
       gnome.gnome-keyring.enable = true;
       gvfs.enable = true;

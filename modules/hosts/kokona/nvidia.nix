@@ -1,4 +1,3 @@
-{ config, ... }:
 {
   hardware = {
     # Likely required to run "まいてつ Last Run!!" under Wine.
