@@ -58,6 +58,7 @@
       exec-once = [
         "fcitx5 -d -r"
         "wl-paste --watch cliphist store &"
+        "${pkgs-stable.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
 
       # Look and Feel

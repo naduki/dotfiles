@@ -43,6 +43,7 @@ lib.mkMerge [
     security = {
       polkit.enable = true;
       pam.services.hyprland.enableGnomeKeyring = true;
+      pam.services.login.enableGnomeKeyring = true;
     };
     # Services
     services = {

@@ -22,9 +22,12 @@
   programs = {
     # Editor
     micro.enable = false;
+
+    helix.enable = true;
     neovim.enable = false;
+
     vscode.enable = false;
-    zed-editor.enable = true;
+    zed-editor.enable = false;
     # Browser
     chromium.enable = true;
     # Browser (alternative)
@@ -33,7 +36,7 @@
     wezterm.enable = true;
     # Other
     gemini-cli.enable = false;
-    htop.enable = true;
+    htop.enable = false;
   };
   # Enable Podman
   services.podman.enable = true;

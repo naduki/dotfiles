@@ -77,6 +77,7 @@
       ".local/share/icons/Mint-Y/apps/48@2x".source = "${inputs.illogical-impulse-dotfiles}/dots/.local/share/icons";
     };
     packages = (with pkgs-stable; [
+      networkmanagerapplet
       ## Audio
       # cava
       # lxqt.pavucontrol-qt

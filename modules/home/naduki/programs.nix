@@ -12,14 +12,11 @@
       # ]
       # Only install when Cinnamon is not enabled
       ++ lib.optionals (! lib.lists.elem "Cinnamon" (myconf.environment or [ ])) [
-        bulky
         celluloid
-        cinnamon-translations
         file-roller
         glib # for trash
         nemo-with-extensions
-        networkmanagerapplet
-        xapp
+        # xapp
         xviewer
         xreader
         xed-editor
@@ -35,7 +32,7 @@
         dur = "du --max-depth=1 -h | sort -hr";
 
         nix-update = "${myconf.flakeRoot}/update.sh";
-        os-list = "nixos-rebuild list-generations ";
+        os-list = "nixos-rebuild list-generations";
         os-wipe = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
 
         # xeyes = "nix run nixpkgs#xorg.xeyes";
