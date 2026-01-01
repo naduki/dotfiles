@@ -1,5 +1,9 @@
 { pkgs-stable, ... }:
 {
+  imports = [
+    ./gtk-theme.nix
+  ];
+
   dbus.packages = [ pkgs-stable.nemo-with-extensions ];
 
   home = {
@@ -21,9 +25,10 @@
       size = 24;
     };
   };
-  programs.chromium.commandLineArgs = [ "--ozone-platform-hint=auto" ];
 
   # Hyprland configuration
+  # When launched from the dank linux launcher, it starts as XWayland or ignores gsettings.
+  # Therefore, launch browsers and IDEs via shortcuts.
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -35,6 +40,7 @@
       "$ide" = "antigravity";
       "$terminal" = "wezterm";
       "$fileManager" = "nemo";
+      "$guiEditor" = "xed";
 
       # Environment Variables
       env = [
@@ -139,6 +145,7 @@
 
       input = {
         kb_layout = "us";
+        kb_options = "caps:super";
         follow_mouse = 1;
         sensitivity = 0;
         touchpad = {
@@ -152,18 +159,18 @@
 
       # Keybindings
       bind = [
-        "SUPER, Q, exec, $terminal"
-        "SUPER, W, exec, $browser"
-        "SUPER, X, exec, $ide"
-        "SUPER, C, killactive,"
+        "SUPER, T, exec, $terminal"
+        "SUPER, B, exec, $browser"
+        "SUPER, I, exec, $ide"
+        "SUPER, X, exec, $guiEditor"
         "SUPER, E, exec, $fileManager"
+        "SUPER, Q, killactive,"
         "SUPER, R, togglefloating,"
         "SUPER, P, pseudo,"
         "SUPER, J, togglesplit,"
 
         "CTRL SHIFT, escape, exec, hyprctl reload"
 
-        "SUPER, space, exec, dms ipc call spotlight toggle"
         "SUPER, V, exec, dms ipc call clipboard toggle"
         "SUPER, M, exec, dms ipc call processlist focusOrToggle"
         "SUPER, comma, exec, dms ipc call settings focusOrToggle"
@@ -238,16 +245,10 @@
         ", XF86AudioPrev, exec, playerctl previous"
       ];
 
-      layerrule = [
-        "noanim, ^(dms)$"
-      ];
-
-      windowrule = [
-        "suppressevent maximize, class:.*"
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-      ];
-
       windowrulev2 = [
+        "suppressevent maximize, class:.*"
+        "nofocus, class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+
         "float, class:^(org.quickshell)$,title:^(設定)(.*)$"
         "float, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
         "keepaspectratio, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
@@ -255,7 +256,7 @@
         "size 25%, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
         "pin, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
 
-        # Brave ファイル保存/オープン系をフロート＆中央寄せ
+        # Float & center Brave file save/open dialogs
         "float, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
         "center, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
         "size 70% 70%, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
@@ -263,21 +264,17 @@
         "center, class:^(brave)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存)(.*)$"
         "size 70% 70%, class:^(brave)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存)(.*)$"
 
-        # VS Code / VSCodium (Electron) のファイル/フォルダー/ワークスペース系をフロート＆中央寄せ
+        # Float & center VS Code / VSCodium (Electron) file/folder/workspace dialogs
         "float, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
         "center, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
         "size 70% 70%, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
 
-        # xdg-desktop-portal-gtk 経由のダイアログ保険
+        # Backup for dialogs via xdg-desktop-portal-gtk
         "float, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
         "center, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
         "size 70% 70%, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
       ];
     };
-    extraConfig = ''
-      # Legacy/Other settings
-      gesture = 3, horizontal, workspace
-    '';
   };
 
   # Screen recording script

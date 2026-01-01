@@ -1,5 +1,9 @@
 { inputs, lib, pkgs, pkgs-stable, ... }:
 {
+  imports = [
+    ./gtk-theme.nix
+  ];
+
   # Hyprland configuration
   wayland.windowManager.hyprland = {
     enable = true;

@@ -1,18 +1,18 @@
 { config, pkgs, lib, myconf, ... }:
 
 {
-  # Swayの有効化
+  # Enable Sway
   programs.sway = {
     enable = true;
     extraOptions = [
       "--unsupported-gpu"
     ];
-    wrapperFeatures.gtk = true; # GTKアプリケーションの動作を最適化します
+    wrapperFeatures.gtk = true; # Optimize GTK application behavior
   };
 
-  # Nvidia GPU向けの環境変数設定
+  # Environment variable settings for Nvidia GPU
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1"; # ElectronアプリなどをWaylandネイティブで動作させる
+    NIXOS_OZONE_WL = "1"; # Run Electron apps etc. natively on Wayland
   };
 } // lib.optionalAttrs (!builtins.elem "Cinnamon" (myconf.environment or [])) {
   # Settings that should NOT be enabled when Cinnamon is active
@@ -37,7 +37,7 @@
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
   };
-  # 画面共有などを動作させるためのポータル設定
+  # Portal settings for screen sharing etc.
   xdg.portal = {
     enable = true;
     wlr.enable = true;

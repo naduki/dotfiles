@@ -26,7 +26,7 @@
   # --- Qt Theme Settings ---
   qt = {
     enable = true;
-    platformTheme.name = "gtk"; # QtアプリもGTKテーマに合わせる
+    platformTheme.name = "gtk"; # Match Qt apps to GTK theme
     style.name = "gtk2";
   };
 
@@ -36,19 +36,19 @@
     pavucontrol
     
     # Sway Essentials
-    wofi          # ランチャー
-    swaylock      # 画面ロック
-    swayidle      # アイドル管理
-    mako          # 通知
-    wlogout       # ログアウトメニュー
-    waybar        # ステータスバー
+    wofi          # Launcher
+    swaylock      # Screen lock
+    swayidle      # Idle management
+    mako          # Notifications
+    wlogout       # Logout menu
+    waybar        # Status bar
     
     # Utilities
     libnotify
     wl-clipboard
-    grim          # スクリーンショット
-    slurp         # 範囲選択
-    playerctl     # メディアキー制御
+    grim          # Screenshot
+    slurp         # Region selection
+    playerctl     # Media key control
   ];
 
   # --- Configuration Files Management ---

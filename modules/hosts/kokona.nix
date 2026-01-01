@@ -60,7 +60,6 @@
     # pkgs.wineWowPackages.stable
     # pkgs.wineWowPackages.wayland
     # pkgs.floorp
-    # pkgs.steamtinkerlaunch
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -50,7 +50,7 @@
         gac = "git add . && git commit ";
       };
       # Do not save lines that start with a space or duplicate lines to history
-      historyControl = [ "erasedups" ];
+      historyControl = [ "ignorespace" ];
       # Set LANG=C on virtual consoles
       initExtra = lib.mkDefault ''
         [ -z "$DISPLAY" ] && export LANG=C

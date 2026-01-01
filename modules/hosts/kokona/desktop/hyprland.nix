@@ -37,7 +37,7 @@ lib.mkMerge [
     environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR = lib.mkDefault "${pkgs.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
     # Enable Bluetooth support
     hardware.bluetooth.enable = true;
-    # Enable dconf -> hyprlandを起動すらできなくなります
+    # Enable dconf
     programs.dconf.enable = true;
     # Security
     security = {
