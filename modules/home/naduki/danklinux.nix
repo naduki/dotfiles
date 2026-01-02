@@ -245,34 +245,30 @@
         ", XF86AudioPrev, exec, playerctl previous"
       ];
 
-      windowrulev2 = [
-        "suppressevent maximize, class:.*"
-        "nofocus, class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      # Hyprland version 0.53.0
+      windowrule = [
+        "suppress_event maximize, match:class .*"
+        "no_focus on, match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0"
 
-        "float, class:^(org.quickshell)$,title:^(設定)(.*)$"
-        "float, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
-        "keepaspectratio, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
-        "move 73% 72%, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
-        "size 25%, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
-        "pin, title:^(ピクチャー イン ピクチャー|Picture in picture)(.*)$"
+        "center on, match:title ^(印刷|Print)$"
+        "float on, match:class ^(org.quickshell)$, match:title ^(設定)$"
+        "float on, keep_aspect_ratio on, move ((monitor_w*0.73)) ((monitor_h*0.72)), size (monitor_w*0.25) (monitor_h*0.25), pin on, match:title ^(ピクチャー イン ピクチャー|Picture in picture)$"
 
         # Float & center Brave file save/open dialogs
-        "float, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
-        "center, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
-        "size 70% 70%, class:^(brave)$, title:^(.*を要求しています|wants to)(.*)$"
-        "float, class:^(brave)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存)(.*)$"
-        "center, class:^(brave)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存)(.*)$"
-        "size 70% 70%, class:^(brave)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存)(.*)$"
+        "float on, center on, size (monitor_w*0.7) (monitor_h*0.7), match:class ^(brave)$, match:title ^(.*)(を要求しています|wants to)(.*)$"
 
         # Float & center VS Code / VSCodium (Electron) file/folder/workspace dialogs
-        "float, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
-        "center, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
-        "size 70% 70%, class:^(code|code-url-handler|codium|codium-url-handler|antigravity)$, title:^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
+        "float on, center on, match:class ^(code|code-url-handler|codium|codium-url-handler|antigravity)$, match:title ^(Open File|Open Folder|Select Folder|Save File|Save As|Open Workspace|Open Workspace from File|Add Folder to Workspace|Save Workspace|ファイルを開く|フォルダーを開く|フォルダーの選択|名前を付けて保存|ワークスペース)(.*)$"
 
-        # Backup for dialogs via xdg-desktop-portal-gtk
-        "float, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
-        "center, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
-        "size 70% 70%, class:^(xdg-desktop-portal-gtk|org.gtk.gtk4.NodeEditor)$, title:^(Open File|Save File|ファイルを開く|ファイルを保存|名前を付けて保存|画像を開く|画像を保存)(.*)$"
+        # celluloid
+        "center on, match:class ^(io.github.celluloid_player.Celluloid)$, match:title ^(ファイルを開く|Open File|フォルダーを開く|Open Folder|設定|Preferences)$"
+        # pulseaudio
+        "float on, match:class ^(org.pulseaudio.pavucontrol)$"
+        # xed
+        "center on, match:class ^(xed)$,match:title ^(ファイルを開く|Open Files|名前を付けて保存|Save As|Xed の設定|Xed Preferences)(.*)"
+        # xviewer
+        "float on, center on, match:class ^(xviewer)$, match:title ^(画像を開く|Open Image|画像を保存|Save Image)$"
+        "center on, match:class ^(xviewer)$, match:title ^(設定|Preferences)$"
       ];
     };
   };
