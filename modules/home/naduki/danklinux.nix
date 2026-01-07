@@ -251,7 +251,7 @@
         "no_focus on, match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0"
 
         "center on, match:title ^(印刷|Print)$"
-        "float on, match:class ^(org.quickshell)$, match:title ^(設定)$"
+        "float on, size (monitor_w*0.7) (monitor_h*0.7), match:class ^(org.quickshell)$, match:title ^(設定)$"
         "float on, keep_aspect_ratio on, move ((monitor_w*0.73)) ((monitor_h*0.72)), size (monitor_w*0.25) (monitor_h*0.25), pin on, match:title ^(ピクチャー イン ピクチャー|Picture in picture)$"
 
         # Float & center Brave file save/open dialogs
