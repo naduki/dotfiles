@@ -25,6 +25,10 @@
       size = 24;
     };
   };
+  # Automatically start Hyprland on tty1. If it fails or is run on another virtual terminal, set LANG=C.
+  programs.bash.initExtra = ''
+    [ -z "$DISPLAY" ] && { [ "''${XDG_VTNR:-0}" -eq 1 ] && exec start-hyprland || export LANG=C; }
+  '';
 
   # Hyprland configuration
   # When launched from the dank linux launcher, it starts as XWayland or ignores gsettings.
@@ -45,6 +49,7 @@
       # Environment Variables
       env = [
         "QT_IM_MODULE, fcitx"
+        "QT_IM_MODULES, wayland;fcitx"
         "XMODIFIERS, @im=fcitx"
         "SDL_IM_MODULE, fcitx"
         "GLFW_IM_MODULE, ibus"

@@ -18,10 +18,9 @@ lib.mkMerge [
       enable = true;
       enableSystemMonitoring = true;
       enableDynamicTheming = true;
-      enableClipboard = true;
     };
     services.displayManager.dms-greeter = {
-      enable = true;
+      enable = false;
       compositor.name = "hyprland";
     };
   })
