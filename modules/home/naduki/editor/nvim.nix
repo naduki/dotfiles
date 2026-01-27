@@ -5,7 +5,7 @@
     let
       toLua = str: "lua << EOF\n${str}\nEOF\n";
       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-      myconfigDir = "../../../config/nvim";
+      myconfigDir = "../../../../config/nvim";
     in
     {
       # package = pkgs-stable.neovim;
@@ -87,7 +87,7 @@
         vim-nix
       ];
 
-      extraLuaConfig = ''
+      initLua = ''
         ${builtins.readFile ./${myconfigDir}/options.lua}
       '';
     };
