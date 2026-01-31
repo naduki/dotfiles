@@ -21,23 +21,23 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "package";
     };
-    # Quickshell base configuration
-    # illogical-impulse-dotfiles = {
-    #   url = "github:end-4/dots-hyprland";
-    #   flake = false;
-    #   submodule = true;
-    # };
     # VSCode marketplace
-    # nix-vscode-extensions = {
-    #   url = "github:nix-community/nix-vscode-extensions";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   # flake-compat flake-utils
-    # };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # flake-compat flake-utils
+    };
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   # flake-compat flake-utils
+    # };
+    # Quickshell base configuration
+    # illogical-impulse-dotfiles = {
+    #   url = "github:end-4/dots-hyprland";
+    #   flake = false;
+    #   submodule = true;
     # };
   };
 
