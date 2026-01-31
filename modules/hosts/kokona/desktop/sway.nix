@@ -9,6 +9,7 @@
     ];
     wrapperFeatures.gtk = true; # Optimize GTK application behavior
   };
+  programs.foot.enable = false;
 
   # Environment variable settings for Nvidia GPU
   environment.sessionVariables = {
@@ -24,6 +25,9 @@
       export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
     fi
   '';
+
+  environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR = lib.mkDefault
+    "${pkgs.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
   # Enable Bluetooth support
   hardware.bluetooth.enable = true;
   # Security
@@ -33,7 +37,7 @@
   };
   # Services
   services = {
-    blueman.enable = true;
+    # blueman.enable = true;
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
   };

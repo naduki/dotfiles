@@ -14,7 +14,7 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 
 ## Cinnamon
 
-## Dank Linux(Hyprland) / now
+## Dank Linux(Hyprland)
 
 ## Hyprland(illogical-impulse)
 
@@ -25,7 +25,7 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 ### Using illogical-impulse with NixOS(Home-manager) + Hyprland
 In Home-manager, set `qt6.enable = true;`!
 
-## Sway
+## Sway / now
 
 ![sway_desktop_environment](./desktop_sway.png "Sway Desktop")
 

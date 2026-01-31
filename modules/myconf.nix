@@ -11,13 +11,13 @@
   # environments
   environment = [
     # "Cinnamon"
-    # "Sway"
-    "Hyprland"
+    "Sway"
+    # "Hyprland"
   ];
   # Rice
   rice = [
     # "illogical-impulse"
-    "danklinux"
+    # "danklinux"
   ];
   # GPU Virtualization
   VirtualizationGPU = true;

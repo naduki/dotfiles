@@ -32,6 +32,12 @@
   # Disable Bluetooth on boot
   hardware.bluetooth.powerOnBoot = false;
 
+  # /var/lib/systemd/coredump limitations
+  systemd.coredump.extraConfig = ''
+    MaxUse=800M
+    MaxRetention=1day
+  '';
+
   services = {
     # GPU Driver
     xserver.videoDrivers = [ "nvidia" ];
