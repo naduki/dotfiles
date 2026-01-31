@@ -1,4 +1,19 @@
 { config, inputs, lib, pkgs, ... }:
+let
+  cfg = config.modules.editors.vscode;
+  notVSCode = cfg.variant != "vscode";
+  isVSCodium = cfg.variant == "vscodium";
+  isAntigravity = cfg.variant == "antigravity";
+
+  marketplace = if notVSCode then pkgs.open-vsx else pkgs.vscode-marketplace;
+
+  fhsPackages = ps: with ps; [
+    clang-tools
+    nixd
+    nixfmt
+    shellcheck-minimal
+  ];
+in
 {
   config = lib.mkIf (config.programs.vscode.enable) {
     # nixpkgs.overlays / allowUnfreePredicate Settings
@@ -8,13 +23,14 @@
         "code"
         "vscode"
         "vscode-extension-github-copilot"
+        "antigravity"
       ];
     };
 
     programs.vscode = {
-      package = pkgs.vscode.fhsWithPackages (ps: with ps; [ clang-tools nixd nixfmt-rfc-style shellcheck-minimal ]);
-      # If you don't use Copilot or Remote-SSH, you can also use VSCodium.
-      # package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ clang-tools shellcheck-minimal nixpkgs-fmt nil ]);
+      package = if isAntigravity
+      then pkgs.antigravity.fhsWithPackages fhsPackages
+      else pkgs.vscode.fhsWithPackages fhsPackages;
       profiles.default = {
         enableUpdateCheck = false;
         enableExtensionUpdateCheck = false;
@@ -27,7 +43,7 @@
           "editor.cursorBlinking" = "phase";
           "editor.cursorSmoothCaretAnimation" = "on";
           "editor.fontFamily" = "'moralerspace Radon HW', 'LXGW WenKai Mono Light', 'Noto Sans Symbols', 'monospace', monospace";
-          "editor.fontSize" = 19;
+          "editor.fontSize" = 18;
           "editor.formatOnSave" = false;
           "editor.tabSize" = 2;
           "editor.minimap.enabled" = false;
@@ -65,7 +81,7 @@
           "workbench.editor.limit.enabled" = true;
           "workbench.editor.limit.perEditorGroup" = true;
           "workbench.editor.limit.value" = 5;
-          "workbench.iconTheme" = "quill-icons-minimal";
+          # "workbench.iconTheme" = "quill-icons-minimal";
           "workbench.productIconTheme" = "icons-carbon";
           "workbench.sideBar.location" = "left";
           "workbench.startupEditor" = "none";
@@ -82,49 +98,48 @@
             "editor.tabSize" = 2;
           };
         };
-        extensions = (with pkgs.vscode-marketplace; [
-          # UI Language
-          ms-ceintl.vscode-language-pack-ja
+      } // lib.optionalAttrs (!isAntigravity) {
+        extensions =
+          (with marketplace; [
+            # UI Language
+            ms-ceintl.vscode-language-pack-ja
 
-          # Theme & flair
-          # sazumiviki.kawaine-theme
-          pmndrs.pmndrs
-          cdonohue.quill-icons
-          antfu.icons-carbon
+            # Theme & flair
+            antfu.icons-carbon
 
-          # C/C++
-          llvm-vs-code-extensions.vscode-clangd
+            # C/C++
+            llvm-vs-code-extensions.vscode-clangd
 
-          # Nix
-          jnoortheen.nix-ide
+            # Nix
+            jnoortheen.nix-ide
 
-          # Misc
-          # hediet.vscode-drawio
-          timonwong.shellcheck
-          mkhl.direnv
-          usernamehw.errorlens
-          donjayamanne.githistory
-          christian-kohler.path-intellisense
-        ]
-        ) ++ (with (pkgs.forVSCodeVersion "${pkgs.vscode.version}").vscode-marketplace-release; [
-          # Copilot
-          github.copilot
-          ## Cannot be installed because engineversion contains a date
-          # github.copilot-chat
-        ]
-        ) ++ (with pkgs.vscode-marketplace-release; [
-          # Copilot-chat
-          github.copilot-chat
-          # Rust
-          rust-lang.rust-analyzer
-          # Misc
-          # ms-vscode-remote.remote-ssh
-        ]
-          # ) ++ (with pkgs.vscode-extensions; [
-          #   # C/C++ | It cannot be installed with nix-vscode-extensions, so if necessary
-          #   ms-vscode.cpptools
-          # ]
-        );
+            # Misc
+            timonwong.shellcheck
+            mkhl.direnv
+            usernamehw.errorlens
+            donjayamanne.githistory
+            christian-kohler.path-intellisense
+          ])
+          ++ (with pkgs.vscode-marketplace; [
+            # Common (Explicitly from Marketplace)
+            pmndrs.pmndrs
+            cdonohue.quill-icons
+          ])
+          ++ lib.optionals notVSCode (with pkgs.open-vsx-release; [
+            rust-lang.rust-analyzer
+          ])
+          ++ lib.optionals (!notVSCode) (
+            (with (pkgs.forVSCodeVersion "${pkgs.vscode.version}").vscode-marketplace-release; [
+              # Copilot
+              github.copilot
+            ]) ++
+            (with pkgs.vscode-marketplace-release; [
+              # Copilot-chat
+              github.copilot-chat
+              # Rust
+              rust-lang.rust-analyzer
+            ])
+          );
       };
     };
   };

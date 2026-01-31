@@ -25,7 +25,7 @@
     helix.enable = true;
     neovim.enable = false;
 
-    vscode.enable = false;
+    vscode.enable = true;
     zed-editor.enable = false;
     # Browser
     chromium.enable = true;
@@ -37,6 +37,7 @@
     gemini-cli.enable = false;
     htop.enable = false;
   };
+  modules.editors.vscode.variant = "antigravity";
   # Enable Podman
   services.podman.enable = true;
 }

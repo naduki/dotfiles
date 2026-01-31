@@ -1,7 +1,14 @@
 { config, lib, ... }:
 {
+  options.modules.editors.vscode = {
+    variant = lib.mkOption {
+      type = lib.types.enum [ "default" "antigravity" ];
+      default = "default";
+      description = "Switch between default vscode and antigravity configuration";
+    };
+  };
+
   imports = [
-    ./antigravity.nix
     ./nvim.nix
     ./vscode.nix
     ./zed-editor.nix
