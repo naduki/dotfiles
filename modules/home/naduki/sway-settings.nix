@@ -3,6 +3,7 @@
 {
   imports = [
     ./gtk-theme.nix
+    ./sc-recoder.nix
   ];
 
   programs = {
@@ -25,7 +26,7 @@
 
   # --- Qt Theme Settings ---
   qt = {
-    enable = true;
+    enable = false;
     platformTheme.name = "gtk"; # Match Qt apps to GTK theme
     style.name = "gtk2";
   };
@@ -46,9 +47,12 @@
     # Utilities
     libnotify
     wl-clipboard
+    overskride
     grim          # Screenshot
     slurp         # Region selection
     playerctl     # Media key control
+    wf-recorder   # Screen recorder
+    autotiling-rs # Autotiling script
   ];
 
   # --- Configuration Files Management ---

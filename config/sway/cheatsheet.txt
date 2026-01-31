@@ -5,24 +5,26 @@ Mod+d               Launcher (Wofi)
 Mod+Shift+q         Close Window
 Mod+Shift+e         Power Menu (wlogout)
 Mod+Shift+c         Reload Config
+Mod+/               Show Cheatsheet
 
 Navigation
 --------------------------------------------------------------------------------
-Mod+Arrow           Move Focus
-Mod+Shift+Arrow     Move Window
-Mod+1~9             Switch Workspace
-Mod+Shift+1~9       Move Window to Workspace
+Mod+Arrow/hjkl      Move Focus
+Mod+Shift+Arrow/hjkl Move Window
+Mod+0-9             Switch Workspace
+Mod+Shift+0-9       Move Window to Workspace
 
 Layout
 --------------------------------------------------------------------------------
 Mod+b / Mod+v       Split Horizontal / Vertical
-Mod+s               Stacking Layout (Tabs like browser)
+Mod+s               Stacking Layout
 Mod+w               Tabbed Layout
 Mod+e               Toggle Split
 Mod+f               Fullscreen
 Mod+Shift+Space     Float / Tile Toggle
 Mod+Space           Focus Float / Tile
 Mod+a               Focus Parent
+Mod+Shift+b         Toggle Border
 
 Scratchpad (Hidden Workspace)
 --------------------------------------------------------------------------------
@@ -35,6 +37,8 @@ Mod+r               Enter Resize Mode
   Arrow / hjkl      Resize
   Esc / Enter       Exit Resize Mode
 
-Screenshot
+Screenshot & Recording
 --------------------------------------------------------------------------------
 Print               Full Screenshot
+Shift+Print         Area Screenshot
+Ctrl+Print          Screen Recording

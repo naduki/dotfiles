@@ -34,7 +34,7 @@ client.urgent           $urgent    $urgent    $text_color $urgent    $urgent
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
-output * bg /home/naduki/Pictures/homework/Wallpapers/wallpaper.png fill
+output * bg /home/naduki/Pictures/homework/Wallpapers/wallpaper fill
 #
 # Example configuration:
 #
@@ -234,6 +234,10 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
     bindsym Print exec grim
+    # Special key to take a screenshot (with selection)
+    bindsym Shift+Print exec grim -g "$(slurp)"
+    # Screen recording
+    bindsym Ctrl+Print exec ~/.config/screen-record.sh
 
     # Show Cheatsheet
     bindsym $mod+slash exec sh -c "cat ~/.config/sway/cheatsheet.txt | wofi --show dmenu --width 800 --height 600 --prompt 'Sway Cheatsheet (Press Esc to close)'"
@@ -265,6 +269,7 @@ exec swayidle -w \
          timeout 300 'swaylock -f' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f'
+exec autotiling-rs
 exec mako
 exec dbus-update-activation-environment --all
 
@@ -273,6 +278,3 @@ exec easyeffects --gapplication-service
 
 # Clipboard history
 exec wl-paste --watch cliphist store
-
-# Bluetooth
-exec bluetoothctl power off
