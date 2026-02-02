@@ -14,5 +14,19 @@
       pictures = "$HOME/Pictures";
       videos = "$HOME/Videos";
     };
+    desktopEntries = {
+      "blueman-adapters" = {
+        name = "Bluetooth Adapters";
+        noDisplay = true;
+      };
+      "kbd-layout-viewer5" = {
+        name = "Keyboard Layout Viewer";
+        noDisplay = true;
+      };
+      "org.fcitx.fcitx5-migrator" = {
+        name = "Fcitx 5 Migration Wizard";
+        noDisplay = true;
+      };
+    };
   };
 }

@@ -7,14 +7,12 @@
     extraOptions = [
       "--unsupported-gpu"
     ];
+    extraPackages = [];
     wrapperFeatures.gtk = true; # Optimize GTK application behavior
   };
-  programs.foot.enable = false;
 
-  # Environment variable settings for Nvidia GPU
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1"; # Run Electron apps etc. natively on Wayland
-  };
+  # Run Electron apps etc. natively on Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 } // lib.optionalAttrs (!builtins.elem "Cinnamon" (myconf.environment or [])) {
   # Settings that should NOT be enabled when Cinnamon is active
   # (Cinnamon manages these services itself)
@@ -37,7 +35,7 @@
   };
   # Services
   services = {
-    # blueman.enable = true;
+    blueman.enable = true;
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
   };
@@ -45,6 +43,6 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-xapp xdg-desktop-portal-gtk ];
   };
 }
