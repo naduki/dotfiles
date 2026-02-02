@@ -5,6 +5,10 @@
     nvidia = {
       # Recommended -> stable, feature -> latest, beta -> beta
       # package = config.boot.kernelPackages.nvidiaPackages.latest;
+      # Modesetting is required for Wayland
+      modesetting.enable = true;
+      # Power management is required to suspend/resume
+      powerManagement.enable = true;
       # Enable the NVIDIA Open Driver
       open = true;
       # Enable the nvidia-settings GUI tool

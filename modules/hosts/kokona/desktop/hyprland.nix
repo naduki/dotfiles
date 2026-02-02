@@ -5,12 +5,6 @@ lib.mkMerge [
     programs.hyprland.enable = true;
     # Enable Hyprlock to unlock from Home-manager
     security.pam.services.hyprlock = { };
-    # Fix Suspend/wakeup issues with Hyprland
-    hardware.nvidia.powerManagement.enable = (lib.lists.elem "nvidia" config.services.xserver.videoDrivers);
-
-    environment.systemPackages = [
-      # pkgs.kitty   # If you don't have a terminal, be sure to install it
-    ];
   }
 
   (lib.mkIf (lib.lists.elem "danklinux" myconf.rice) {
@@ -41,7 +35,6 @@ lib.mkMerge [
     # Security
     security = {
       polkit.enable = true;
-      pam.services.hyprland.enableGnomeKeyring = true;
       pam.services.login.enableGnomeKeyring = true;
     };
     # Services
