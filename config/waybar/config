@@ -7,7 +7,7 @@
     "margin-right": 10,
     "modules-left": ["sway/workspaces", "sway/window"],
     "modules-center": ["clock", "mpris"],
-    "modules-right": ["pulseaudio", "bluetooth", "network", "battery", "tray", "idle_inhibitor", "custom/wlogout"],
+    "modules-right": ["memory", "pulseaudio", "network", "bluetooth", "battery", "tray", "idle_inhibitor", "custom/wlogout"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -109,5 +109,16 @@
             "activated": "",
             "deactivated": ""
         }
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "memory": {
+        "interval": 30,
+        "format": "{}%",
+        "format-alt": "{used:0.1f}G",
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "{used:0.1f}GiB / {total:0.1f}GiB used"
     }
 }

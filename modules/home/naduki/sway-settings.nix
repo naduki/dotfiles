@@ -47,7 +47,7 @@
     # Utilities
     libnotify
     wl-clipboard
-    overskride
+    sway-audio-idle-inhibit
     grim          # Screenshot
     slurp         # Region selection
     playerctl     # Media key control

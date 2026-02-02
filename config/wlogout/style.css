@@ -10,15 +10,13 @@ window {
 button {
     border-radius: 20px;
     border-color: #dcedc1;
-	text-decoration-color: #dcedc1;
+    text-decoration-color: #dcedc1;
     color: #dcedc1;
-	background-color: #52796f;
-	border-style: solid;
-	border-width: 1px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 25%;
-    margin: 10px;
+    background-color: #52796f;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 2.5rem; /* 文字を大きく */
+    margin: 60px; /* 余白を増やしてボタンを小さく見せる */
     transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
@@ -26,28 +24,4 @@ button:focus, button:active, button:hover {
 	background-color: #84a98c;
 	outline-style: none;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-#lock {
-    background-image: image(url("icons/lock.png"));
-}
-
-#logout {
-    background-image: image(url("icons/logout.png"));
-}
-
-#suspend {
-    background-image: image(url("icons/suspend.png"));
-}
-
-#hibernate {
-    background-image: image(url("icons/hibernate.png"));
-}
-
-#shutdown {
-    background-image: image(url("icons/shutdown.png"));
-}
-
-#reboot {
-    background-image: image(url("icons/reboot.png"));
 }
