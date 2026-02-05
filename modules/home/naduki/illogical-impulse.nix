@@ -37,7 +37,7 @@
   programs = {
     # Automatically start Hyprland on tty1. If it fails or is run on another virtual terminal, set LANG=C.
     bash.initExtra = ''
-      [ -z "$DISPLAY" ] && { [ "''${XDG_VTNR:-0}" -eq 1 ] && exec Hyprland >"$HOME/.hyprland.log" 2>&1 || export LANG=C; }
+      [ -z "$DISPLAY" ] && { [ "''${XDG_VTNR:-0}" -eq 1 ] && exec start-hyprland 2>&1 || export LANG=C; }
     '';
     hyprlock.enable = true;
     hyprshot.enable = true;
@@ -51,7 +51,6 @@
       enableBashIntegration = true;
       package = pkgs-stable.starship;
     };
-    micro.package = lib.mkForce pkgs-stable.micro-with-wl-clipboard;
     quickshell = {
       enable = true;
       package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;

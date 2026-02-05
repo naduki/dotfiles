@@ -16,7 +16,6 @@
         file-roller
         glib # for trash
         nemo-with-extensions
-        # xapp
         xviewer
         xreader
         xed-editor
@@ -49,8 +48,6 @@
         gg = "git gc";
         gac = "git add . && git commit ";
       };
-      # Do not save lines that start with a space or duplicate lines to history
-      historyControl = [ "ignorespace" ];
       # Set LANG=C on virtual consoles
       initExtra = lib.mkDefault ''
         [ -z "$DISPLAY" ] && export LANG=C
@@ -60,7 +57,7 @@
     chromium.package = pkgs-stable.brave;
     # Browser (alternative)
     floorp = {
-      package = pkgs-stable.floorp;
+      package = pkgs-stable.floorp-bin;
       languagePacks = [ "ja" ];
     };
     # Terminal
@@ -85,6 +82,5 @@
         signByDefault = true;
       };
     };
-    micro.package = lib.mkDefault pkgs-stable.micro;
   };
 }

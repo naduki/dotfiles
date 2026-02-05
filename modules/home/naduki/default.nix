@@ -20,8 +20,6 @@
   ];
   programs = {
     # Editor
-    micro.enable = false;
-
     helix.enable = true;
     neovim.enable = false;
 
@@ -35,7 +33,6 @@
     wezterm.enable = true;
     # Other
     gemini-cli.enable = false;
-    htop.enable = false;
   };
   modules.editors.vscode.variant = "antigravity";
   # Enable Podman

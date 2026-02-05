@@ -38,13 +38,16 @@ in
           "breadcrumbs.enabled" = true;
           "clangd.path" = "clangd";
           "diffEditor.ignoreTrimWhitespace" = false;
+          "diffEditor.experimental.useTrueInlineView" = true;
 
           "editor.bracketPairColorization.enabled" = true;
           "editor.cursorBlinking" = "phase";
           "editor.cursorSmoothCaretAnimation" = "on";
+          "editor.cursorStyle" = "line-thin";
           "editor.fontFamily" = "'moralerspace Radon HW', 'LXGW WenKai Mono Light', 'Noto Sans Symbols', 'monospace', monospace";
           "editor.fontSize" = 18;
           "editor.formatOnSave" = false;
+          "editor.guides.bracketPairs" = true;
           "editor.tabSize" = 2;
           "editor.minimap.enabled" = false;
           "editor.renderLineHighlight" = "all";
@@ -61,6 +64,11 @@ in
           "files.autoSave" = "onWindowChange";
           "files.autoGuessEncoding" = true;
           "files.associations".".envrc" = "plaintext"; # Prevent shellcheck from triggering on .envrc files
+          "files.exclude" = {
+            "**/.direnv" = true;
+            "**/.git" = true;
+            "**/.DS_Store" = true;
+          };
 
           "nix.enableLSP" = true;
           "nix.serverPath" = "nixd";
