@@ -3,13 +3,9 @@
   home = {
     packages = with pkgs-stable; (
       [
-        # prismlauncher # minecraft alternative launcher
         # unityhub
         # virt-manager
       ]
-      # ++ lib.optionals (config.services.podman.enable or false) [
-      #   pkgs.podman-desktop
-      # ]
       # Only install when Cinnamon is not enabled
       ++ lib.optionals (! lib.lists.elem "Cinnamon" (myconf.environment or [ ])) [
         celluloid

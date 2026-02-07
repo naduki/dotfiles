@@ -1,8 +1,8 @@
-{ inputs, lib, pkgs, pkgs-stable, ... }:
+{ inputs, lib, myconf, pkgs, pkgs-stable, ... }:
 {
   imports = [
     ./gtk-theme.nix
-  ];
+  ] ++ lib.optional (myconf.naduki_Initial or false) ../activation/hypr-custom.nix;
 
   # Hyprland configuration
   wayland.windowManager.hyprland = {
