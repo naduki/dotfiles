@@ -94,7 +94,7 @@ if [ "$USER" = "unknown" ] || [ "$HOSTNAME" = "unknown-host" ]; then
 fi
 # Change to the directory where this script is located
 cd "$(dirname "$0")" || close 1
-rm -rf "$HOSTNAME".qcow2 && unlink result 2> /dev/null
+rm -f "$HOSTNAME".qcow2 && unlink result 2> /dev/null
 # Check if flake.nix exists, otherwise input directory with whiptail
 if [ ! -f "flake.nix" ]; then
   DIR=$(whiptail --title "Flake Directory" --inputbox "Enter the directory containing flake.nix:" 10 60 3>&1 1>&2 2>&3) || canceled
