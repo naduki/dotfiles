@@ -22,11 +22,11 @@
       inputs.nixpkgs.follows = "package";
     };
     # VSCode marketplace
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # flake-compat flake-utils
-    };
+    # nix-vscode-extensions = {
+    #   url = "github:nix-community/nix-vscode-extensions";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   # flake-compat flake-utils
+    # };
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
