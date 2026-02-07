@@ -264,18 +264,19 @@ for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enabl
 exec fcitx5 -d
 
 # Core components
-exec gnome-keyring-daemon --start --components=secrets
-exec swayidle -w \
-         timeout 300 'swaylock -f' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f'
-exec sway-audio-idle-inhibit
-exec autotiling-rs
-exec mako
 exec dbus-update-activation-environment --all
+exec gnome-keyring-daemon --start --components=secrets
+exec sway-audio-idle-inhibit
+
+# exec swayidle -w \
+#          timeout 300 'swaylock -f' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f'
+# exec autotiling-rs
+# exec mako
 
 # Audio
-exec easyeffects --gapplication-service
+# exec easyeffects --gapplication-service
 
 # Clipboard history
-exec wl-paste --watch cliphist store
+# exec wl-paste --watch cliphist store
