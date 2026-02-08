@@ -13,6 +13,7 @@
 
   # Run Electron apps etc. natively on Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
 } // lib.optionalAttrs (!builtins.elem "Cinnamon" (myconf.environment or [])) {
   # Settings that should NOT be enabled when Cinnamon is active
   # (Cinnamon manages these services itself)

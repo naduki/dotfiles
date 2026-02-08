@@ -3,8 +3,6 @@
     # Likely required to run "まいてつ Last Run!!" under Wine.
     # graphics.enable32Bit = true;
     nvidia = {
-      # Recommended -> stable, feature -> latest, beta -> beta
-      # package = config.boot.kernelPackages.nvidiaPackages.latest;
       # Modesetting is required for Wayland
       modesetting.enable = true;
       # Power management is required to suspend/resume
