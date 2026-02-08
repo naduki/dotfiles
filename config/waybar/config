@@ -7,7 +7,7 @@
     "margin-right": 10,
     "modules-left": ["sway/workspaces", "sway/window"],
     "modules-center": ["clock", "mpris"],
-    "modules-right": ["memory", "pulseaudio", "network", "bluetooth", "battery", "tray", "idle_inhibitor", "custom/wlogout"],
+    "modules-right": ["memory", "pulseaudio", "network", "bluetooth", "battery", "tray", "custom/audio_idle_inhibitor", "idle_inhibitor", "custom/wlogout"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
