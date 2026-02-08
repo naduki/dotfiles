@@ -37,7 +37,7 @@ in
     # Terminal
     wezterm.enable = true;
     # Other
-    gemini-cli.enable = false;
+    gemini-cli.enable = true;
   };
   modules.editors.vscode.variant = "antigravity";
 

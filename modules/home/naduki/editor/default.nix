@@ -9,6 +9,7 @@
   };
 
   imports = [
+    ./helix.nix
     ./nvim.nix
     ./vscode
     ./zed-editor.nix

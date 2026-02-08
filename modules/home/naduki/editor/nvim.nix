@@ -25,7 +25,6 @@
         nixfmt-rfc-style
         shellcheck-minimal
         ripgrep # for telescope
-        rust-analyzer
       ];
 
       plugins = with pkgs.vimPlugins; [
