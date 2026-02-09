@@ -24,6 +24,7 @@
       shellAliases = {
         sudo = "sudo -k ";
         thmcl = "rm -r ${config.home.homeDirectory}/.cache/thumbnails/*";
+        rmxmod = "find . -type f -exec chmod -x {} +";
         dur = "du --max-depth=1 -h | sort -hr";
 
         nix-update = "${myconf.flakeRoot}/update.sh";

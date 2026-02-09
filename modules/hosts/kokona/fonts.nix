@@ -13,6 +13,7 @@
       noto-fonts-monochrome-emoji
       noto-fonts-color-emoji
       material-symbols
+      freefont_ttf
       # default fonts
       lxgw-wenkai
       moralerspace-hw
