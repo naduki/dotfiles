@@ -6,6 +6,7 @@ in
   imports = [
     ./fonts.nix
     ./editor
+    ./fish_ghost.nix
     ./programs.nix
     ./tmpfs.nix
     ./xdg-user-dirs.nix
@@ -25,8 +26,8 @@ in
 
   programs = {
     # Editor
-    helix.enable = true;
-    neovim.enable = false;
+    helix.enable = false;
+    neovim.enable = true;
 
     vscode.enable = true;
     zed-editor.enable = false;
