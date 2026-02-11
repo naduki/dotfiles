@@ -4,9 +4,9 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。
 
 - Version : Unstable
-- Editor : Helix + Google Antigravity
-- Shell : Bash
-- Terminal: Wezterm
+- Editor : Neovim + Google Antigravity
+- Shell : Bash + Fish
+- Terminal: Wezterm + Ghostty
 - Browser : Brave
 
 
