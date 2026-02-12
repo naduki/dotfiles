@@ -2,17 +2,17 @@ Key Bindings
 --------------------------------------------------------------------------------
 Mod+Enter           Terminal (Wezterm)
 Mod+d               Launcher (Wofi)
-Mod+Shift+q         Close Window
+Mod+q               Close Window
 Mod+Shift+e         Power Menu (wlogout)
 Mod+Shift+c         Reload Config
 Mod+/               Show Cheatsheet
 
 Navigation
 --------------------------------------------------------------------------------
-Mod+Arrow/hjkl      Move Focus
-Mod+Shift+Arrow/hjkl Move Window
-Mod+0-9             Switch Workspace
-Mod+Shift+0-9       Move Window to Workspace
+Mod+Arrow/hjkl        Move Focus
+Mod+Shift+Arrow/hjkl  Move Window
+Mod+0-9               Switch Workspace
+Mod+Shift+0-9         Move Window to Workspace
 
 Layout
 --------------------------------------------------------------------------------

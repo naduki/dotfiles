@@ -91,7 +91,7 @@ input "type:keyboard" {
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -106,7 +106,6 @@ input "type:keyboard" {
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec wlogout
 #
@@ -256,10 +255,10 @@ bar {
 include /etc/sway/config.d/*
 
 ### Window Rules
-#
+# y が 48 ずれる
 # Brave Picture-in-Picture
-for_window [title="(?i)picture in picture"] floating enable, sticky enable, resize set width 460 height 260, move position 2080 1170
-for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enable, sticky enable, resize set width 460 height 260, move position 2080 1170
+for_window [title="(?i)picture in picture"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
+for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
 
 ### Autostart
 #
