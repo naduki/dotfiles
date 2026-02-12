@@ -5,8 +5,6 @@
     extensions = [
       # Theme
       "poimandres"
-      # Latex
-      "LaTeX"
     ];
     extraPackages = with pkgs; [
       package-version-server

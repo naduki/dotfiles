@@ -40,6 +40,8 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     end,
 })
 
+vim.diagnostic.config({ virtual_text = true })
+
 --------------------------------------------------------------------------------
 -- Keymaps (General)
 --------------------------------------------------------------------------------
@@ -122,7 +124,21 @@ require("lualine").setup({
       { 'filename', newfile_status = true, path = 1, shorting_target = 24 },
     },
     lualine_c = { require('lsp-progress').progress() },
-    lualine_x = { 'diagnostics' },
+    lualine_x = {
+      'diagnostics',
+      {
+        function()
+          local clients = vim.lsp.get_clients({ bufnr = 0 })
+          if #clients == 0 then return '' end
+          local names = {}
+          for _, client in ipairs(clients) do
+            table.insert(names, client.name)
+          end
+          return table.concat(names, ', ')
+        end,
+        icon = ' ',
+      }
+    },
     lualine_y = { 'branch', 'diff' },
     lualine_z = { 'filetype' },
   },
@@ -197,35 +213,54 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Setup servers
 local servers = {
-  c = { name = 'clangd', cmd = { 'clangd' } },
-  cpp = { name = 'clangd', cmd = { 'clangd' } },
-  cuda = { name = 'clangd', cmd = { 'clangd' } },
-  nix = {
-    name = 'nixd',
+  bashls = {
+    cmd = { 'bash-language-server', 'start' },
+    filetypes = { 'sh' },
+  },
+  clangd = {
+    cmd = { 'clangd' },
+    filetypes = { 'c', 'cpp', 'cuda' },
+    root_markers = { '.clangd', 'compile_commands.json', 'compile_flags.txt' },
+  },
+  nixd = {
     cmd = { 'nixd' },
     settings = { nixd = { formatting = { command = { 'nixfmt' } } } },
     root_markers = { 'flake.nix' },
+    filetypes = { 'nix' },
   },
-  sh = {
-    name = 'bashls',
-    cmd = { 'bash-language-server', 'start' },
+  pyright = {
+    cmd = { 'pyright-langserver', '--stdio' },
+    filetypes = { 'python' },
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = "workspace",
+          useLibraryCodeForTypes = true,
+        },
+      },
+    },
   },
-  rust = {
-    name = 'rust_analyzer',
+  rust_analyzer = {
     cmd = { 'rust-analyzer' },
     settings = { ['rust-analyzer'] = { diagnostics = { enable = false } } },
+    filetypes = { 'rust' },
+  },
+  texlab = {
+    cmd = { 'texlab' },
+    filetypes = { 'tex', 'bib' },
   },
 }
 
-for ft, conf in pairs(servers) do
+for name, conf in pairs(servers) do
   vim.api.nvim_create_autocmd('FileType', {
-    pattern = ft,
-    callback = function()
+    pattern = conf.filetypes,
+    callback = function(args)
       local root_markers = conf.root_markers or { '.git' }
-      local root_dir = vim.fs.root(0, root_markers) or vim.uv.cwd()
+      local root_dir = vim.fs.root(args.buf, root_markers) or vim.uv.cwd()
 
       vim.lsp.start({
-        name = conf.name,
+        name = name,
         cmd = conf.cmd,
         root_dir = root_dir,
         settings = conf.settings,
@@ -236,27 +271,53 @@ for ft, conf in pairs(servers) do
 end
 
 -- LspAttach (Keymaps & Formatting)
+-- Diagnostic UI
+local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  update_in_insert = false,
+  underline = true,
+  severity_sort = true,
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+})
+
+local function lsp_keymaps(bufnr)
+  local bufmap = function(keys, func)
+    vim.keymap.set('n', keys, func, { buffer = bufnr })
+  end
+  local builtin = require('telescope.builtin')
+
+  bufmap('K', vim.lsp.buf.hover)
+  bufmap('gd', vim.lsp.buf.definition)
+  bufmap('gD', vim.lsp.buf.declaration)
+  bufmap('gi', vim.lsp.buf.implementation)
+  bufmap('go', vim.lsp.buf.type_definition)
+  bufmap('<leader>r', vim.lsp.buf.rename)
+  bufmap('<leader>a', vim.lsp.buf.code_action)
+
+  -- Telescope integration
+  bufmap('gr', builtin.lsp_references)
+  bufmap('<leader>s', builtin.lsp_document_symbols)
+  bufmap('<leader>S', builtin.lsp_dynamic_workspace_symbols)
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
-    local bufmap = function(keys, func)
-      vim.keymap.set('n', keys, func, { buffer = event.buf })
-    end
-
-    bufmap('K', vim.lsp.buf.hover)
-    bufmap('gd', vim.lsp.buf.definition)
-    bufmap('gD', vim.lsp.buf.declaration)
-    bufmap('gi', vim.lsp.buf.implementation)
-    bufmap('go', vim.lsp.buf.type_definition)
-    bufmap('gr', vim.lsp.buf.references) -- or telescope below
-    bufmap('<leader>r', vim.lsp.buf.rename)
-    bufmap('<leader>a', vim.lsp.buf.code_action)
-
-    -- Telescope integration
-    local builtin = require('telescope.builtin')
-    bufmap('gr', builtin.lsp_references)
-    bufmap('<leader>s', builtin.lsp_document_symbols)
-    bufmap('<leader>S', builtin.lsp_dynamic_workspace_symbols)
+    lsp_keymaps(event.buf)
 
     -- Format command
     vim.api.nvim_buf_create_user_command(event.buf, 'Format', function(_)

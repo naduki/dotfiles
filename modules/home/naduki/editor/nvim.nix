@@ -17,7 +17,7 @@
       nixfmt
       shellcheck-minimal
       # for telescope
-      fd 
+      fd
       ripgrep
     ];
 
@@ -44,12 +44,12 @@
       friendly-snippets
       # File explorer
       neo-tree-nvim
-      # 自動で括弧を閉じる
+      # Auto close parentheses
       nvim-autopairs
-      # キーマップ表示
+      # Keymap display
       which-key-nvim
       mini-icons
-      # Gitの変更表示
+      # Git changes
       gitsigns-nvim
       # Syntax highlighting
       (nvim-treesitter.withPlugins (p: with p; [
