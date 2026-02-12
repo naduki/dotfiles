@@ -1,0 +1,68 @@
+# Poimandres for Helix
+# ~/.config/helix/themes/poimandres.toml
+
+"ui.background" = { bg = "#1b1e28" }
+"ui.background.separator" = { fg = "#505870" }
+"ui.cursor" = { fg = "#1b1e28", bg = "#a6accd" }
+"ui.cursor.match" = { fg = "#5de4c7", modifiers = ["bold"] }
+"ui.cursor.primary" = { fg = "#1b1e28", bg = "#a6accd" }
+"ui.cursorline.primary" = { bg = "#252b37" }
+"ui.help" = { fg = "#a6accd", bg = "#1b1e28" }
+"ui.linenr" = { fg = "#505870" }
+"ui.linenr.selected" = { fg = "#a6accd", bg = "#252b37" }
+"ui.menu" = { fg = "#a6accd", bg = "#252b37" }
+"ui.menu.selected" = { fg = "#1b1e28", bg = "#5de4c7" }
+"ui.popup" = { bg = "#252b37" }
+"ui.selection" = { bg = "#303340" }
+"ui.statusline" = { fg = "#a6accd", bg = "#1b1e28" }
+"ui.statusline.inactive" = { fg = "#505870", bg = "#1b1e28" }
+"ui.text" = "#a6accd"
+"ui.text.focus" = "#a6accd"
+"ui.virtual.indent-guide" = { fg = "#303340" }
+"ui.virtual.ruler" = { bg = "#303340" }
+"ui.window" = { fg = "#505870" }
+
+# Syntax Highlighting
+"attribute" = "#e4f0fb"
+"comment" = { fg = "#767c9d", modifiers = ["italic"] }
+"constant" = "#91b4d5"
+"constant.builtin" = "#91b4d5"
+"constant.character.escape" = "#89ddff"
+"constant.numeric" = "#5de4c7"
+"constructor" = "#89ddff"
+"function" = "#89ddff"
+"function.builtin" = "#89ddff"
+"function.macro" = "#89ddff"
+"keyword" = "#fae4fc"
+"keyword.control" = "#fae4fc"
+"keyword.directive" = "#fae4fc"
+"label" = "#fae4fc"
+"namespace" = "#d0679d"
+"operator" = "#89ddff"
+"special" = "#89ddff"
+"string" = "#5de4c7"
+"tag" = "#add7ff"
+"type" = "#add7ff"
+"type.builtin" = "#add7ff"
+"variable" = "#a6accd"
+"variable.builtin" = "#fae4fc"
+"variable.other.member" = "#a6accd"
+"variable.parameter" = "#e4f0fb"
+
+# Diagnostics
+"diagnostic.error" = { underline = { color = "#d0679d", style = "curl" } }
+"diagnostic.hint" = { underline = { color = "#5de4c7", style = "curl" } }
+"diagnostic.info" = { underline = { color = "#89ddff", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "#fffac2", style = "curl" } }
+
+"info" = "#89ddff"
+"hint" = "#5de4c7"
+"debug" = "#505870"
+"warning" = "#fffac2"
+"error" = "#d0679d"
+
+# Git / Diff
+"diff.delta" = "#e4f0fb"
+"diff.minus" = "#d0679d"
+"diff.plus" = "#5de4c7"
+
