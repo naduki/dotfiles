@@ -19,8 +19,16 @@
         name = "Bluetooth Adapters";
         noDisplay = true;
       };
+      "Helix" = {
+        name = "Helix";
+        noDisplay = true;
+      };
       "kbd-layout-viewer5" = {
         name = "Keyboard Layout Viewer";
+        noDisplay = true;
+      };
+      "nvim" = {
+        name = "Neovim wrapper";
         noDisplay = true;
       };
       "org.fcitx.fcitx5-migrator" = {

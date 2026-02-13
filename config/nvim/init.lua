@@ -34,13 +34,11 @@ g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
 vim.api.nvim_create_autocmd("InsertLeave", {
-    pattern = "*",
-    callback = function()
-        vim.fn.system("fcitx5-remote -c")
-    end,
+  pattern = "*",
+  callback = function()
+    vim.fn.system("fcitx5-remote -c")
+  end,
 })
-
-vim.diagnostic.config({ virtual_text = true })
 
 --------------------------------------------------------------------------------
 -- Keymaps (General)
@@ -124,21 +122,7 @@ require("lualine").setup({
       { 'filename', newfile_status = true, path = 1, shorting_target = 24 },
     },
     lualine_c = { require('lsp-progress').progress() },
-    lualine_x = {
-      'diagnostics',
-      {
-        function()
-          local clients = vim.lsp.get_clients({ bufnr = 0 })
-          if #clients == 0 then return '' end
-          local names = {}
-          for _, client in ipairs(clients) do
-            table.insert(names, client.name)
-          end
-          return table.concat(names, ', ')
-        end,
-        icon = ' ',
-      }
-    },
+    lualine_x = { 'diagnostics' },
     lualine_y = { 'branch', 'diff' },
     lualine_z = { 'filetype' },
   },
@@ -272,15 +256,28 @@ end
 
 -- LspAttach (Keymaps & Formatting)
 -- Diagnostic UI
-local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 vim.diagnostic.config({
   virtual_text = true,
-  signs = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "󰅚 ",
+      [vim.diagnostic.severity.WARN] = "󰀪 ",
+      [vim.diagnostic.severity.HINT] = "󰌶 ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+    texthl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+    },
+  },
   update_in_insert = false,
   underline = true,
   severity_sort = true,

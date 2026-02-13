@@ -9,7 +9,7 @@
       enable = true;
       enableFishIntegration = true;
       settings = {
-        command = "fish --login";
+        command = "fish -C 'set fish_greeting' --login";
         theme = "poimandres";
         font-family = [
           "Moralerspace Radon HW"
