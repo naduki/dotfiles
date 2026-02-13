@@ -46,6 +46,8 @@
           "**/.DS_Store" = true;
         };
 
+        "json.schemaDownload.enable" = false;
+
         "nix.enableLSP" = true;
         "nix.serverPath" = "nixd";
         "nix.formatterPath" = "nixfmt";

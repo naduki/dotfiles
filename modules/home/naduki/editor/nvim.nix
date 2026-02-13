@@ -32,25 +32,27 @@
       nvim-cmp
       cmp_luasnip
       cmp-nvim-lsp
-      # Fuzzy finder
-      telescope-nvim
-      telescope-fzf-native-nvim
-      # Status line
-      lualine-nvim
-      lsp-progress-nvim
-      nvim-web-devicons
+      # Auto close parentheses
+      nvim-autopairs
       # Code snippets
       luasnip
       friendly-snippets
       # File explorer
       neo-tree-nvim
-      # Auto close parentheses
-      nvim-autopairs
+      # Fuzzy finder
+      telescope-nvim
+      telescope-fzf-native-nvim
+      # Git changes
+      gitsigns-nvim
       # Keymap display
       which-key-nvim
       mini-icons
-      # Git changes
-      gitsigns-nvim
+      # Status line
+      lualine-nvim
+      lsp-progress-nvim
+      nvim-web-devicons
+      # integrate Direnv
+      direnv-vim
       # Syntax highlighting
       (nvim-treesitter.withPlugins (p: with p; [
         bash
