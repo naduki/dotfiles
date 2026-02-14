@@ -1,4 +1,4 @@
-{ config, lib, myconf, ... }:
+{ config, lib, myconf, pkgs, ... }:
 {
   imports = [
     ./${myconf.host}
@@ -62,11 +62,14 @@
 
   environment.systemPackages = [
     # pkgs.wget
-    # pkgs.git
-    # pkgs.wineWowPackages.stable
-    # pkgs.wineWowPackages.wayland
-    # pkgs.floorp-bin
+    # pkgs.wineWow64Packages.stable
   ];
+
+  # programs.git.enable = true;
+  # programs.firefox = {
+  #   enable = true;
+  #   package = pkgs.floorp-bin;
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

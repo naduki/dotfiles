@@ -1,5 +1,4 @@
 {
-  naduki_Initial = false;
   # Path to the directory containing flake.nix
   flakeRoot = "/home/share/dotfiles";
   # Hostname  "kokona"
@@ -13,10 +12,8 @@
     # "Hyprland"
   ];
   # Rice
-  rice = [
-    # "illogical-impulse"
-    # "danklinux"
-  ];
-  # GPU Virtualization
-  VirtualizationGPU = true;
+  # rice = [
+  #   # "illogical-impulse"
+  #   "danklinux"
+  # ];
 }

@@ -4,9 +4,9 @@ let
 in
 {
   imports = [
-    ./fonts.nix
     ./editor
     ./fish_ghost.nix
+    ./fonts.nix
     ./programs.nix
     ./tmpfs.nix
     ./xdg-user-dirs.nix

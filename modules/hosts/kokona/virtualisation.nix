@@ -1,4 +1,4 @@
-{ config, lib, myconf, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   EnableNvidia = (lib.lists.elem "nvidia" config.services.xserver.videoDrivers);
 in
@@ -33,7 +33,7 @@ in
   else [ ];
   # Container GPU acceleration
   hardware.nvidia-container-toolkit = {
-    enable = (EnableNvidia && (myconf.VirtualizationGPU || config.virtualisation.incus.enable));
+    enable = EnableNvidia;
     # mounts = [ nvidia.com/gpu=0 ];
   };
 
