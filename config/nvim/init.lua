@@ -56,7 +56,6 @@ vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]])
 vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]])
 vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]])
 
-vim.keymap.set('n', '<leader>n', '<cmd>Neotree toggle<CR>')
 vim.keymap.set('n', '<leader>t', '<cmd>belowright 10new<CR><cmd>terminal<CR>')
 
 --------------------------------------------------------------------------------
@@ -88,7 +87,9 @@ require("neo-tree").setup({
     },
   },
 })
+vim.keymap.set('n', '<leader>n', '<cmd>Neotree toggle<CR>')
 
+-- telescope
 require('telescope').setup({
   extensions = {
     fzf = {
@@ -121,7 +122,11 @@ require("lualine").setup({
     lualine_b = {
       { 'filename', newfile_status = true, path = 1, shorting_target = 24 },
     },
-    lualine_c = { require('lsp-progress').progress() },
+    lualine_c = { 
+      function()
+        return require('lsp-progress').progress()
+      end,
+    },
     lualine_x = { 'diagnostics' },
     lualine_y = { 'branch', 'diff' },
     lualine_z = { 'filetype' },
@@ -142,33 +147,23 @@ local luasnip = require('luasnip')
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
-local has_words_before = function()
-  if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then return false end
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 cmp.setup {
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-a>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then -- and has_words_before()
+      if cmp.visible() then
         cmp.select_next_item({ behavior = cmp.SelectBehavior.Select }) -- Prefer selection over snippet
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
       else
         fallback()
       end
@@ -295,7 +290,6 @@ local function lsp_keymaps(bufnr)
   local bufmap = function(keys, func)
     vim.keymap.set('n', keys, func, { buffer = bufnr })
   end
-  local builtin = require('telescope.builtin')
 
   bufmap('K', vim.lsp.buf.hover)
   bufmap('gd', vim.lsp.buf.definition)
@@ -346,10 +340,3 @@ opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldtext = ""
 opt.foldlevel = 99
 opt.indentexpr = "v:lua.vim.treesitter.indentexpr()"
-
--- require("copilot").setup({
---   suggestion = { enabled = false },
---   panel = { enabled = false },
--- })
-
--- require("copilot_cmp").setup()
