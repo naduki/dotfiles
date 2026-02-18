@@ -1,4 +1,4 @@
-{ inputs, lib, myconf, pkgs, pkgs-stable, ... }:
+{ config, inputs, lib, myconf, pkgs, pkgs-stable, ... }:
 {
   imports = [
     ./gtk-theme.nix

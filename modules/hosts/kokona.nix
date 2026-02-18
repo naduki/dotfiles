@@ -1,4 +1,4 @@
-{ config, lib, myconf, pkgs, ... }:
+{ config, lib, myconf, ... }:
 {
   imports = [
     ./${myconf.host}
@@ -19,6 +19,9 @@
   # Enable AMD P-State driver
   boot.kernelParams = [ "amd_pstate=active" ];
 
+  # Disable Bluetooth on boot
+  hardware.bluetooth.powerOnBoot = false;
+
   networking = {
     hostName = "${myconf.host}";
     # Enable networking
@@ -26,17 +29,18 @@
     # Enable L2TP VPN
     # networkmanager.plugins = [ pkgs.networkmanager-l2tp ];
   };
+
   # Install steam
   programs.steam.enable = true;
 
-  # Disable Bluetooth on boot
-  hardware.bluetooth.powerOnBoot = false;
-
-  # /var/lib/systemd/coredump limitations
-  systemd.coredump.extraConfig = ''
-    MaxUse=800M
-    MaxRetention=1day
-  '';
+  # Enable Sudo-rs
+  security = {
+    sudo-rs.enable = true;
+    sudo.enable = lib.mkForce (!(config.security.sudo-rs.enable));
+    sudo-rs.extraConfig = ''
+      Defaults timestamp_timeout=1
+    '';
+  };
 
   services = {
     # GPU Driver
@@ -44,11 +48,13 @@
     # File system trim
     fstrim.enable = true;
   };
-  # Enable Sudo-rs
-  security = {
-    sudo-rs.enable = true;
-    sudo.enable = lib.mkForce (!(config.security.sudo-rs.enable));
-  };
+
+  # /var/lib/systemd/coredump limitations
+  systemd.coredump.extraConfig = ''
+    MaxUse=800M
+    MaxRetention=1day
+  '';
+
   # user settings
   users.users.${myconf.user} = {
     isNormalUser = true;
@@ -60,10 +66,16 @@
       ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
 
-  environment.systemPackages = [
-    # pkgs.wget
-    # pkgs.wineWow64Packages.stable
-  ];
+  environment = {
+    shellAliases = {
+      os-list = "nixos-rebuild list-generations";
+      os-wipe = "sudo -k nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
+    };
+    systemPackages = [
+      # pkgs.wget
+      # pkgs.wineWow64Packages.stable
+    ];
+  };
 
   # programs.git.enable = true;
   # programs.firefox = {

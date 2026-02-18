@@ -5,7 +5,6 @@ in
 {
   imports = [
     ./editor
-    ./fish_ghost.nix
     ./fonts.nix
     ./programs.nix
     ./tmpfs.nix
@@ -24,6 +23,18 @@ in
     (pkgs-stable.blender.override { cudaSupport = true; })
   ];
 
+  home.shellAliases = {
+    rmxmod = "find . -type f -exec chmod -x {} +";
+    dur = "du --max-depth=1 -h | sort -hr";
+
+    nix-update = "${myconf.flakeRoot}/update.sh";
+
+    # xeyes = "nix run nixpkgs#xorg.xeyes";
+    # dconf-editor = "nix run nixpkgs#dconf-editor";
+    # neofetch = "nix run nixpkgs#neofetch";
+    # mission-center = "nix run nixpkgs#mission-center";
+  };
+
   programs = {
     # Editor
     helix.enable = false;
@@ -36,6 +47,7 @@ in
     # Browser (alternative)
     floorp.enable = false;
     # Terminal
+    ghostty.enable = false;
     wezterm.enable = true;
     # Other
     gemini-cli.enable = true;

@@ -19,7 +19,7 @@ config.font = wezterm.font_with_fallback {
 -- Waylandで動かす
 config.enable_wayland = true
 -- フォントサイズ
-config.font_size = 13.0
+config.font_size = 15.0
 config.use_ime = true
 -- テーマ
 config.color_scheme = "Poimandres"
@@ -80,9 +80,10 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     -- プロセスに合わせてアイコン表示
     local nerd_icons = {
         nvim = wezterm.nerdfonts.custom_vim,
-        docker = wezterm.nerdfonts.dev_docker,
+        -- docker = wezterm.nerdfonts.dev_docker,
         podman = wezterm.nerdfonts.dev_podman,
         bash = wezterm.nerdfonts.dev_terminal,
+        fish = wezterm.nerdfonts.dev_terminal,
         -- ssh  = wezterm.nerdfonts.mdi_server,
         top  = wezterm.nerdfonts.mdi_monitor,
         htop  = wezterm.nerdfonts.mdi_monitor,

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ lib, ... }:
 {
   options.modules.editors.vscode = {
     variant = lib.mkOption {

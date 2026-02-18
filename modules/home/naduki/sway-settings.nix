@@ -1,5 +1,4 @@
 { pkgs-stable, ... }:
-
 {
   imports = [
     ./gtk-theme.nix
@@ -17,6 +16,7 @@
       sway-audio-idle-inhibit
       wf-recorder   # Screen recorder
     ];
+
     # --- Cursor Theme Settings ---
     pointerCursor = {
       gtk.enable = true;
@@ -99,7 +99,12 @@
 
   # --- Configuration Files Management ---
   xdg.configFile = {
-    "sway/config".source = ../../../config/sway/config;
+    "sway/config".text = builtins.readFile ../../../config/sway/config + ''
+
+      # Start Polkit Authentication Agent
+      exec ${pkgs-stable.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+    '';
+
     "sway/cheatsheet.txt".source = ../../../config/sway/cheatsheet.txt;
     "waybar/config".source = ../../../config/waybar/config;
     "wlogout/layout".source = ../../../config/wlogout/layout;

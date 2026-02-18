@@ -64,6 +64,7 @@
         toml
         yaml
       ]))
+      toggleterm-nvim
     ];
     initLua = ''${builtins.readFile ../../../../config/nvim/init.lua}'';
   };

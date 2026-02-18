@@ -51,12 +51,12 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
-vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]])
-vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]])
-vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]])
-vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]])
+-- vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]])
+-- vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]])
+-- vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]])
+-- vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]])
 
-vim.keymap.set('n', '<leader>t', '<cmd>belowright 10new<CR><cmd>terminal<CR>')
+-- vim.keymap.set('n', '<leader>t', '<cmd>belowright 10new<CR><cmd>terminal<CR>')
 
 --------------------------------------------------------------------------------
 -- Plugin Configurations
@@ -340,3 +340,24 @@ opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldtext = ""
 opt.foldlevel = 99
 opt.indentexpr = "v:lua.vim.treesitter.indentexpr()"
+
+require("toggleterm").setup({
+  size = 10, 
+  open_mapping = [[<c-\>]],
+  direction = 'horizontal',
+  shell = "fish",
+  start_in_insert = true,
+  persist_size = true,
+})
+
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
+
+-- ターミナルを開いた時だけこのキーマップを有効にする
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
