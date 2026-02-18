@@ -28,8 +28,13 @@
         noDisplay = true;
       };
       "nvim" = {
-        name = "Neovim wrapper";
-        noDisplay = true;
+        name = "Neovim";
+        genericName = "Text Editor";
+        comment = "Edit text files";
+        icon = "nvim";
+        exec = "wezterm start -- nvim %F";
+        terminal = false;
+        categories = [ "TextEditor" ];
       };
       "org.fcitx.fcitx5-migrator" = {
         name = "Fcitx 5 Migration Wizard";

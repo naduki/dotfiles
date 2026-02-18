@@ -361,3 +361,17 @@ end
 
 -- ターミナルを開いた時だけこのキーマップを有効にする
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+-- Gemini Launch
+vim.keymap.set('n', '<leader>l', function()
+  vim.cmd('lcd %:p:h')
+  vim.cmd('botright 80vsplit | terminal gemini')
+end, { desc = 'Launch Gemini CLI' })
+
+-- Gemini Terminal Specific Settings
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "term://*gemini",
+  callback = function()
+    vim.keymap.del('t', '<esc>', { buffer = 0 })
+  end,
+})
