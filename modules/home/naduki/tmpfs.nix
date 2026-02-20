@@ -9,5 +9,8 @@
     # nvidiaのキャッシュ
     "d /tmp/nvidia 0700 - - -"
     "L+ %h/.cache/nvidia - - - - /tmp/nvidia"
+    # fontconfigのキャッシュ
+    "d /tmp/fontconfig 0700 - - -"
+    "L+ %h/.cache/fontconfig - - - - /tmp/fontconfig"
   ];
 }

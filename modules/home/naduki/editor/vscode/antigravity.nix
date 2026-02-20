@@ -8,6 +8,12 @@ in
       "antigravity"
     ];
     programs.vscode.package = pkgs.antigravity.fhsWithPackages fhsPackages;
+    systemd.user.tmpfiles.rules = [
+      "d /tmp/Antigravity/Cache 0700 - - -"
+      "L+ %h/.config/Antigravity/Cache - - - - /tmp/Antigravity/Cache"
+      "d /tmp/Antigravity/CachedData 0700 - - -"
+      "L+ %h/.config/Antigravity/CachedData - - - - /tmp/Antigravity/CachedData"
+    ];
   };
 }
 
