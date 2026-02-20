@@ -21,6 +21,7 @@
     # Shell
     bash = {
       enable = true;
+      historyIgnore = [ "ls" "l" "ll" "cd" "exit" "reboot" "poweroff" "nix-update" ];
       # Set LANG=C on virtual consoles
       initExtra = lib.mkDefault ''
         [ -z "$DISPLAY" ] && export LANG=C

@@ -5,9 +5,6 @@
 local opt = vim.opt
 local g = vim.g
 
-g.mapleader = ' '
-g.maplocalleader = ' '
-
 -- UI / Appearance
 vim.cmd.colorscheme('poimandres')
 opt.termguicolors = true
@@ -29,9 +26,18 @@ opt.clipboard = 'unnamedplus'
 opt.mouse = 'a'
 opt.swapfile = false
 
+g.mapleader = ' '
+g.maplocalleader = ' '
+
 -- Disable Netrw (using neo-tree)
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
+
+-- Disable Providers
+g.loaded_node_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_ruby_provider = 0
 
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
@@ -65,11 +71,17 @@ vim.keymap.set('n', '<C-l>', '<C-w>l')
 -- nvim-autopairs
 require("nvim-autopairs").setup {}
 
--- which-key
-require("which-key").setup {}
-
 -- gitsigns
 require('gitsigns').setup {}
+
+-- which-key
+local wk = require("which-key")
+wk.setup({})
+
+wk.add({
+  { "<leader>f", group = "file/find" },
+  { "<leader>s", group = "search/symbol" },
+})
 
 -- neo-tree
 require("neo-tree").setup({
@@ -105,6 +117,30 @@ require('telescope').setup({
 require('telescope').load_extension('fzf')
 
 local builtin = require('telescope.builtin')
+
+local function lsp_keymaps(bufnr)
+  local bufmap = function(keys, func)
+    vim.keymap.set('n', keys, func, { buffer = bufnr })
+  end
+
+  -- Telescope integration
+  bufmap('grr', builtin.lsp_references)
+  bufmap('<leader>s', builtin.lsp_document_symbols)
+  bufmap('<leader>S', builtin.lsp_dynamic_workspace_symbols)
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  desc = 'LSP actions',
+  callback = function(event)
+    lsp_keymaps(event.buf)
+
+    -- Format command
+    vim.api.nvim_buf_create_user_command(event.buf, 'Format', function(_)
+      vim.lsp.buf.format()
+    end, {})
+  end,
+})
+
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
@@ -249,7 +285,6 @@ for name, conf in pairs(servers) do
   })
 end
 
--- LspAttach (Keymaps & Formatting)
 -- Diagnostic UI
 vim.diagnostic.config({
   virtual_text = true,
@@ -284,37 +319,6 @@ vim.diagnostic.config({
     header = "",
     prefix = "",
   },
-})
-
-local function lsp_keymaps(bufnr)
-  local bufmap = function(keys, func)
-    vim.keymap.set('n', keys, func, { buffer = bufnr })
-  end
-
-  bufmap('K', vim.lsp.buf.hover)
-  bufmap('gd', vim.lsp.buf.definition)
-  bufmap('gD', vim.lsp.buf.declaration)
-  bufmap('gi', vim.lsp.buf.implementation)
-  bufmap('go', vim.lsp.buf.type_definition)
-  bufmap('<leader>r', vim.lsp.buf.rename)
-  bufmap('<leader>a', vim.lsp.buf.code_action)
-
-  -- Telescope integration
-  bufmap('gr', builtin.lsp_references)
-  bufmap('<leader>s', builtin.lsp_document_symbols)
-  bufmap('<leader>S', builtin.lsp_dynamic_workspace_symbols)
-end
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  desc = 'LSP actions',
-  callback = function(event)
-    lsp_keymaps(event.buf)
-
-    -- Format command
-    vim.api.nvim_buf_create_user_command(event.buf, 'Format', function(_)
-      vim.lsp.buf.format()
-    end, {})
-  end,
 })
 
 --------------------------------------------------------------------------------

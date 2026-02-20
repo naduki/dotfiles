@@ -1,13 +1,10 @@
 { pkgs, ... }:
 {
   programs.neovim = {
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-
     withNodeJs = false;
-    withRuby = false;
+    withPerl = false;
     withPython3 = false;
+    withRuby = false;
 
     extraPackages = with pkgs; [
       bash-language-server
@@ -68,4 +65,5 @@
     ];
     initLua = ''${builtins.readFile ../../../../config/nvim/init.lua}'';
   };
+  programs.bash.historyIgnore = [ "nvim" ];
 }
