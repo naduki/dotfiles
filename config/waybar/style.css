@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Klee One", "LXGW WenKai Light", "Moralerspace Radon HW", Helvetica, Arial, sans-serif;
     font-size: 13px;
     min-height: 0;
 }
@@ -36,7 +36,7 @@ window#waybar {
     background: #a8e6cf; /* Mint */
 }
 
-#clock, #battery, #cpu, #memory, #disk, #temperature, #backlight, #network, #bluetooth, #pulseaudio, #mpris, #custom-media, #tray, #mode, #idle_inhibitor, #custom-audio_idle_inhibitor, #mpd, #custom-wlogout {
+#clock, #battery, #memory, #network, #bluetooth, #pulseaudio, #mpris, #tray, #idle_inhibitor, #custom-wlogout {
     padding: 0 10px;
     color: #2f3e46;
 }

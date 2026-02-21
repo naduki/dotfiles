@@ -63,9 +63,9 @@ config.keys = {
     { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
     -- タブリスト
     { key = "q", mods = "LEADER", action = act.ShowTabNavigator },
-    -- 新規ペイン(縦)
+    -- 新規ペイン(縦 / 上下)
     { key = 'v', mods = 'LEADER', action = act.SplitHorizontal{ domain = 'CurrentPaneDomain' } },
-    -- 新規ペイン(横)
+    -- 新規ペイン(横 / 左右)
     { key = "s", mods = "LEADER", action = act.SplitVertical{ domain = "CurrentPaneDomain" } },
     -- ペインを閉じる
     { key = "x", mods = "LEADER", action = act.CloseCurrentPane{ confirm = true } },

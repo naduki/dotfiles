@@ -39,7 +39,7 @@ g.loaded_perl_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 
-vim.api.nvim_create_autocmd("InsertLeave", {
+vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter", "BufEnter" }, {
   pattern = "*",
   callback = function()
     vim.fn.system("fcitx5-remote -c")
@@ -56,13 +56,6 @@ vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
-
--- vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]])
--- vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]])
--- vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]])
--- vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]])
-
--- vim.keymap.set('n', '<leader>t', '<cmd>belowright 10new<CR><cmd>terminal<CR>')
 
 --------------------------------------------------------------------------------
 -- Plugin Configurations
@@ -220,6 +213,28 @@ cmp.setup {
   },
 }
 
+-- toggleterm
+require("toggleterm").setup({
+  size = 10, 
+  open_mapping = [[<c-\>]],
+  direction = 'horizontal',
+  shell = "fish",
+  start_in_insert = true,
+  persist_size = true,
+})
+
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
+
+-- Enable these keymaps only when a terminal is opened
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
 --------------------------------------------------------------------------------
 -- LSP Configuration
 --------------------------------------------------------------------------------
@@ -345,37 +360,22 @@ opt.foldtext = ""
 opt.foldlevel = 99
 opt.indentexpr = "v:lua.vim.treesitter.indentexpr()"
 
-require("toggleterm").setup({
-  size = 10, 
-  open_mapping = [[<c-\>]],
-  direction = 'horizontal',
-  shell = "fish",
-  start_in_insert = true,
-  persist_size = true,
-})
-
-function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-end
-
--- ターミナルを開いた時だけこのキーマップを有効にする
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
 -- Gemini Launch
 vim.keymap.set('n', '<leader>l', function()
   vim.cmd('lcd %:p:h')
   vim.cmd('botright 80vsplit | terminal gemini')
+  vim.cmd('startinsert')
 end, { desc = 'Launch Gemini CLI' })
 
 -- Gemini Terminal Specific Settings
-vim.api.nvim_create_autocmd("TermOpen", {
+vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
   pattern = "term://*gemini",
   callback = function()
-    vim.keymap.del('t', '<esc>', { buffer = 0 })
+    -- Disable <esc> to normal mode for Gemini CLI
+    pcall(vim.keymap.del, 't', '<esc>', { buffer = 0 })
+    
+    if vim.bo.buftype == 'terminal' then
+      vim.cmd('startinsert')
+    end
   end,
 })
