@@ -5,26 +5,16 @@
     ./sc-recoder.nix
   ];
 
-  home = {
-    # --- Essential Packages ---
-    packages = with pkgs-stable; [
-      pavucontrol
+  # --- Essential Packages ---
+  home.packages = with pkgs-stable; [
+    pavucontrol
 
-      libnotify
-      grim          # Screenshot
-      slurp         # Region selection
-      sway-audio-idle-inhibit
-      wf-recorder   # Screen recorder
-    ];
-
-    # --- Cursor Theme Settings ---
-    pointerCursor = {
-      gtk.enable = true;
-      name = "catppuccin-mocha-teal-cursors";
-      package = pkgs-stable.catppuccin-cursors.mochaTeal;
-      size = 24;
-    };
-  };
+    libnotify
+    grim          # Screenshot
+    slurp         # Region selection
+    sway-audio-idle-inhibit
+    wf-recorder   # Screen recorder
+  ];
 
   programs = {
     # Automatically start Sway on tty1. If it fails or is run on another virtual terminal, set LANG=C.
@@ -66,6 +56,7 @@
       package = pkgs-stable.cliphist;
       clipboardPackage = pkgs-stable.wl-clipboard;
     };
+    polkit-gnome.enable = true;
     # Notifications
     mako = {
       enable = true;
@@ -99,12 +90,7 @@
 
   # --- Configuration Files Management ---
   xdg.configFile = {
-    "sway/config".text = builtins.readFile ../../../config/sway/config + ''
-
-      # Start Polkit Authentication Agent
-      exec ${pkgs-stable.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-    '';
-
+    "sway/config".source = ../../../config/sway/config;
     "sway/cheatsheet.txt".source = ../../../config/sway/cheatsheet.txt;
     "waybar/config".source = ../../../config/waybar/config;
     "wlogout/layout".source = ../../../config/wlogout/layout;
