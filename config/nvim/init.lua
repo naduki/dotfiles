@@ -25,6 +25,7 @@ opt.autoindent = true
 opt.clipboard = 'unnamedplus'
 opt.mouse = 'a'
 opt.swapfile = false
+opt.equalalways = false
 
 g.mapleader = ' '
 g.maplocalleader = ' '
@@ -363,7 +364,7 @@ opt.indentexpr = "v:lua.vim.treesitter.indentexpr()"
 -- Gemini Launch
 vim.keymap.set('n', '<leader>l', function()
   vim.cmd('lcd %:p:h')
-  vim.cmd('botright 80vsplit | terminal gemini')
+  vim.cmd('botright 65vsplit | terminal gemini')
   vim.cmd('startinsert')
 end, { desc = 'Launch Gemini CLI' })
 
