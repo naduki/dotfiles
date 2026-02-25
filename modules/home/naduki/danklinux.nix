@@ -7,25 +7,15 @@
 
   dbus.packages = [ pkgs-stable.nemo-with-extensions ];
 
-  home = {
-    packages = with pkgs-stable; [
-      ## screen recorder
-      slurp
-      wf-recorder
+  home.packages = with pkgs-stable; [
+    ## screen recorder
+    slurp
+    wf-recorder
 
-      ## etc ...
-      pavucontrol
-      xdg-user-dirs
-    ];
-    # --- Cursor Theme Settings ---
-    pointerCursor = {
-      gtk.enable = true;
-      hyprcursor.enable = true;
-      name = "catppuccin-mocha-teal-cursors";
-      package = pkgs-stable.catppuccin-cursors.mochaTeal;
-      size = 24;
-    };
-  };
+    ## etc ...
+    pavucontrol
+    xdg-user-dirs
+  ];
   # Automatically start Hyprland on tty1. If it fails or is run on another virtual terminal, set LANG=C.
   programs.bash.initExtra = ''
     [ -z "$DISPLAY" ] && { [ "''${XDG_VTNR:-0}" -eq 1 ] && exec start-hyprland || export LANG=C; }

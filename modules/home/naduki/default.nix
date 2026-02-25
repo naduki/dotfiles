@@ -18,21 +18,30 @@ in
   # Disable home-manager news notifications on switch
   news.display = "silent";
 
-  # Add Blender (CUDA Support)
-  home.packages = [
-    (pkgs-stable.blender.override { cudaSupport = true; })
-  ];
+  home = {
+    # --- Cursor Theme Settings ---
+    pointerCursor = lib.mkIf (!(builtins.elem "Cinnamon" (myconf.environment or [ ]))) {
+      gtk.enable = true;
+      name = "catppuccin-mocha-teal-cursors";
+      package = pkgs-stable.catppuccin-cursors.mochaTeal;
+      size = 24;
+    };
+    # Add Blender (CUDA Support)
+    packages = [
+      (pkgs-stable.blender.override { cudaSupport = true; })
+    ];
+    # User Global Aliases
+    shellAliases = {
+      rmxmod = "find . -type f -exec chmod -x {} +";
+      dur = "du --max-depth=1 -h | sort -hr";
 
-  home.shellAliases = {
-    rmxmod = "find . -type f -exec chmod -x {} +";
-    dur = "du --max-depth=1 -h | sort -hr";
+      nix-update = "${myconf.flakeRoot}/update.sh";
 
-    nix-update = "${myconf.flakeRoot}/update.sh";
-
-    # xeyes = "nix run nixpkgs#xorg.xeyes";
-    # dconf-editor = "nix run nixpkgs#dconf-editor";
-    # neofetch = "nix run nixpkgs#neofetch";
-    # mission-center = "nix run nixpkgs#mission-center";
+      # xeyes = "nix run nixpkgs#xorg.xeyes";
+      # dconf-editor = "nix run nixpkgs#dconf-editor";
+      # neofetch = "nix run nixpkgs#neofetch";
+      # mission-center = "nix run nixpkgs#mission-center";
+    };
   };
 
   programs = {
