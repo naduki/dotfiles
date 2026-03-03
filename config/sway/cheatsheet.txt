@@ -1,44 +1,55 @@
 Key Bindings
---------------------------------------------------------------------------------
-Mod+Enter           Terminal (Wezterm)
-Mod+d               Launcher (Wofi)
-Mod+q               Close Window
-Mod+Shift+e         Power Menu (wlogout)
-Mod+Shift+c         Reload Config
-Mod+/               Show Cheatsheet
+-----------------------------------------------------
+Mod+Enter             Terminal (Wezterm)
+Mod+d                 Launcher (Fuzzel)
+Mod+e                 Explorer (Nemo)
+Mod+w                 Browser (Brave)
+Mod+q                 Close Window
+Mod+Shift+Escape      Power Menu (wlogout)
+Mod+Shift+c           Reload Config
+Mod+/                 Show Cheatsheet
 
 Navigation
---------------------------------------------------------------------------------
+-----------------------------------------------------
 Mod+Arrow/hjkl        Move Focus
 Mod+Shift+Arrow/hjkl  Move Window
 Mod+0-9               Switch Workspace
 Mod+Shift+0-9         Move Window to Workspace
 
 Layout
---------------------------------------------------------------------------------
-Mod+b / Mod+v       Split Horizontal / Vertical
-Mod+s               Stacking Layout
-Mod+w               Tabbed Layout
-Mod+e               Toggle Split
-Mod+f               Fullscreen
-Mod+Shift+Space     Float / Tile Toggle
-Mod+Space           Focus Float / Tile
-Mod+a               Focus Parent
-Mod+Shift+b         Toggle Border
+-----------------------------------------------------
+Mod+b / Mod+v         Split Horizontal / Vertical
+Mod+Shift+s           Stacking Layout
+Mod+Shift+w           Tabbed Layout
+Mod+Shift+e           Toggle Split
+Mod+f                 Fullscreen
+Mod+Shift+Space       Float / Tile Toggle
+Mod+Space             Focus Float / Tile
+Mod+a                 Focus Parent
+Mod+Shift+b           Toggle Border
 
 Scratchpad (Hidden Workspace)
---------------------------------------------------------------------------------
-Mod+Shift+minus     Move to Scratchpad
-Mod+minus           Show Scratchpad
-
-Resize Mode
---------------------------------------------------------------------------------
-Mod+r               Enter Resize Mode
-  Arrow / hjkl      Resize
-  Esc / Enter       Exit Resize Mode
+-----------------------------------------------------
+Mod+Shift+minus       Move to Scratchpad
+Mod+minus             Show Scratchpad
 
 Screenshot & Recording
---------------------------------------------------------------------------------
-Print               Full Screenshot
-Shift+Print         Area Screenshot
-Ctrl+Print          Screen Recording
+-----------------------------------------------------
+Print                 Full Screenshot
+Shift+Print           Area Screenshot
+Ctrl+Print            Screen Recording
+
+Resize Mode
+-----------------------------------------------------
+Mod+r                 Enter Resize Mode
+  Arrow / hjkl        Resize
+  Esc / Enter         Exit Resize Mode
+
+Volume & Brightness
+-----------------------------------------------------
+AudioMute             Toggle Mute
+AudioLowerVolume      Volume -5%
+AudioRaiseVolume      Volume -5%
+AudioMicMute          Toggle Mic Mute
+MonBrightnessDown     Brightness -5%
+MonBrightnessUp       Brightness +5%
