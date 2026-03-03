@@ -39,9 +39,30 @@
       style = builtins.readFile ../../../config/wlogout/style.css;
     };
     # Launcher
-    wofi = {
+    fuzzel = {
       enable = true;
-      package = pkgs-stable.wofi;
+      package = pkgs-stable.fuzzel;
+      settings = {
+        main = {
+          terminal = "wezterm";
+        };
+        colors = {
+          # $pale_mint
+          background="dcedc1ff";
+          # $text_color
+          text="2f3e46ff";
+          # $urgent
+          match="ff6b6bff";
+          # $mint
+          selection="a8e6cfff";
+          # $text_color
+          selection-text="2f3e46ff";
+          # $urgent
+          selection-match="ff6b6bff";
+          # $mint
+          border="a8e6cfff";
+        };
+      };
     };
   };
 

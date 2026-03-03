@@ -27,9 +27,9 @@ in
       size = 24;
     };
     # Add Blender (CUDA Support)
-    packages = [
-      (pkgs-stable.blender.override { cudaSupport = true; })
-    ];
+    # packages = [
+    #   (pkgs-stable.blender.override { cudaSupport = true; })
+    # ];
     # User Global Aliases
     shellAliases = {
       rmxmod = "find . -type f -exec chmod -x {} +";

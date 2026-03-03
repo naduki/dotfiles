@@ -8,6 +8,7 @@
       "--unsupported-gpu"
     ];
     extraPackages = [
+      # pkgs.brightnessctl
       pkgs.polkit_gnome
     ];
     wrapperFeatures.gtk = true; # Optimize GTK application behavior
@@ -33,10 +34,7 @@
   hardware.bluetooth.enable = true;
   # Security
   security = {
-    polkit = {
-      enable = true;
-      adminIdentities = [ "unix-group:wheel" ];
-    };
+    polkit.enable = true;
     pam.services.login.enableGnomeKeyring = true;
   };
   # Services

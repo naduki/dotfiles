@@ -16,7 +16,11 @@ set $right l
 # Your preferred terminal emulator
 set $term wezterm
 # Your preferred application launcher
-set $menu wofi --show drun --sort-order=alphabetical
+set $menu fuzzel
+# Browser
+set $browser brave
+# Explorer
+set $filer nemo
 
 ### Colors (Mint Green Pastel)
 set $mint #a8e6cf
@@ -34,14 +38,15 @@ client.urgent           $urgent    $urgent    $text_color $urgent    $urgent
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
-output * bg /home/naduki/Pictures/homework/Wallpapers/wallpaper fill
+output * bg /home/naduki/.config/wallpaper/wallpaper fill
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output DP-1 mode 2560x1440@75Hz pos 0 0
+include monitors.conf
+# output DP-1 mode 2560x1440@75Hz pos 0 0
 
 ### Window configuration
 #
@@ -93,6 +98,16 @@ input "type:keyboard" {
     # Kill focused window
     bindsym $mod+q kill
 
+    bindsym $mod+e exec $filer
+
+    bindsym $mod+w exec $browser
+
+    # bindsym $mod+i exec if systemctl --user is-active --quiet swayidle.service; then \
+    #     systemctl --user stop swayidle.service && notify-send "Idle Inhibited"; \
+    #     else \
+    #     systemctl --user start swayidle.service && notify-send "Idle Enabled"; \
+    #     fi
+
     # Start your launcher
     bindsym $mod+d exec $menu
 
@@ -107,7 +122,7 @@ input "type:keyboard" {
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec wlogout
+    bindsym $mod+Shift+Escape exec wlogout
 #
 # Moving around:
 #
@@ -169,9 +184,9 @@ input "type:keyboard" {
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+Shift+s layout stacking
+    bindsym $mod+Shift+w layout tabbed
+    bindsym $mod+Shift+e layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -242,7 +257,7 @@ bindsym $mod+r mode "resize"
     bindsym Ctrl+Print exec ~/.config/screen-record.sh
 
     # Show Cheatsheet
-    bindsym $mod+slash exec sh -c "cat ~/.config/sway/cheatsheet.txt | wofi --show dmenu --width 800 --height 600 --prompt 'Sway Cheatsheet (Press Esc to close)'"
+    bindsym $mod+slash exec sh -c "cat ~/.config/sway/cheatsheet.txt | fuzzel -d -w 50 -l 45 --prompt 'Sway Cheatsheet (Press Esc to close) > '"
 
 #
 # Status Bar:
@@ -255,7 +270,7 @@ bar {
 include /etc/sway/config.d/*
 
 ### Window Rules
-# y が 48 ずれる
+# Waybarで y が 48 ずれる
 # Brave Picture-in-Picture
 for_window [title="(?i)picture in picture"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
 for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
@@ -266,7 +281,8 @@ for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enabl
 exec fcitx5 -d
 
 # Core components
-exec dbus-update-activation-environment --all
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE PATH
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE PATH LANG LC_ALL
 exec gnome-keyring-daemon --start --components=secrets
 exec sway-audio-idle-inhibit
 
