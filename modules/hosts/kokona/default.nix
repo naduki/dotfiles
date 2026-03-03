@@ -5,6 +5,7 @@
     ./limine.nix
     ./locale_jp.nix
     ./nvidia.nix
+    ./extra/l2tp.nix
     ./extra/security.nix
     ./sound.nix
     ./system.nix

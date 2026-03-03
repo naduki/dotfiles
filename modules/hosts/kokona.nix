@@ -26,8 +26,6 @@
     hostName = "${myconf.host}";
     # Enable networking
     networkmanager.enable = true;
-    # Enable L2TP VPN
-    # networkmanager.plugins = [ pkgs.networkmanager-l2tp ];
   };
 
   # Install steam
