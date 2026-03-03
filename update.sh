@@ -1,6 +1,6 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p git newt
-# shellcheck shell=sh
+# shellcheck shell=bash
 # This script is used to update NixOS / Home-manager.
 
 # If "-h" option is specified, display usage
@@ -118,7 +118,7 @@ while true; do
     LOOP_FLAG=true
   else
     # If arguments exist, remove hyphen and set mode
-    MODE=$(echo "$1" | sed 's/^-//')
+    MODE="${1#-}"
     LOOP_FLAG=false
   fi
   SLEEP=3
@@ -135,7 +135,7 @@ while true; do
     (hm)
       home ;;
     (cl)
-      sudo nix-collect-garbage --delete-older-than 1d
+      pkexec nix-collect-garbage --delete-older-than 1d
       nix-collect-garbage --delete-older-than 1d
       nix flake archive && SLEEP=0 ;;
     (q)
