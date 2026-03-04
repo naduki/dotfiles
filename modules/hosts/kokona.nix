@@ -1,4 +1,10 @@
-{ config, lib, myconf, ... }:
+{
+  config,
+  lib,
+  myconf,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./${myconf.host}
@@ -29,7 +35,7 @@
   };
 
   # Install steam
-  programs.steam.enable = true;
+  # programs.steam.enable = true;
 
   # Enable Sudo-rs
   security = {
@@ -59,19 +65,19 @@
     initialHashedPassword = "$y$j9T$DvGj7T6HlYCo2M4jtp5ZK1$ykxX0xXUjLvz.7ZEKx/tXIo7hEOJY6MYJoEhI/Dud2.";
     description = "${myconf.user}_nixos";
     extraGroups = [ "networkmanager" "wheel" ]
-      # Additional Groups
-      ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"  # KVM and QEMU rootless
-      ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
+    # Additional Groups
+    ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"  # KVM and QEMU rootless
+    ++ lib.optional config.virtualisation.incus.enable "incus-admin"; # incus rootless
   };
 
   environment = {
     shellAliases = {
       os-list = "nixos-rebuild list-generations";
-      os-wipe = "sudo -k nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
+      os-wipe = "pkexec nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
     };
     systemPackages = [
       # pkgs.wget
-      # pkgs.wineWow64Packages.stable
+      pkgs.wineWow64Packages.stable
     ];
   };
 
