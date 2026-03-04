@@ -2,8 +2,8 @@
 (pkgs.buildFHSEnv {
   name = "AUTOMATIC1111/stable-diffusion-webui FHS Environment";
 
-  # OSにNvidiaドライバと固有環境でBlender CUDAを入れたためか、
-  # FHSだとドライバとCUDAを無くすことができた
+  # It seems that because the Nvidia driver and Blender CUDA were installed on the host OS,
+  # they could be omitted from this FHS environment.
   targetPkgs = pkgs: with pkgs; [
     git # The program instantly crashes if git is not present, even if everything is already downloaded
     wget
@@ -14,7 +14,7 @@
     stdenv.cc
     libGLU libGL
     glib
-    # 無くても動くけどエラーが出る
+    # Works without it, but errors occur
     freeglut
     util-linux
   ];

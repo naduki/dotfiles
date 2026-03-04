@@ -1,16 +1,16 @@
 {
   systemd.user.tmpfiles.rules = [
-    # BraveSoftwareのキャッシュ
+    # BraveSoftware
     "d /tmp/BraveSoftware 0700 - - -"
     "L+ %h/.cache/BraveSoftware - - - - /tmp/BraveSoftware"
-    # ms-playwright-goのキャッシュ
-    "d /tmp/ms-playwright-go 0700 - - -"
-    "L+ %h/.cache/ms-playwright-go - - - - /tmp/ms-playwright-go"
-    # nvidiaのキャッシュ
-    "d /tmp/nvidia 0700 - - -"
-    "L+ %h/.cache/nvidia - - - - /tmp/nvidia"
-    # fontconfigのキャッシュ
+  # fontconfig
     "d /tmp/fontconfig 0700 - - -"
     "L+ %h/.cache/fontconfig - - - - /tmp/fontconfig"
+    # ms-playwright-go
+    "d /tmp/ms-playwright-go 0700 - - -"
+    "L+ %h/.cache/ms-playwright-go - - - - /tmp/ms-playwright-go"
+    # nvidia
+    "d /tmp/nvidia 0700 - - -"
+    "L+ %h/.cache/nvidia - - - - /tmp/nvidia"
   ];
 }

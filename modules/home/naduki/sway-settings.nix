@@ -31,7 +31,7 @@
           terminal = "wezterm";
           sort-result = "yes";
           match-mode = "fzf";
-          # 頻度による並び替えを実質的にリセット・無効化する
+          # Effectively reset or disable sorting by frequency
           cache = "/dev/null";
         };
         colors = {
