@@ -22,18 +22,18 @@ set $browser brave
 # Explorer
 set $filer nemo
 
-### Colors (Mint Green Pastel)
-set $mint #a8e6cf
-set $pale_mint #dcedc1
-set $dark_green #2f3e46
-set $text_color #2f3e46
-set $urgent #ff6b6b
+### Colors (Poimandres)
+set $accent #5de4c7
+set $bg_focus #1b1e28
+set $bg_inactive #303340
+set $text_inactive #a6accd
+set $urgent #d0679d
 
-# class                 border     backgr.    text        indicator  child_border
-client.focused          $mint      $mint      $text_color $mint      $mint
-client.focused_inactive $pale_mint $pale_mint $text_color $pale_mint $pale_mint
-client.unfocused        $pale_mint $pale_mint $text_color $pale_mint $pale_mint
-client.urgent           $urgent    $urgent    $text_color $urgent    $urgent
+# class                 border       backgr.      text           indicator    child_border
+client.focused          $accent      $accent      $bg_focus      $accent      $accent
+client.focused_inactive $bg_inactive $bg_inactive $text_inactive $bg_inactive $bg_inactive
+client.unfocused        $bg_inactive $bg_inactive $text_inactive $bg_inactive $bg_inactive
+client.urgent           $urgent      $urgent      $bg_focus      $urgent      $urgent
 
 ### Output configuration
 #
@@ -122,7 +122,7 @@ input "type:keyboard" {
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+Escape exec wlogout
+    bindsym $mod+Shift+Escape exec exec ~/.config/power-menu.sh
 #
 # Moving around:
 #
@@ -257,7 +257,7 @@ bindsym $mod+r mode "resize"
     bindsym Ctrl+Print exec ~/.config/screen-record.sh
 
     # Show Cheatsheet
-    bindsym $mod+slash exec sh -c "cat ~/.config/sway/cheatsheet.txt | fuzzel -d -w 50 -l 45 --prompt 'Sway Cheatsheet (Press Esc to close) > '"
+    bindsym $mod+slash exec sh -c "cat ~/.config/sway/cheatsheet.txt | fuzzel -d -w 50 -l 40 --prompt 'Sway Cheatsheet (Press Esc to close) > '"
 
 #
 # Status Bar:
