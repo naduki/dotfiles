@@ -98,7 +98,7 @@
     },
     "custom/wlogout": {
         "format": "",
-        "on-click": "wlogout",
+        "on-click": "~/.config/power-menu.sh",
         "tooltip": false
     }
 }
