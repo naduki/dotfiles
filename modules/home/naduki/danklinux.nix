@@ -2,7 +2,7 @@
 {
   imports = [
     ./gtk-theme.nix
-    ./sc-recoder.nix
+    ./scripts/sc-recoder.nix
   ];
 
   dbus.packages = [ pkgs-stable.nemo-with-extensions ];
