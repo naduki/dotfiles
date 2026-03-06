@@ -104,6 +104,11 @@
       package = pkgs-stable.cliphist;
       clipboardPackage = pkgs-stable.wl-clipboard;
     };
+    gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      pinentry.package = pkgs-stable.pinentry-gnome3;
+    };
     polkit-gnome.enable = true;
     # Notifications
     mako = {
