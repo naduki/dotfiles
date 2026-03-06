@@ -39,6 +39,7 @@ client.urgent           $urgent      $urgent      $bg_focus      $urgent      $u
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
 output * bg /home/naduki/.config/wallpaper/wallpaper fill
+
 #
 # Example configuration:
 #
@@ -270,7 +271,7 @@ bar {
 include /etc/sway/config.d/*
 
 ### Window Rules
-# Waybarで y が 48 ずれる
+# Waybar y-axis offset of 48
 # Brave Picture-in-Picture
 for_window [title="(?i)picture in picture"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
 for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
@@ -281,15 +282,9 @@ for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enabl
 exec fcitx5 -d
 
 # Core components
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE PATH
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE PATH LANG LC_ALL
+exec dbus-update-activation-environment --systemd --all
 exec gnome-keyring-daemon --start --components=secrets
 exec sway-audio-idle-inhibit
-
-# exec swayidle -w \
-#          timeout 300 'swaylock -f' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f'
 # exec autotiling-rs
 # exec mako
 

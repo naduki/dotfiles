@@ -5,7 +5,7 @@ Mod+d                 Launcher (Fuzzel)
 Mod+e                 Explorer (Nemo)
 Mod+w                 Browser (Brave)
 Mod+q                 Close Window
-Mod+Shift+Escape      Power Menu (wlogout)
+Mod+Shift+Escape      Power Menu
 Mod+Shift+c           Reload Config
 Mod+/                 Show Cheatsheet
 
