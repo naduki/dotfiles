@@ -9,7 +9,7 @@
     ];
     extraPackages = [
       # pkgs.brightnessctl
-      pkgs.polkit_gnome
+      # pkgs.ghostty
     ];
     wrapperFeatures.gtk = true; # Optimize GTK application behavior
   };
@@ -23,6 +23,11 @@
 
   environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR = lib.mkDefault
     "${pkgs.cinnamon-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
+
+  environment.systemPackages = [
+    pkgs.nemo-with-extensions
+    pkgs.polkit_gnome
+  ];
 
   # Enable Bluetooth support
   hardware.bluetooth.enable = true;

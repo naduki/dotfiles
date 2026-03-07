@@ -11,7 +11,7 @@
         celluloid
         file-roller
         glib # for trash
-        nemo-with-extensions
+        # nemo-with-extensions
         xviewer
         xreader
         xed-editor
