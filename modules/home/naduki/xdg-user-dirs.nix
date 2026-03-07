@@ -19,10 +19,10 @@
         name = "Bluetooth Adapters";
         noDisplay = true;
       };
-      "Helix" = {
-        name = "Helix";
-        noDisplay = true;
-      };
+      # "Helix" = {
+      #   name = "Helix";
+      #   noDisplay = true;
+      # };
       "kbd-layout-viewer5" = {
         name = "Keyboard Layout Viewer";
         noDisplay = true;
