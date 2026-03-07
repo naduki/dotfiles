@@ -25,6 +25,11 @@
   # Enable AMD P-State driver
   boot.kernelParams = [ "amd_pstate=active" ];
 
+  documentation = {
+    doc.enable = false;
+    info.enable = false;
+  };
+
   # Disable Bluetooth on boot
   hardware.bluetooth.powerOnBoot = false;
 

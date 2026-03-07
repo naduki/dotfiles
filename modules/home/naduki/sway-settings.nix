@@ -33,6 +33,7 @@
           match-mode = "fzf";
           # Effectively reset or disable sorting by frequency
           cache = "/dev/null";
+          icon-theme="Mint-Y";
         };
         colors = {
           background="1b1e28ff";
