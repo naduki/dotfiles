@@ -14,10 +14,17 @@ in
           # Pass stable package set with alias for use
           pkgs-stable = import inputs.stable {
             inherit system;
-            config.allowUnfreePredicate = pkg: builtins.elem (inputs.stable.lib.getName pkg) [
-              # Allow Blender CUDA
-              "blender" "cuda_cudart" "cuda_nvcc" "cuda_cccl"
-            ];
+            # Allow Blender CUDA
+            # config = {
+            #   allowUnfreePredicate = pkg:
+            #     let
+            #       pkgName = inputs.stable.lib.getName pkg;
+            #     in
+            #       builtins.elem pkgName [
+            #         "blender" "optix" # "cuda_cudart" "cuda_nvcc" "cuda_cccl"
+            #       ] || inputs.stable.lib.hasPrefix "cuda_" pkgName;
+            #   cudaCapabilities = [ "8.9" ];  # for 4000
+            # };
           };
         };
         modules = [ ./home/home.nix ];

@@ -28,12 +28,14 @@
       package = pkgs-stable.fuzzel;
       settings = {
         main = {
-          terminal = "wezterm";
-          sort-result = "yes";
-          match-mode = "fzf";
-          # Effectively reset or disable sorting by frequency
-          cache = "/dev/null";
+          cache = "/dev/null";  # Effectively reset or disable sorting by frequency
+          font = "monospace:size=14";
           icon-theme="Mint-Y";
+          match-mode = "fzf";
+          show-actions = "yes";
+          sort-result = "yes";
+          terminal = "wezterm";
+          width = 40;
         };
         colors = {
           background="1b1e28ff";
