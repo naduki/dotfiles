@@ -277,19 +277,13 @@ for_window [title="(?i)picture in picture"] floating enable, sticky enable, resi
 for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
 
 ### Autostart
-#
+# Core components
+exec dbus-update-activation-environment --systemd --all
+exec systemctl --user restart polkit-gnome autotiling cliphist cliphist-images
+exec gnome-keyring-daemon --start --components=secrets
+
 # Input method
 exec fcitx5 -d
 
-# Core components
-exec dbus-update-activation-environment --systemd --all
-exec gnome-keyring-daemon --start --components=secrets
 exec sway-audio-idle-inhibit
-# exec autotiling-rs
-# exec mako
-
-# Audio
-# exec easyeffects --gapplication-service
-
-# Clipboard history
-# exec wl-paste --watch cliphist store
+exec cliphist wipe
