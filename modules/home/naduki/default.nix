@@ -49,7 +49,7 @@ in
     helix.enable = false;
     neovim.enable = true;
 
-    vscode.enable = true;
+    vscode.enable = false;
     zed-editor.enable = false;
     # Browser
     chromium.enable = true;
