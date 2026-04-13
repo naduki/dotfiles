@@ -346,10 +346,13 @@ vim.api.nvim_create_autocmd("FileType", {
     local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
     if not lang then return end
 
-    -- Safe check for parser availability
-    local has_parser = pcall(function() vim.treesitter.get_parser(args.buf, lang) end)
-    if has_parser then
-      vim.treesitter.start(args.buf, lang)
+    -- Only for normal buffers
+    if vim.bo[args.buf].buftype == "" then
+      -- Skip large files (e.g. > 100KB)
+      local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+      if ok and stats and stats.size < 102400 then
+        pcall(vim.treesitter.start, args.buf, lang)
+      end
     end
   end,
 })
@@ -374,7 +377,6 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
   callback = function()
     -- Disable <esc> to normal mode for Gemini CLI
     pcall(vim.keymap.del, 't', '<esc>', { buffer = 0 })
-    
     if vim.bo.buftype == 'terminal' then
       vim.cmd('startinsert')
     end

@@ -5,6 +5,7 @@
     userDirs = {
       enable = true;
       createDirectories = true;
+      setSessionVariables = false;
       desktop = "$HOME/Desktop";
       download = "$HOME/Downloads";
       templates = "$HOME/Templates";
