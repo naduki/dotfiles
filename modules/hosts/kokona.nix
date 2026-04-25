@@ -22,8 +22,11 @@
       ++ optionals (config.programs.steam.enable or false) [ "steam" "steam-original" "steam-unwrapped" "steam-run" ];
   in builtins.elem name allowed;
 
-  # Enable AMD P-State driver
-  boot.kernelParams = [ "amd_pstate=active" ];
+  # Enable AMD P-State driver and disable MSI Modern MD272QPW Storage
+  boot.kernelParams = [
+    "amd_pstate=active"
+    "usb-storage.quirks=1462:3fa4:i"
+  ];
 
   documentation = {
     doc.enable = false;
