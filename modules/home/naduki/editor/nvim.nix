@@ -1,5 +1,11 @@
 { pkgs, ... }:
 {
+  imports = [ ./nvim-queries.nix ];
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+    "poimandres.nvim"
+  ];
+
   programs.neovim = {
     withNodeJs = false;
     withPerl = false;
@@ -41,6 +47,8 @@
       telescope-fzf-native-nvim
       # Git changes
       gitsigns-nvim
+      # Integrate Direnv
+      direnv-vim
       # Keymap display
       which-key-nvim
       mini-icons
@@ -48,20 +56,14 @@
       lualine-nvim
       lsp-progress-nvim
       nvim-web-devicons
-      # integrate Direnv
-      direnv-vim
-      # Syntax highlighting
-      (nvim-treesitter.withPlugins (p: with p; [
-        bash
-        cuda
-        json
-        nix
-        python
-        rust
-        toml
-        yaml
-      ]))
+      # Terminal
       toggleterm-nvim
+      # Treesitter
+      nvim-treesitter-parsers.bash
+      nvim-treesitter-parsers.dockerfile
+      nvim-treesitter-parsers.nix
+      nvim-treesitter-parsers.rust
+      nvim-treesitter-parsers.toml
     ];
     initLua = ''${builtins.readFile ../../../../config/nvim/init.lua}'';
   };
