@@ -1,4 +1,4 @@
-{ config, pkgs, lib, myconf, ... }:
+{ pkgs, lib, myconf, ... }:
 
 {
   # Enable Sway
@@ -35,7 +35,7 @@
   security.polkit.enable = true;
   # Services
   services = {
-    blueman.enable = true;
+    # blueman.enable = true;
     gnome = {
       gnome-keyring.enable = true;
       # Conflict with ssh-agent
