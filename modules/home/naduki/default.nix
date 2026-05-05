@@ -64,5 +64,12 @@ in
   modules.editors.vscode.variant = "antigravity";
 
   # Enable Podman
-  services.podman.enable = true;
+  services.podman = {
+    enable = true;
+    settings.containers = {
+      containers = {
+        userns = "keep-id";
+      };
+    };
+  };
 }
