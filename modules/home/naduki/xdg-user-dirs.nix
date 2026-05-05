@@ -16,10 +16,10 @@
       videos = "$HOME/Videos";
     };
     desktopEntries = {
-      "blueman-adapters" = {
-        name = "Bluetooth Adapters";
-        noDisplay = true;
-      };
+      # "blueman-adapters" = {
+      #   name = "Bluetooth Adapters";
+      #   noDisplay = true;
+      # };
       # "Helix" = {
       #   name = "Helix";
       #   noDisplay = true;

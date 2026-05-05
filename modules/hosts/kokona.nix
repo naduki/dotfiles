@@ -62,10 +62,10 @@
   };
 
   # /var/lib/systemd/coredump limitations
-  systemd.coredump.extraConfig = ''
-    MaxUse=800M
-    MaxRetention=1day
-  '';
+  systemd.coredump.settings.Coredump = {
+    MaxUse = "800M";
+    MaxRetention = "1day";
+  };
 
   # user settings
   users.users.${myconf.user} = {
