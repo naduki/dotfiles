@@ -1,4 +1,4 @@
-{ pkgs-stable, ... }:
+{ config, pkgs, pkgs-stable, ... }:
 {
   imports = [
     ./gtk-theme.nix
@@ -161,17 +161,16 @@
       enable = true;
       package = pkgs-stable.swayidle;
       events = {
-        "before-sleep" = "swaylock -f";
+        "before-sleep" = "${config.programs.swaylock.package}/bin/swaylock -f";
       };
       timeouts = [
         {
-          timeout = 300;
-          command = "swaylock -f";
+          timeout = 180;
+          command = "${config.programs.swaylock.package}/bin/swaylock -f";
         }
         {
           timeout = 600;
-          command = ''swaymsg "output * power off"'';
-          resumeCommand = ''swaymsg "output * power on"'';
+          command = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
     };
