@@ -58,8 +58,6 @@ in
     # Terminal
     ghostty.enable = false;
     wezterm.enable = true;
-    # Other
-    gemini-cli.enable = true;
   };
   modules.editors.vscode.variant = "antigravity";
 

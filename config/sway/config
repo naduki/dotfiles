@@ -276,6 +276,7 @@ include /etc/sway/config.d/*
 # Brave Picture-in-Picture
 for_window [title="(?i)picture in picture"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
 for_window [title=".*ピクチャー.*イン.*ピクチャー.*"] floating enable, sticky enable, resize set width 460 height 260, move position 2095 12
+for_window [class="com3d2x64.exe"] floating enable
 
 ### Autostart
 # Core components
