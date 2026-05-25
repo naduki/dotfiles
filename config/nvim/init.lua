@@ -364,21 +364,3 @@ opt.foldtext = ""
 opt.foldlevel = 99
 opt.indentexpr = "v:lua.vim.treesitter.indentexpr()"
 
--- Gemini Launch
-vim.keymap.set('n', '<leader>l', function()
-  vim.cmd('lcd %:p:h')
-  vim.cmd('botright 65vsplit | terminal gemini -s')
-  vim.cmd('startinsert')
-end, { desc = 'Launch Gemini CLI' })
-
--- Gemini Terminal Specific Settings
-vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
-  pattern = "term://*gemini",
-  callback = function()
-    -- Disable <esc> to normal mode for Gemini CLI
-    pcall(vim.keymap.del, 't', '<esc>', { buffer = 0 })
-    if vim.bo.buftype == 'terminal' then
-      vim.cmd('startinsert')
-    end
-  end,
-})
