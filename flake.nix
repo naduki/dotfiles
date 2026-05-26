@@ -3,12 +3,13 @@
 
   inputs = {
     # nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/release-25.11";
+    stable.url = "github:NixOS/nixpkgs/release-26.05";
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.follws = "unstable";
     # home-manager
     home-manager = {
-      url = "github:nix-community/home-manager"; # unstable
+      url = "github:nix-community/home-manager/release-26.05"; # unstable
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # flake-parts
@@ -16,28 +17,11 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    # Rust
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "package";
-    };
-    # VSCode marketplace
-    # nix-vscode-extensions = {
-    #   url = "github:nix-community/nix-vscode-extensions";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   # flake-compat flake-utils
-    # };
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   # flake-compat flake-utils
-    # };
-    # Quickshell base configuration
-    # illogical-impulse-dotfiles = {
-    #   url = "github:end-4/dots-hyprland";
-    #   flake = false;
-    #   submodule = true;
     # };
   };
 

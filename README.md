@@ -3,29 +3,20 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 
 この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。
 
-- Version : Unstable
 - Editor : Neovim
 - Shell : Bash + Fish
-- Terminal: Wezterm + Ghostty
+- Terminal: Wezterm
 - Browser : Brave
 
+# 上位でユーザー名とホスト名でプロファイルを切り替えれるように調整中。また、未テストです。
 
 # Desktop Environment
 
 ## Cinnamon
-
-## Dank Linux(Hyprland)
-
-## Hyprland(illogical-impulse)
-
-![hyprland_desktop_environment](./desktop.png "Hyprland Desktop")
-
-- Some scripts (especially Python) are not working due to missing required packages.
-
-### Using illogical-impulse with NixOS(Home-manager) + Hyprland
-In Home-manager, set `qt6.enable = true;`!
+- Version : Unstable
 
 ## Sway / now
+- Version : Stable
 
 ![sway_desktop_environment](./desktop_sway.png "Sway Desktop")
 
