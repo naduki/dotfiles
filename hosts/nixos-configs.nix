@@ -8,6 +8,8 @@ in {
       specialArgs = SpecialArgs;
       modules = [
         ../hardware-configuration.nix
+        ../modules/nixos
+        ./sway/for_cinnamon.nix
         ./sway
       ];
     };
@@ -15,6 +17,7 @@ in {
       specialArgs = SpecialArgs;
       modules = [
         ../hardware-configuration.nix
+        ../modules/nixos
         ./cinnamon
       ];
     };

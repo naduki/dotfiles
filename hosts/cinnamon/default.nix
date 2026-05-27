@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [ ../../modules/nixos ];
-
   services = {
     # X11 settings
     xserver = {
