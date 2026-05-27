@@ -8,8 +8,6 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 - Terminal: Wezterm
 - Browser : Brave
 
-# 上位でユーザー名とホスト名でプロファイルを切り替えれるように調整中。また、未テストです。
-
 # Desktop Environment
 
 ## Cinnamon
@@ -21,6 +19,11 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 ![sway_desktop_environment](./desktop_sway.png "Sway Desktop")
 
 - Sway related settings were created using Gemini3 Pro.
+
+# TODO
+- SwayのCinnamon依存設定を結合する。configを使ったら無限ループになる
+
+- updater.nixの修正
 
 # Reference
 
