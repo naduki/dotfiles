@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, user, ... }:
 {
   perSystem = { system, ... }: {
     # Home-manager Standalone Setting
@@ -6,7 +6,7 @@
       naduki = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.stable.legacyPackages.${system};
         extraSpecialArgs = {
-          inherit inputs;
+          inherit inputs user;
         };
         modules = [ ../modules/home-manager/home.nix ];
       };

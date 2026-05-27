@@ -6,10 +6,10 @@
     stable.url = "github:NixOS/nixpkgs/release-26.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs.follws = "unstable";
+    nixpkgs.follows = "unstable";
     # home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05"; # unstable
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # flake-parts
@@ -32,10 +32,21 @@
         # 1. Add foo to inputs
         # 2. Add foo as a parameter to the outputs function
         # 3. Add here: foo.flakeModule
-        ./modules/devshells.nix
-        ./modules/home-manager.nix
-        ./modules/nixos-configs.nix
+        ./hosts/devshells.nix
+        ./hosts/home-manager.nix
+        ./hosts/nixos-configs.nix
       ];
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+      # Set Profile Name
+      _module.args = {
+        user = {
+          # UserName, Home-manager Profile
+          name = "naduki";
+          # HostName
+          hosts = "kokona";
+          # Desktop Environment
+          env = "Sway";
+        };
+      };
     };
 }

@@ -1,16 +1,18 @@
-{ inputs, ... }:
-{
+{ inputs, user, ... }:
+let
+  SpecialArgs = { inherit inputs user; };
+in {
   # NixOS configurations for different hosts.
   flake.nixosConfigurations = {
     Sway = inputs.stable.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = SpecialArgs;
       modules = [
         ../hardware-configuration.nix
         ./sway
       ];
     };
     Cinnamon = inputs.unstable.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = SpecialArgs;
       modules = [
         ../hardware-configuration.nix
         ./cinnamon

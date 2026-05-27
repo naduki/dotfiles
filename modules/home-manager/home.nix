@@ -1,10 +1,11 @@
+{ user, ...}:
 {
   imports = [
-    ./profiles/naduki.nix
+    ./profiles/${user.name}.nix
   ];
 
   home = rec {
-    username = "naduki";
+    username = "${user.name}";
     homeDirectory = "/home/${username}";
     stateVersion = "25.11";
   };

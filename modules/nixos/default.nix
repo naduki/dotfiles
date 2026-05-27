@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, user, ... }:
 {
   imports = [
     ./core/boot.nix
@@ -36,7 +36,7 @@
   hardware.bluetooth.powerOnBoot = false;
 
   networking = {
-    hostName = "nixos";
+    hostName = "${user.hosts}_${user.env};
     # Enable networking
     networkmanager.enable = true;
   };
@@ -67,10 +67,10 @@
   };
 
   # user settings
-  users.users.naduki = {
+  users.users.${user.name} = {
     isNormalUser = true;
     initialHashedPassword = "$y$j9T$DvGj7T6HlYCo2M4jtp5ZK1$ykxX0xXUjLvz.7ZEKx/tXIo7hEOJY6MYJoEhI/Dud2.";
-    description = "naduki_nixos";
+    description = "${user.name}_nixos";
     extraGroups = [ "networkmanager" "wheel" "video" ];
   };
 
