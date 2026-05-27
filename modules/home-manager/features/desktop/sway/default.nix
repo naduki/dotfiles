@@ -107,7 +107,7 @@
     waybar = {
       enable = true;
       package = pkgs.waybar;
-      style = builtins.readFile ../../../config/waybar/style.css;
+      style = builtins.readFile ../waybar/style.css;
     };
   };
 
@@ -216,8 +216,8 @@
 
   # --- Configuration Files Management ---
   xdg.configFile = {
-    "sway/config".source = ../../../config/sway/config;
-    "sway/cheatsheet.txt".source = ../../../config/sway/cheatsheet.txt;
-    "waybar/config".source = ../../../config/waybar/config;
+    "sway/config".source = ./config;
+    "sway/cheatsheet.txt".source = ./cheatsheet.txt;
+    "waybar/config".source = ../waybar/config;
   };
 }

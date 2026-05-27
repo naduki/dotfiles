@@ -5,7 +5,7 @@
     ./nvim-queries.nix 
   ];
 
-  unfreePackages = [ "poimandres.nvim" ];
+  unfreePackages_unstable = [ "poimandres.nvim" ];
 
   programs.neovim = {
     enable = true;
@@ -71,7 +71,7 @@
       nvim-treesitter-parsers.rust
       nvim-treesitter-parsers.toml
     ];
-    initLua = ''${builtins.readFile ../../../../config/nvim/init.lua}'';
+    initLua = ''${builtins.readFile ./init.lua}'';
   };
   programs.bash.historyIgnore = [ "nvim" ];
 }

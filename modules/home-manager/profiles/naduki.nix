@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ../../options/unfree.nix
+
     ../features/apps/wezterm
 
     ../features/cli/nvim
