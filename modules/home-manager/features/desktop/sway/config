@@ -285,7 +285,7 @@ exec systemctl --user restart polkit-gnome autotiling cliphist cliphist-images
 exec gnome-keyring-daemon --start --components=secrets
 
 # Input method
-exec fcitx5 -d
+# exec fcitx5 -d
 
 exec cliphist wipe
 

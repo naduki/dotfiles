@@ -11,6 +11,7 @@
     packages = with pkgs; [
       celluloid
       glib # for trash
+      nemo-with-extensions
       pavucontrol
 
       xed-editor
@@ -206,7 +207,7 @@
     Service = {
       Type = "oneshot";
 
-      ExecStart = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
+      ExecStart = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit &";
       RemainAfterExit = true;
     };
     Install = {

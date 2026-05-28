@@ -36,7 +36,7 @@
   hardware.bluetooth.powerOnBoot = false;
 
   networking = {
-    hostName = "${user.hosts}_${user.env}";
+    hostName = "${user.hosts}-${user.env}";
     # Enable networking
     networkmanager.enable = true;
   };
