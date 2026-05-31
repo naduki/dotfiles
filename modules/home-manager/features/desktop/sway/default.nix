@@ -18,7 +18,7 @@
       xreader
       xviewer
 
-      libnotify
+      # libnotify
       grim          # Screenshot
       slurp         # Region selection
       # sway-audio-idle-inhibit

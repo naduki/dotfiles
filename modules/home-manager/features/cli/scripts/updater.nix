@@ -1,11 +1,9 @@
-{
+{ config, pkgs, user, ... }:{
   # Updater Script
   xdg.configFile."updater.sh" = {
     executable = true;
     text = ''
-      #!/usr/bin/env nix-shell
-      #!nix-shell -i bash -p git newt
-      # shellcheck shell=bash
+      #!/usr/bin/env bash
       # This script is used to update NixOS / Home-manager.
 
       # If "-h" option is specified, display usage
@@ -36,7 +34,7 @@
       # NixOS update function
       nixos(){
         # Select arguments to pass to nixos-rebuild with whiptail
-        MODE=$(whiptail --title "NixOS Update Mode" --menu "Choose NixOS update mode:" 15 80 4 \
+        MODE=$(${pkgs.newt}/bin/whiptail --title "NixOS Update Mode" --menu "Choose NixOS update mode:" 15 80 4 \
             "switch" "Switch to the new configuration" \
             "boot"   "Apply new configuration at next startup" \
             "test"   "Test the new configuration" \
@@ -48,24 +46,24 @@
             (switch)
             echo -e "\nSwitching to the new configuration..."
             # cp /etc/nixos/hardware-configuration.nix ./
-            # nixos-rebuild switch --upgrade --use-remote-sudo --flake .#"$USER"@"$HOSTNAME"
-            nixos-rebuild switch --sudo --flake .#"$USER"@"$HOSTNAME" || os_failed ;;
+            # nixos-rebuild switch --upgrade --use-remote-sudo --flake .#${user.env}
+            nixos-rebuild switch --sudo --flake .#${user.env} || os_failed ;;
             (boot)
             echo -e "\nApplying new configuration at next startup..."
-            nixos-rebuild boot --sudo --flake .#"$USER"@"$HOSTNAME" || os_failed ;;
+            nixos-rebuild boot --sudo --flake .#${user.env} || os_failed ;;
             (test)
             echo -e "\nTesting the new configuration..."
-            nixos-rebuild test --sudo --flake .#"$USER"@"$HOSTNAME" || os_failed ;;
+            nixos-rebuild test --sudo --flake .#${user.env} || os_failed ;;
             (build-vm)
             echo -e "\nBuilding and launching a VM image..."
-            nixos-rebuild build-vm --flake .#"$USER"@"$HOSTNAME" || os_failed
+            nixos-rebuild build-vm --flake .#${user.env} || os_failed
             QEMU_OPTS="-display gtk" ./result/bin/run-"$HOSTNAME"-vm ;;
         esac
       }
       # Home-manager update function
       home(){
         # Select arguments to pass to home-manager with whiptail
-        MODE=$(whiptail --title "Home-manager standalone Update Mode" --menu "Choose Home-manager standalone update mode:" 15 80 4 -- \
+        MODE=$(${pkgs.newt}/bin/whiptail --title "Home-manager standalone Update Mode" --menu "Choose Home-manager standalone update mode:" 15 80 4 -- \
             "activate" "Activate home-manager standalone" \
             "switch" "Switch to the new configuration" \
             "backup" "-b backup" \
@@ -75,43 +73,35 @@
         # Execute process according to mode
         case "$MODE" in
             (activate)
-            echo -e "\nActivating home-manager standalone..."
-            nix run flake:home-manager -- switch --flake .#"$USER" || hm_failed ;;
+              echo -e "\nActivating home-manager standalone..."
+              nix run flake:home-manager -- switch --flake .#${user.name} || hm_failed ;;
             (switch)
-            echo -e "\nSwitching to the new configuration..."
-            home-manager switch --flake .#"$USER" || hm_failed ;;
+              echo -e "\nSwitching to the new configuration..."
+              home-manager switch --flake .#${user.name} || hm_failed ;;
             (backup)
-            echo -e "\nSwitching to the new configuration..."
-            home-manager switch --flake .#"$USER" -b backup || hm_failed ;;
+              echo -e "\nSwitching to the new configuration..."
+              home-manager switch --flake .#${user.name} -b backup || hm_failed ;;
             (build)
-            echo -e "\nBuilding the new configuration..."
-            home-manager build --flake .#"$USER" || hm_failed ;;
+              echo -e "\nBuilding the new configuration..."
+              home-manager build --flake .#${user.name} || hm_failed ;;
         esac
       }
       # Main section
-      # Get username and hostname
-      USER=$(id -un 2>/dev/null || logname 2>/dev/null || whoami 2>/dev/null || echo "unknown")
-      HOSTNAME=$(hostname 2>/dev/null || echo "unknown-host")
-      # If unknown or unknown-host, display error message
-      if [ "$USER" = "unknown" ] || [ "$HOSTNAME" = "unknown-host" ]; then
-        echo "Error: Unable to determine user or hostname."
-        close 2
-      fi
       # Change to the directory where this script is located
       cd "$(dirname "$0")" || close 1
       rm -f "$HOSTNAME".qcow2 && unlink result 2> /dev/null
       # Check if flake.nix exists, otherwise input directory with whiptail
       if [ ! -f "flake.nix" ]; then
-        DIR=$(whiptail --title "Flake Directory" --inputbox "Enter the directory containing flake.nix:" 10 60 3>&1 1>&2 2>&3) || canceled
+        DIR=$(${pkgs.newt}/bin/whiptail --title "Flake Directory" --inputbox "Enter the directory containing flake.nix:" 10 60 3>&1 1>&2 2>&3) || canceled
         ttyclear
         cd "$DIR" || close 2
       fi
-      git add .
+      ${config.programs.git.package}/bin/git add .
       # Infinite loop
       while true; do
         # If no arguments, select operation mode with whiptail
         if [ $# -eq 0 ]; then
-            MODE=$(whiptail --title "Update Mode" --menu "Choose update mode:" 15 60 6 \
+            MODE=$(${pkgs.newt}/bin/whiptail --title "Update Mode" --menu "Choose update mode:" 15 60 6 \
             "f"  "Update Flake.lock" \
             "fc" "Update Flake.lock (Commit)" \
             "os" "Update NixOS" \
@@ -123,35 +113,34 @@
             LOOP_FLAG=true
         else
             # If arguments exist, remove hyphen and set mode
-            MODE="$${1#-}"
+            MODE="''${1#-}"
             LOOP_FLAG=false
         fi
         SLEEP=3
         # Execute process according to mode
         case "$MODE" in
             (f)
-            echo -e "\nUpdating Flake.lock..."
-            nix flake update && SLEEP=5 ;;
+              echo -e "\nUpdating Flake.lock..."
+              nix flake update && SLEEP=5 ;;
             (fc)
-            echo -e "\nUpdating Flake.lock and committing..."
-            nix flake update --commit-lock-file && SLEEP=5 ;;
+              echo -e "\nUpdating Flake.lock and committing..."
+              nix flake update --commit-lock-file && SLEEP=5 ;;
             (os)
-            nixos ;;
+              nixos ;;
             (hm)
-            home ;;
+              home ;;
             (cl)
-            pkexec nix-collect-garbage --delete-older-than 1d
-            nix-collect-garbage --delete-older-than 1d
-            nix flake archive && SLEEP=0 ;;
+              pkexec nix-collect-garbage --delete-older-than 1d
+              nix-collect-garbage --delete-older-than 1d
+              nix flake archive && SLEEP=0 ;;
             (q)
-            LOOP_FLAG=false ;;
+              LOOP_FLAG=false ;;
             (*)
-            echo "Invalid mode: $MODE"
-            usage 2
-            ;;
+              echo "Invalid mode: $MODE"
+              usage 2 ;;
         esac
         # If loop flag is "false", break the loop
-        $${LOOP_FLAG} || break
+        ''${LOOP_FLAG} || break
         sleep "$SLEEP"
       done
     '';
