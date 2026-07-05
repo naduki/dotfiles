@@ -21,9 +21,6 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 - Sway related settings were created using Gemini3 Pro.
 
 # TODO
-- SwayのCinnamon依存設定を結合する。configを使ったら無限ループになる
-
-- updater.nixの修正
 
 # Reference
 
