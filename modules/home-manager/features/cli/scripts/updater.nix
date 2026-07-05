@@ -6,9 +6,6 @@
       #!/usr/bin/env bash
       # This script is used to update NixOS / Home-manager.
 
-      # If "-h" option is specified, display usage
-      [ "$1" = "-h" ] && usage 0
-
       # Clean up environment variables and functions
       close(){
         unset DIR MODE LOOP_FLAG USER HOSTNAME
@@ -87,9 +84,12 @@
         esac
       }
       # Main section
+      # If "-h" option is specified, display usage
+      [ "$1" = "-h" ] && usage 0
+
       # Change to the directory where this script is located
-      cd "$(dirname "$0")" || close 1
-      rm -f "$HOSTNAME".qcow2 && unlink result 2> /dev/null
+      cd "$(pwd)" || close 1
+      rm -f ${user.env}.qcow2 && unlink result 2> /dev/null
       # Check if flake.nix exists, otherwise input directory with whiptail
       if [ ! -f "flake.nix" ]; then
         DIR=$(${pkgs.newt}/bin/whiptail --title "Flake Directory" --inputbox "Enter the directory containing flake.nix:" 10 60 3>&1 1>&2 2>&3) || canceled
