@@ -3,12 +3,13 @@
 
   inputs = {
     # nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/release-25.11";
+    stable.url = "github:NixOS/nixpkgs/release-26.05";
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     package.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.follows = "unstable";
     # home-manager
     home-manager = {
-      url = "github:nix-community/home-manager"; # unstable
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # flake-parts
@@ -16,28 +17,11 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    # Rust
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "package";
-    };
-    # VSCode marketplace
-    # nix-vscode-extensions = {
-    #   url = "github:nix-community/nix-vscode-extensions";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   # flake-compat flake-utils
-    # };
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   # flake-compat flake-utils
-    # };
-    # Quickshell base configuration
-    # illogical-impulse-dotfiles = {
-    #   url = "github:end-4/dots-hyprland";
-    #   flake = false;
-    #   submodule = true;
     # };
   };
 
@@ -48,10 +32,21 @@
         # 1. Add foo to inputs
         # 2. Add foo as a parameter to the outputs function
         # 3. Add here: foo.flakeModule
-        ./modules/devshells.nix
-        ./modules/home-manager.nix
-        ./modules/nixos-configs.nix
+        ./hosts/devshells.nix
+        ./hosts/home-manager.nix
+        ./hosts/nixos-configs.nix
       ];
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+      # Set Profile Name
+      _module.args = {
+        user = {
+          # UserName, Home-manager Profile
+          name = "naduki";
+          # HostName
+          hosts = "kokona";
+          # Desktop Environment
+          env = "Sway";
+        };
+      };
     };
 }

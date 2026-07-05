@@ -3,33 +3,27 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 
 この文書は、Reference以外をGithub Copilot (Claude Sonnet 4)にて英訳しています。
 
-- Version : Unstable
 - Editor : Neovim
 - Shell : Bash + Fish
-- Terminal: Wezterm + Ghostty
+- Terminal: Wezterm
 - Browser : Brave
-
 
 # Desktop Environment
 
 ## Cinnamon
-
-## Dank Linux(Hyprland)
-
-## Hyprland(illogical-impulse)
-
-![hyprland_desktop_environment](./desktop.png "Hyprland Desktop")
-
-- Some scripts (especially Python) are not working due to missing required packages.
-
-### Using illogical-impulse with NixOS(Home-manager) + Hyprland
-In Home-manager, set `qt6.enable = true;`!
+- Version : Unstable
 
 ## Sway / now
+- Version : Stable
 
 ![sway_desktop_environment](./desktop_sway.png "Sway Desktop")
 
 - Sway related settings were created using Gemini3 Pro.
+
+# TODO
+- SwayのCinnamon依存設定を結合する。configを使ったら無限ループになる
+
+- updater.nixの修正
 
 # Reference
 

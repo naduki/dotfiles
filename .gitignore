@@ -5,11 +5,9 @@
 
 ### not ignore ###
 !/.gitignore
-!/config/
+!/hosts/
 !/modules/
-!/update.sh
 !/desktop_sway.png
-!/desktop.png
 !/README.md
 !/flake.lock
 !/flake.nix
