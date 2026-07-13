@@ -197,18 +197,16 @@
     };
   };
 
-  # sway-audio-idle-inhibitをログイン時にサービスから起動する
-  # ターミナルからさわれないようにするため
-  # sway/configをNix式で管理する場合は、Swayから起動させてもよい
-  systemd.user.services.sway-audio-idle-inhibit = {
+  systemd.user.services.wayland-pipewire-idle-inhibit = {
     Unit = {
-      Description = "Run sway-audio-idle-inhibit";
+      Description = "Inhibit wayland idle when pipewire is playing media";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
     };
     Service = {
-      Type = "oneshot";
-
-      ExecStart = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit &";
-      RemainAfterExit = true;
+      ExecStart = "${pkgs.wayland-pipewire-idle-inhibit}/bin/wayland-pipewire-idle-inhibit";
+      Restart = "on-failure";
+      RestartSec = "5s";
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];
