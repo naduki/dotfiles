@@ -36,7 +36,7 @@
       # Theme
       poimandres-nvim
       # AI
-      codecompanion-nvim
+      # codecompanion-nvim
       # Autocompletion
       nvim-cmp
       cmp_luasnip
