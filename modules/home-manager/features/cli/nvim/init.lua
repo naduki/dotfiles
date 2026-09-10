@@ -236,24 +236,24 @@ end
 -- Enable these keymaps only when a terminal is opened
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
-require("codecompanion").setup({
-  strategies = {
-    chat = { adapter = "ollama" },
-    inline = { adapter = "ollama" },
-    agent = { adapter = "ollama" },
-  },
-  adapters = {
-    ollama = function()
-      return require("codecompanion.adapters").extend("ollama", {
-        schema = {
-          model = {
-            default = "qwen2.5-coder:7b", -- お使いのOllamaのモデル名
-          },
-        },
-      })
-    end,
-  },
-})
+-- require("codecompanion").setup({
+--   strategies = {
+--     chat = { adapter = "ollama" },
+--     inline = { adapter = "ollama" },
+--     agent = { adapter = "ollama" },
+--   },
+--   adapters = {
+--     ollama = function()
+--       return require("codecompanion.adapters").extend("ollama", {
+--         schema = {
+--           model = {
+--             default = "qwen2.5-coder:7b", -- お使いのOllamaのモデル名
+--           },
+--         },
+--       })
+--     end,
+--   },
+-- })
 
 --------------------------------------------------------------------------------
 -- LSP Configuration
