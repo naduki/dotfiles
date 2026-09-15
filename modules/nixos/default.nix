@@ -77,7 +77,7 @@
   environment = {
     shellAliases = {
       os-list = "nixos-rebuild list-generations";
-      os-wipe = "pkexec nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
+      os-wipe = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than ";
     };
     systemPackages = [
       # pkgs.wget

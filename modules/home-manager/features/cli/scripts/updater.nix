@@ -130,7 +130,7 @@
             (hm)
               home ;;
             (cl)
-              pkexec nix-collect-garbage --delete-older-than 1d
+              sudo nix-collect-garbage --delete-older-than 1d
               nix-collect-garbage --delete-older-than 1d
               nix flake archive && SLEEP=0 ;;
             (q)

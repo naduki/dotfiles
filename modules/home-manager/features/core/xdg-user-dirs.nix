@@ -14,6 +14,8 @@
       music = "$HOME/Music";
       pictures = "$HOME/Pictures";
       videos = "$HOME/Videos";
+      # disable auto create projects directory
+      projects = null;
     };
     desktopEntries = {
       # "blueman-adapters" = {

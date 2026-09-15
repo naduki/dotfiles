@@ -17,7 +17,7 @@
     ../features/desktop/ime.nix
   ];
 
-  unfreePackages = [ "cuda_cudart" "cuda_nvcc" "cuda_cccl" "libcublas" ];
+  # unfreePackages = [ "cuda_cudart" "cuda_nvcc" "cuda_cccl" "libcublas" ];
 
   home = {
     # User Global Aliases
@@ -71,7 +71,7 @@
       acceleration = "cuda";
     };
     podman = {
-      enable = false;
+      enable = true;
       settings.containers = {
         containers = {
           userns = "keep-id";
