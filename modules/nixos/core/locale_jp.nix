@@ -17,4 +17,5 @@
   };
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
+  networking.timeServers = [ "ntp.nict.jp" ];
 }

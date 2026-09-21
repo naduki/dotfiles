@@ -58,6 +58,10 @@
     xserver.videoDrivers = [ "nvidia" ];
     # File system trim
     fstrim.enable = true;
+    # Performance settings
+    # auto-cpufreq.enable = false;
+    # power-profiles-daemon.enable = false;
+    # upower.enable = false;
   };
 
   # /var/lib/systemd/coredump limitations
