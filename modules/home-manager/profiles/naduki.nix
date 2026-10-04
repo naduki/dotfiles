@@ -4,6 +4,7 @@
     ../../options/unfree.nix
 
     ../features/apps/wezterm
+    ../features/apps/wine
 
     ../features/cli/nvim
     ../features/cli/scripts/updater.nix
@@ -17,18 +18,12 @@
     ../features/desktop/ime.nix
   ];
 
-  # unfreePackages = [ "cuda_cudart" "cuda_nvcc" "cuda_cccl" "libcublas" ];
-
   home = {
     # User Global Aliases
     shellAliases = {
       rmxmod = "find . -type f -exec chmod -x {} +";
       dur = "du --max-depth=1 -h | sort -hr";
-
-      # nix-update = "$HOME/.config/update.sh";
-
       # xeyes = "nix run nixpkgs#xorg.xeyes";
-      # neofetch = "nix run nixpkgs#neofetch";
     };
   };
 
@@ -66,10 +61,6 @@
   };
 
   services = {
-    ollama = {
-      enable = false;
-      acceleration = "cuda";
-    };
     podman = {
       enable = true;
       settings.containers = {
