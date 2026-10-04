@@ -9,12 +9,12 @@
       experimental-features = [ "nix-command" "flakes" ]; # Enable experimental features (Flakes)
       warn-dirty = false; # Suppress Git dirty warnings
       # Cachix Settings
-      substituters = [
-        "https://nix-community.cachix.org"  # for CUDA
-      ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
+      # substituters = [
+        # "https://nix-community.cachix.org"  # for CUDA
+      # ];
+      # trusted-public-keys = [
+        # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      # ];
     };
     extraOptions = ''
       keep-outputs = true
