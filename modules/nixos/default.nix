@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, ... }:
+{ config, lib, user, ... }:
 {
   imports = [
     ./core/boot.nix
@@ -10,6 +10,7 @@
     ./desktop/sound.nix
 
     ./hardware/disable_PTXH.nix
+    ./hardware/kanata.nix
     ./hardware/nvidia.nix
 
     ../options/unfree.nix

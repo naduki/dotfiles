@@ -86,9 +86,9 @@ default_floating_border pixel 2
 #
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
-input "type:keyboard" {
-    xkb_options caps:escape
-}
+# input "type:keyboard" {
+    # xkb_options caps:escape
+# }
 
 ### Key bindings
 #
