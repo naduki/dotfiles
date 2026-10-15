@@ -7,6 +7,7 @@
 !/.gitignore
 !/hosts/
 !/modules/
+!/packages/
 !/desktop_sway.png
 !/README.md
 !/flake.lock

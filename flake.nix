@@ -17,6 +17,17 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    # Meltype: build meltype.cpp
+    meltype-src = {
+      url = "github:yksr-melt/Meltype";
+      flake = false;
+    };
+    # Meltype releases: for binary
+    meltype-zip = {
+      url = "https://github.com/yksr-melt/Meltype/releases/download/v1.2.1/Meltype-1.2.1-linux.zip";
+      type = "file";
+      flake = false;
+    };
     # NixOS-WSL
     # nixos-wsl = {
     #   url = "github:nix-community/NixOS-WSL";

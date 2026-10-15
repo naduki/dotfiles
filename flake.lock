@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790996401,
-        "narHash": "sha256-f+kOxEmOUnQazVAmGg0i8hzwgd1kX/geY+k/Dpheye8=",
+        "lastModified": 1791938526,
+        "narHash": "sha256-yNYK2pdk3bCtJrpblrNYA6hZKdybWUeyTtx74+OEJFo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "db7d5e2332710f5abb088f6b5de927d7f9511b35",
+        "rev": "32904dfe1cf86039f3c8c9f41f94e1cfd76dbb34",
         "type": "github"
       },
       "original": {
@@ -41,13 +41,41 @@
         "type": "github"
       }
     },
+    "meltype-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791956328,
+        "narHash": "sha256-NTz4/yQx1j1EycemL40ruXnixhTiTl3DtVNkPFtqHN0=",
+        "owner": "yksr-melt",
+        "repo": "Meltype",
+        "rev": "45e14f86558aa6ea34f2c2ecd038ba95ca8c3c46",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yksr-melt",
+        "repo": "Meltype",
+        "type": "github"
+      }
+    },
+    "meltype-zip": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-M9DRPEsonKN41j8NBONBN5tc6J9SaHLIs2+vd+nQ2mg=",
+        "type": "file",
+        "url": "https://github.com/yksr-melt/Meltype/releases/download/v1.2.1/Meltype-1.2.1-linux.zip"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/yksr-melt/Meltype/releases/download/v1.2.1/Meltype-1.2.1-linux.zip"
+      }
+    },
     "package": {
       "locked": {
-        "lastModified": 1791366222,
-        "narHash": "sha256-o0N4g6uSOIppU7CGToNvGlMf5vC+B6O6ukFHKY/TKOY=",
+        "lastModified": 1791637130,
+        "narHash": "sha256-TuvwvSjJrpqyIYdjhQ7Wu+ADVfeOpO2Um21/V7TOubw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "39ad350a0602fa0a58a544344e3e9187526ea45c",
+        "rev": "ca1659429c950a11a565b5764e37a1b704e17ec8",
         "type": "github"
       },
       "original": {
@@ -61,6 +89,8 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "meltype-src": "meltype-src",
+        "meltype-zip": "meltype-zip",
         "nixpkgs": [
           "unstable"
         ],
@@ -71,11 +101,11 @@
     },
     "stable": {
       "locked": {
-        "lastModified": 1791540131,
-        "narHash": "sha256-X5XptkI6NU2XUUeYh0im0wPWHQNqiMexGoVQFUYJJTY=",
+        "lastModified": 1792064383,
+        "narHash": "sha256-liOyJ/Zl7nphC6Dppxa4WxpTJlISYmcDs6FmspGdoF0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "94026834073bc1232c3e6b4c419ac308656f0645",
+        "rev": "274fe825e4fe496d30532950acac906edc7fd420",
         "type": "github"
       },
       "original": {
@@ -87,11 +117,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1791512942,
-        "narHash": "sha256-ZSzLfW5QKlfdd9KUAQiw35M+g5699SJpirI9oBbTHHA=",
+        "lastModified": 1792034174,
+        "narHash": "sha256-Wqty06OaHk9quzfq4m60/+aYeFIHuOvMXSlT6cqmk54=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "91a5f61bd46148dc7a3e571fd908f9d3cf66c20b",
+        "rev": "2ebb5e07650b0d0cc7bcbe22f4fc4b561572b87f",
         "type": "github"
       },
       "original": {

@@ -1,5 +1,7 @@
-{ pkgs, ... }:
-{
+{ pkgs, inputs, ... }:
+let
+  meltype = pkgs.callPackage ../../../../packages/meltype.nix { inherit inputs; };
+in {
   nixpkgs.overlays = [
     (final: prev:
       let
@@ -36,7 +38,7 @@
     type = "fcitx5";
     fcitx5 = {
       waylandFrontend = true;
-      addons = with pkgs; [ fcitx5-mozc (catppuccin-fcitx5.override { withRoundedCorners = true; }) ];
+      addons = with pkgs; [ fcitx5-mozc (catppuccin-fcitx5.override { withRoundedCorners = true; }) ] ++ [ meltype ];
     };
   };
 }
