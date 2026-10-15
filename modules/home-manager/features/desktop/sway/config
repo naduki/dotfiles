@@ -123,8 +123,8 @@ default_floating_border pixel 2
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+Escape exec exec ~/.config/power-menu.sh
+    # Open Power menu
+    bindsym $mod+p exec exec ~/.config/power-menu.sh
 #
 # Moving around:
 #

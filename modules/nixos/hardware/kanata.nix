@@ -6,15 +6,15 @@
         extraDefCfg = ''
           process-unmapped-keys yes
         '';
-        # Capslock: tap -> hiragana/katakana, add ime switch
-        #           long press -> Escape
+        # Capslock: tap -> Escape, (for Neovim)
+        #           long press -> Mod (for Sway)
         config = ''
           (defsrc
             caps
           )
 
           (defalias
-            cap (tap-hold 200 200 kana esc)
+            cap (tap-hold 200 200 esc lmet)
           )
 
           (deflayer base
@@ -25,5 +25,5 @@
     };
   };
 
-  users.users.${user.name}.extraGroups = [ "uinput" ];
+  # users.users.${user.name}.extraGroups = [ "uinput" ];
 }
