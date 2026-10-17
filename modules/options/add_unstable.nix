@@ -1,7 +1,7 @@
 { config, lib, inputs, ... }: {
   options = {
     # 独自のオプション「unfreePackages」を定義（文字列のリスト型）
-    # リスト型（listOf）は複数ファイルで定義しても自動で1つにマージされます
+    # リスト型（listOf）は複数ファイルで定義しても自動で1つにマージされる
     unfreePackages_unstable = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
@@ -11,7 +11,7 @@
 
   config.nixpkgs.overlays = [
     (final: prev: {
-      # stable という名前で、inputs.stable からインポートしたパッケージ群を生やす
+      # unstable という名前で、inputs.stable からインポートしたパッケージ群を生やす
       unstable = import inputs.unstable {
         inherit (prev.stdenv.hostPlatform) system;
         # config.cudaCapabilities = [ "8.9" ];

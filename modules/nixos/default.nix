@@ -86,7 +86,6 @@
     };
     systemPackages = [
       # pkgs.wget
-      # pkgs.wineWow64Packages.stable
     ];
   };
 
