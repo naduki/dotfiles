@@ -247,7 +247,7 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 --       return require("codecompanion.adapters").extend("ollama", {
 --         schema = {
 --           model = {
---             default = "qwen2.5-coder:7b", -- お使いのOllamaのモデル名
+--             default = "qwen2.5-coder:7b", -- Ollamaのモデル名
 --           },
 --         },
 --       })
@@ -274,7 +274,31 @@ local servers = {
   },
   nixd = {
     cmd = { 'nixd' },
-    settings = { nixd = { formatting = { command = { 'nixfmt' } } } },
+    settings = function(root_dir)
+      local flake = string.format('(builtins.getFlake "%s")', root_dir)
+      local env = vim.uv.os_gethostname():match('-(.+)$') or 'wsl'
+      return {
+        nixd = {
+          nixpkgs = {
+            expr = string.format('import %s.inputs.nixpkgs { }', flake),
+          },
+          formatting = {
+            command = { 'nixfmt' },
+          },
+          options = {
+            nixos = {
+              expr = string.format('%s.nixosConfigurations.%s.options', flake, env),
+            },
+            ['home-manager'] = {
+              expr = string.format(
+                '%s.legacyPackages.${builtins.currentSystem}.homeConfigurations.${builtins.getEnv "USER"}.options',
+                flake
+              ),
+            },
+          },
+        },
+      }
+    end,
     root_markers = { 'flake.nix' },
     filetypes = { 'nix' },
   },
@@ -308,12 +332,13 @@ for name, conf in pairs(servers) do
     callback = function(args)
       local root_markers = conf.root_markers or { '.git' }
       local root_dir = vim.fs.root(args.buf, root_markers) or vim.uv.cwd()
+      local settings = type(conf.settings) == 'function' and conf.settings(root_dir) or conf.settings
 
       vim.lsp.start({
         name = name,
         cmd = conf.cmd,
         root_dir = root_dir,
-        settings = conf.settings,
+        settings = settings,
         capabilities = capabilities,
       })
     end,

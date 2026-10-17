@@ -1,6 +1,8 @@
 { pkgs, inputs, ... }:
 let
-  meltype = pkgs.callPackage ../../../../packages/meltype.nix { inherit inputs; };
+  meltype = pkgs.callPackage ../../../../packages/meltype/fcitx5-meltype.nix {
+    src = inputs.meltype;
+  };
 in {
   nixpkgs.overlays = [
     (final: prev:
