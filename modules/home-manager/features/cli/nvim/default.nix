@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-  imports = [ 
+  imports = [
     ../../../../options/add_unstable.nix
-    ./nvim-queries.nix 
+    ./nvim-queries.nix
   ];
 
   unfreePackages_unstable = [ "poimandres.nvim" ];

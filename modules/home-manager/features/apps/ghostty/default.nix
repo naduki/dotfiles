@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [ 
+  imports = [
     ../../../../options/add_unstable.nix
   ];
 
