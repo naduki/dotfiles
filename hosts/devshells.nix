@@ -18,7 +18,6 @@
       devShells = {
         default = import ./shells/shell.nix { inherit pkgs; };
         cuda    = import ./shells/environments/cuda/shell.nix { pkgs = pkgsCuda; };
-        imagen  = import ./shells/environments/imagen/shell-fhs.nix { inherit pkgs; };
       };
     };
 }
