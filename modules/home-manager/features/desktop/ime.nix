@@ -5,33 +5,28 @@ let
   };
 in {
   nixpkgs.overlays = [
-    (final: prev:
-      let
-        lib = final.lib or prev.lib;
-      in
-      {
-        catppuccin-fcitx5 =
-          let
-            pallet = "mocha";
-            color = "teal";
-            withRoundedCorners = final.withRoundedCorners or prev.lib.withRoundedCorners or false;
-          in
-          prev.catppuccin-fcitx5.overrideAttrs (old: {
-            installPhase = ''
-              runHook preInstall
-              local variant="catppuccin-${pallet}-${color}"
-            ''
-            + lib.optionalString withRoundedCorners ''
-              find src -name theme.conf -exec sed -i -E 's/^# (Image=(panel|highlight).svg)/\1/' {} +
-            ''
-            + ''
-              mkdir -p $out/share/fcitx5/themes
-              cp -r src/$variant $out/share/fcitx5/themes/$variant
-
-              runHook postInstall
-            '';
-          });
-      })
+    (final: prev: {
+      catppuccin-fcitx5 =
+        let
+          pallet = "mocha";
+          color = "teal";
+          variant = "catppuccin-${pallet}-${color}";
+        in
+        (prev.catppuccin-fcitx5.override {
+          withRoundedCorners = true;
+        }).overrideAttrs (old: {
+          installPhase = builtins.replaceStrings
+            [
+              "mkdir -p $out/share/fcitx5"
+              "cp -r src $out/share/fcitx5/themes"
+            ]
+            [
+              "mkdir -p $out/share/fcitx5/themes"
+              "cp -r src/${variant} $out/share/fcitx5/themes/${variant}"
+            ]
+            old.installPhase;
+        });
+    })
   ];
 
   # Japanese input
@@ -40,7 +35,11 @@ in {
     type = "fcitx5";
     fcitx5 = {
       waylandFrontend = true;
-      addons = with pkgs; [ fcitx5-mozc (catppuccin-fcitx5.override { withRoundedCorners = true; }) ] ++ [ meltype ];
+      addons = [
+        # pkgs.fcitx5-mozc
+        pkgs.catppuccin-fcitx5
+        meltype
+      ];
     };
   };
 }
