@@ -3,8 +3,8 @@
 let
   targetLangs = [ "bash" "dockerfile" "nix" "rust" "toml" ];
 
-  # nvim-treesitter のソース（クエリが含まれる場所）
-  # nixpkgs のプラグインパッケージを使用
+  # Source of nvim-treesitter (where queries are located)
+  # Use the plugin package from nixpkgs
   tsPlugin = pkgs.vimPlugins.nvim-treesitter.src;
 
   queriesDir = pkgs.runCommand "nvim-ts-queries" {} ''
@@ -13,13 +13,13 @@ let
     ${lib.concatMapStringsSep "\n" (lang: ''
       src_dir="${tsPlugin}/runtime/queries/${lang}"
 
-      # ディレクトリが存在するか厳密にチェックし、無ければビルドを失敗させる
+      # Strictly check if the directory exists, and fail the build if it does not
       if [ -d "$src_dir" ]; then
         cp -r "$src_dir" $out/
       else
         echo "========================================"
-        echo "ERROR: ${lang} のクエリが見つかりません！"
-        echo "参照先: $src_dir"
+        echo "ERROR: Queries for ${lang} not found!"
+        echo "Target path: $src_dir"
         echo "========================================"
         exit 1
       fi
