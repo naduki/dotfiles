@@ -3,7 +3,7 @@
   imports = [
     ../gtk-theme.nix
     ../../cli/scripts/fuzzel_power.nix
-    ../../cli/scripts/sc-recoder.nix
+    ../../cli/scripts/sc-recorder.nix
   ];
 
   home = {
@@ -18,11 +18,8 @@
       xreader
       xviewer
 
-      # libnotify
       grim          # Screenshot
       slurp         # Region selection
-      # sway-audio-idle-inhibit
-      # wf-recorder   # Screen recorder
     ];
     # --- Cursor Theme Settings ---
     pointerCursor = {
@@ -36,12 +33,11 @@
   programs = {
     # Automatically start Sway on tty1. If it fails or is run on another virtual terminal, set LANG=C.
     bash.initExtra = ''
-      [ -z "$DISPLAY" ] && { [ "''${XDG_VTNR:-0}" -eq 1 ] && exec sway || export LANG=C; }
+      [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && { [ "''${XDG_VTNR:-0}" -eq 1 ] && exec sway || export LANG=C; }
     '';
     # Launcher
     fuzzel = {
       enable = true;
-      package = pkgs.fuzzel;
       settings = {
         main = {
           cache = "/dev/null";  # Effectively reset or disable sorting by frequency
@@ -67,13 +63,12 @@
     # Sway Screen Lock
     swaylock = {
       enable = true;
-      package = pkgs.swaylock;
       settings = {
         daemonize = true;
         show-failed-attempts = true;
         ignore-empty-password = true;
 
-        image="/home/naduki/.config/wallpaper/wallpaper";
+        image = "${config.xdg.configHome}/wallpaper/wallpaper";
 
         # Appearance
         color="1b1e28";
@@ -118,11 +113,8 @@
       package = pkgs.autotiling-rs;
     };
     # Clipboard
-    cliphist = {
-      enable = true;
-      package = pkgs.cliphist;
-      clipboardPackage = pkgs.wl-clipboard;
-    };
+    cliphist.enable = true;
+
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
@@ -132,7 +124,6 @@
     # Notifications
     mako = {
       enable = true;
-      package = pkgs.mako;
       settings = {
         "actionable=true" = {
           anchor = "top-left";
@@ -156,7 +147,7 @@
         markup = true;
         width = 300;
       };
-      extraConfig = "
+      extraConfig = ''
         [urgency=low]
         border-color=#303340
 
@@ -170,12 +161,11 @@
         [category=mpd]
         default-timeout=2000
         group-by=category
-      ";
+      '';
     };
     # Sway Idle management
     swayidle = {
       enable = true;
-      package = pkgs.swayidle;
       events = {
         "before-sleep" = "${config.programs.swaylock.package}/bin/swaylock -f";
       };
@@ -191,10 +181,7 @@
       ];
     };
     # Enable playerctld daemon for media player control
-    playerctld = {
-      enable = true;
-      package = pkgs.playerctl;
-    };
+    playerctld.enable = true;
   };
 
   systemd.user.services.wayland-pipewire-idle-inhibit = {

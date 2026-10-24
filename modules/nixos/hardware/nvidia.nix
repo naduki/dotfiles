@@ -13,6 +13,6 @@
       # Enable the nvidia-settings GUI tool
       nvidiaSettings = false;
     };
-    nvidia-container-toolkit.enable = (lib.lists.elem "nvidia" config.services.xserver.videoDrivers);
+    nvidia-container-toolkit.enable = lib.elem "nvidia" config.services.xserver.videoDrivers;
   };
 }

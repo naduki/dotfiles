@@ -5,7 +5,7 @@
   ];
 
   home = rec {
-    username = "${user.name}";
+    username = user.name;
     homeDirectory = "/home/${username}";
     stateVersion = "25.11";
   };

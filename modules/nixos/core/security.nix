@@ -62,5 +62,6 @@
   boot.kernelModules = [ "tcp_bbr" ];
 
   # So we don't have to do this later...
-  security.acme.acceptTerms = true;
+  # Not needed on the desktop
+  # security.acme.acceptTerms = true;
 }

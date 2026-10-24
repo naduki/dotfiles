@@ -7,8 +7,13 @@
     after = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'if grep -q \"PTXH.*enabled\" /proc/acpi/wakeup; then echo PTXH > /proc/acpi/wakeup; fi'";
-      RemainAfterExit = "yes";
+      # Writing the device name toggles its state, so only write it when enabled
+      ExecStart = pkgs.writeShellScript "disable-acpi-wakeup-PTXH" ''
+        if ${pkgs.gnugrep}/bin/grep -q "PTXH.*enabled" /proc/acpi/wakeup; then
+          echo PTXH > /proc/acpi/wakeup
+        fi
+      '';
+      RemainAfterExit = true;
     };
     wantedBy = [ "multi-user.target" ];
   };
