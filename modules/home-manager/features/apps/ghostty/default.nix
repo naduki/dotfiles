@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../../../options/add_unstable.nix
+    ../../../../options/nixpkgs.nix
   ];
 
   programs.ghostty = {

@@ -49,8 +49,6 @@
           name = "naduki";
           # HostName
           hosts = "kokona";
-          # Desktop Environment
-          env = "Sway";
         };
       };
     };

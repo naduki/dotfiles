@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+# { pkgs, ... }:
 {
   # Enable Sway
   programs.sway = {
@@ -9,7 +9,6 @@
     extraPackages = [
       # pkgs.brightnessctl
       # pkgs.ghostty
-      pkgs.polkit_gnome
     ];
     wrapperFeatures.gtk = true; # Optimize GTK application behavior
   };

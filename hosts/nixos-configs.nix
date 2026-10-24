@@ -1,24 +1,28 @@
 { inputs, user, ... }:
 let
-  SpecialArgs = { inherit inputs user; };
+  # Override user.env per configuration so that values derived from it
+  # (e.g. networking.hostName) match the configuration being built.
+  mkSpecialArgs = env: {
+    inherit inputs;
+    user = user // { inherit env; };
+  };
 in {
   # NixOS configurations for different hosts.
   flake.nixosConfigurations = {
     Sway = inputs.stable.lib.nixosSystem {
-      specialArgs = SpecialArgs;
+      specialArgs = mkSpecialArgs "Sway";
       modules = [
-        ../hardware-configuration.nix
-        ../modules/nixos
-        ./sway/for_cinnamon.nix
-        ./sway
+        ./kokona
+        ./desktop/sway/for_cinnamon.nix
+        ./desktop/sway
       ];
     };
+    # Intentionally built on unstable to use the latest Cinnamon
     Cinnamon = inputs.unstable.lib.nixosSystem {
-      specialArgs = SpecialArgs;
+      specialArgs = mkSpecialArgs "Cinnamon";
       modules = [
-        ../hardware-configuration.nix
-        ../modules/nixos
-        ./cinnamon
+        ./kokona
+        ./desktop/cinnamon
       ];
     };
     wsl = inputs.stable.lib.nixosSystem {
