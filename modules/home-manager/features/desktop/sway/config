@@ -39,7 +39,7 @@ client.urgent           $urgent      $urgent      $bg_focus      $urgent      $u
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
 # output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/naduki/.config/wallpaper/wallpaper fill
+output * bg ~/.config/wallpaper/wallpaper fill
 
 #
 # Example configuration:
@@ -124,7 +124,7 @@ default_floating_border pixel 2
     bindsym $mod+Shift+c reload
 
     # Open Power menu
-    bindsym $mod+p exec exec ~/.config/power-menu.sh
+    bindsym $mod+p exec exec power-menu
 #
 # Moving around:
 #
@@ -256,7 +256,7 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot (with selection)
     bindsym Shift+Print exec grim -g "$(slurp)"
     # Screen recording
-    bindsym Ctrl+Print exec ~/.config/screen-record.sh
+    bindsym Ctrl+Print exec screen-record
 
     # Show Cheatsheet
     bindsym $mod+slash exec sh -c "cat ~/.config/sway/cheatsheet.txt | fuzzel -d -w 50 -l 40 --prompt 'Sway Cheatsheet (Press Esc to close) > '"
@@ -290,4 +290,4 @@ exec gnome-keyring-daemon --start --components=secrets
 exec cliphist wipe
 
 # Xed Editorにおける候補ウィンドウのフォールバック対策
-exec "export GTK_IM_MODULE="
+# exec "export GTK_IM_MODULE="

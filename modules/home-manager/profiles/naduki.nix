@@ -1,13 +1,14 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../../options/unfree.nix
+    ../../options/nixpkgs.nix
 
     ../features/apps/wezterm
     ../features/apps/wine
 
+    ../features/cli/agy
+    ../features/cli/nh
     ../features/cli/nvim
-    ../features/cli/scripts/updater.nix
 
     ../features/core/programs.nix
     ../features/core/tmpfs.nix
@@ -21,8 +22,9 @@
   home = {
     # User Global Aliases
     shellAliases = {
-      rmxmod = "find . -type f -exec chmod -x {} +";
+      gan = "git add -N .";
       dur = "du --max-depth=1 -h | sort -hr";
+      rmxmod = "find . -type f -exec chmod -x {} +";
       # xeyes = "nix run nixpkgs#xorg.xeyes";
     };
   };
@@ -40,9 +42,6 @@
     chromium = {
       enable = true;
       package = pkgs.brave;
-    };
-    direnv = {
-      enableFishIntegration = (config.programs.fish.enable);
     };
     git = {
       settings = {
