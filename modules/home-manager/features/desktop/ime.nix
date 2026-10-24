@@ -8,23 +8,19 @@ in {
     (final: prev: {
       catppuccin-fcitx5 =
         let
-          pallet = "mocha";
+          palette = "mocha";
           color = "teal";
-          variant = "catppuccin-${pallet}-${color}";
+          variant = "catppuccin-${palette}-${color}";
         in
         (prev.catppuccin-fcitx5.override {
           withRoundedCorners = true;
         }).overrideAttrs (old: {
-          installPhase = builtins.replaceStrings
-            [
-              "mkdir -p $out/share/fcitx5"
-              "cp -r src $out/share/fcitx5/themes"
-            ]
-            [
-              "mkdir -p $out/share/fcitx5/themes"
-              "cp -r src/${variant} $out/share/fcitx5/themes/${variant}"
-            ]
-            old.installPhase;
+          # Keep only the selected variant (fails if it does not exist)
+          postInstall = (old.postInstall or "") + ''
+            themes=$out/share/fcitx5/themes
+            test -d "$themes/${variant}"
+            find "$themes" -mindepth 1 -maxdepth 1 ! -name "${variant}" -exec rm -rf {} +
+          '';
         });
     })
   ];

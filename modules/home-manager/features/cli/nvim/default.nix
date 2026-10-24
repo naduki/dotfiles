@@ -1,11 +1,11 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../../../options/add_unstable.nix
+    ../../../../options/nixpkgs.nix
     ./nvim-queries.nix
   ];
 
-  unfreePackages_unstable = [ "poimandres.nvim" ];
+  unstableUnfreePackages = [ "poimandres.nvim" ];
 
   programs.neovim = {
     enable = true;
@@ -64,14 +64,9 @@
       nvim-web-devicons
       # Terminal
       toggleterm-nvim
-      # Treesitter
-      nvim-treesitter-parsers.bash
-      nvim-treesitter-parsers.dockerfile
-      nvim-treesitter-parsers.nix
-      nvim-treesitter-parsers.rust
-      nvim-treesitter-parsers.toml
+      # Treesitter parsers are defined in ./nvim-queries.nix
     ];
-    initLua = ''${builtins.readFile ./init.lua}'';
+    initLua = builtins.readFile ./init.lua;
   };
   programs.bash.historyIgnore = [ "nvim" ];
 }
