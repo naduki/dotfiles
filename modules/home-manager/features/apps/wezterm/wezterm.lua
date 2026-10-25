@@ -86,14 +86,8 @@ local NERD_ICONS = {
     htop   = wezterm.nerdfonts.mdi_monitor,
     git    = wezterm.nerdfonts.dev_git,
     nix    = wezterm.nerdfonts.md_nix,
+    nh     = wezterm.nerdfonts.md_nix,
     nano   = wezterm.nerdfonts.md_note_edit,
-    gemini = wezterm.nerdfonts.md_google,
-}
-
--- Keyword -> display name for Node.js-based CLI tools
--- When foreground process is 'node', argv is scanned for these keywords.
-local NODE_APP_ALIASES = {
-    gemini = 'gemini',
 }
 
 -- ══════════════════════════════════════════════
@@ -164,26 +158,6 @@ config.keys = {
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     local process_name = basename(tab.active_pane.foreground_process_name)
-
-    -- node.js apps: resolve the real app name from argv
-    if process_name == 'node' then
-        local mux_pane = wezterm.mux.get_pane(tab.active_pane.pane_id)
-        if mux_pane then
-            local info = mux_pane:get_foreground_process_info()
-            if info and info.argv then
-                for _, arg in ipairs(info.argv) do
-                    for keyword, alias in pairs(NODE_APP_ALIASES) do
-                        if arg:lower():find(keyword, 1, true) then
-                            process_name = alias
-                            break
-                        end
-                    end
-                    if process_name ~= 'node' then break end
-                end
-            end
-        end
-    end
-
     local icon  = NERD_ICONS[process_name]
     local title = tostring(tab.tab_index + 1) .. ': ' .. process_name
     if icon then

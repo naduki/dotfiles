@@ -289,5 +289,3 @@ exec gnome-keyring-daemon --start --components=secrets
 
 exec cliphist wipe
 
-# Xed Editorにおける候補ウィンドウのフォールバック対策
-# exec "export GTK_IM_MODULE="
