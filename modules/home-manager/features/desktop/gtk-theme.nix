@@ -1,12 +1,24 @@
 { pkgs, ... }:
 {
+  dconf.settings = {
+    # Nemo用の設定
+    "org/cinnamon/desktop/applications/terminal" = {
+      exec = "wezterm -e --cwd .";
+    };
+    # "org/cinnamon/desktop/interface" = {
+    #   icon-theme = "Mint-Y-Cyan";
+    # };
+    "org/nemo/preferences" = {
+      bulk-rename-tool = "${pkgs.bulky}/bin/bulky";
+    };
+  };
   # GTK theme configuration
   gtk = {
     enable = true;
+    colorScheme = "dark";
     gtk2.enable = false;
     gtk3 = {
       enable = true;
-      # cursorTheme is managed by home.pointerCursor in sway-settings.nix
       iconTheme = {
         name = "Mint-Y-Cyan";
         package = pkgs.mint-y-icons;
