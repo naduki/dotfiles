@@ -27,10 +27,8 @@
   # Disable Bluetooth on boot
   hardware.bluetooth.powerOnBoot = false;
 
-  networking = {
-    # Enable networking
-    networkmanager.enable = true;
-  };
+  # Enable networking
+  networking.networkmanager.enable = true;
 
   # Install Steam
   # programs.steam.enable = true;
@@ -59,9 +57,12 @@
     MaxRetention = "1day";
   };
 
-  environment.systemPackages = [
-      # pkgs.wget
-  ];
+  # Enable waydroid
+  # virtualisation.waydroid.enable = true;
+
+  # environment.systemPackages = [
+  #     pkgs.wget
+  #   ];
 
   # programs.git.enable = true;
   # programs.firefox = {
