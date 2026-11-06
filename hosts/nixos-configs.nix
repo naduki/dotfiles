@@ -13,7 +13,6 @@ in {
       specialArgs = mkSpecialArgs "Sway";
       modules = [
         ./kokona
-        ./desktop/sway/for_cinnamon.nix
         ./desktop/sway
       ];
     };
