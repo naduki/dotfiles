@@ -1,9 +1,9 @@
 Key Bindings
 -----------------------------------------------------
-Mod+Enter             Terminal (Wezterm)
+Mod+Enter             Terminal
 Mod+d                 Launcher (Fuzzel)
-Mod+e                 Explorer (Nemo)
-Mod+w                 Browser (Brave)
+Mod+e                 Explorer
+Mod+w                 Browser
 Mod+q                 Close Window
 Mod+p                 Power Menu
 Mod+Shift+c           Reload Config
