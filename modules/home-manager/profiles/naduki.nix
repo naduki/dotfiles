@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   imports = [
     ../../options/nixpkgs.nix
@@ -39,9 +39,9 @@
         fish_greeting = "echo";
       };
     };
-    chromium = {
+    floorp = {
       enable = true;
-      package = pkgs.brave;
+      languagePacks = [ "ja" ];
     };
     git = {
       settings = {
