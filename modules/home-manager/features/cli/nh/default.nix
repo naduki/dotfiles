@@ -30,6 +30,6 @@ in
     hm-init = "nix run flake:home-manager -- switch --flake \"$NH_FLAKE#${user.name}\"";
 
     # Garbage collection and boot entry cleanup
-    nix-clean = "nh clean all --keep-since 1d && sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot";
+    nix-clean = "nh clean all --keep 2 --keep-since 1d && sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot";
   };
 }
