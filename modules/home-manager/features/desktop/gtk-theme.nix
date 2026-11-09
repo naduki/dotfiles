@@ -9,7 +9,7 @@
     #   icon-theme = "Mint-Y-Cyan";
     # };
     "org/nemo/preferences" = {
-      bulk-rename-tool = "${pkgs.bulky}/bin/bulky";
+      bulk-rename-tool = "b'${pkgs.bulky}/bin/bulky'";
     };
   };
   # GTK theme configuration
