@@ -6,7 +6,8 @@ This document is translated into English using GitHub Copilot (Claude Sonnet 4),
 - Editor : Neovim
 - Shell : Bash + Fish
 - Terminal: Wezterm
-- Browser : Brave
+- Browser : Floorp
+- IME : Fcitx5 + Meltype
 
 # Desktop Environment
 
