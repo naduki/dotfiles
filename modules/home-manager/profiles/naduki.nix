@@ -56,7 +56,7 @@
 
   services = {
     podman = {
-      enable = true;
+      enable = false;
       settings.containers = {
         containers = {
           userns = "keep-id";

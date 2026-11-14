@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+# { config, lib, ... }:
 {
   hardware = {
     # Likely required to run "まいてつ Last Run!!" under Wine.
@@ -13,6 +13,6 @@
       # Enable the nvidia-settings GUI tool
       nvidiaSettings = false;
     };
-    nvidia-container-toolkit.enable = lib.elem "nvidia" config.services.xserver.videoDrivers;
+    # nvidia-container-toolkit.enable = lib.elem "nvidia" config.services.xserver.videoDrivers;
   };
 }
