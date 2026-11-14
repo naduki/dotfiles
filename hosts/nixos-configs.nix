@@ -12,21 +12,21 @@ in {
     Sway = inputs.stable.lib.nixosSystem {
       specialArgs = mkSpecialArgs "Sway";
       modules = [
-        ./kokona
-        ./desktop/sway
+        ./user/kokona
+        ../modules/nixos/desktop/sway.nix
       ];
     };
     # Intentionally built on unstable to use the latest Cinnamon
     Cinnamon = inputs.unstable.lib.nixosSystem {
       specialArgs = mkSpecialArgs "Cinnamon";
       modules = [
-        ./kokona
-        ./desktop/cinnamon
+        ./user/kokona
+        ../modules/nixos/desktop/cinnamon.nix
       ];
     };
     wsl = inputs.stable.lib.nixosSystem {
       specialArgs = { inherit inputs; };
-      modules = [ ./wsl ];
+      modules = [ ./user/wsl ];
     };
   };
 }

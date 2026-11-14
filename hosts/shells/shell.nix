@@ -2,7 +2,7 @@
 
 pkgs.mkShell {
   # Basic development tools
-  nativeBuildInputs = with pkgs; [ git wget nixd nixfmt-rfc-style ];
+  nativeBuildInputs = with pkgs; [ git wget nixd nixfmt ];
 
   # Isolate the host environment (for nix-shell)
   # This setting prevents inheritance of the host environment

@@ -3,12 +3,12 @@
 # (shared by all desktop environments: Sway, Cinnamon)
 {
   imports = [
-    ../../hardware-configuration.nix
-    ../../modules/nixos
+    ../../../hardware-configuration.nix
+    ../../../modules/nixos
 
-    ../../modules/nixos/hardware/disable_PTXH.nix
-    ../../modules/nixos/hardware/kanata.nix
-    ../../modules/nixos/hardware/nvidia.nix
+    ../../../modules/nixos/hardware/disable_PTXH.nix
+    ../../../modules/nixos/hardware/kanata.nix
+    ../../../modules/nixos/hardware/nvidia.nix
   ];
 
   # Enable AMD P-State driver and disable MSI Modern MD272QPW Storage
