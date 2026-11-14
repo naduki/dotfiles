@@ -122,6 +122,12 @@ config.initial_cols = 100
 config.initial_rows = 24
 
 -- ══════════════════════════════════════════════
+--  Launch Shell
+-- ══════════════════════════════════════════════
+
+config.default_prog = { 'fish', '-l', '-C', 'set -g fish_greeting' }
+
+-- ══════════════════════════════════════════════
 --  Tab bar
 -- ══════════════════════════════════════════════
 
@@ -131,7 +137,7 @@ config.tab_bar_at_bottom = false
 --  Key bindings
 -- ══════════════════════════════════════════════
 
-config.leader = { key = ',', mods = 'CTRL', timeout_milliseconds = 5000 }
+config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 5000 }
 config.keys = {
     { key = 'f',  mods = 'LEADER', action = act.ToggleFullScreen },
     -- Tabs

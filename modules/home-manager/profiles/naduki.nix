@@ -33,12 +33,7 @@
   news.display = "silent";
 
   programs = {
-    fish = {
-      enable = true;
-      functions = {
-        fish_greeting = "echo";
-      };
-    };
+    fish.enable = true;
     floorp = {
       enable = true;
       languagePacks = [ "ja" ];
