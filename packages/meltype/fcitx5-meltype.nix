@@ -7,6 +7,7 @@
 #   $out/share/fcitx5/inputmethod/meltype.conf  入力メソッドの定義 (@DIR@ を置き換え済み)
 #   $out/lib/meltype/                           MELTYPE_DIR (deb・rpm の /opt/meltype に相当)
 #     libMeltypeNative.so, icon.png, mozc/meltype_mozc_helper, meltype-settings, LICENSE, ...
+#     zenzai/ (withZenzai のとき。llama-server と zenz のモデル)
 #   $out/bin/meltype-settings                   設定画面 (withSettings のとき。deb の /usr/bin/meltype-settings)
 #   $out/share/applications/meltype-settings.desktop
 #
@@ -27,10 +28,14 @@
   meltype-native ? callPackage ./native.nix { inherit src; },
   meltype-mozc-helper ? if withMozc then callPackage ./mozc-helper.nix { inherit src; } else null,
   withMozc ? true,
+  meltype-zenzai ? if withZenzai then callPackage ./zenzai.nix { inherit src; } else null,
+  # Zenzai (llama.cpp の llama-server と zenz のモデルによるかな漢字変換)。1.7.0 から。無ければ Mozc だけで変換する
+  withZenzai ? false,
   # 設定画面 (meltype-settings, Python・GTK 4)。1.5.0 から
   withSettings ? true,
 }:
 assert withMozc -> meltype-mozc-helper != null;
+assert withZenzai -> meltype-zenzai != null;
 let
   # deb の Depends (python3, python3-gi, gir1.2-gtk-4.0) に相当する
   settingsPython = python3.withPackages (ps: [ ps.pygobject3 ]);
@@ -111,6 +116,9 @@ stdenv.mkDerivation (finalAttrs: {
   + lib.optionalString withMozc ''
     ln -s "${meltype-mozc-helper}/lib/meltype/mozc" "$meltypeDir/mozc"
   ''
+  + lib.optionalString withZenzai ''
+    ln -s "${meltype-zenzai}/lib/meltype/zenzai" "$meltypeDir/zenzai"
+  ''
   + lib.optionalString withSettings ''
     install -Dm755 "$linuxDir/meltype-settings" "$meltypeDir/meltype-settings"
     install -dm755 "$out/bin"
@@ -131,7 +139,7 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   passthru = {
-    inherit meltype-native meltype-mozc-helper;
+    inherit meltype-native meltype-mozc-helper meltype-zenzai;
   };
 
   meta = {
