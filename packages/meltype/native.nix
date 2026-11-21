@@ -1,5 +1,5 @@
 # Meltype の本体 (C# の Meltype.Core を NativeAOT にした libMeltypeNative.so)。
-# linux/build.sh の「1/3 本体 (C#, NativeAOT) をビルド」に相当する。
+# native/build-core-linux.sh の「本体 (C#, NativeAOT) をビルド」に相当する。
 #
 # NuGet のパッケージは参照していない (PackageReference が無い) ので、nugetDeps は要らない。
 # NativeAOT のコンパイラ (Microsoft.DotNet.ILCompiler など) は nixpkgs の .NET SDK に同梱されている。
@@ -20,7 +20,8 @@ buildDotnetModule {
   version = callPackage ./version.nix { inherit src; };
   inherit src;
 
-  projectFile = "src/Meltype.Mac.Native/Meltype.Mac.Native.csproj";
+  # 1.7.0 で src/Meltype.Mac.Native から名前が変わった (AssemblyName は MeltypeNative のまま)
+  projectFile = "src/Meltype.Core.CApi/Meltype.Core.CApi.csproj";
   dotnet-sdk = dotnetCorePackages.sdk_10_0;
   dotnet-runtime = null;
 
